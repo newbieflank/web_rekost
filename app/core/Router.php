@@ -38,7 +38,7 @@ class Router
 
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
-        $baseDir = 'Routing/public';
+        $baseDir = 'rekost_web/public';
 
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
