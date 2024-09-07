@@ -12,4 +12,10 @@ class LoginController extends Controller
     {
         $this->view('Login/register');
     }
+
+    public function show($id)
+    {
+        // Use $id to fetch and display user information
+        echo "User ID: " . htmlspecialchars($id);
+    }
 }

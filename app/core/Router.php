@@ -10,11 +10,11 @@ class Router
         self::$routes['GET'][$uri] = $action;
     }
 
-
     public static function post($uri, $action)
     {
         self::$routes['POST'][$uri] = $action;
     }
+
 
 
     public static function dispatch()
@@ -22,21 +22,28 @@ class Router
         $uri = self::getUri();
         $method = $_SERVER['REQUEST_METHOD'];
 
+        if (isset(self::$routes[$method])) {
+            foreach (self::$routes[$method] as $route => $action) {
+                // Convert route URI to a regex pattern
+                $routePattern = preg_replace('/\{[a-zA-Z_]+\}/', '([a-zA-Z0-9_-]+)', $route);
+                $routePattern = str_replace('/', '\/', $routePattern);
 
+                if (preg_match('/^' . $routePattern . '$/', $uri, $matches)) {
+                    array_shift($matches); // Remove the first element which is the full match
 
-        if (isset(self::$routes[$method][$uri])) {
-            $action = self::$routes[$method][$uri];
+                    if (is_callable($action)) {
+                        call_user_func_array($action, $matches);
+                    } else if (is_string($action)) {
+                        self::callControllerAction($action, $matches);
+                    }
 
-
-            if (is_callable($action)) {
-                call_user_func($action);
-            } else if (is_string($action)) {
-                self::callControllerAction($action);
+                    return;
+                }
             }
-        } else {
-            http_response_code(404);
-            echo "404 - Not Found";
         }
+
+        http_response_code(404);
+        echo "404 - Not Found";
     }
 
 
@@ -59,9 +66,7 @@ class Router
     }
 
 
-
-    // Call the controller action
-    private static function callControllerAction($action)
+    private static function callControllerAction($action, $params = [])
     {
         list($controller, $method) = explode('@', $action);
         $controller = ucfirst($controller);
@@ -71,7 +76,7 @@ class Router
             require_once $controllerFile;
             $controllerInstance = new $controller();
             if (method_exists($controllerInstance, $method)) {
-                call_user_func_array([$controllerInstance, $method], []);
+                call_user_func_array([$controllerInstance, $method], $params);
             } else {
                 echo "Method $method not found in controller $controller.";
             }
