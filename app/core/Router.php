@@ -27,7 +27,7 @@ class Router
                 $routePattern = preg_replace('/\{[a-zA-Z_]+\}/', '([a-zA-Z0-9_-]+)', $route);
                 $routePattern = str_replace('/', '\/', $routePattern);
                 if (preg_match('/^' . $routePattern . '$/', $uri, $matches)) {
-                    array_shift($matches); 
+                    array_shift($matches);
 
                     if (is_callable($action)) {
                         call_user_func_array($action, $matches);
@@ -47,7 +47,7 @@ class Router
     public static function getUri()
     {
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-        $baseDir = 'rekost_web/public';
+        $baseDir = 'web_rekost/public';
 
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
@@ -75,4 +75,3 @@ class Router
         }
     }
 }
-

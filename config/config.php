@@ -1,6 +1,6 @@
 <?php
 
-define('BASEURL', 'http://localhost/rekost_web/public');
+define('BASEURL', 'http://localhost/web_rekost/public');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
