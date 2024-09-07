@@ -2,4 +2,4 @@
 
 Router::get('/', 'HomeController@index');
 Router::get('/login', 'LoginController@login');
-Router::get('/login', 'LoginController@register');
+Router::get('/register', 'LoginController@register');
