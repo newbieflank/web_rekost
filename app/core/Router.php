@@ -4,40 +4,49 @@ class Router
 {
     private static $routes = [];
 
-    public static function get($uri, $action)
+    public static function __callStatic($method, $args)
     {
-        self::$routes['GET'][$uri] = $action;
+        if (in_array(strtoupper($method), ['GET', 'POST'])) {
+            $uri = $args[0];
+            $action = $args[1];
+            self::$routes[strtoupper($method)][$uri] = $action;
+            self::handleDispatch();
+        } else {
+            throw new \BadMethodCallException("Method $method not supported.");
+        }
     }
 
-    public static function post($uri, $action)
-    {
-        self::$routes['POST'][$uri] = $action;
-    }
-
-    public static function dispatch()
+    private static function handleDispatch()
     {
         $uri = self::getUri();
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if (isset(self::$routes[$method][$uri])) {
-            $action = self::$routes[$method][$uri];
+        if (isset(self::$routes[$method])) {
+            foreach (self::$routes[$method] as $route => $action) {
+                // Convert route URI to a regex pattern
+                $routePattern = preg_replace('/\{[a-zA-Z_]+\}/', '([a-zA-Z0-9_-]+)', $route);
+                $routePattern = str_replace('/', '\/', $routePattern);
+                if (preg_match('/^' . $routePattern . '$/', $uri, $matches)) {
+                    array_shift($matches); 
 
-            if (is_callable($action)) {
-                call_user_func($action);
-            } else if (is_string($action)) {
-                self::callControllerAction($action);
+                    if (is_callable($action)) {
+                        call_user_func_array($action, $matches);
+                    } else if (is_string($action)) {
+                        self::callControllerAction($action, $matches);
+                    }
+
+                    return;
+                }
             }
-        } else {
-            http_response_code(404);
-            echo "404 - Not Found";
         }
+
+        http_response_code(404);
+        echo "404 - Not Found";
     }
 
     public static function getUri()
     {
-
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
         $baseDir = 'rekost_web/public';
 
         if (strpos($uri, $baseDir) === 0) {
@@ -47,10 +56,7 @@ class Router
         return $uri ?: '/';
     }
 
-
-
-    // Call the controller action
-    private static function callControllerAction($action)
+    private static function callControllerAction($action, $params = [])
     {
         list($controller, $method) = explode('@', $action);
         $controller = ucfirst($controller);
@@ -60,7 +66,7 @@ class Router
             require_once $controllerFile;
             $controllerInstance = new $controller();
             if (method_exists($controllerInstance, $method)) {
-                call_user_func_array([$controllerInstance, $method], []);
+                call_user_func_array([$controllerInstance, $method], $params); // Pass parameters to the method
             } else {
                 echo "Method $method not found in controller $controller.";
             }
@@ -69,3 +75,4 @@ class Router
         }
     }
 }
+

@@ -1,8 +1,7 @@
 <?php
 
-define('BASEURL', 'http://localhost/Routing/public');
+define('BASEURL', 'http://localhost/rekost_web/public');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'mvc_framework');
-
+define('DB_NAME', 'rekost');
