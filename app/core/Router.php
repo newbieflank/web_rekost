@@ -16,6 +16,11 @@ class Router
         }
     }
 
+    public static function dispatch()
+    {
+        self::handleDispatch();
+    }
+
     private static function handleDispatch()
     {
         $uri = self::getUri();
