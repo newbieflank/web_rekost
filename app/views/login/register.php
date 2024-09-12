@@ -16,13 +16,15 @@
     }
 </style>
 <div class="loginPage">
-    <img src="<?= BASEURL; ?>img/ImageLogin.svg" alt="Image">
+    <div class="wrap-img">
+        <img lass="imgbanner" src="<?= BASEURL; ?>img/ImageLogin.svg" alt="Image">
+    </div>
 
 
     <div class="login-content">
         <img class="loginImage" src="<?= BASEURL; ?>img/ImageLoginLogo.svg" alt="">
         <h2>Get Started!</h2>
-        <p>Already have an account? <a href="<?= BASEURL; ?>register">Sign In?</a></p>
+        <p>Already have an account? <a href="<?= BASEURL; ?>login">Sign In?</a></p>
 
 
         <form action="">
