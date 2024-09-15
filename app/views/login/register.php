@@ -5,13 +5,17 @@
             display: none;
         }
 
-        .login-content img {
+        .login-content .loginImage {
             display: block;
             position: absolute;
             top: -20;
             right: -20;
             width: 100px;
             height: 80px;
+        }
+
+        .button-link .button-logo {
+            display: block;
         }
     }
 </style>
@@ -27,7 +31,7 @@
         <p>Already have an account? <a href="<?= BASEURL; ?>login">Sign In?</a></p>
 
 
-        <form action="">
+        <form action="<?= BASEURL; ?>register">
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
             <label for="email">Email</label>
@@ -38,5 +42,12 @@
             <input type="password" name="password" id="password" placeholder="Enter password" required>
             <button type="submit">Create account</button>
         </form>
+        <div class="separator">
+            <span>Or Sign Up With</span>
+        </div>
+        <a href="" class="button-link">
+            <img src="<?= BASEURL; ?>img/googleIcon.svg" alt="Logo" class="button-logo">
+            Sign Up With Google
+        </a>
     </div>
 </div>

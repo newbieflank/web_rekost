@@ -41,7 +41,6 @@ class Router
                 }
             }
         }
-
         http_response_code(404);
         echo "404 - Not Found";
     }
@@ -60,8 +59,7 @@ class Router
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
         }
-
-
+        $uri = str_replace("public", "", $uri);
         return $uri ?: '/';
     }
 
