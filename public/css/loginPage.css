@@ -45,18 +45,18 @@
 }
 
 .content h2 {
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 80px 80px 0px 80px;
 }
 
 .content p {
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: smaller;
   margin: 5px 80px;
 }
 
 .content form {
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 40px 80px 1rem 80px;
   display: flex;
   flex-direction: column;
@@ -91,11 +91,45 @@ input {
 .remember-section a {
   margin-left: auto;
   text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: smaller;
   color: #5d58af;
 }
 
 .remember-section a:hover {
   text-decoration: underline;
+}
+
+.password-section {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-section label {
+  margin-right: 10px;
+}
+
+.password-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container input {
+  padding-right: 30px;
+  flex: 1;
+}
+
+.password-section .showPass {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: auto;
 }
 
 form button {
@@ -115,7 +149,7 @@ form button {
   text-align: center;
   margin: 25px 80px 1rem 80px;
   color: #9c9c9c;
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .separator::before,
@@ -152,7 +186,7 @@ form button {
   border: 1px #5d58af solid;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-family: sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: bold;
 }
 

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= BASEURL; ?>css/registerPage.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
     @media (max-width: 1024px) {
         .loginPage img {
@@ -17,6 +18,10 @@
         .button-link .button-logo {
             display: block;
         }
+
+        .password-section img {
+            display: block;
+        }
     }
 </style>
 <div class="loginPage">
@@ -31,14 +36,17 @@
         <p>Already have an account? <a href="<?= BASEURL; ?>login">Sign In?</a></p>
 
 
-        <form action="<?= BASEURL; ?>register">
+        <form action="<?= BASEURL; ?>">
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="Enter email" required>
             <label for="number">Phone Number</label>
             <input type="tel" name="number" id="number" placeholder="Enter phone number" required>
-            <label for="password">Password</label>
+            <div class="password-section">
+                <label for="password">Password</label>
+                <img class="showPass" src="<?= BASEURL; ?>img/eyePass.svg" alt="" onclick="togglePassword()">
+            </div>
             <input type="password" name="password" id="password" placeholder="Enter password" required>
             <button type="submit">Create account</button>
         </form>
@@ -51,3 +59,11 @@
         </a>
     </div>
 </div>
+
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+    }
+</script>

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?= BASEURL; ?>css/loginPage.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
     @media (max-width: 1024px) {
         .Page img {
@@ -17,6 +18,10 @@
         .button-link .button-logo {
             display: block;
         }
+
+        .password-section img {
+            display: block;
+        }
     }
 </style>
 <div class="Page">
@@ -28,12 +33,15 @@
         <form action="">
             <label for="username">Email or Username</label>
             <input type="text" name="username" id="username" placeholder="example@gmail.com" required>
-            <label for="password">Password</label>
+            <div class="password-section">
+                <label for="password">Password</label>
+                <img class="showPass" src="<?= BASEURL; ?>img/eyePass.svg" alt="" onclick="togglePassword()">
+            </div>
             <input type="password" name="password" id="password" placeholder="Masukan Password" required>
             <div class="remember-section">
                 <input type="checkbox" id="remember">
                 <label for="remember">Remember Me</label>
-                <a href="#">Forgot password?</a>
+                <a href="#">Forgot Password?</a>
             </div>
             <button type="submit">Login</button>
         </form>
@@ -50,3 +58,11 @@
         <img src="<?= BASEURL; ?>img/ImageLogin.svg" alt="">
     </div>
 </div>
+
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const type = passwordField.type === 'password' ? 'text' : 'password';
+        passwordField.type = type;
+    }
+</script>
