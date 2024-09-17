@@ -1,0 +1,129 @@
+.nav-item {
+  margin-right: 20px;
+}
+.main-content {
+  text-align: center;
+  padding: 2rem;
+}
+.navbar {
+  z-index: 1030;
+  padding: 20px 0;
+  box-shadow: 0 4px 8px 0 rgba(158, 158, 158, 0.2);
+}
+.navbar-btn {
+  padding: 10px 24px;
+  font-size: 14px;
+}
+.navbar-btn.btn-outline-secondary {
+  color: #5d58af;
+  border-color: #5d58af;
+  font-weight: semibold;
+}
+
+.navbar-btn.btn-outline-secondary:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #5d58af;
+}
+.navbar-btn.btn-primary {
+  background-color: #908aff;
+  color: #ffffff;
+  border: none;
+  font-weight: semibold;
+}
+
+.navbar-btn.btn-primary:hover {
+  background-color: #5d58af;
+  color: #ffffff;
+}
+
+.navbar-nav {
+  justify-content: center;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e0ddff;
+}
+main {
+  padding: 20px;
+  text-align: left;
+  padding-top: 80px;
+}
+.main-btn {
+  background-color: #6a0dad;
+  color: white;
+  border-radius: 12px;
+  padding: 14px 33px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+.main-btn:hover {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.stats {
+  display: flex;
+  justify-content: left;
+  gap: 1rem;
+  margin-top: 20px;
+}
+.stat {
+  text-align: center;
+}
+.stat p {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .nav-item {
+    margin-right: 10px;
+  }
+  .stats {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.image-container {
+  position: relative;
+  width: 300px;
+  height: 480px;
+  margin: 20px;
+}
+.image-container img {
+  position: absolute;
+  top: 100px;
+  left: 230px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: 1;
+}
+.image-container img.second {
+  z-index: 1;
+  left: 20px;
+  top: 20px;
+}
+h2 {
+  max-width: 600px;
+  line-height: 1.4;
+}
+p {
+  max-width: 600px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+.text-content {
+  margin-bottom: 64px;
+}
