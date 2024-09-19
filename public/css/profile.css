@@ -1,0 +1,63 @@
+/* Profile Image */
+.imgProfile {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.imgProfile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Custom Form */
+form.custom-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+form.custom-form label {
+  width: 150px;
+  margin-right: 10px;
+}
+
+form.custom-form input,
+form.custom-form select {
+  border: 1px solid black;
+  flex-grow: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* For tablets and small desktops */
+  .imgProfile {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* For mobile devices */
+  .imgProfile {
+    width: 80px;
+    height: 80px;
+  }
+
+  form.custom-form {
+    flex-direction: column; /* Stack form fields vertically */
+  }
+
+  form.custom-form label {
+    width: 100%;
+    margin-bottom: 5px; /* Add some space below label */
+  }
+
+  form.custom-form input,
+  form.custom-form select {
+    width: 100%;
+    font-size: smaller;
+  }
+}
