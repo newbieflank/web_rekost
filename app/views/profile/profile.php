@@ -30,7 +30,7 @@
                     <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="">
                 </div>
             </div>
-            <form class="row m-5 custom-form" action="">
+            <form id="myForm" class="row m-5 custom-form" action="">
                 <div class="mb-3 row">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
@@ -82,6 +82,10 @@
                     <div class="col-sm-10">
                         <input type="tel" class="form-control" id="noTelp" placeholder="Masukan No Telp">
                     </div>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" id="saveBtn">Save Change</button>
+                    <button type="button" id="resetBtn">Cancel</button>
                 </div>
             </form>
         </div>

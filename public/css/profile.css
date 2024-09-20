@@ -11,7 +11,6 @@
   object-fit: cover;
 }
 
-/* Custom Form */
 form.custom-form {
   display: flex;
   flex-wrap: wrap;
@@ -30,9 +29,34 @@ form.custom-form select {
   flex-grow: 1;
 }
 
-/* Responsive Design */
+#saveBtn,
+#resetBtn {
+  background-color: gray;
+  color: white;
+  margin-right: 40px;
+  padding: 10px;
+  width: 120px;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  cursor: not-allowed;
+}
+
+#saveBtn {
+  margin: 0;
+}
+
+#saveBtn.enabled {
+  background-color: #4379f2;
+  cursor: pointer;
+}
+
+#resetBtn.enabled {
+  background-color: red;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
-  /* For tablets and small desktops */
   .imgProfile {
     width: 100px;
     height: 100px;
@@ -40,19 +64,18 @@ form.custom-form select {
 }
 
 @media (max-width: 480px) {
-  /* For mobile devices */
   .imgProfile {
     width: 80px;
     height: 80px;
   }
 
   form.custom-form {
-    flex-direction: column; /* Stack form fields vertically */
+    flex-direction: column;
   }
 
   form.custom-form label {
     width: 100%;
-    margin-bottom: 5px; /* Add some space below label */
+    margin-bottom: 5px;
   }
 
   form.custom-form input,
