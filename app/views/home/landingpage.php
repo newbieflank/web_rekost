@@ -44,10 +44,10 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="login.php" class="btn btn-outline-primary mr-2">Sign In</a>
+                        <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a href="register.php" class="btn btn-primary">Sign Up</a>
+                        <a href="register" class="btn btn-primary">Sign Up</a>
                     </li>
                 </ul>
             </div>
