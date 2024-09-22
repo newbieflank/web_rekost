@@ -505,8 +505,6 @@
             </div>
         </div>
     </section>
-
-
     <hr style="border: 1px solid #EEEEEE; margin: 0px;">
     <footer id="contact">
         <div class="container">
