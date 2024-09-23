@@ -51,7 +51,7 @@
             <button type="submit">Create account</button>
         </form>
         <div class="separator">
-            <span>Or Sign Up With</span>
+            <span>Or</span>
         </div>
         <a href="" class="button-link">
             <img src="img/googleIcon.svg" alt="Logo" class="button-logo">
