@@ -18,4 +18,14 @@ class LoginController extends Controller
         // Use $id to fetch and display user information
         echo "User ID: " . htmlspecialchars($id);
     }
+
+    public function auth()
+    {
+        $username = $_POST['username'];
+        $pass = $_POST['password'];
+
+        if ($this->model('UsersModel')->loginAuth($username, $pass) > 0) {
+                
+        }
+    }
 }

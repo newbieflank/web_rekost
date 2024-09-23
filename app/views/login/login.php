@@ -30,7 +30,7 @@
         <h2>Selamat Datang</h2>
         <p>Selamat Datang di laman Re-kost! Tempat terbaik untuk mencari rekomendasi kost</p>
 
-        <form action="">
+        <form method="post" action="<?= BASEURL ?>login">
             <label for="username">Email or Username</label>
             <input type="text" name="username" id="username" placeholder="example@gmail.com" required>
             <div class="password-section">

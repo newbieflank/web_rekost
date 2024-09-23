@@ -21,4 +21,16 @@ class ProfileController extends Controller
 
         $this->view('layout/main', $data);
     }
+
+    public function profileKost()
+    {
+        ob_start();
+        $this->view('profile/profileKost');
+        $content = ob_get_clean();
+
+        $data = [
+            "content" => $content,
+            "title" => "Profile"
+        ];
+    }
 }
