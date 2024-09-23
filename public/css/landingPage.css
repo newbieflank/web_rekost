@@ -96,10 +96,16 @@ header {
   width: 60%;
   opacity: 0.9;
 }
+.reviews {
+  margin-top: -52px;
+}
 
 @media (max-width: 768px) {
   .hero-stats h1 {
     font-size: 32px;
+  }
+  .reviews {
+    margin-top: 20px;
   }
 
   .hero-stats .row {
@@ -174,6 +180,7 @@ header {
 .popular .scroll-container {
   display: flex;
   flex-wrap: nowrap;
+  gap: 20px;
   overflow-x: auto;
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */

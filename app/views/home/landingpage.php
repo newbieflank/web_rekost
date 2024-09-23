@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-start" style="margin-top: -52px;">
+            <div class="row justify-content-start reviews" >
                 <div class="col-auto">
                     <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">100K+</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
