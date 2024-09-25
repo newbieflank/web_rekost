@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-start reviews" >
+            <div class="row justify-content-start reviews">
                 <div class="col-auto">
                     <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">100K+</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
@@ -90,15 +90,15 @@
                                 <label for="location">Location</label>
                                 <div class="input-group position-relative">
                                     <input type="text" class="form-control pl-5 pr-5" id="location" placeholder="Add your location">
-                                    <i class="fas fa-map-marker-alt position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
-                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                                    <i class="fas fa-map-marker-alt position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
+                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="cost">Cost</label>
                                 <div class="input-group position-relative">
                                     <input type="text" class="form-control pr-5" id="cost" placeholder="Enter Price">
-                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@
                                 <label for="date">Date</label>
                                 <div class="input-group position-relative">
                                     <input type="text" class="form-control pr-5" id="date" placeholder="Enter Date">
-                                    <i class="fas fa-calendar-alt position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%);"></i>
+                                    <i class="fas fa-calendar-alt position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
@@ -118,7 +118,6 @@
             </div>
         </div>
     </section>
-
     </section>
     <section id="bookings" class="popular">
         <div class="container">
@@ -201,7 +200,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-light btn-wide" style="color: #5D58AF; font-weight: 600;">See all <i class="fas fa-angle-right"></i></button>
+                    <a href="popularkos">
+                        <button type="button" class="btn btn-light btn-wide" style="color: #5D58AF; font-weight: 600;">
+                            See all <i class="fas fa-angle-right"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
 

@@ -19,16 +19,15 @@
             }
         }
 
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
         .navbar {
             background-color: #fff;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-        }
-
-        .fixed-top {
-            position: fixed;
-            top: 0;
-            width: 100%;
         }
 
         .navbar-nav {
@@ -56,35 +55,37 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
-        <a class="navbar-brand" href="#">
-            <img src="img/logo.png" alt="Re-Kost Logo" height="50">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#bookings">Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#service">Service</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a href="register" class="btn btn-primary">Sign Up</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#home">Home <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bookings">Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#service">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="register" class="btn btn-primary">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
