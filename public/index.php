@@ -10,7 +10,6 @@ require_once '../app/core/Controller.php';
 require_once '../app/core/Model.php';
 require_once '../app/core/Router.php';
 require_once '../app/core/View.php';
-require_once '../app/Helpers/Response.php';
-require_once '../app/MiddleWare/AuthMiddleware.php';
+
 
 $app = new App();
