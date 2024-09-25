@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Popular</title>
+    <link rel="stylesheet" href="<?= BASEURL; ?>css/popular.css">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
@@ -42,7 +44,7 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center ms-3">
-                    <img alt="User profile picture" class="rounded-circle" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-hDigkO50ViA2HiUVvIurjDM1.png?st=2024-09-22T06%3A17%3A38Z&amp;se=2024-09-22T08%3A17%3A38Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-22T01%3A34%3A34Z&amp;ske=2024-09-23T01%3A34%3A34Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=fOkKU7D8iZSpuGw2PwbefEbZSQjkuSD4xjaP6D24Y1c%3D" width="40" />
+                    <img alt="user.png" class="rounded-circle" height="40" src="img/user.png" width="40" />
                 </div>
             </div>
         </div>
@@ -89,7 +91,7 @@
         <div class="row mt-4">
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -113,7 +115,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -137,7 +139,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -161,7 +163,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -185,7 +187,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -209,7 +211,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -233,7 +235,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
@@ -257,7 +259,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img alt="House image" class="card-img-top" height="200" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-llwzcjNit6wIIAdHFAI8f5n4.png?st=2024-09-22T06%3A17%3A40Z&amp;se=2024-09-22T08%3A17%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-21T23%3A09%3A14Z&amp;ske=2024-09-22T23%3A09%3A14Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QCZUBmjTLRw13lRA3WO5s7VdCeZckXw3b7GV6p55FC4%3D" width="300" />
+                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
                     <div class="card-body">
                         <h5 class="card-title">
                             Kos Putri Syariah
