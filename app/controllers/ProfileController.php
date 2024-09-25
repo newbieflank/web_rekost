@@ -2,9 +2,16 @@
 
 class ProfileController extends Controller
 {
+    private $baseURL = "";
 
-    private $id = '123';
-    private $name = 'mafira';
+    public function __construct()
+    {
+        // if (!isset($_SESSION['user'])) {
+        //     header('Location: login');
+        //     exit;
+        // }
+    }
+
     public function profile()
     {
         ob_start();
@@ -19,7 +26,7 @@ class ProfileController extends Controller
 
         ];
 
-        $this->view('layout/main', $data);
+        $this->view('layout/main2', $data);
     }
 
     public function profileKost()
