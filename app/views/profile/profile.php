@@ -44,7 +44,6 @@
                             <option selected>Pilih Jenis Kelamin</option>
                             <option value="Laki-Laki">Laki-Laki</option>
                             <option value="Perempuan">Perempuan</option>
-                            <option value="Hewan">Hewan</option>
                         </select>
                     </div>
                 </div>

@@ -3,8 +3,26 @@
 class Router
 {
     private static $routes = [];
+    protected static $middleware = [];
+    protected static $groupAttributes = [];
+
+    public static function middleware($name, $class)
+    {
+        self::$middleware[$name] = $class;
+    }
 
 
+    public static function group($attributes, $callback)
+    {
+        $middlewareName = $attributes["middleware"];;
+        if (isset(self::$middleware[$middlewareName])) {
+            $instance = new self::$middleware[$middlewareName];
+            if ($instance->handle() == true) {
+                call_user_func($callback);
+                return;
+            }
+        }
+    }
     public static function get($uri, $action)
     {
         self::$routes['GET'][$uri] = $action;
