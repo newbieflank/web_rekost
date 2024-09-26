@@ -1,290 +1,64 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Popular</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re-Kost</title>
     <link rel="stylesheet" href="<?= BASEURL; ?>css/popular.css">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                Re-Kost
+                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
             </a>
-            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon">
-                </span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            Home
-                        </a>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Service
-                        </a>
+                        <a class="nav-link" href="#bookings">Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Bookings
-                        </a>
+                        <a class="nav-link" href="#service">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Contact
-                        </a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center ms-3">
-                    <img alt="user.png" class="rounded-circle" height="40" src="img/user.png" width="40" />
-                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <img src="img/user.png" alt="profile">
+                    </li>
+                </ul>
             </div>
-        </div>
-    </nav>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="search-bar d-flex align-items-center">
-                    <input placeholder="Search Boarding House" type="text" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 d-flex justify-content-between align-items-center">
-                <h2 class="popular-title">
-                    Popular in Re-kost!
-                </h2>
-                <div class="filter-buttons d-flex gap-2">
-                    <button class="btn">
-                        <i class="fas fa-filter">
-                        </i>
-                        Filter
-                    </button>
-                    <button class="btn">
-                        <i class="fas fa-calendar-alt">
-                        </i>
-                        Tanggal
-                    </button>
-                    <button class="btn">
-                        <i class="fas fa-dollar-sign">
-                        </i>
-                        Harga
-                    </button>
-                    <button class="btn">
-                        <i class="fas fa-sort">
-                        </i>
-                        Urutkan
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="Home1.png" class="card-img-top" height="200" width="300" />
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Kos Putri Syariah
-                        </h5>
-                        <p class="card-text">
-                            4.5/5 (100 Reviews)
-                            <br />
-                            Blindungan, Bondowoso
-                        </p>
-                        <span class="btn-available">
-                            Tersedia
-                        </span>
-                        <p class="price mt-2">
-                            IDR 500,000 / month
-                        </p>
-                        <a class="btn-order" href="#">
-                            Pesan sekarang
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script crossorigin="anonymous" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+3i5d5L5hb5g7v4l5Y5n5Y5n5Y5n5" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-    </script>
-</body>
 
-</html>
+        </nav>
+        <div class="w-100">
+            <form class="form-inline my-2 my-lg-0 float-left">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+</body>

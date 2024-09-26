@@ -6,4 +6,12 @@ class HomeController extends Controller
     {
         $this->view('home/landingpage');
     }
+    public function popular()
+    {
+        $this->view('detail/popularkos');
+    }
+    public function best()
+    {
+        $this->view('detail/bestkos');
+    }
 }

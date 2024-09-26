@@ -20,7 +20,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
                 <img src="img/logo.png" alt="Re-Kost Logo" height="50">
             </a>
@@ -200,14 +200,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <a href="popularkos">
+                    <a href="popular">
                         <button type="button" class="btn btn-light btn-wide" style="color: #5D58AF; font-weight: 600;">
                             See all <i class="fas fa-angle-right"></i>
                         </button>
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
     <section class="boarding-house">
