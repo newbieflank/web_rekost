@@ -3,26 +3,7 @@
 class Router
 {
     private static $routes = [];
-    protected static $middleware = [];
-    protected static $groupAttributes = [];
 
-    public static function middleware($name, $class)
-    {
-        self::$middleware[$name] = $class;
-    }
-
-
-    public static function group($attributes, $callback)
-    {
-        $middlewareName = $attributes["middleware"];;
-        if (isset(self::$middleware[$middlewareName])) {
-            $instance = new self::$middleware[$middlewareName];
-            if ($instance->handle() == true) {
-                call_user_func($callback);
-                return;
-            }
-        }
-    }
     public static function get($uri, $action)
     {
         self::$routes['GET'][$uri] = $action;
@@ -39,6 +20,7 @@ class Router
     {
         $uri = self::getUri();
         $method = $_SERVER['REQUEST_METHOD'];
+
 
         if (isset(self::$routes[$method])) {
             foreach (self::$routes[$method] as $route => $action) {
@@ -57,10 +39,10 @@ class Router
 
                     return;
                 }
-            }
+            } //
         }
-        http_response_code(404);
-        echo "404 - Not Found";
+        header('Location: /web_rekost/public/');
+        exit();
     }
 
 
@@ -77,6 +59,7 @@ class Router
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
         }
+
         $uri = str_replace("public", "", $uri);
         return $uri ?: '/';
     }

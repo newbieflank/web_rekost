@@ -26,7 +26,7 @@ class ProfileController extends Controller
 
         ];
 
-        $this->view('layout/main2', $data);
+        $this->view('layout/main', $data);
     }
 
     public function profileKost()
@@ -39,5 +39,7 @@ class ProfileController extends Controller
             "content" => $content,
             "title" => "Profile"
         ];
+
+        $this->view('layout/main', $data);
     }
 }

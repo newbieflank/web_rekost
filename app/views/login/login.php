@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/loginPage.css">
+<link rel="stylesheet" href="<?= BASEURL; ?>css/loginPage.css">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
     @media (max-width: 1024px) {
