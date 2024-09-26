@@ -41,7 +41,6 @@
                     <label for="inputKelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
                         <select class="form-select" id="inputKelamin" aria-label="Default select example">
-                            <option selected>Pilih Jenis Kelamin</option>
                             <option value="Laki-Laki">Laki-Laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
@@ -60,7 +59,7 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputSekolah" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <label for="inputSekolah" class="col-sm-2 col-form-label">Nama Instansi</label>
                     <div class="col-sm-10">
                         <select class="form-select" id="inputSekolah" aria-label="Default select example">
                             <option selected>Pilih Sekolah/Kampus</option>
