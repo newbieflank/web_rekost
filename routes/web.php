@@ -7,8 +7,9 @@ Router::get('/register', 'LoginController@register');
 Router::get('/id/{id}', 'LoginController@show');
 Router::get('/profile', 'ProfileController@profile');
 Router::get('/Kost', 'ProfileController@profileKost');
-Router::get('/popular', 'HomeController@popular');
-Router::get('/best', 'HomeController@best');
+Router::get('/popular', 'DetailController@popularkos');
+Router::get('/best', 'DetailController@bestkos');
+Router::get('/campus', 'DetailController@strategically');
 
 
 //POST METHOD

@@ -45,7 +45,7 @@ header {
 .navbar-toggler {
   margin-left: auto;
 }
-.populer-title {
+.best-title {
   font-weight: 400;
   font-size: 24px;
   color: #2d3748;
@@ -60,10 +60,8 @@ header {
   padding-right: 40px;
   font-size: 14px;
   border-radius: 22px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  background-color: #fff !important;
-  border: none !important;
-  color: #a7abb7;
+  border: 1px solid;
+  color: #007bff;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -72,7 +70,7 @@ header {
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
-  color: #a7abb7;
+  color: grey;
   font-size: 16px;
   pointer-events: none;
 }
@@ -83,17 +81,30 @@ header {
   }
 }
 
-.populer {
+.best {
   padding: 32px 0;
   background-color: #f3f2ff;
 }
-.populer .d-flex {
-  justify-content: space-between;
+.best .d-flex {
   align-items: center;
 }
-.populer button {
+.best button {
   white-space: nowrap;
 }
+.overflow-auto {
+    overflow-x: auto;     
+    white-space: nowrap;   
+}
+
+.overflow-auto::-webkit-scrollbar {
+    display: none;  
+}
+
+.overflow-auto {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;     
+}
+
 .card {
   border: none;
   border-radius: 12px;
@@ -122,7 +133,7 @@ header {
   color: white;
   border-radius: 12px;
   padding: 2px 8px;
-  font-size: 12px;
+  font-size: 12px;s
 }
 
 .btn-order {

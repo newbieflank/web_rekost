@@ -1,11 +1,7 @@
 <?php
 
-class HomeController extends Controller
+class DetailController extends Controller
 {
-    public function index()
-    {
-        $this->view('home/landingpage');
-    }
     public function popularkos()
     {
         $this->view('detail/popularkos');

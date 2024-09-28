@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/bestkos.css">
+    <link rel="stylesheet" href="<?= BASEURL; ?>css/strategically.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -50,12 +50,12 @@
             </div>
         </nav>
     </header>
-    <section class="best">
+    <section class="strategically">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-start" style="margin-top: 24px; margin-bottom: 24px;">
                     <div>
-                        <h2 style="font-size: 32px; font-weight: bold;">Best Boarding House Options Near You</h2>
+                        <h2 style="font-size: 32px; font-weight: bold;">Strategically Located Kosts Near Campus/Office</h2>
                         <p style="font-size: 16px; font-weight: normal; color: #5F5F5F;">Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
                     </div>
                     <div class="d-flex align-items-center">
@@ -72,13 +72,11 @@
                 </div>
             </div>
             <div class="d-flex overflow-auto mb-4">
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Blindungan</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamanan</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Wonosari</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamansari</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Kampung Arab</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Sempol</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tapen</button>
+                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Jember</button>
+                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Bondowoso</button>
+                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Politeknik Negeri Jember</button>
+                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Univeristas Muhammadiyah</button>
+                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Islam</button>
             </div>
         </div>
 
@@ -230,11 +228,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
