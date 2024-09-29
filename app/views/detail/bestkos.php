@@ -51,40 +51,62 @@
         </nav>
     </header>
     <section class="best">
-        <div class="container">
+        <div class="container-fluid px-4">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-start" style="margin-top: 24px; margin-bottom: 24px;">
                     <div>
-                        <h2 style="font-size: 32px; font-weight: bold;">Best Boarding House Options Near You</h2>
+                        <h2 style="font-size: 32px; font-weight: bold; margin-top: 24px">Best Boarding House Options Near You</h2>
                         <p style="font-size: 16px; font-weight: normal; color: #5F5F5F;">Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-primary mr-2">
-                            <i class="fas fa-calendar-alt"></i> Tanggal
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                <div class="d-flex overflow-auto mb-2 mb-md-0">
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Blindungan</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamanan</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Wonosari</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamansari</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Kampung Arab</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Sempol</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tapen</button>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown d-inline-block mr-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-map-marker-alt"></i> Lokasi
                         </button>
-                        <button type="button" class="btn btn-primary mr-2">
+                        <div class="dropdown-menu" aria-labelledby="dropdownLokasi">
+                            <a class="dropdown-item" href="#">Blindungan</a>
+                            <a class="dropdown-item" href="#">Tamanan</a>
+                            <a class="dropdown-item" href="#">Tamansari</a>
+                            <a class="dropdown-item" href="#">Tapen</a>
+                            <a class="dropdown-item" href="#">Sempol</a>
+                        </div>
+                    </div>
+                    <div class="dropdown d-inline-block mr-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-dollar-sign"></i> Harga
                         </button>
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-sort"></i> Urutkan
+                        <div class="dropdown-menu" aria-labelledby="dropdownHarga">
+                            <a class="dropdown-item" href="#">Tertinggi ke Terendah</a>
+                            <a class="dropdown-item" href="#">Terendah ke Tertinggi</a>
+                        </div>
+                    </div>
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-filter"></i> Urutkan
                         </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownUrutkan">
+                            <a class="dropdown-item" href="#">Popularitas</a>
+                            <a class="dropdown-item" href="#">Terbaru</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="d-flex overflow-auto mb-4">
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Blindungan</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamanan</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Wonosari</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamansari</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Kampung Arab</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Sempol</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tapen</button>
-            </div>
         </div>
-
-        <div class="container mt-4">
+        <div class="container-fluid">
             <div class="row" style="margin-top: 32px;">
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
                         <img src="img/home1.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
@@ -100,9 +122,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home2.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -116,9 +138,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home3.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -132,9 +154,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home4.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -148,9 +170,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home5.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -164,9 +186,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home3.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -180,9 +202,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home2.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -196,9 +218,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home4.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -212,9 +234,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-5">
+                <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="img/home5.png" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -230,11 +252,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

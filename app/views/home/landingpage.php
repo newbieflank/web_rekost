@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
     <link rel="stylesheet" href="<?= BASEURL; ?>css/landingPage.css">
+    <script src="js/navbar.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -70,14 +71,15 @@
             </div>
             <div class="row justify-content-start reviews">
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">100K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0K+</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
                 </div>
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">100K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0K+</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Booked</p>
                 </div>
             </div>
+
         </div>
     </section>
     <section class="search">
@@ -89,24 +91,34 @@
                             <div class="form-group col-md-4">
                                 <label for="location">Location</label>
                                 <div class="input-group position-relative">
-                                    <input type="text" class="form-control pl-5 pr-5" id="location" placeholder="Add your location">
+                                    <select class="form-control pl-5 pr-5" id="location">
+                                        <option value="">Select Location</option>
+                                        <option value="blindungan">Blindungan</option>
+                                        <option value="tapen">Tapen</option>
+                                        <option value="tamnanan">Tamanan</option>
+                                        <option value="tamansari">Tamansari</option>
+                                        <option value="sempol">Sempol</option>
+                                    </select>
                                     <i class="fas fa-map-marker-alt position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
-                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="cost">Cost</label>
                                 <div class="input-group position-relative">
-                                    <input type="text" class="form-control pr-5" id="cost" placeholder="Enter Price">
-                                    <i class="fas fa-chevron-down position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
+                                    <select class="form-control pr-5" id="cost">
+                                        <option value="">Select Price Range</option>
+                                        <option value="0-100000">Dibawah 100,000</option>
+                                        <option value="100000-500000">100,000 - 500,000</option>
+                                        <option value="500000-1000000">500,000 - 1,000,000</option>
+                                        <option value="1000000-2000000">1,000,000 - 2,000,000</option>
+                                        <option value="2000000">Diatas 2,000,000</option>
+                                    </select>
                                 </div>
                             </div>
-
                             <div class="form-group col-md-4">
                                 <label for="date">Date</label>
                                 <div class="input-group position-relative">
-                                    <input type="text" class="form-control pr-5" id="date" placeholder="Enter Date">
-                                    <i class="fas fa-calendar-alt position-absolute cursor-pointer" style="right: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
+                                    <input type="date" class="form-control " id="date" placeholder="Enter Date">
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
@@ -128,74 +140,84 @@
             </div>
             <div class="row scroll-container">
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home3.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home4.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="#" class="card-link">
+                        <div class="card">
+                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="row">
@@ -224,80 +246,92 @@
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Wonosari</button>
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">10+</button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-custom d-inline-block" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
-                </div>
+                <a href="best">
+                    <div>
+                        <button type="button" class="btn btn-custom d-inline-block" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
+                    </div>
+                </a>
             </div>
             <div class="row scroll-container">
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="best" class="card-link">
+                        <div class="card">
+                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="best" class="card-link">
+                        <div class="card">
+                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home3.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="best" class="card-link">
+                        <div class="card">
+                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home4.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="best" class="card-link">
+                        <div class="card">
+                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="best" class="card-link">
+                        <div class="card">
+                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -310,79 +344,91 @@
                         <h2>Strategically Located Kosts Near Campus/Office</h2>
                         <p>Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
                     </div>
-                    <button type="button" class="btn btn-custom" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
+                    <a href="campus">
+                        <button type="button" class="btn btn-custom" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
+                    </a>
                 </div>
             </div>
             <div class="row scroll-container">
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="strategically" class="card-link">
+                        <div class="card">
+                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="strategically" class="card-link">
+                        <div class="card">
+                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home3.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="strategically" class="card-link">
+                        <div class="card">
+                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home4.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="strategically" class="card-link">
+                        <div class="card">
+                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home2.png" class="card-img-top" alt="Kost Image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
+                    <a href="strategically" class="card-link">
+                        <div class="card">
+                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
+                                <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
+                                <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                    IDR 500,000
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -499,10 +545,11 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                             </div>
-                            <input type="text" class="form-control" placeholder="Tuliskan ulasan anda disini....">
-                            <i class="fas fa-paper-plane send-message position-absolute" style="color: #303030; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                            <input type="text" class="form-control" placeholder="Tuliskan ulasan anda disini...." id="reviewInput">
+                            <i class="fas fa-paper-plane send-message position-absolute" style="color: #303030; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 4;" onclick="sendReview()"></i>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -524,30 +571,29 @@
                             </span>
                         </div>
                     </form>
-
                 </div>
                 <div class="col-md-2">
                     <h3 style="font-size: 18px; font-weight: semibold;">Service</h3>
                     <ul class="list-unstyled">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Carriers</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Police</a></li>
-                        <li><a href="#">Terms And Conditions</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
                     <h3 style="font-size: 18px; font-weight: semibold;">Social Media</h3>
                     <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="#" class="social-instagram"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#" class="social-facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" class="social-twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" class="social-whatsapp"><i class="fab fa-whatsapp"></i></a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

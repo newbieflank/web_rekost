@@ -51,36 +51,58 @@
         </nav>
     </header>
     <section class="strategically">
-        <div class="container">
+        <div class="container-fluid px-4">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-between align-items-start" style="margin-top: 24px; margin-bottom: 24px;">
                     <div>
-                        <h2 style="font-size: 32px; font-weight: bold;">Strategically Located Kosts Near Campus/Office</h2>
+                        <h2 style="font-size: 32px; font-weight: bold; margin-top: 24px">Strategically Located Kosts Near Campus/Office</h2>
                         <p style="font-size: 16px; font-weight: normal; color: #5F5F5F;">Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <button type="button" class="btn btn-primary mr-2">
-                            <i class="fas fa-calendar-alt"></i> Tanggal
-                        </button>
-                        <button type="button" class="btn btn-primary mr-2">
-                            <i class="fas fa-dollar-sign"></i> Harga
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-sort"></i> Urutkan
-                        </button>
                     </div>
                 </div>
             </div>
-            <div class="d-flex overflow-auto mb-4">
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Jember</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Bondowoso</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Politeknik Negeri Jember</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Univeristas Muhammadiyah</button>
-                <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Islam</button>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex overflow-auto">
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Jember</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Bondowoso</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Politeknik Negeri Jember</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Univeristas Muhammadiyah</button>
+                    <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Universitas Islam</button>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown d-inline-block mr-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-map-marker-alt"></i> Lokasi
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownLokasi">
+                            <a class="dropdown-item" href="#">Blindungan</a>
+                            <a class="dropdown-item" href="#">Tamanan</a>
+                            <a class="dropdown-item" href="#">Tamansari</a>
+                            <a class="dropdown-item" href="#">Tapen</a>
+                            <a class="dropdown-item" href="#">Sempol</a>
+                        </div>
+                    </div>
+                    <div class="dropdown d-inline-block mr-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-dollar-sign"></i> Harga
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownHarga">
+                            <a class="dropdown-item" href="#">Tertinggi ke Terendah</a>
+                            <a class="dropdown-item" href="#">Terendah ke Tertinggi</a>
+                        </div>
+                    </div>
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-filter"></i> Urutkan
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownUrutkan">
+                            <a class="dropdown-item" href="#">Popularitas</a>
+                            <a class="dropdown-item" href="#">Terbaru</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="container mt-4">
+        <div class="container-fluid px-4">
             <div class="row" style="margin-top: 32px;">
                 <div class="col-md-4 mb-5">
                     <div class="card">

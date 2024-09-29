@@ -1,12 +1,8 @@
 body {
   font-family: "Arial", sans-serif;
   background-color: #f3f2ff !important;
-  padding-top: 70px;
+  padding-top: 48px;
 }
-section {
-  padding-top: 50px;
-}
-
 header {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -45,6 +41,7 @@ header {
 .navbar-toggler {
   margin-left: auto;
 }
+
 .populer-title {
   font-weight: 400;
   font-size: 24px;
