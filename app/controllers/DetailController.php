@@ -14,4 +14,8 @@ class DetailController extends Controller
     {
         $this->view('detail/strategically');
     }
+    public function detailkos()
+    {
+        $this->view('detail/detailkos');
+    }
 }

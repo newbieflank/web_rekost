@@ -10,6 +10,7 @@ Router::get('/Kost', 'ProfileController@profileKost');
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
+Router::get('/detailkos', 'DetailController@detailkos');
 
 
 //POST METHOD
