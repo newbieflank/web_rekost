@@ -1,24 +1,11 @@
 <?php
 
-class HomeController extends Controller
+class DetailController extends Controller
 {
-    public function index()
-    {
-        $this->view('home/landingpage');
-    }
     public function popularkos()
     {
         $this->view('detail/popularkos');
     }
-<<<<<<< HEAD
-
-    public function best()
-    {
-        $this->view('detail/bestkos');
-    }
-
-
-=======
     public function bestkos()
     {
         $this->view('detail/bestkos');
@@ -27,5 +14,8 @@ class HomeController extends Controller
     {
         $this->view('detail/strategically');
     }
->>>>>>> refs/remotes/origin/main
+    public function detailkos()
+    {
+        $this->view('detail/detailkos');
+    }
 }

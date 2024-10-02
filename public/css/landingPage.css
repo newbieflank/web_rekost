@@ -38,6 +38,9 @@ header {
   color: #4a4a4a;
   font-size: 16px;
 }
+.nav-item.active .nav-link {
+  color: black;
+}
 
 .navbar-toggler {
   margin-left: auto;
@@ -508,7 +511,8 @@ footer .btn {
 }
 
 footer .btn:hover {
-  background-color: #555;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer .list-unstyled {
@@ -548,17 +552,33 @@ footer .social-buttons li a {
   align-items: center;
   width: 40px;
   height: 40px;
-  border: 1px solid #515151 !important;
+  border: 1px solid #515151;
   background-color: transparent;
-  color: #515151 !important;
+  color: #515151;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 footer .social-buttons li a:hover {
-  background-color: #007bff;
-  border: 1px solid transparent !important;
-  color: #fff !important;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+footer .social-buttons li a.social-instagram:hover {
+  background-color: #e1306c;
+}
+
+footer .social-buttons li a.social-facebook:hover {
+  background-color: #1877f2;
+}
+
+footer .social-buttons li a.social-twitter:hover {
+  background-color: #1da1f2;
+}
+
+footer .social-buttons li a.social-whatsapp:hover {
+  background-color: #25d366;
 }
 
 footer .social-buttons a {

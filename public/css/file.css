@@ -1,231 +1,56 @@
-<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet" />
-<section style="background-color: #f3f2ff;">
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-12 d-flex justify-content-between align-items-center">
-                    <h2 class="popular-title">
-                        Popular in Re-kost!
-                    </h2>
-                    <div class="filter-buttons d-flex gap-2">
-                        <button class="btn">
-                            <i class="fas fa-filter">
-                            </i>
-                            Filter
-                        </button>
-                        <button class="btn">
-                            <i class="fas fa-calendar-alt">
-                            </i>
-                            Tanggal
-                        </button>
-                        <button class="btn">
-                            <i class="fas fa-dollar-sign">
-                            </i>
-                            Harga
-                        </button>
-                        <button class="btn">
-                            <i class="fas fa-sort">
-                            </i>
-                            Urutkan
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Kos Putri Syariah
-                            </h5>
-                            <p class="card-text">
-                                4.5/5 (100 Reviews)
-                                <br />
-                                Blindungan, Bondowoso
-                            </p>
-                            <span class="btn-available">
-                                Tersedia
-                            </span>
-                            <p class="price mt-2">
-                                IDR 500,000 / month
-                            </p>
-                            <a class="btn-order" href="#">
-                                Pesan sekarang
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script crossorigin="anonymous" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+3i5d5L5hb5g7v4l5Y5n5Y5n5Y5n5" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: #2d3748;
+}
+
+.card-text {
+  color: #718096;
+}
+
+.price {
+  font-weight: 700;
+  color: #e53e3e;
+}
+
+.btn-available {
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.btn-order {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px !important;
+}
+
+.filter-buttons .btn {
+  background-color: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  color: #4a5568;
+  font-weight: 600;
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
