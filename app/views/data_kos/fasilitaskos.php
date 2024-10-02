@@ -28,52 +28,40 @@
     }
 </style>
 
-<!-- Form Profile -->
+<!-- Form Fasilitas Kos -->
 <div class="container">
     <div class="card mx-auto mr-5 mt-5 mb-3">
-        <h5 class="card-header">Informasi Pribadi</h5>
+        <h5 class="card-header">Fasilitas Kos</h5>
         <div class="card-body">
-            <div class="container mt-3 mb-5">
-                <div class="imgProfile d-block mx-auto">
-                    <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="">
-                </div>
-            </div>
             <form id="myForm" class="row m-5 custom-form" method="post" action="update">
                 <div class="mb-3 row">
-                    <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                    <label for="fasilitasumum" class="col-sm-2 col-form-label">Fasilitas Umum</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Masukan Nama Lengkap">
+                        <input type="text" class="form-control" id="fasilitasumum" placeholder="Masukkan fasilitas umum...">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                    <label for="fasilitaskamar" class="col-sm-2 col-form-label">Fasilitas Kamar</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" placeholder="Masukkan E-mail">
+                        <input type="text" class="form-control" id="fasilitaskamar" placeholder="Masukkan fasilitas kamar...">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <label for="kamarpribadi" class="col-sm-2 col-form-label">Fasilitas Kamar Mandi</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                        <input type="text" class="form-control" id="kamarpribadi" placeholder="Masukkan fasilitas kamar mandi...">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="nama_kos" class="col-sm-2 col-form-label">Nama Kost</label>
+                    <label for="parkir" class="col-sm-2 col-form-label">Fasilitas Parkir</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_kos" placeholder="Masukkan Nama Kos">
+                        <input type="text" class="form-control" id="parkir" placeholder="Masukkan fasilitas parkir...">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="Lokasi" class="col-sm-2 col-form-label">Lokasi</label>
+                    <label for="luar" class="col-sm-2 col-form-label">Fasilitas Luar</label>
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="Lokasi" placeholder="Masukkan Lokasi">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="nomorhandphone" class="col-sm-2 col-form-label">Nomor Handphone</label>
-                    <div class="col-sm-10">
-                        <input type="number" class="form-control mb-3" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
-                        <input type="number" class="form-control" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
+                       <input type="text" class="form-control" id="luar" placeholder="Masukkan fasilitas luar kos...">
                     </div>
                 </div>
             </form>

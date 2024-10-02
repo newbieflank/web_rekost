@@ -10,11 +10,11 @@ class HomeController extends Controller
     {
         $this->view('detail/popularkos');
     }
-<<<<<<< HEAD
+
     public function best()
     {
         $this->view('detail/bestkos');
     }
-=======
->>>>>>> refs/remotes/origin/main
+
+
 }
