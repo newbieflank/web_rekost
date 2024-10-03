@@ -1,6 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff !important;
   padding-top: 70px;
 }
 
@@ -48,7 +48,7 @@ header {
 
 .hero-stats {
   padding: 50px 0;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff;
 }
 
 .hero-stats .row {
@@ -147,7 +147,7 @@ header {
 
 .search {
   padding: 50px 0;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff;
 }
 .cursor-pointer {
   cursor: pointer;
@@ -189,7 +189,7 @@ header {
 
 .popular {
   padding: 50px 0;
-  background-color: #5d58af;
+  background-color: #6290cd;
 }
 
 .popular h2 {
@@ -268,7 +268,7 @@ header {
 
 .boarding-house {
   padding: 32px 0;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff;
 }
 .boarding-house .d-flex {
   justify-content: space-between;
@@ -324,7 +324,7 @@ header {
 
 .strategically-located {
   padding: 32px 0;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff;
 }
 .strategically-located .d-flex {
   margin-bottom: 20px;

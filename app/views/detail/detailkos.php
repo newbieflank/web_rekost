@@ -54,14 +54,17 @@
         </div>
         <div class="container-fluid px-4">
             <div class="row">
-                <div class="col-md-7 p-4">
-                    <img src="img/home1.png" alt="thumbnail" height="600">
+                <div class="col-md-7 p-2">
+                    <img src="img/home1.png" alt="thumbnail" class="thumbnail w-100">
+
                 </div>
-                <div class="col-md-5 d-flex flex-wrap justify-content-around p-4">
-                    <img src="img/home2.png" alt="thumbnail" width="300" class="mb-2">
-                    <img src="img/home3.png" alt="thumbnail" width="300" class="mb-2">
-                    <img src="img/home4.png" alt="thumbnail" width="300" class="mb-2">
-                    <img src="img/home5.png" alt="thumbnail" width="300" class="mb-2">
+                <div class="col-md-5 d-flex flex-wrap justify-content-around">
+                    <div class="row">
+                        <img src="img/home2.png" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="img/home3.png" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="img/home4.png" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="img/home5.png" alt="thumbnail" class="img-fluid w-50 p-2">
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +87,12 @@
                 </li>
             </ul>
         </div>
+        <div class="rating">
+            <i class="fas fa-star"></i>
+            <span>4.5/5 | 100 Reviews</span>
+        </div>
+        <h1>Kos Putri Muslimah</h1>
+        <div class="price">Mulai dari IDR 500.000 /bulan</div>
     </section>
     <script crossorigin="anonymous" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1p6QF1bM4Jp+7F2m1i6U8zTnm5zT9UJ0Zr+2QIT3hK" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js">
     </script>

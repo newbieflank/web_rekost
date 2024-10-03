@@ -12,6 +12,10 @@ class LoginController extends Controller
     {
         $this->view('Login/register');
     }
+    public function setpassword()
+    {
+        $this->view('Login/setpassword');
+    }
 
     public function show($id)
     {
@@ -25,7 +29,6 @@ class LoginController extends Controller
         $pass = $_POST['password'];
 
         if ($this->model('UsersModel')->loginAuth($username, $pass) > 0) {
-                
         }
     }
 }
