@@ -3,6 +3,7 @@
 class AuthController extends Controller
 {
     private $googleClient;
+
     private $userModel;
 
     public function __construct()
