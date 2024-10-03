@@ -15,6 +15,9 @@ $(function () {
     const initialValues = {};
     inputs.forEach(input => initialValues[input.id] = input.value);
 
+    function redirectTopopular(){
+        window.location.href = 'popular';
+    }
 
     function checkForChanges() {
         let hasChanged = false;

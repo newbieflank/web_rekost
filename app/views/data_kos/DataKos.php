@@ -28,52 +28,58 @@
     }
 </style>
 
-<!-- Form Profile -->
+<!-- Form Data Kos -->
 <div class="container">
     <div class="card mx-auto mr-5 mt-5 mb-3">
-        <h5 class="card-header">Informasi Pribadi</h5>
+        <h5 class="card-header">Lengkapi Data Kos</h5>
         <div class="card-body">
-            <div class="container mt-3 mb-5">
-                <div class="imgProfile d-block mx-auto">
-                    <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="">
-                </div>
-            </div>
             <form id="myForm" class="row m-5 custom-form" method="post" action="update">
                 <div class="mb-3 row">
-                    <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                    <label for="namakos" class="col-sm-2 col-form-label">Nama Kos</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Masukan Nama Lengkap">
+                        <input type="text" class="form-control" id="namakos" placeholder="Masukan Nama Kos">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                    <label for="jumlahkamar" class="col-sm-2 col-form-label">Jumlah Kamar</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" placeholder="Masukkan E-mail">
+                        <input type="number" class="form-control" id="jumlahkamar" placeholder="Masukkan Jumlah Kamar">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <label for="tipekos" class="col-sm-2 col-form-label">Disewakan Untuk</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipekos" id="putra" value="Putra">
+                            <label class="form-check-label" for="putra">Putra</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipekos" id="putri" value="Putri">
+                            <label class="form-check-label" for="putri">Putri</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipekos" id="campur" value="Campur">
+                            <label class="form-check-label" for="campur">Campur</label>
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="nama_kos" class="col-sm-2 col-form-label">Nama Kost</label>
+                    <label for="deskripsikos" class="col-sm-2 col-form-label">Deskripsi Kos</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_kos" placeholder="Masukkan Nama Kos">
+                        <textarea type="text" class="form-control" id="deskripsikos" placeholder="Tuliskan deskripsi kos anda..." rows="3" style="resize: none;"></textarea>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="Lokasi" class="col-sm-2 col-form-label">Lokasi</label>
+                    <label for="peraturankos" class="col-sm-2 col-form-label">Peraturan Kos</label>
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="Lokasi" placeholder="Masukkan Lokasi">
+                        <input type="text" class="form-control" id="peraturankos" placeholder="Tentukan aturan kos disini...">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="nomorhandphone" class="col-sm-2 col-form-label">Nomor Handphone</label>
+                    <label for="catatan" class="col-sm-2 col-form-label">Catatan Lainnya (Opsional)</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control mb-3" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
-                        <input type="number" class="form-control" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
+                        <textarea type="text" class="form-control" id="catatan"
+                            placeholder="Masukan catatan lainnya disini..." rows="3" style="resize: none;"></textarea>
                     </div>
                 </div>
             </form>

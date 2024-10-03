@@ -48,7 +48,7 @@
         <div class="separator">
             <span>Or</span>
         </div>
-        <a href="" class="button-link">
+        <a href="<?= BASEURL; ?>auth" class="button-link">
             <img src="img/googleIcon.svg" alt="Logo" class="button-logo">
             Sign In With Google
         </a>
