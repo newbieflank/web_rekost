@@ -11,7 +11,14 @@ Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
 Router::get('/detailkos', 'DetailController@detailkos');
+Router::get('/confirm', 'LoginController@setPassword');
 
+//login Google
+Router::get('/auth', 'AuthController@login');
+Router::get('/auth/callback', 'AuthController@callback');
+
+//logout
+Router::get('/logout', 'LoginController@logout');
 
 //POST METHOD
 Router::post('/login', 'LoginController@auth');

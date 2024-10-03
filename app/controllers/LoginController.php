@@ -19,13 +19,20 @@ class LoginController extends Controller
         echo "User ID: " . htmlspecialchars($id);
     }
 
-    public function auth()
+    public function logout()
     {
-        $username = $_POST['username'];
-        $pass = $_POST['password'];
-
-        if ($this->model('UsersModel')->loginAuth($username, $pass) > 0) {
-                
+        // Ensure session is started before manipulating it
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
+
+        // Unset all session variables
+        $_SESSION = array();
+
+        session_destroy();
+
+        // Redirect to home or login page
+        $this->header('/');
+        exit();
     }
 }

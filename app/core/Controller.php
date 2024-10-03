@@ -16,4 +16,10 @@ class Controller
         require_once '../app/models/' . $model . '.php';
         return new $model;
     }
+
+    protected function header($route)
+    {
+
+        header('Location: http://localhost/web_rekost/public');
+    }
 }

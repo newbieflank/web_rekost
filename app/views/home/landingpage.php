@@ -43,14 +43,20 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register" class="btn btn-primary">Sign Up</a>
-                    </li>
-                </ul>
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+                    <div class="navbar-nav ml-auto mx-4">
+                        <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="" width="40px">
+                    </div>
+                <?php else: ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="register" class="btn btn-primary">Sign Up</a>
+                        </li>
+                    </ul>
+                <?php endif; ?>
             </div>
         </nav>
     </header>

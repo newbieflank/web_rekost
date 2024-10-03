@@ -80,7 +80,7 @@
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4">
-                        <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.png' ?>" alt="" width="50px">
+                        <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="" width="40px">
                     </div>
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">
