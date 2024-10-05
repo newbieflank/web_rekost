@@ -8,6 +8,7 @@ class LoginController extends Controller
         $this->view('Login/login');
     }
 
+
     public function register()
     {
         $this->view('Login/register');
@@ -25,16 +26,9 @@ class LoginController extends Controller
 
     public function logout()
     {
-<<<<<<< HEAD
-        $username = $_POST['username'];
-        $pass = $_POST['password'];
-
-        if ($this->model('UsersModel')->loginAuth($username, $pass) > 0) {
-=======
         // Ensure session is started before manipulating it
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
->>>>>>> refs/remotes/origin/main
         }
 
         // Unset all session variables
