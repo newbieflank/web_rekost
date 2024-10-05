@@ -8,11 +8,22 @@ Router::get('/setpassword', 'LoginController@setpassword');
 Router::get('/id/{id}', 'LoginController@show');
 Router::get('/profile', 'ProfileController@profile');
 Router::get('/Kost', 'ProfileController@profileKost');
+<<<<<<< HEAD
+=======
+Router::get('/popular', 'HomeController@popular');
+Router::get('/best', 'HomeController@best');
+Router::get(uri:'/datakos', action:'DataKosController@index');
+Router::get(uri:'/fotokos',action:'FotoKosController@index');
+>>>>>>> 25d197d (komit kedua)
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
 Router::get('/detailkos', 'DetailController@detailkos');
+<<<<<<< HEAD
 Router::get('/confirm', 'LoginController@setPassword');
+=======
+
+>>>>>>> 25d197d (komit kedua)
 
 //login Google
 Router::get('/auth', 'AuthController@login');

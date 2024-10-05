@@ -10,6 +10,18 @@ class HomeController extends Controller
     {
         $this->view('detail/popularkos');
     }
+<<<<<<< HEAD
+=======
+
+
+    public function best()
+    {
+        $this->view('detail/bestkos');
+    }
+
+
+
+>>>>>>> 25d197d (komit kedua)
     public function bestkos()
     {
         $this->view('detail/bestkos');
@@ -18,4 +30,8 @@ class HomeController extends Controller
     {
         $this->view('detail/strategically');
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25d197d (komit kedua)
 }
