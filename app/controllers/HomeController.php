@@ -10,6 +10,15 @@ class HomeController extends Controller
     {
         $this->view('detail/popularkos');
     }
+
+
+    public function best()
+    {
+        $this->view('detail/bestkos');
+    }
+
+
+
     public function bestkos()
     {
         $this->view('detail/bestkos');

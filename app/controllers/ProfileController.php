@@ -12,22 +12,54 @@ class ProfileController extends Controller
         // }
     }
 
+    public function getData()
+    {
+        if (isset($_SESSION['user'])) {
+            return json_decode($_SESSION['user']);
+        }
+        return null;
+    }
+
+    public function getRole()
+    {
+        $user = $this->getData();
+
+        if ($user) {
+            return $role = $user->role;
+        }
+
+        return null;
+    }
+
     public function profile()
     {
+
+
         ob_start();
-        $this->view('profile/profile');
-        $content = ob_get_clean();
+        $role = $this->getRole();
 
-        // $data['user'] = $this->model('UsersModel')->getProfile($id);
+        if ($role == 'pencari kos') {
+            $this->view('profile/profile');
+            $content = ob_get_clean();
 
-        $data = [
-            "content" => $content,
-            "title" => "profile",
+            $data = [
+                "content" => $content,
+                "title" => "profile",
 
-        ];
+            ];
+        } else {
+            $this->view('profile/profileKost');
+            $content = ob_get_clean();
+
+            $data = [
+                "content" => $content,
+                "title" => "Profile"
+            ];
+        }
 
         $this->view('layout/main', $data);
     }
+
 
     public function profileKost()
     {

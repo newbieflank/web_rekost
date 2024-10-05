@@ -3,7 +3,7 @@
 
 class UsersModel extends Controller
 {
-    private $table = 'users';
+    private $table = 'user';
     private $db;
     public $username;
     public $email;
@@ -14,28 +14,15 @@ class UsersModel extends Controller
         $this->db = new Database();
     }
 
-    public function getProfile($id)
+    public function getProfile($email, $password)
     {
-        $query = "SELECT * FROM" . $this->table . " WHERE id=:id";
+        $query = "SELECT * FROM " . $this->table . " WHERE email=:email AND password=:password";
         $this->db->query($query);
-        $this->db->bind('id', $id);
+        $this->db->bind('email', $email);
+        $this->db->bind('password', $password);
         $this->db->single();
     }
 
-    public function login($username, $pass)
-    {
-        // $query = "SELECT * FROM" . $this->table . " Where username=:username and password=:password";
-        // $this->db->query($query);
-        // $this->db->bind('username', $username);
-        // $this->db->bind('password', $pass);
-        // $this->db->single();
-
-        // return $this->db->rowCount();
-
-        if ($username == "mafira" && $pass == 123) {
-            return 1;
-        }
-    }
 
     public function findUserByEmail($email)
     {
@@ -49,8 +36,8 @@ class UsersModel extends Controller
     {
         $username = $data['name'];
         $email = $data['email'];
-        $id = $data['google_id'];
 
         $this->header('/confirm');
+        exit();
     }
 }

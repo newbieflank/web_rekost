@@ -8,27 +8,29 @@
 </head>
 
 <body>
-    <div class="password-container">
-        <span class="close-btn">&times;</span>
-        <h2>Set Password</h2>
-        <p>Pastikan password yang anda masukkan benar</p>
-        <div class="mb-3">
-            <label for="Password" class="form-label">Password</label>
-            <div class="form-control">
-                <input type="password" class="form-control" id="Password" placeholder="Enter yourPassword">
-                <i class="fas fa-eye"></i>
+    <form action="<?= BASEURL; ?>register" method="post">
+        <div class="password-container">
+            <span class="close-btn">&times;</span>
+            <h2>Set Password</h2>
+            <p>Pastikan password yang anda masukkan benar</p>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <div class="form-control">
+                    <input type="password" class="form-control" id="Password" placeholder="Enter yourPassword">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <small class="form-text text-muted">Minimal 8 karakter</small>
             </div>
-            <small class="form-text text-muted">Minimal 8 karakter</small>
-        </div>
-        <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
-            <div class="form-control">
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-                <i class="fas fa-eye"></i>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
+                <div class="form-control">
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                    <i class="fas fa-eye"></i>
+                </div>
             </div>
+            <button type="submit" class="btn btn-primary">Konfirmasi</button>
         </div>
-        <button type="button" class="btn btn-primary">Konfirmasi</button>
-    </div>
+    </form>
 </body>
 
 </html>

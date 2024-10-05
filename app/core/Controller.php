@@ -19,7 +19,6 @@ class Controller
 
     protected function header($route)
     {
-
-        header('Location: http://localhost/web_rekost/public');
+        header('Location: http://localhost/web_rekost/public' . $route);
     }
 }
