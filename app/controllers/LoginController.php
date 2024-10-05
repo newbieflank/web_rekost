@@ -17,24 +17,29 @@ class LoginController extends Controller
         $this->view('Login/setpassword');
     }
 
-    public function show($id)
+    public function auth($data = null)
     {
-        // Use $id to fetch and display user information
-        echo "User ID: " . htmlspecialchars($id);
-    }
+        $email = $_POST['username'];
+        $password = $_POST['password'];
 
+        $user = json_encode($this->model('UsersModel')->getProfile($email, $password));
+        if (isset($_POST['remember'])) {
+        }
+        if (isset($user)) {
+            session_set_cookie_params(0);
+            $_SESSION['user'] = $user;
+
+            $this->header('/');
+            exit();
+        } else {
+            die('Login Failed');
+        }
+    }
     public function logout()
     {
-<<<<<<< HEAD
-        $username = $_POST['username'];
-        $pass = $_POST['password'];
-
-        if ($this->model('UsersModel')->loginAuth($username, $pass) > 0) {
-=======
         // Ensure session is started before manipulating it
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
->>>>>>> refs/remotes/origin/main
         }
 
         // Unset all session variables
@@ -46,4 +51,6 @@ class LoginController extends Controller
         $this->header('/');
         exit();
     }
+
+    public function create($data) {}
 }

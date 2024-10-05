@@ -36,7 +36,7 @@
         <p>Already have an account? <a href="login">Sign In?</a></p>
 
 
-        <form action="">
+        <form action="/" method="post">
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
             <label for="email">Email</label>
@@ -53,7 +53,7 @@
         <div class="separator">
             <span>Or</span>
         </div>
-        <a href="" class="button-link">
+        <a href="<?= BASEURL; ?>create" class="button-link">
             <img src="img/googleIcon.svg" alt="Logo" class="button-logo">
             Sign Up With Google
         </a>

@@ -31,6 +31,13 @@
         <p>Selamat Datang di laman Re-kost! Tempat terbaik untuk mencari rekomendasi kost</p>
 
         <form method="post" action="<?= BASEURL ?>login">
+            <div class="row">
+                <div class="col-lg-6">
+                    <?php if (isset($_SESSION['flash'])): ?>
+                        <?php Flasher::flash(); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
             <label for="username">Email or Username</label>
             <input type="text" name="username" id="username" placeholder="example@gmail.com" required>
             <div class="password-section">
@@ -39,7 +46,7 @@
             </div>
             <input type="password" name="password" id="password" placeholder="Masukan Password" required>
             <div class="remember-section">
-                <input type="checkbox" id="remember">
+                <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember Me</label>
                 <a href="#">Forgot Password?</a>
             </div>
