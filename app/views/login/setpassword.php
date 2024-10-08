@@ -8,15 +8,24 @@
 </head>
 
 <body>
-    <form action="<?= BASEURL; ?>register" method="post">
+    <form action="<?= BASEURL; ?>create" method="post">
+        <div class="row">
+            <div class="col-lg-6">
+                <?php if (isset($_SESSION['flash'])): ?>
+                    <?php Flasher::flash(); ?>
+                <?php endif; ?>
+            </div>
+        </div>
         <div class="password-container">
             <span class="close-btn">&times;</span>
             <h2>Set Password</h2>
             <p>Pastikan password yang anda masukkan benar</p>
             <div class="mb-3">
+                <input type="hidden" name="username" id="username" value="<?php echo $data['name'] ?>">
+                <input type="hidden" name="email" id="email" value="<?php echo $data['email'] ?>">
                 <label for="Password" class="form-label">Password</label>
                 <div class="form-control">
-                    <input type="password" class="form-control" id="Password" placeholder="Enter yourPassword">
+                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter yourPassword">
                     <i class="fas fa-eye"></i>
                 </div>
                 <small class="form-text text-muted">Minimal 8 karakter</small>
@@ -24,7 +33,7 @@
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
                 <div class="form-control">
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
                     <i class="fas fa-eye"></i>
                 </div>
             </div>

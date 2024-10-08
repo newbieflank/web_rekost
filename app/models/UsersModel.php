@@ -34,10 +34,44 @@ class UsersModel extends Controller
 
     public function registerUser($data)
     {
-        $username = $data['name'];
-        $email = $data['email'];
+        $_SESSION['register'] = $data;
 
-        $this->header('/confirm');
+        $this->view('login/setpassword');
         exit();
+    }
+
+    public function create($data)
+    {
+
+        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, status) VALUES (:id, :username, :email, :password, :number,'pencari kos')";
+
+
+        $this->db->query($query);
+        $this->db->bind('id', $data['id']);
+        $this->db->bind('nama', $data['username']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('password', $data['password']);
+
+        $this->db->bind('number', $data['number']);
+
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function createG($data)
+    {
+        $query = "INSERT INTO user (id_user, nama, email, password, role) VALUES (:id, :nama, :email, :pass, 'pencari kos')";
+
+        $this->db->query($query);
+        $this->db->bind('id', $data['id']);
+        $this->db->bind('nama', $data['username']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('pass', $data['password']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }

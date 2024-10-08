@@ -45,7 +45,7 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+                <?php if (isset($_SESSION['user']) && isset($_COOKIE['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4">
                         <a href="<?= BASEURL; ?>profile">
                             <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="" width="40px">

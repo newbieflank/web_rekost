@@ -29,6 +29,7 @@ Router::get('/logout', 'LoginController@logout');
 //POST METHOD
 Router::post('/login', 'LoginController@auth');
 Router::post('/register', 'LoginController@create');
+Router::post('/create', 'LoginController@Google');
 
 
 //APi
