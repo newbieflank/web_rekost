@@ -36,7 +36,7 @@
         <p>Already have an account? <a href="login">Sign In?</a></p>
 
 
-        <form action="/" method="post">
+        <form action="<?= BASEURL; ?>register" method="post">
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
             <label for="email">Email</label>
@@ -48,7 +48,7 @@
                 <img class="showPass" src="img/eyePass.svg" alt="" onclick="togglePassword()">
             </div>
             <input type="password" name="password" id="password" placeholder="Enter password" required>
-            <button type="submit">Create account</button>
+            <button type="submit" name="register">Create account</button>
         </form>
         <div class="separator">
             <span>Or</span>

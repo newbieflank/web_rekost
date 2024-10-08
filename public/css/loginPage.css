@@ -133,6 +133,14 @@ input {
   height: auto;
 }
 
+.alert-danger {
+  padding: 15px;
+  margin: 10px 0 10px 0px;
+  border-radius: 10px;
+  background-color: #ff6b6b;
+  color: white;
+}
+
 form button {
   margin-top: 30px;
   padding: 15px;

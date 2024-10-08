@@ -79,11 +79,13 @@ class AuthController extends Controller
 
             case 'register':
                 $data = [
-                    'name' => $googleUser->username,
+                    'name' => $googleUser->name,
                     'email' => $googleUser->email,
                 ];
+
+
                 unset($_SESSION['form']);
-                $this->userModel->registerUser($data);
+                $this->view('login/setpassword', $data);
                 break;
 
             default:
