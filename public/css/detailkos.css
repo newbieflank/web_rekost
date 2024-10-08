@@ -1,7 +1,7 @@
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f3f2ff !important;
-  padding-top: 48px;
+  background-color: #f9fcff !important;
+  padding-top: 80px;
 }
 header {
   background-color: #fff;
@@ -58,4 +58,132 @@ header {
 .nav-tabs .nav-link:hover {
   background-color: #007bff;
   color: #fff;
+}
+.info {
+  padding: 20px;
+}
+
+.info .container-fluid {
+  display: block;
+}
+
+.info .info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info h1 {
+  font-size: 30px;
+}
+
+.info .rating {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.info .rating i {
+  color: #ffd700;
+  margin-right: 5px;
+}
+
+.info .price {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.text-grey {
+  color: #818181;
+  font-size: 14px;
+}
+
+.text-red {
+  color: #e52424;
+  font-size: 20px;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .info .info-content {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .info .price {
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+  }
+  hr {
+    width: 100%;
+  }
+}
+.fasilitas,
+.kebijakan,
+.location,
+.about {
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.fasilitas h2,
+.kebijakan h2,
+.location h2,
+.about h2 {
+  margin-bottom: 10px;
+}
+.fasilitas .icons,
+.other-fasilitas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.fasilitas .icons i,
+.other-fasilitas i {
+  margin-right: 6px;
+  color: #585858;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.location {
+  margin-bottom: 20px;
+}
+
+.address {
+  margin-left: 10px;
+}
+.about p {
+  margin: 0;
+}
+.fasilitas .icons div {
+  display: none;
+}
+
+.fasilitas .icons div:nth-child(-n + 5) {
+  display: block;
+}
+
+.fasilitas .icons div:nth-child(n + 6) {
+  display: none;
+}
+
+.toggle-btn {
+  margin-top: 20px;
+  padding: 8px 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.toggle-btn i {
+  margin-left: 6px;
 }
