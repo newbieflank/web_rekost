@@ -263,18 +263,14 @@
     </script>
     <script>
         function toggleFasilitas() {
-            const fasilitas = document.querySelectorAll('.fasilitas .icons div');
+            const fasilitas = document.querySelectorAll('.fasilitas .icons div:nth-child(n + 6)');
             const toggleBtn = document.querySelector('.toggle-btn');
             const toggleIcon = toggleBtn.querySelector('i');
 
             // Jika semua item terlihat, sembunyikan beberapa
             if (toggleBtn.textContent.includes('Lihat lebih sedikit')) {
                 fasilitas.forEach((el, index) => {
-                    if (index >= 5) { // Sembunyikan item setelah item ke-5
-                        el.style.display = 'none';
-                    } else {
-                        el.style.display = 'block'; // Pastikan item 1-5 tetap terlihat
-                    }
+                    el.style.display = 'none';
                 });
                 toggleBtn.textContent = 'Lihat lebih banyak';
                 toggleIcon.classList.remove('fa-chevron-up');
