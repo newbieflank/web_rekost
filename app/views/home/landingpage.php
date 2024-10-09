@@ -45,11 +45,17 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <?php if (isset($_SESSION['user']) && isset($_COOKIE['user'])) : ?>
-                    <div class="navbar-nav ml-auto mx-4">
-                        <a href="<?= BASEURL; ?>profile">
-                            <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="" width="40px">
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
+                    <div class="navbar-nav ml-auto mx-4 dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="Profile Image" width="40px">
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                            <a class="dropdown-item" href="#services">Layanan Kost</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout">Logout</a>
+                        </div>
                     </div>
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">
