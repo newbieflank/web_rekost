@@ -34,3 +34,5 @@ Router::post('/create', 'LoginController@Google');
 
 //APi
 Router::get('/api/user/{id}', 'API@user');
+
+Router::get('/random', 'LoginController@generateRandomId');

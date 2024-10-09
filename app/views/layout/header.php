@@ -66,16 +66,16 @@
             <na class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#home">Home <span class="sr-only"></span></a>
+                        <a class="nav-link" href="<?= BASEURL;?>#home">Home <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bookings">Bookings</a>
+                        <a class="nav-link" href="<?= BASEURL;?>#bookings">Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#service">Service</a>
+                        <a class="nav-link" href="<?= BASEURL;?>#service">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="<?= BASEURL;?>#contact">Contact</a>
                     </li>
                 </ul>
                 <?php if (isset($_SESSION['user']) && isset($_COOKIE['user'])) : ?>

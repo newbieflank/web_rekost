@@ -20,16 +20,17 @@ class UsersModel extends Controller
         $this->db->query($query);
         $this->db->bind('email', $email);
         $this->db->bind('password', $password);
-        $this->db->single();
+
+        return $this->db->single(); // Return user data, including the hashed password
     }
 
 
     public function findUserByEmail($email)
     {
-        $query = "SELECT * FROM user WHERE email=:email";
+        $query = "SELECT * FROM user WHERE email= :email";
         $this->db->query($query);
         $this->db->bind('email', $email);
-        $this->db->single();
+        return $this->db->single();
     }
 
     public function registerUser($data)
@@ -43,17 +44,14 @@ class UsersModel extends Controller
     public function create($data)
     {
 
-        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, status) VALUES (:id, :username, :email, :password, :number,'pencari kos')";
-
+        $query = "INSERT INTO user (id_user, nama, email, password, number_phone) VALUES (:id, :nama, :email, :pass, :nomor)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
         $this->db->bind('nama', $data['username']);
         $this->db->bind('email', $data['email']);
-        $this->db->bind('password', $data['password']);
-
-        $this->db->bind('number', $data['number']);
-
+        $this->db->bind('pass', $data['password']);
+        $this->db->bind('nomor', $data['number']);
 
         $this->db->execute();
 
@@ -62,7 +60,7 @@ class UsersModel extends Controller
 
     public function createG($data)
     {
-        $query = "INSERT INTO user (id_user, nama, email, password, role) VALUES (:id, :nama, :email, :pass, 'pencari kos')";
+        $query = "INSERT INTO user (id_user, nama, email, password) VALUES (:id, :nama, :email, :pass)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);

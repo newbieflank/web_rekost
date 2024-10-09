@@ -34,7 +34,7 @@
                 <div class="mb-3 row">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Masukan Nama Lengkap">
+                        <input type="text" class="form-control" id="name" placeholder="Masukan Nama Lengkap" value="<?php echo $username ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">

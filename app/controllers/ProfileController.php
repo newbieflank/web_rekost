@@ -12,20 +12,12 @@ class ProfileController extends Controller
         // }
     }
 
-    public function getData()
-    {
-        if (isset($_SESSION['user'])) {
-            return json_decode($_SESSION['user']);
-        }
-        return null;
-    }
-
     public function getRole()
     {
-        $user = $this->getData();
+        $user = $_SESSION['user'];
 
         if ($user) {
-            return $role = $user->role;
+            return $role = $user['role'];
         }
 
         return null;
@@ -33,31 +25,19 @@ class ProfileController extends Controller
 
     public function profile()
     {
-
+        $user = $_SESSION['user'];
 
         ob_start();
         $role = $this->getRole();
 
         if ($role == 'pencari kos') {
-            $this->view('profile/profile');
-            $content = ob_get_clean();
-
-            $data = [
-                "content" => $content,
-                "title" => "profile",
-
+            $userData = [
+                "username" => $user['nama']
             ];
+            $this->renderProfile('profile/profile', 'Profile', $userData);
         } else {
-            $this->view('profile/profileKost');
-            $content = ob_get_clean();
-
-            $data = [
-                "content" => $content,
-                "title" => "Profile"
-            ];
+            $this->renderProfile('profile/profileKost', 'Profile');
         }
-
-        $this->view('layout/main', $data);
     }
 
 
@@ -73,5 +53,19 @@ class ProfileController extends Controller
         ];
 
         $this->view('layout/main', $data);
+    }
+
+    private function renderProfile($viewPath, $pageTitle, $data = [])
+    {
+        ob_start();
+        $this->view($viewPath, $data);
+        $content = ob_get_clean();
+
+        $layoutData = [
+            "content" => $content,
+            "title" => $pageTitle
+        ];
+
+        $this->view('layout/main', $layoutData);
     }
 }

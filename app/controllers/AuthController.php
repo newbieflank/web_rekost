@@ -73,7 +73,7 @@ class AuthController extends Controller
                 }
 
                 session_set_cookie_params(0);
-                $_SESSION['user'] = $googleUser;
+                $_SESSION['user'] = $existingUser;
                 unset($_SESSION['form']);
                 break;
 

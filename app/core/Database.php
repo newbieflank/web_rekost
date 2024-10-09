@@ -13,21 +13,25 @@ class Database
     public function __construct()
     {
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
-        $Option = [
+        $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
 
         try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $Option);
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
-            die($e->getMessage());
+            $this->handleError($e);
         }
     }
 
     public function query($query)
     {
-        $this->stm = $this->dbh->prepare($query);
+        try {
+            $this->stm = $this->dbh->prepare($query);
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
     }
 
     public function bind($params, $value, $type = null)
@@ -48,29 +52,55 @@ class Database
             }
         }
 
-        $this->stm->bindValue($params, $value, $type);
+        try {
+            $this->stm->bindValue($params, $value, $type);
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
     }
 
     public function execute()
     {
-        $this->stm->execute();
+        try {
+            return $this->stm->execute();
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
     }
-
 
     public function resultSet()
     {
-        $this->execute();
-        return $this->stm->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $this->execute();
+            return $this->stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
     }
 
     public function single()
     {
-        $this->execute();
-        return $this->stm->fetch(PDO::FETCH_ASSOC);
+        try {
+            $this->execute();
+            return $this->stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
     }
 
     public function rowCount()
     {
-        return $this->stm->rowCount();
+        try {
+            return $this->stm->rowCount();
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
+    }
+
+    private function handleError($e)
+    {
+
+        error_log('Database Error: ' . $e->getMessage());
+        die('An error occurred while interacting with the database.');
     }
 }
