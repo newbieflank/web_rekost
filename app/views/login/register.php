@@ -42,7 +42,7 @@
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="Enter email" required>
             <label for="number">Phone Number</label>
-            <input type="tel" name="number" id="number" placeholder="Enter phone number" required>
+            <input type="text" inputmode="numeric" name="number" id="number" placeholder="Enter phone number" required>
             <div class="password-section">
                 <label for="password">Password</label>
                 <img class="showPass" src="img/eyePass.svg" alt="" onclick="togglePassword()">

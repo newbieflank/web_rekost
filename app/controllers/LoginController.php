@@ -43,9 +43,8 @@ class LoginController extends Controller
             $this->header('/');
             exit();
         } else {
-            // Flasher::setFlash('Akun Tidak di temukan', 'danger');
-            // $this->header('/login');
-            echo $user;
+            Flasher::setFlash('*Akun Tidak di Temukan', 'danger');
+            $this->header('/login');
             exit();
         }
     }
@@ -58,7 +57,7 @@ class LoginController extends Controller
 
         // Unset all session variables
         $_SESSION = array();
-
+        session_unset();
         session_destroy();
 
         // Redirect to home or login page
@@ -131,7 +130,7 @@ class LoginController extends Controller
 
         $dateTime = date('Ym'); // This gives you 12 characters (YYYYMMDDHHMM)
 
-        
+
         $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
 
         $generatedId = $dateTime . $randomNumber;

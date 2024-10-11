@@ -6,10 +6,10 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        // if (!isset($_SESSION['user'])) {
-        //     header('Location: login');
-        //     exit;
-        // }
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
     }
 
     public function getRole()
