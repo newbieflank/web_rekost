@@ -1,0 +1,62 @@
+body {
+  background: #f0f4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.password-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+.password-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.password-container p {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+.password-container .form-control {
+  position: relative;
+}
+.password-container .form-control i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.password-container .progress {
+  height: 5px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.password-container .btn-primary {
+  width: 100%;
+  background-color: #007bff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.password-container .btn-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #007bff;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}

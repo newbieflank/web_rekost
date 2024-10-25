@@ -1,0 +1,56 @@
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: #2d3748;
+}
+
+.card-text {
+  color: #718096;
+}
+
+.price {
+  font-weight: 700;
+  color: #e53e3e;
+}
+
+.btn-available {
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.btn-order {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px !important;
+}
+
+.filter-buttons .btn {
+  background-color: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  color: #4a5568;
+  font-weight: 600;
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,285 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.img-wrap {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  overflow: hidden;
+}
+
+.Page img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 0px 10px 0px 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 2rem;
+  font-size: larger;
+}
+
+.content .logo {
+  width: 150px;
+  height: 120px;
+  position: absolute;
+  top: 0;
+  left: -30px;
+}
+
+.content h2 {
+  font-family: "Open Sans", sans-serif;
+  margin: 80px 80px 0px 80px;
+}
+
+.content p {
+  font-family: "Open Sans", sans-serif;
+  font-size: smaller;
+  margin: 5px 80px;
+}
+
+.content form {
+  font-family: "Open Sans", sans-serif;
+  margin: 40px 80px 1rem 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.remember-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remember-section input {
+  margin: 1px;
+}
+
+.remember-section label {
+  margin: 0;
+  font-size: smaller;
+}
+
+.remember-section a {
+  margin-left: auto;
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: smaller;
+  color: #5d58af;
+}
+
+.remember-section a:hover {
+  text-decoration: underline;
+}
+
+.password-section {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-section label {
+  margin-right: 10px;
+}
+
+.password-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.password-input-container input {
+  padding-right: 30px;
+  flex: 1;
+}
+
+.password-section .showPass {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: auto;
+}
+
+form button {
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #5d58af 0%, #d9d6ff 100%);
+  transition: background 0.3s ease;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 25px 80px 1rem 80px;
+  color: #9c9c9c;
+  font-family: "Open Sans", sans-serif;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #9c9c9c;
+}
+
+.separator::before {
+  margin-right: 10px;
+}
+
+.separator::after {
+  margin-left: 10px;
+}
+
+.separator span {
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  margin: 25px 80px 1rem 80px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 1px #5d58af solid;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+}
+
+.button-link .button-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.button-link:hover {
+  background-color: black;
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .Page {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .Page img {
+    display: none;
+  }
+
+  .content {
+    margin-top: 20px;
+    padding: 1rem;
+  }
+
+  .content h2 {
+    margin: 20px 20px 0 20px;
+  }
+
+  .content p {
+    margin: 0 20px;
+  }
+
+  .content form {
+    margin: 20px 20px;
+  }
+
+  .separator {
+    margin: 20px 20px;
+  }
+
+  .button-link {
+    margin: 20px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .content form {
+    margin: 20px 20px;
+  }
+
+  .separator {
+    margin: 20px 20px;
+  }
+
+  .button-link {
+    margin: 20px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Page {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .content h2 {
+    font-size: 1.25rem;
+    margin-top: 60px;
+  }
+
+  .content p {
+    font-size: 0.875rem;
+  }
+
+  .content form {
+    margin: 0 10px;
+  }
+
+  form button {
+    font-size: 0.875rem;
+    padding: 8px;
+  }
+}
