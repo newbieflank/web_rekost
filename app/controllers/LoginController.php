@@ -107,6 +107,10 @@ class LoginController extends Controller
             Flasher::setFlash('Password Tidak Cocok', 'danger');
             $this->header('/setpassword');
             exit();
+        } else if (!(strlen($password) == 8)) {
+            Flasher::setFlash('Password Minimal 8 Character', 'danger');
+            $this->header('/setpassword');
+            exit();
         }
 
         $data = [
@@ -125,7 +129,7 @@ class LoginController extends Controller
         }
     }
 
-    public function generateRandomId()
+    private function generateRandomId()
     {
 
         $dateTime = date('Ym'); // This gives you 12 characters (YYYYMMDDHHMM)

@@ -47,7 +47,7 @@
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="Profile Image" width="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">

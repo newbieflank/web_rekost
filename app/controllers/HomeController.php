@@ -46,4 +46,9 @@ class HomeController extends Controller
     {
         $this->view('detail/strategically');
     }
+
+    public function echo()
+    {
+        echo json_encode($_SESSION['user']);
+    }
 }

@@ -21,4 +21,16 @@ class Controller
     {
         header('Location: http://localhost/web_rekost/public' . $route);
     }
+
+    protected function helper($helper)
+    {
+        $helperPath = '../helpers/' . $helper . '.php';
+
+        // Check if the helper file exists before requiring it
+        if (file_exists($helperPath)) {
+            require_once $helperPath;
+        } else {
+            throw new Exception("Helper file {$helper}.php not found.");
+        }
+    }
 }
