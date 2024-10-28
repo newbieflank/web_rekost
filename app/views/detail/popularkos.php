@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="<?= asset('img/logo.png') ?>" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home3.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home3.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home4.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home4.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -169,7 +169,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home2.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
-                        <img src="img/home3.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
