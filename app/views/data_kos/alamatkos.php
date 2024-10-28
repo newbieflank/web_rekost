@@ -40,7 +40,7 @@
         <div class="card-body">
             <div class="container mt-3 mb-5">
                 <div class="imgMap d-block mx-auto">
-                    <img src="<?= BASEURL; ?>img/map.png" class="d-block mx-auto" alt="">
+                    <img src="<?= asset('img/map.png') ?>" class="d-block mx-auto" alt="">
                 </div>
             </div>
             <form id="myForm" class="row m-5 custom-form" method="post" action="update">

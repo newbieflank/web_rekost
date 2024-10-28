@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/strategically.css">
+    <link rel="stylesheet" href="<?= asset('css/strategically.css') ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
+                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
             </a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -44,7 +44,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <img src="img/user.png" alt="profile">
+                        <img src="<?= asset('img/user.png') ?>" alt="profile">
                     </li>
                 </ul>
             </div>
@@ -106,7 +106,7 @@
             <div class="row" style="margin-top: 32px;">
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -202,7 +202,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -218,7 +218,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -234,7 +234,7 @@
                 </div>
                 <div class="col-md-4 mb-5">
                     <div class="card">
-                        <img src="img/home1.png" class="card-img-top" height="200" width="300" />
+                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
