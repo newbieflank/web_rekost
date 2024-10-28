@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= BASEURL; ?>css/loginPage.css">
+<link rel="stylesheet" href="<?= asset('css/loginPage.css') ?>">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
     @media (max-width: 1024px) {
@@ -26,7 +26,7 @@
 </style>
 <div class="Page">
     <div class="content">
-        <img class="logo" src="img/ImageLoginLogo.svg" alt="">
+        <img class="logo" src="<?= asset('img/ImageLoginLogo.svg') ?>" alt="">
         <h2>Selamat Datang</h2>
         <p>Selamat Datang di laman Re-kost! Tempat terbaik untuk mencari rekomendasi kost</p>
 
@@ -42,7 +42,7 @@
             <input type="text" name="username" id="username" placeholder="example@gmail.com" required>
             <div class="password-section">
                 <label for="password">Password</label>
-                <img class="showPass" src="img/eyePass.svg" alt="" onclick="togglePassword()">
+                <img class="showPass" src="<?= asset('img/eyePass.svg') ?>" alt="" onclick="togglePassword()">
             </div>
             <input type="password" name="password" id="password" placeholder="Masukan Password" required>
             <div class="remember-section">
@@ -56,13 +56,13 @@
             <span>Or</span>
         </div>
         <a href="<?= BASEURL; ?>auth" class="button-link">
-            <img src="img/googleIcon.svg" alt="Logo" class="button-logo">
+            <img src="<?= asset('img/googleIcon.svg') ?>" alt="Logo" class="button-logo">
             Sign In With Google
         </a>
     </div>
 
     <div class="img-wrap">
-        <img src="img/ImageLogin.svg" alt="">
+        <img src="<?= asset('img/ImageLogin.svg') ?>" alt="">
     </div>
 </div>
 

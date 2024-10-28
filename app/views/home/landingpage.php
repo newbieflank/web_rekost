@@ -80,8 +80,8 @@
                 </div>
                 <div class="col-md-6 position-relative">
                     <div class="image-stack">
-                        <img src="img/img1.png" alt="Image 1" class="img-fluid img1">
-                        <img src="img/img2.png" alt="Image 2" class="img-fluid img2">
+                        <img src="<?= asset('img/img1.png') ?>" alt="Image 1" class="img-fluid img1">
+                        <img src="<?= asset('img/img2.png') ?>" alt="Image 2" class="img-fluid img2">
                     </div>
                 </div>
             </div>
@@ -144,14 +144,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <h2><img src="img/icon.png" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!</h2>
+                    <h2><img src="<?= asset('img/icon.png') ?>" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!</h2>
                 </div>
             </div>
             <div class="row scroll-container">
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -167,7 +167,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -183,7 +183,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -199,7 +199,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -215,7 +215,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -265,7 +265,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -281,7 +281,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
@@ -297,7 +297,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
@@ -313,7 +313,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
@@ -329,7 +329,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -378,7 +378,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
@@ -394,7 +394,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
@@ -410,7 +410,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
@@ -426,7 +426,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -456,7 +456,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -475,7 +475,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -495,7 +495,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -514,7 +514,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -541,7 +541,7 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <div class="mt-2">
-                        <img src="img/user.png" alt="Circle Image" class="rounded-circle" style="width: 50px; height: 50px;">
+                        <img src="<?= asset('img/user.png') ?>" alt="Circle Image" class="rounded-circle" style="width: 50px; height: 50px;">
                         <div class="star-rating mt-2">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>

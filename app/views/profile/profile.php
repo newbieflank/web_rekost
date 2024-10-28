@@ -29,7 +29,7 @@
                 <div class="imgProfile d-block mx-auto">
                     <!-- Clickable Image -->
                     <a href="#" data-bs-toggle="modal" data-bs-target="#changeImageModal">
-                        <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
+                        <img src="<?= asset('img/img1.png') ?>" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
                     </a>
                 </div>
             </div>
