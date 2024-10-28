@@ -4,10 +4,6 @@ class LoginController extends Controller
 {
 
     private $userModel;
-    private $userData;
-
-
-
 
     public function __construct()
     {
@@ -29,25 +25,25 @@ class LoginController extends Controller
         $this->view('Login/setpassword');
     }
 
-    public function auth($data = null)
+    public function auth()
     {
         $email = $_POST['username'];
         $password = $_POST['password'];
 
-        $user = json_encode($this->model('UsersModel')->getProfile($email, $password));
-        if (isset($_POST['remember'])) {
-            setcookie("user", $user, time() + (86400 * 30), "/", "", true);
-            $this->header('/');
-            exit();
-        }
-        if (isset($this->user->id)) {
+        $user = $this->userModel->getProfile($email, $password);
+        if (isset($user['id_user'])) {
+            if (isset($_POST['remember'])) {
+                setcookie("user", $user, time() + (86400 * 30), "/", "", true);
+                $this->header('/');
+                exit();
+            }
             session_set_cookie_params(0);
             $_SESSION['user'] = $user;
 
             $this->header('/');
             exit();
         } else {
-            Flasher::setFlash('Akun Tidak Di Temukan', 'danger');
+            Flasher::setFlash('*Akun Tidak di Temukan', 'danger');
             $this->header('/login');
             exit();
         }
@@ -61,7 +57,7 @@ class LoginController extends Controller
 
         // Unset all session variables
         $_SESSION = array();
-
+        session_unset();
         session_destroy();
 
         // Redirect to home or login page
@@ -75,7 +71,6 @@ class LoginController extends Controller
 
         $username = $_POST['fullname'];
         $email = $_POST['email'];
-
         $number = $_POST['number'];
         $password = $_POST['password'];
 
@@ -87,6 +82,8 @@ class LoginController extends Controller
             'number' => $number,
             'password' => $password
         ];
+
+
         if ($this->userModel->create($data) > 0) {
             session_set_cookie_params(0);
             $_SESSION['user'] = $data['email'];
@@ -100,7 +97,7 @@ class LoginController extends Controller
     {
 
         $id = $this->generateRandomId();
-        $username = $_POST['fullname'];
+        $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['Password'];
         $confirm = $_POST['confirmPassword'];
@@ -108,6 +105,10 @@ class LoginController extends Controller
 
         if (!($password == $confirm)) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
+            $this->header('/setpassword');
+            exit();
+        } else if (!(strlen($password) == 8)) {
+            Flasher::setFlash('Password Minimal 8 Character', 'danger');
             $this->header('/setpassword');
             exit();
         }
@@ -121,7 +122,6 @@ class LoginController extends Controller
         if ($this->userModel->createG($data) > 0) {
             session_set_cookie_params(0);
 
-            echo json_encode($data);
             $_SESSION['user'] = $data['email'];
 
             $this->header('/');
@@ -129,13 +129,17 @@ class LoginController extends Controller
         }
     }
 
-    public function generateRandomId()
+    private function generateRandomId()
     {
 
-        $dateTime = date('YmdHis');
+        $dateTime = date('Ym'); // This gives you 12 characters (YYYYMMDDHHMM)
 
-        $generatedId = $dateTime;
 
+        $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
+
+        $generatedId = $dateTime . $randomNumber;
+
+        echo $generatedId;
         return $generatedId;
     }
 }

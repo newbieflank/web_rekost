@@ -22,70 +22,99 @@
 
 <!-- Form Profile -->
 <div class="container">
-    <div class="card m-5">
+    <div class="card m-4">
         <h5 class="card-header">Informasi Pribadi</h5>
         <div class="card-body">
             <div class="container mt-3 mb-5">
                 <div class="imgProfile d-block mx-auto">
-                    <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="">
+                    <!-- Clickable Image -->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#changeImageModal">
+                        <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
+                    </a>
                 </div>
             </div>
-            <form id="myForm" class="row m-5 custom-form" action="">
+            <form id="myForm" class="row m-5 custom-form" method="post" action="<?= BASEURL; ?>profile/update">
                 <div class="mb-3 row">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Masukan Nama Lengkap">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Lengkap" value="<?php echo $username ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputKelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <label for="inputGender" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
-                        <select class="form-select" id="inputKelamin" aria-label="Default select example">
-                            <option value="Laki-Laki">Laki-Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                        <select class="form-select" id="inputGender" name="inputGender" aria-label="Default select example">
+                            <option value="" <?php echo empty($gender) ? 'selected' : ''; ?>>Pilih Sekolah/Kampus</option>
+                            <option value="Laki-Laki" <?php echo (isset($gender) && $gender == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
+                            <option value="Perempuan" <?php echo (isset($gender) && $gender == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="customDate" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="customDate" placeholder="Pilih tanggal">
+                        <input type="text" class="form-control" id="customDate" name="customDate" placeholder="Pilih tanggal" value="<?php echo $tanggal ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="pekerjaan" placeholder="Masukan Pekerjaan">
+                        <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukan Pekerjaan" value="<?php echo $pekerjaan ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputSekolah" class="col-sm-2 col-form-label">Nama Instansi</label>
+                    <label for="inputInstansi" class="col-sm-2 col-form-label">Nama Instansi</label>
                     <div class="col-sm-10">
-                        <select class="form-select" id="inputSekolah" aria-label="Default select example">
-                            <option selected>Pilih Sekolah/Kampus</option>
-                            <option value="Laki-Laki">Politeknik Negeri Jember</option>
-                            <option value="Perempuan">Universitas Jember</option>
-                            <option value="Hewan">Universitas Bondowoso</option>
+                        <select class="form-select" id="inputInstansi" name="inputInstansi" aria-label="Default select example">
+                            <option value="" <?php echo empty($selectedSchool) ? 'selected' : ''; ?>>Pilih Sekolah/Kampus</option>
+                            <?php foreach ($schools as $school): ?>
+                                <option value="<?php echo $school['name']; ?>" <?php echo ($selectedSchool == $school['name']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($school['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                            <option value="other">Other</option>
                         </select>
+                        <input type="text" id="newSchoolName" name="newSchoolName" placeholder="Enter New School Name"
+                            class="form-control" style="display: none;">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="kotaAsal" class="col-sm-2 col-form-label">Kota Asal</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kotaAsal" placeholder="Masukan Kota Asal">
+                        <input type="text" class="form-control" id="kotaAsal" name="kotaAsal" placeholder="Masukan Kota Asal" value="<?php echo $kota ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="noTelp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" id="noTelp" placeholder="Masukan No Telp">
+                        <input type="tel" class="form-control" id="noTelp" name="noTelp" placeholder="Masukan No Telp" value="<?php echo $nomor ?>">
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" id="saveBtn">Save Change</button>
+                    <button type="submit" form="myForm" id="saveBtn">Save Change</button>
                     <button type="button" id="resetBtn">Cancel</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeImageModal" tabindex="-1" aria-labelledby="changeImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeImageModalLabel">Change Profile Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="changeImageForm" action="<?= BASEURL; ?>upImg" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="profileImage" class="form-label">Choose New Profile Image</label>
+                        <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

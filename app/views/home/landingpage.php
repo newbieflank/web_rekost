@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/landingPage.css">
-    <script src="js/navbar.js"></script>
+    <link rel="stylesheet" href="<?= asset('css/landingPage.css') ?>">
+    <script src="<?= asset('js/navbar.js') ?>"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
+                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -47,8 +47,8 @@
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="Profile Image" width="40px">
+                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="<?php echo isset($_SESSION['user_img']) ? asset($_SESSION['user_img']) : asset('img/Vector.svg') ?>" alt="Profile Image" width="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>

@@ -134,11 +134,13 @@ input {
 }
 
 .alert-danger {
-  padding: 15px;
+  font-size: 16px;
+  font-weight: BOLD;
+  padding: 10px;
   margin: 10px 0 10px 0px;
   border-radius: 10px;
-  background-color: #ff6b6b;
-  color: white;
+  background-color: #ffeded;
+  color: rgb(142, 0, 0);
 }
 
 form button {
@@ -148,8 +150,12 @@ form button {
   color: white;
   border: none;
   cursor: pointer;
-  background-image: linear-gradient(to right, #5d58af 0%, #d9d6ff 100%);
+  background-color: #007bff;
   transition: background 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0554a8;
 }
 
 .separator {
