@@ -5,7 +5,7 @@ if (!session_start()) {
     session_start();
 }
 
-$file = '../.env';
+$file = './.env';
 
 if (!file_exists($file)) {
     throw new Exception("File .env tidak ditemukan: $file");
@@ -28,13 +28,14 @@ foreach ($lines as $line) {
     }
 }
 
-require '../vendor/autoload.php';
-require_once '../config/config.php';
-require_once '../app/helpers/FileUploadHelper.php';
-require_once '../app/core/Controller.php';
-require_once '../app/core/Flasher.php';
-require_once '../app/core/Database.php';
-require_once '../app/core/Router.php';
-require_once '../app/core/App.php';
+require './vendor/autoload.php';
+require_once './config/config.php';
+require_once './app/helpers/FileUploadHelper.php';
+require_once './app/core/Controller.php';
+require_once './app/core/Flasher.php';
+require_once './app/core/Database.php';
+require_once './app/core/Router.php';
+require_once './app/core/Helper.php';
+require_once './app/core/App.php';
 
 $app = new App();

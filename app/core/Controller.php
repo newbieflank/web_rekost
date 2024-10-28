@@ -8,23 +8,23 @@ class Controller
     {
 
         extract($data);
-        require_once '../app/views/' . $view . '.php';
+        require_once './app/views/' . $view . '.php';
     }
 
     protected function model($model)
     {
-        require_once '../app/models/' . $model . '.php';
+        require_once './app/models/' . $model . '.php';
         return new $model;
     }
 
     protected function header($route)
     {
-        header('Location: http://localhost/web_rekost/public' . $route);
+        header('Location: http://localhost/web_rekost' . $route);
     }
 
     protected function helper($helper)
     {
-        $helperPath = '../helpers/' . $helper . '.php';
+        $helperPath = './helpers/' . $helper . '.php';
 
         // Check if the helper file exists before requiring it
         if (file_exists($helperPath)) {
