@@ -76,7 +76,7 @@
                 <div class="col-md-6 text-left">
                     <h1 style="margin-bottom: 32px;">Mulai Pencarian Kostmu, Temukan Tempat yang Tepat.</h1>
                     <p style="margin-bottom: 16px; font-size: 14px; color: #4A4A4A; font-weight: 600;">Jelajahi ratusan pilihan kost dengan fitur pencarian yang canggih, mulai dari harga, lokasi, hingga fasilitas yang sesuai dengan kebutuhanmu</p>
-                    <button type="button" class="btn btn-lg btn-primary mt-4" style="border-radius: 12px; font-size: 16px; font-weight: bold; padding: 12px 32px;">Booking Now</button>
+                    <button type="button" class="btn btn-lg btn-primary mt-4" style="border-radius: 12px; font-size: 16px; font-weight: bold; padding: 12px 32px;">Pesan Sekarang</button>
                 </div>
                 <div class="col-md-6 position-relative">
                     <div class="image-stack">
@@ -87,15 +87,14 @@
             </div>
             <div class="row justify-content-start reviews">
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
                 </div>
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Booked</p>
                 </div>
             </div>
-
         </div>
     </section>
     <section class="search">
@@ -104,11 +103,11 @@
                 <div class="col-md-12">
                     <div class="search-box p-4" style="margin-top: 32px;">
                         <form class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="location">Location</label>
+                            <div class="form-group col-md-6">
+                                <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
                                     <select class="form-control pl-5 pr-5" id="location">
-                                        <option value="">Select Location</option>
+                                        <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
                                         <option value="tamnanan">Tamanan</option>
@@ -118,23 +117,17 @@
                                     <i class="fas fa-map-marker-alt position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="cost">Cost</label>
+                            <div class="form-group col-md-6">
+                                <label for="cost">Harga</label>
                                 <div class="input-group position-relative">
                                     <select class="form-control pr-5" id="cost">
-                                        <option value="">Select Price Range</option>
+                                        <option value="">Pilih Harga</option>
                                         <option value="0-100000">Dibawah 100,000</option>
                                         <option value="100000-500000">100,000 - 500,000</option>
                                         <option value="500000-1000000">500,000 - 1,000,000</option>
                                         <option value="1000000-2000000">1,000,000 - 2,000,000</option>
                                         <option value="2000000">Diatas 2,000,000</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="date">Date</label>
-                                <div class="input-group position-relative">
-                                    <input type="date" class="form-control " id="date" placeholder="Enter Date">
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
@@ -239,7 +232,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <a href="popular">
-                        <button type="button" class="btn btn-light btn-wide" style="color: #5D58AF; font-weight: 600;">
+                        <button type="button" class="btn btn-light btn-wide" style="color: #007bff; font-weight: 600;">
                             See all <i class="fas fa-angle-right"></i>
                         </button>
                     </a>
@@ -570,6 +563,7 @@
             </div>
         </div>
     </section>
+
     <hr style="border: 1px solid #EEEEEE; margin: 0px;">
     <footer id="contact">
         <div class="container">
@@ -609,6 +603,29 @@
             </div>
         </div>
     </footer>
+    <!-- <a href="#" class="float-button" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+    </a>
+    <div id="chatBox" class="chat-popup">
+        <div class="chat-header">
+            <h5>Chat</h5>
+            <button type="button" class="close" onclick="toggleChat()" style="color: #fff;">&times;</button>
+        </div>
+        <div class="chat-body">
+            <div id="chatMessages" class="chat-messages">
+                <div class="chat-bubble admin">
+                    <p>Halo Selamat Datang di Re-Kost</p>
+                </div>
+                <div class="chat-bubble user">
+                    <p>Halo Selamat Datang di Re-Kost</p>
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="sendMessage(event)">
+                <button type="button" onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+    </div> -->
     <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();

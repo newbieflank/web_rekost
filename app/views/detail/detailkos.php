@@ -69,15 +69,6 @@
     <section class="foto mt-4">
         <div class="container-fluid px-4">
             <div class="row">
-                <div class="col-md-0 p-4">
-                    <a class="text-decoration-none text-dark" href="popular">
-                        <i class="fas fa-arrow-left">Back</i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid px-4">
-            <div class="row">
                 <div class="col-md-7 p-2">
                     <img src="img/home1.png" alt="thumbnail" class="thumbnail w-100">
                 </div>

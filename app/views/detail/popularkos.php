@@ -131,7 +131,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -243,7 +243,7 @@
                                 IDR 500,000
                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
                             </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
+                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
                         </div>
                     </div>
                 </div>
