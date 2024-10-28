@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                <img src="<?= asset('img/logo.png"') ?> alt=" Re-Kost Logo" height="50">
+                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
                         <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="Profile Image" width="40px">
+                            <img src="<?php echo isset($_SESSION['user_img']) ? asset($_SESSION['user_img']) : asset('img/Vector.svg') ?>" alt="Profile Image" width="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
