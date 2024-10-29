@@ -18,25 +18,25 @@
             $uploadDir = $baseDir . $id . '/';
 
             if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true); // 0777 gives full permissions; true makes it recursive
+                mkdir($uploadDir, 0777, true); 
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 $file = $_FILES['file'];
 
-                // Check for errors
+               
                 if ($file['error'] !== UPLOAD_ERR_OK) {
                     echo "An error occurred during file upload.";
                     return;
                 }
 
-                // Validate file size (e.g., max 2MB)
-                if ($file['size'] > 2 * 1024 * 1024) { // 2 MB
+                
+                if ($file['size'] > 2 * 1024 * 1024) { 
                     echo "File size exceeds the limit.";
                     return;
                 }
 
-                // Validate file type (e.g., allow only images)
+                
                 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 if (!in_array($file['type'], $allowedTypes)) {
                     echo "Only JPG, PNG, and GIF files are allowed.";
