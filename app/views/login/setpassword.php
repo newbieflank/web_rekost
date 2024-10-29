@@ -23,6 +23,11 @@
             <div class="mb-3">
                 <input type="hidden" name="username" id="username" value="<?php echo $data['name'] ?>">
                 <input type="hidden" name="email" id="email" value="<?php echo $data['email'] ?>">
+                <select class="form-select" name="role" id="role">
+                    <option value="" selected>Daftar Sebagai</option>
+                    <option value="pencari kos">Pencari Kost</option>
+                    <option value="pemilik kos">Pemilik Kost</option>
+                </select>
                 <label for="Password" class="form-label">Password</label>
                 <div class="form-control">
                     <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter yourPassword">

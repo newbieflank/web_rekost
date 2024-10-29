@@ -60,13 +60,14 @@ class UsersModel extends Controller
 
     public function createG($data)
     {
-        $query = "INSERT INTO user (id_user, nama, email, password) VALUES (:id, :nama, :email, :pass)";
+        $query = "INSERT INTO user (id_user, nama, email, password, role) VALUES (:id, :nama, :email, :pass, :role)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
         $this->db->bind('nama', $data['username']);
         $this->db->bind('email', $data['email']);
         $this->db->bind('pass', $data['password']);
+        $this->db->bind('role', $data['role']);
 
         $this->db->execute();
 

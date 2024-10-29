@@ -4,7 +4,6 @@
 Router::get('/', 'HomeController@index');
 Router::get('/login', 'LoginController@login');
 Router::get('/register', 'LoginController@register');
-Router::get('/setpassword', 'LoginController@setpassword');
 Router::get('/id/{id}', 'LoginController@show');
 Router::get('/profile', 'ProfileController@profile');
 Router::get('/Kost', 'ProfileController@profileKost');

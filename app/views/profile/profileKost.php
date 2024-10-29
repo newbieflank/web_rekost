@@ -33,12 +33,12 @@
     <div class="card mx-auto mr-5 mt-5 mb-3">
         <h5 class="card-header">Informasi Pribadi</h5>
         <div class="card-body">
-            <div class="container mt-3 mb-5">
-                <div class="imgProfile d-block mx-auto">
-                    <img src="<?= asset('img/img1.png') ?>" class="rounded-circle d-block mx-auto" alt="">
-                </div>
+            <div class="imgProfile d-block mx-auto">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#changeImageModal">
+                    <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
+                </a>
             </div>
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="myForm" class="row m-5 custom-form" method="post" action="<?= BASEURL; ?>profile/update">
                 <div class="mb-3 row">
                     <label for="name" class="col-sm-2 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-10">
@@ -49,12 +49,6 @@
                     <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="email" placeholder="Masukkan E-mail">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" placeholder="Masukkan Password">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -72,8 +66,8 @@
                 <div class="mb-3 row">
                     <label for="nomorhandphone" class="col-sm-2 col-form-label">Nomor Handphone</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control mb-3" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
-                        <input type="number" class="form-control" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
+                        <input type="number" class="form-control mt-3" id="nomorhandphone" placeholder="Masukan Nomor Handphone">
+
                     </div>
                 </div>
             </form>

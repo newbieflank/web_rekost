@@ -20,10 +20,6 @@ class LoginController extends Controller
     {
         $this->view('Login/register');
     }
-    public function setpassword()
-    {
-        $this->view('Login/setpassword');
-    }
 
     public function auth()
     {
@@ -107,6 +103,7 @@ class LoginController extends Controller
         $id = $this->generateRandomId();
         $username = $_POST['username'];
         $email = $_POST['email'];
+        $role = $_POST['role'];
         $password = $_POST['Password'];
         $confirm = $_POST['confirmPassword'];
 
@@ -125,7 +122,8 @@ class LoginController extends Controller
             'id' => $id,
             'username' => $username,
             'email' => $email,
-            'password' => $password
+            'password' => $password,
+            'role' => $role
         ];
         if ($this->userModel->createG($data) > 0) {
             session_set_cookie_params(0);
