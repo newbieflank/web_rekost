@@ -2,22 +2,16 @@
 
 class API extends Controller
 {
-    public function users()
-    {
-        $data = [
-            ["nama" => "kholit"],
-            ["nama" => "Akbar"]
-        ];
 
-        echo json_encode($data);
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = $this->model('UsersModel');
     }
-    public function user($id)
-    {
-        $data = [
-            ["nama" => "kholit"],
-            ["nama" => "Akbar"]
-        ];
 
-        echo json_encode($data);
+    public function getProfile()
+    {
+        echo $this->user->getData();
     }
 }

@@ -2,34 +2,25 @@
 
 class HomeController extends Controller
 {
-    private $userModel;
-    public function __construct()
-    {
-        // $this->userModel = $this->model('UsersModel');
-        // if (isset($_SESSION['user']) || isset($_COOKIE['user'])) {
-        //     $this->getImg();
-        // }
-    }
-
 
     public function index()
     {
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->model('UsersModel')->findUserByEmail($email);
+
+            $layoutData = [
+                "id_user" => $user['id_user'],
+                "id_gambar" => $user['id_gambar']
+            ];
+            $this->view('home/landingpage', $layoutData);
+        }
         $this->view('home/landingpage');
     }
     public function popularkos()
     {
         $this->view('detail/popularkos');
     }
-
-    // public function getImg()
-    // {
-    //     if ($_SESSION['user']) {
-    //         $id = $_SESSION['user']->id;
-    //     } else if ($_COOKIE['user']) {
-    //         $id = $_COOKIE['user']->id;
-    //     }
-    //     $this->userModel->imgProfile($id);
-    // }
 
     public function best()
     {
@@ -45,5 +36,10 @@ class HomeController extends Controller
     public function strategically()
     {
         $this->view('detail/strategically');
+    }
+
+    public function echo()
+    {
+        echo json_encode($_SESSION['user']);
     }
 }

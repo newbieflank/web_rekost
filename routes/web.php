@@ -30,9 +30,13 @@ Router::get('/logout', 'LoginController@logout');
 Router::post('/login', 'LoginController@auth');
 Router::post('/register', 'LoginController@create');
 Router::post('/create', 'LoginController@Google');
+Router::post('/profile/update', 'ProfileController@update');
+Router::post('/upImg', 'FileController@upload');
+
+
+Router::get('/echo', 'HomeController@echo');
 
 
 //APi
 Router::get('/api/user/{id}', 'API@user');
-
-Router::get('/random', 'LoginController@generateRandomId');
+Router::get('/api/data', 'API@getProfile');

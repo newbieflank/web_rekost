@@ -35,7 +35,7 @@
         <div class="card-body">
             <div class="container mt-3 mb-5">
                 <div class="imgProfile d-block mx-auto">
-                    <img src="<?= BASEURL; ?>img/img1.png" class="rounded-circle d-block mx-auto" alt="">
+                    <img src="<?= asset('img/img1.png') ?>" class="rounded-circle d-block mx-auto" alt="">
                 </div>
             </div>
             <form id="myForm" class="row m-5 custom-form" method="post" action="update">
@@ -66,7 +66,7 @@
                 <div class="mb-3 row">
                     <label for="Lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                     <div class="col-sm-10">
-                       <input type="text" class="form-control" id="Lokasi" placeholder="Masukkan Lokasi">
+                        <input type="text" class="form-control" id="Lokasi" placeholder="Masukkan Lokasi">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -80,9 +80,8 @@
         </div>
     </div>
     <div class="text-end mx-5">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
-                    class="fas fa-chevron-right ms-2"></i></button>
-        </a>
+        <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
+                class="fas fa-chevron-right ms-2"></i></button>
+
     </div>
 </div>

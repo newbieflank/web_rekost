@@ -1,6 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f3f2ff !important;
+  background-color: #f3f9ff !important;
   padding-top: 70px;
 }
 section {
@@ -83,7 +83,7 @@ header {
 
 .best {
   padding: 32px 0;
-  background-color: #f3f2ff;
+  background-color: #f3f9ff;
 }
 .best .d-flex {
   align-items: center;

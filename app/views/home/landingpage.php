@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/landingPage.css">
-    <script src="js/navbar.js"></script>
+    <link rel="stylesheet" href="<?= asset('css/landingPage.css') ?>">
+    <script src="<?= asset('js/navbar.js') ?>"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -25,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
+                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -47,8 +47,8 @@
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($_SESSION['user_img']) ? $_SESSION['user_img'] : 'img/Vector.svg' ?>" alt="Profile Image" width="40px">
+                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
@@ -76,26 +76,25 @@
                 <div class="col-md-6 text-left">
                     <h1 style="margin-bottom: 32px;">Mulai Pencarian Kostmu, Temukan Tempat yang Tepat.</h1>
                     <p style="margin-bottom: 16px; font-size: 14px; color: #4A4A4A; font-weight: 600;">Jelajahi ratusan pilihan kost dengan fitur pencarian yang canggih, mulai dari harga, lokasi, hingga fasilitas yang sesuai dengan kebutuhanmu</p>
-                    <button type="button" class="btn btn-lg btn-primary mt-4" style="border-radius: 12px; font-size: 16px; font-weight: bold; padding: 12px 32px;">Booking Now</button>
+                    <button type="button" class="btn btn-lg btn-primary mt-4" style="border-radius: 12px; font-size: 16px; font-weight: bold; padding: 12px 32px;">Pesan Sekarang</button>
                 </div>
                 <div class="col-md-6 position-relative">
                     <div class="image-stack">
-                        <img src="img/img1.png" alt="Image 1" class="img-fluid img1">
-                        <img src="img/img2.png" alt="Image 2" class="img-fluid img2">
+                        <img src="<?= asset('img/img1.png') ?>" alt="Image 1" class="img-fluid img1">
+                        <img src="<?= asset('img/img2.png') ?>" alt="Image 2" class="img-fluid img2">
                     </div>
                 </div>
             </div>
             <div class="row justify-content-start reviews">
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
                 </div>
                 <div class="col-auto">
-                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0K+</h2>
+                    <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0</h2>
                     <p style="font-size: 18px; color: #4A4A4A;">Booked</p>
                 </div>
             </div>
-
         </div>
     </section>
     <section class="search">
@@ -104,11 +103,11 @@
                 <div class="col-md-12">
                     <div class="search-box p-4" style="margin-top: 32px;">
                         <form class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="location">Location</label>
+                            <div class="form-group col-md-6">
+                                <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
                                     <select class="form-control pl-5 pr-5" id="location">
-                                        <option value="">Select Location</option>
+                                        <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
                                         <option value="tamnanan">Tamanan</option>
@@ -118,23 +117,17 @@
                                     <i class="fas fa-map-marker-alt position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="cost">Cost</label>
+                            <div class="form-group col-md-6">
+                                <label for="cost">Harga</label>
                                 <div class="input-group position-relative">
                                     <select class="form-control pr-5" id="cost">
-                                        <option value="">Select Price Range</option>
+                                        <option value="">Pilih Harga</option>
                                         <option value="0-100000">Dibawah 100,000</option>
                                         <option value="100000-500000">100,000 - 500,000</option>
                                         <option value="500000-1000000">500,000 - 1,000,000</option>
                                         <option value="1000000-2000000">1,000,000 - 2,000,000</option>
                                         <option value="2000000">Diatas 2,000,000</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="date">Date</label>
-                                <div class="input-group position-relative">
-                                    <input type="date" class="form-control " id="date" placeholder="Enter Date">
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
@@ -151,14 +144,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <h2><img src="img/icon.png" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!</h2>
+                    <h2><img src="<?= asset('img/icon.png') ?>" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!</h2>
                 </div>
             </div>
             <div class="row scroll-container">
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -174,7 +167,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -190,7 +183,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -206,7 +199,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -222,7 +215,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="#" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -239,7 +232,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <a href="popular">
-                        <button type="button" class="btn btn-light btn-wide" style="color: #5D58AF; font-weight: 600;">
+                        <button type="button" class="btn btn-light btn-wide" style="color: #007bff; font-weight: 600;">
                             See all <i class="fas fa-angle-right"></i>
                         </button>
                     </a>
@@ -272,7 +265,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -288,7 +281,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
@@ -304,7 +297,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
@@ -320,7 +313,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
@@ -336,7 +329,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="best" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -385,7 +378,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putra</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tenggarang, Bondowoso</p>
@@ -401,7 +394,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home3.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Campur Taman Sari</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Taman Sari, Bondowoso</p>
@@ -417,7 +410,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home4.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">KosMU, Tapen</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Tapen, Bondowoso</p>
@@ -433,7 +426,7 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home2.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img2.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Muslimah</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
@@ -463,7 +456,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -482,7 +475,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -502,7 +495,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -521,7 +514,7 @@
                         <div class="card mx-3 mb-4" style="width: 300px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="img/user.png" class="rounded-circle mr-3" alt="User Profile">
+                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
                                         <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
                                         <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
@@ -548,7 +541,7 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <div class="mt-2">
-                        <img src="img/user.png" alt="Circle Image" class="rounded-circle" style="width: 50px; height: 50px;">
+                        <img src="<?= asset('img/user.png') ?>" alt="Circle Image" class="rounded-circle" style="width: 50px; height: 50px;">
                         <div class="star-rating mt-2">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -570,6 +563,7 @@
             </div>
         </div>
     </section>
+
     <hr style="border: 1px solid #EEEEEE; margin: 0px;">
     <footer id="contact">
         <div class="container">
@@ -609,6 +603,29 @@
             </div>
         </div>
     </footer>
+    <!-- <a href="#" class="float-button" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+    </a>
+    <div id="chatBox" class="chat-popup">
+        <div class="chat-header">
+            <h5>Chat</h5>
+            <button type="button" class="close" onclick="toggleChat()" style="color: #fff;">&times;</button>
+        </div>
+        <div class="chat-body">
+            <div id="chatMessages" class="chat-messages">
+                <div class="chat-bubble admin">
+                    <p>Halo Selamat Datang di Re-Kost</p>
+                </div>
+                <div class="chat-bubble user">
+                    <p>Halo Selamat Datang di Re-Kost</p>
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="sendMessage(event)">
+                <button type="button" onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+    </div> -->
     <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();

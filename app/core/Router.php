@@ -41,7 +41,7 @@ class Router
                 }
             } //
         }
-        header('Location: /web_rekost/public/');
+        header('Location: /web_rekost/');
         exit();
     }
 
@@ -53,14 +53,13 @@ class Router
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
 
-        $baseDir = 'web_rekost/public';
+        $baseDir = 'web_rekost';
 
 
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
         }
 
-        $uri = str_replace("public", "", $uri);
         return $uri ?: '/';
     }
 
@@ -69,7 +68,7 @@ class Router
     {
         list($controller, $method) = explode('@', $action);
         $controller = ucfirst($controller);
-        $controllerFile = "../app/controllers/$controller.php";
+        $controllerFile = "./app/controllers/$controller.php";
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;

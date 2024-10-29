@@ -1,8 +1,9 @@
 <?php
-
 class ProfileController extends Controller
 {
-    private $baseURL = "";
+    private $user;
+    private $userModel;
+    private $ImageModel;
 
     public function __construct()
     {
@@ -10,14 +11,18 @@ class ProfileController extends Controller
             $this->header('/login');
             exit;
         }
+
+        $this->userModel = $this->model('UsersModel');
+        $this->ImageModel = $this->model('ImageModel');
     }
 
     public function getRole()
     {
         $user = $_SESSION['user'];
 
-        if ($user) {
-            return $role = $user['role'];
+        // Check if $user is an array and contains the 'role' key
+        if (is_array($user) && isset($user['role'])) {
+            return $user['role'];
         }
 
         return null;
@@ -25,47 +30,77 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        $user = $_SESSION['user'];
+        $email = $_SESSION['user']['email'];
+        $user = $this->model('UsersModel')->findUserByEmail($email);
 
         ob_start();
         $role = $this->getRole();
 
-        if ($role == 'pencari kos') {
+        if ($role === 'pencari kos') {
+            $tanggal = DateTime::createFromFormat('Y-m-d', $user['tanggal_lahir']);
+            $formattedTanggal = $tanggal ? $tanggal->format('d-F-Y') : null;
+
             $userData = [
-                "username" => $user['nama']
+                "id_user" => $user['id_user'],
+                "username" => $user['nama'],
+                "gender" => $user['jenis_kelamin'],
+                "pekerjaan" => $user['pekerjaan'],
+                "tanggal" => $formattedTanggal,
+                "instansi" => $user['Instansi'],
+                "kota" => $user['kota_asal'],
+                "nomor" => $user['number_phone'],
+                "status" => $user['status'],
+                "alamat" => $user['alamat'],
+                "id_gambar" => $user['id_gambar']
+
             ];
+            // echo json_encode($userData);
             $this->renderProfile('profile/profile', 'Profile', $userData);
         } else {
             $this->renderProfile('profile/profileKost', 'Profile');
         }
     }
 
-
-    public function profileKost()
-    {
-        ob_start();
-        $this->view('profile/profileKost');
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "Profile"
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
     private function renderProfile($viewPath, $pageTitle, $data = [])
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->model('UsersModel')->findUserByEmail($email);
+
         ob_start();
         $this->view($viewPath, $data);
         $content = ob_get_clean();
 
         $layoutData = [
             "content" => $content,
-            "title" => $pageTitle
+            "title" => $pageTitle,
+            "id_user" => $user['id_user'],
+            "id_gambar" => $user['id_gambar']
         ];
 
+        // echo $role = $this->getRole();
+
         $this->view('layout/main', $layoutData);
+    }
+
+    public function update()
+    {
+        if ($this->model('UsersModel')->updateProfile($_POST) > 0) {
+            $this->header('/profile');
+            exit;
+        } else {
+            echo 'error';
+        }
+    }
+
+
+    private function IdMaker()
+    {
+        $id = $_SESSION['user']['id_user'];
+
+        $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
+
+        $ID = $id + $randomNumber;
+
+        return $ID;
     }
 }

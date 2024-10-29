@@ -15,7 +15,7 @@ $(function () {
     const initialValues = {};
     inputs.forEach(input => initialValues[input.id] = input.value);
 
-    function redirectTopopular(){
+    function redirectTopopular() {
         window.location.href = 'popular';
     }
 
@@ -59,5 +59,21 @@ $(function () {
         resetBtn.disabled = true;
         resetBtn.classList.remove("enabled");
     });
+
+    document.getElementById('profileImage').onchange = function (event) {
+        const [file] = event.target.files;
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Display selected image in the modal or as a preview
+                document.querySelector('.imgProfile img').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+
+
 });
 

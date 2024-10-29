@@ -53,6 +53,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function toggleChat() {
+    var chatBox = document.getElementById("chatBox");
+    if (chatBox.style.display === "none" || chatBox.style.display === "") {
+        chatBox.style.display = "block";
+    } else {
+        chatBox.style.display = "none";
+    }
+}
+
+function toggleChat() {
+    var chatBox = document.getElementById("chatBox");
+    if (chatBox.style.display === "none" || chatBox.style.display === "") {
+        chatBox.style.display = "block";
+    } else {
+        chatBox.style.display = "none";
+    }
+}
+
+function sendChatMessage() {
+    var input = document.getElementById("chatInput");
+    var message = input.value.trim();
+    
+    if (message) {
+        var messageContainer = document.createElement("div");
+        messageContainer.classList.add("chat-bubble", "user");
+        messageContainer.innerHTML = `<p>${message}</p>`;
+
+        document.getElementById("chatMessages").appendChild(messageContainer);
+        input.value = "";  // Kosongkan input setelah pesan dikirim
+        scrollToBottom();
+    }
+}
+
+function sendMessage(event) {
+    if (event.key === "Enter") {
+        sendChatMessage();
+    }
+}
+
+function scrollToBottom() {
+    var chatMessages = document.getElementById("chatMessages");
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
+function sendMessage(event) {
+    if (event.key === "Enter") {
+        sendChatMessage();
+    }
+}
+
+function scrollToBottom() {
+    var chatMessages = document.getElementById("chatMessages");
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
 function sendReview() {
     const reviewInput = document.getElementById('reviewInput');

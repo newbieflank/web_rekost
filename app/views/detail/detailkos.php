@@ -5,7 +5,7 @@
     <title>
         Re-Kost
     </title>
-    <link rel="stylesheet" href="<?= BASEURL; ?>css/detailkos.css">
+    <link rel="stylesheet" href="<?= asset('css/detailkos.css') ?>">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -38,7 +38,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="Re-Kost Logo" height="50">
+                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
             </a>
             <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <img src="img/user.png" alt="profile">
+                        <img src="<?= asset('img/user.png') ?>" alt="profile">
                     </li>
                 </ul>
             </div>
@@ -69,24 +69,15 @@
     <section class="foto mt-4">
         <div class="container-fluid px-4">
             <div class="row">
-                <div class="col-md-0 p-4">
-                    <a class="text-decoration-none text-dark" href="popular">
-                        <i class="fas fa-arrow-left">Back</i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid px-4">
-            <div class="row">
                 <div class="col-md-7 p-2">
-                    <img src="img/home1.png" alt="thumbnail" class="thumbnail w-100">
+                    <img src="<?= asset('img/home1.png') ?>" alt="thumbnail" class="thumbnail w-100">
                 </div>
                 <div class="col-md-5 d-flex flex-wrap justify-content-around">
                     <div class="row">
-                        <img src="img/home2.png" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="img/home3.png" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="img/home4.png" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="img/home5.png" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('img/home2.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('img/home3.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('img/home4.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('img/home5.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
                     </div>
                 </div>
             </div>

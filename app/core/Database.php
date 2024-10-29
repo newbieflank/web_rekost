@@ -34,7 +34,7 @@ class Database
         }
     }
 
-    public function bind($params, $value, $type = null)
+    public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -53,11 +53,12 @@ class Database
         }
 
         try {
-            $this->stm->bindValue($params, $value, $type);
+            $this->stm->bindValue($param, $value, $type);
         } catch (PDOException $e) {
             $this->handleError($e);
         }
     }
+
 
     public function execute()
     {

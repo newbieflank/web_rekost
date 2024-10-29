@@ -12,7 +12,7 @@ class AuthController extends Controller
         $this->googleClient = new Google_Client();
         $this->googleClient->setClientId($_ENV['CLIENT_ID_GOOGLE']);
         $this->googleClient->setClientSecret($_ENV['CLIENT_SECRET']);
-        $this->googleClient->setRedirectUri('http://localhost/web_rekost/public/auth/callback');
+        $this->googleClient->setRedirectUri('http://localhost/web_rekost/auth/callback');
         $this->googleClient->addScope("email");
         $this->googleClient->addScope("profile");
 
@@ -65,15 +65,19 @@ class AuthController extends Controller
 
         switch ($_SESSION['form']) {
             case 'login':
-                $existingUser = $this->userModel->findUserByEmail($googleUser->email);
-                if (!$existingUser) {
+                $user = $this->userModel->findUserByEmail($googleUser->email);
+                if (!$user) {
                     Flasher::setFlash('Akun Tidak Di Temukan', 'danger');
                     $this->header('/login');
                     exit();
                 }
 
 
-                $_SESSION['user'] = $existingUser;
+                $_SESSION['user'] = [
+                    "id_user" => $user['id_user'],
+                    "email" => $user['email'],
+                    "role" => $user['role']
+                ];
                 unset($_SESSION['form']);
                 $this->header('/');
                 break;

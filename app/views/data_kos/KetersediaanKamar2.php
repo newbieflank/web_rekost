@@ -39,68 +39,68 @@
     }
 
     .room-card {
-    background-color: #F9F9FF;
-    border: 1px solid #E0E0FF;
-    border-radius: 10px;
-    padding: 20px;
-    position: relative;
-    margin-left: 90px;
-    width: 400px;
-}
+        background-color: #F9F9FF;
+        border: 1px solid #E0E0FF;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        margin-left: 90px;
+        width: 400px;
+    }
 
-.room-card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #4A4A4A;
-    margin-bottom: 10px;
-}
+    .room-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #4A4A4A;
+        margin-bottom: 10px;
+    }
 
-.room-card input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #E0E0FF;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+    .room-card input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #E0E0FF;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
 
-.room-card .status {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    color: #4A4A4A;
-    width: 100%;
-}
+    .room-card .status {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: #4A4A4A;
+        width: 100%;
+    }
 
-.room-card .status i {
-    margin-left: 5px;
-    margin-right: 0;
-}
+    .room-card .status i {
+        margin-left: 5px;
+        margin-right: 0;
+    }
 
-.room-card .status i.fa-check-circle {
-    color: #4CAF50;
-    font-size: 1.2em;
-}
+    .room-card .status i.fa-check-circle {
+        color: #4CAF50;
+        font-size: 1.2em;
+    }
 
-.room-card .status i.fa-circle {
-    color: #E0E0FF;
-    font-size: 1.2em;
-}
+    .room-card .status i.fa-circle {
+        color: #E0E0FF;
+        font-size: 1.2em;
+    }
 
-.room-card .number {
-    position: absolute;
-    top: -15px;
-    left: -35px; 
-    border: 1px solid #E0E0FF;
-    color: #000000;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-}
+    .room-card .number {
+        position: absolute;
+        top: -15px;
+        left: -35px;
+        border: 1px solid #E0E0FF;
+        color: #000000;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+    }
 
 
     .footer-buttons {
@@ -135,7 +135,7 @@
 
     .filter-buttons button {
         background-color: #E0E0FF;
-        border: 2px solid #4A4A4A   ;
+        border: 2px solid #4A4A4A;
         border-radius: 20px;
         padding: 10px 20px;
         margin-left: 10px;
