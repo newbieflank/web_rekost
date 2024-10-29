@@ -1,6 +1,6 @@
 <?php
 
-class ImageModel extends Controller
+class ImageModel
 {
     private $db;
 
@@ -9,19 +9,23 @@ class ImageModel extends Controller
         $this->db = new Database();
     }
 
-    public function insert($id, $gambar)
+    public function insert($id, $idGambar)
     {
-        $query = 'INSERT INTO gambar (id_gambar, gambar) VALUES (:id, :gambar); UPDATE user SET id_gambar=:Idgambar;';
-        $this->db->query($query);
-        $this->db->bind('id', $id);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('Idgambar', $id);
-        $this->db->execute();
-
-        return $this->db->rowCount();
+        try {
+            $query = "UPDATE user SET id_gambar=:idGambar WHERE id_user=:id";
+            $this->db->query($query);
+            $this->db->bind(':idGambar', $idGambar);
+            $this->db->bind(':id', $id);
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (PDOException $e) {
+            echo $e . '</br>';
+            echo "kontol";
+            return 0;
+        }
     }
 
-    public function getId($data)
+    public function getImageByUserId($data)
     {
 
         $query = 'SELECT id_gambar FROM user WHERE id_user=:id';

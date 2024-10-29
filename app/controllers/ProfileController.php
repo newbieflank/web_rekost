@@ -41,13 +41,17 @@ class ProfileController extends Controller
             $formattedTanggal = $tanggal ? $tanggal->format('d-F-Y') : null;
 
             $userData = [
+                "id_user" => $user['id_user'],
                 "username" => $user['nama'],
                 "gender" => $user['jenis_kelamin'],
                 "pekerjaan" => $user['pekerjaan'],
                 "tanggal" => $formattedTanggal,
                 "instansi" => $user['Instansi'],
                 "kota" => $user['kota_asal'],
-                "nomor" => $user['number_phone']
+                "nomor" => $user['number_phone'],
+                "status" => $user['status'],
+                "alamat" => $user['alamat'],
+                "id_gambar" => $user['id_gambar']
 
             ];
             // echo json_encode($userData);
@@ -59,6 +63,9 @@ class ProfileController extends Controller
 
     private function renderProfile($viewPath, $pageTitle, $data = [])
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->model('UsersModel')->findUserByEmail($email);
+
         ob_start();
         $this->view($viewPath, $data);
         $content = ob_get_clean();
@@ -66,6 +73,8 @@ class ProfileController extends Controller
         $layoutData = [
             "content" => $content,
             "title" => $pageTitle,
+            "id_user" => $user['id_user'],
+            "id_gambar" => $user['id_gambar']
         ];
 
         // echo $role = $this->getRole();
@@ -83,47 +92,6 @@ class ProfileController extends Controller
         }
     }
 
-    public function upload()
-    {
-        // $image = $_FILES['profileImage']['tmp_name'];
-        // $imageId = $this->IdMaker();
-
-        // // Read the image file
-        // $imageContent = file_get_contents($image);
-        // if ($imageContent === false) {
-        //     die("Failed to read image file.");
-        // }
-
-        // if ($_FILES['profileImage']['error'] !== UPLOAD_ERR_OK) {
-        //     die("Upload failed with error code " . $_FILES['profileImage']['error']);
-        // }
-
-        // if ($this->model('ImageModel')->insert($imageId, $image) > 0) {
-        //     $this->header('/profile');
-        //     exit;
-        // } else {
-        //     echo "Kholit Kontol";
-        // }
-
-        $id = $this->ImageModel->getId($_SESSION['user']['id_user']);
-
-        $targetDir = '../../public/asset/';
-        $previousFile = $id;
-
-        if (isset($_POST['file'])) {
-            $result = FileUploadHelper::uploadFile($_FILES['file'], $targetDir, $previousFile);
-
-            if ($result['status']) {
-                // Update the session or database with the new file path
-                $_SESSION['uploaded_file'] = $result['filePath'];
-                echo $result['message'];
-            } else {
-                echo $result['message'];
-            }
-        } else {
-            echo "Error: No file uploaded.";
-        }
-    }
 
     private function IdMaker()
     {

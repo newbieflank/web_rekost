@@ -48,7 +48,7 @@
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
                         <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($_SESSION['user_img']) ? asset($_SESSION['user_img']) : asset('img/Vector.svg') ?>" alt="Profile Image" width="40px">
+                            <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>

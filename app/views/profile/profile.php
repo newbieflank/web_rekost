@@ -18,6 +18,10 @@
         background-color: #e5e4ff;
         border: 1px solid #d3d3d3;
     }
+
+    #alamat {
+        resize: none;
+    }
 </style>
 
 <!-- Form Profile -->
@@ -29,7 +33,7 @@
                 <div class="imgProfile d-block mx-auto">
                     <!-- Clickable Image -->
                     <a href="#" data-bs-toggle="modal" data-bs-target="#changeImageModal">
-                        <img src="<?= asset('img/img1.png') ?>" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle d-block mx-auto" alt="Profile Image" style="cursor: pointer;">
                     </a>
                 </div>
             </div>
@@ -44,7 +48,7 @@
                     <label for="inputGender" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
                         <select class="form-select" id="inputGender" name="inputGender" aria-label="Default select example">
-                            <option value="" <?php echo empty($gender) ? 'selected' : ''; ?>>Pilih Sekolah/Kampus</option>
+                            <option value="" <?php echo empty($gender) ? 'selected' : ''; ?>>Pilih Jenis Kelamin</option>
                             <option value="Laki-Laki" <?php echo (isset($gender) && $gender == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
                             <option value="Perempuan" <?php echo (isset($gender) && $gender == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
                         </select>
@@ -57,6 +61,16 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
+                    <label for="status" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" id="status" name="status" aria-label="Default select example">
+                            <option value="" <?php echo empty($status) ? 'selected' : ''; ?>>Pilih Status</option>
+                            <option value="Menikah" <?php echo (isset($status) && $status == 'Menikah') ? 'selected' : ''; ?>>Menikah</option>
+                            <option value="Belum Menikah" <?php echo (isset($status) && $status == 'Belum Menikah') ? 'selected' : ''; ?>>Belum Menikah</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
                     <label for="pekerjaan" class="col-sm-2 col-form-label">Pekerjaan</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukan Pekerjaan" value="<?php echo $pekerjaan ?>">
@@ -65,17 +79,7 @@
                 <div class="mb-3 row">
                     <label for="inputInstansi" class="col-sm-2 col-form-label">Nama Instansi</label>
                     <div class="col-sm-10">
-                        <select class="form-select" id="inputInstansi" name="inputInstansi" aria-label="Default select example">
-                            <option value="" <?php echo empty($selectedSchool) ? 'selected' : ''; ?>>Pilih Sekolah/Kampus</option>
-                            <?php foreach ($schools as $school): ?>
-                                <option value="<?php echo $school['name']; ?>" <?php echo ($selectedSchool == $school['name']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($school['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                            <option value="other">Other</option>
-                        </select>
-                        <input type="text" id="newSchoolName" name="newSchoolName" placeholder="Enter New School Name"
-                            class="form-control" style="display: none;">
+                        <input type="text" class="form-control" name="inputInstansi" id="inputInstansi" placeholder="Masukan Nama Instansi" value="<?php echo $instansi ?>">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -88,6 +92,12 @@
                     <label for="noTelp" class="col-sm-2 col-form-label">Nomor Telepon</label>
                     <div class="col-sm-10">
                         <input type="tel" class="form-control" id="noTelp" name="noTelp" placeholder="Masukan No Telp" value="<?php echo $nomor ?>">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                    <div class="col-sm-10">
+                        <textarea name="alamat" id="alamat" placeholder="masukan alamat" class="form-control"><?= $alamat ?></textarea>
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">

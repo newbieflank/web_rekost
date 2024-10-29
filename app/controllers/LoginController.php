@@ -38,7 +38,11 @@ class LoginController extends Controller
                 exit();
             }
             session_set_cookie_params(0);
-            $_SESSION['user'] = $user;
+            $_SESSION['user'] = [
+                "id_user" => $user['id_user'],
+                "email" => $user['email'],
+                "role" => $user['role']
+            ];
 
             $this->header('/');
             exit();
@@ -86,7 +90,11 @@ class LoginController extends Controller
 
         if ($this->userModel->create($data) > 0) {
             session_set_cookie_params(0);
-            $_SESSION['user'] = $data['email'];
+            $_SESSION['user'] = [
+                "id_user" => $data['id_user'],
+                "email" => $data['email'],
+                "role" => $data['role']
+            ];
 
             $this->header('/');
             exit();
@@ -122,7 +130,11 @@ class LoginController extends Controller
         if ($this->userModel->createG($data) > 0) {
             session_set_cookie_params(0);
 
-            $_SESSION['user'] = $data['email'];
+            $_SESSION['user'] = [
+                "id_user" => $data['id_user'],
+                "email" => $data['email'],
+                "role" => $data['role']
+            ];
 
             $this->header('/');
             exit();

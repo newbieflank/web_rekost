@@ -24,7 +24,8 @@ form.custom-form label {
 }
 
 form.custom-form input,
-form.custom-form select {
+form.custom-form select,
+form.custom-form textarea {
   border: 1px solid black;
   flex-grow: 1;
 }

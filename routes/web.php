@@ -31,7 +31,7 @@ Router::post('/login', 'LoginController@auth');
 Router::post('/register', 'LoginController@create');
 Router::post('/create', 'LoginController@Google');
 Router::post('/profile/update', 'ProfileController@update');
-Router::post('/upImg', 'ProfileController@upload');
+Router::post('/upImg', 'FileController@upload');
 
 
 Router::get('/echo', 'HomeController@echo');

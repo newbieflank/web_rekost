@@ -104,11 +104,13 @@ class UsersModel extends Controller
         $gender = isset($data['inputGender']) ? $data['inputGender'] : null;
         $tanggal = isset($data['customDate']) ? $this->getDate($data['customDate']) : null;
         $pekerjaan = isset($data['pekerjaan']) ? $data['pekerjaan'] : null;
-        $instansi = isset($data['inputInstansi']) ? $data['inputInstansi'] : $data['newSchoolName'];
+        $instansi = isset($data['inputInstansi']) ? $data['inputInstansi'] : null;
         $kota = isset($data['kotaAsal']) ? $data['kotaAsal'] : null;
         $telp = isset($data['noTelp']) ? $data['noTelp'] : null;
+        $status = isset($data['status']) ? $data['status'] : null;
+        $alamat = isset($data['alamat']) ? $data['alamat'] : null;
 
-        $query = 'UPDATE user SET nama=:nama, jenis_kelamin=:gender, tanggal_lahir=:tanggal, Instansi=:instansi, pekerjaan=:pekerjaan, kota_asal=:kota, number_phone=:telp WHERE id_user=:id';
+        $query = 'UPDATE user SET nama=:nama, jenis_kelamin=:gender, tanggal_lahir=:tanggal, Instansi=:instansi, pekerjaan=:pekerjaan, kota_asal=:kota, number_phone=:telp, status=:status, alamat=:alamat WHERE id_user=:id';
         $this->db->query($query);
         $this->db->bind('nama', $nama);
         $this->db->bind('gender', $gender);
@@ -117,6 +119,8 @@ class UsersModel extends Controller
         $this->db->bind('instansi', $instansi);
         $this->db->bind('kota', $kota);
         $this->db->bind('telp', $telp);
+        $this->db->bind('status', $status);
+        $this->db->bind('alamat', $alamat);
         $this->db->bind('id', $id);
 
         $this->db->execute();
