@@ -43,7 +43,7 @@
                     <img src="<?= asset('img/map.png') ?>" class="d-block mx-auto" alt="">
                 </div>
             </div>
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="myForm" class="row m-5 custom-form">
                 <div class="mb-3 row">
                     <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
@@ -80,8 +80,8 @@
         </div>
     </div>
     <div class="text-end mx-5">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
+        <a href="http://localhost/web_rekost/fotokos">
+            <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
                     class="fas fa-chevron-right ms-2"></i></button>
         </a>
     </div>
