@@ -22,6 +22,7 @@ Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
 Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
+//Ragu
 
 //login Google
 Router::get('/auth', 'AuthController@login');

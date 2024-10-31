@@ -85,7 +85,8 @@
         </div>
     </div>
     <div class="text-end mx-5">
-        <a href="http://localhost/web_rekost/fasilitaskos" class="text-decoration-none">
+        <a href="http://localhost/web_rekost/fasilitaskos" class="text-decoration-none"> 
+            <!-- //ragu -->
             <button type="button" class="btn btn-lanjut">
                 Lanjutkan <i class="fas fa-chevron-right ms-2"></i>
             </button>
