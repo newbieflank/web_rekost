@@ -139,30 +139,6 @@ class UsersModel extends Controller
         return $date;
     }
     
-    public function createKos1($data)
-{
-    $query = "INSERT INTO detail_kos (id_kos,nama_kos, harga_kos,deskripsi,tipe_kos,alamat,waktu_bayar,latitude,longititude,jumlah_kamar,id_kamar,id_fasilitas_umum,id_peraturan_kos,id_user
-    ) VALUES (:id_kos,:nama_kos,:harga_kos,:deskripsi,:tipe_kos,:alamat,:waktu_bayar,:latitude,:longititude,:jumlah_kamar,:id_kamar,:id_fasilitas_umum,:id_peraturan_kos,:id_user)";
 
-    $this->db->query($query);
-    $this->db->bind('id_kos', $data['id_kos']);
-    $this->db->bind('nama_kos', $data['nama_kos']);
-    $this->db->bind('harga_kos', $data['harga_kos']);
-    $this->db->bind('deskripsi', $data['deskripsi']);
-    $this->db->bind('tipe_kos', $data['tipe_kos']);
-    $this->db->bind('alamat', $data['alamat']);
-    $this->db->bind('waktu_bayar', $data['waktu_bayar']);
-    $this->db->bind('latitude', $data['latitude']);
-    $this->db->bind('longititude', $data['longititude']);
-    $this->db->bind('jumlah_kamar', $data['jumlah_kamar']);
-    $this->db->bind('id_kamar', $data['id_kamar']);
-    $this->db->bind('id_fasilitas_umum', $data['id_fasilitas_umum']);
-    $this->db->bind('id_peraturan_kos', $data['id_peraturan_kos']); 
-    $this->db->bind('id_user', $data['id_user']);
-
-    $this->db->execute();
-
-    return $this->db->rowCount();
-}
 
 }
