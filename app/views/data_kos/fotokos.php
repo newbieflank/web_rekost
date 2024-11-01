@@ -97,7 +97,7 @@
             </div>
         </h5>
         <div class="card-body">
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="myForm" class="row m-5 custom-form">
                 <div class="row g-1">
                     <div class="col-md-6">
                         <h2 class="font-semibold mb-2">Foto bangunan depan</h2>
@@ -140,8 +140,8 @@
         </div>
     </div>
     <div class="text-end mb-4">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
+        <a href="http://localhost/web_rekost/fotokamar">
+            <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
                     class="fas fa-chevron-right ms-2"></i></button>
         </a>
     </div>

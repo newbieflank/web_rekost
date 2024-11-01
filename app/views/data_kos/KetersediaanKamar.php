@@ -95,7 +95,7 @@
     <div class="card mx-auto mr-5 mt-5 mb-3">
         <h5 class="card-header">Ketersediaan Kamar</h5>
         <div class="card-body">
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="myForm" class="row m-5 custom-form">
                 <div class="mb-3 row">
                     <label for="Ukuran" class="col-sm-2 col-form-label">Ukuran Kamar</label>
                     <div class="col-sm-10">
@@ -134,8 +134,8 @@
         </div>
     </div>
     <div class="text-end mx-5">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
+        <a href="http://localhost/web_rekost/ketersediaanKamar2">
+            <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
                     class="fas fa-chevron-right ms-2"></i></button>
         </a>
     </div>

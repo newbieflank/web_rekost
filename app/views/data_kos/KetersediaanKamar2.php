@@ -248,8 +248,8 @@
             </a>
         </div>
         <div class="text-end mb-4">
-            <a href="popular">
-                <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
+            <a href="http://localhost/web_rekost/Harga">
+                <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
                         class="fas fa-chevron-right ms-2"></i></button>
             </a>
         </div>

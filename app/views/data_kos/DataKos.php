@@ -33,24 +33,24 @@
     <div class="card mx-auto mr-5 mt-5 mb-3">
         <h5 class="card-header">Lengkapi Data Kos</h5>
         <div class="card-body">
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="dataKosForm" class="row m-5 custom-form">
                 <div class="mb-3 row">
                     <label for="namakos" class="col-sm-2 col-form-label">Nama Kos</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="namakos" placeholder="Masukan Nama Kos">
+                        <input type="text" class="form-control" id="namakos" name="namakos" placeholder="Masukan Nama Kos" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="jumlahkamar" class="col-sm-2 col-form-label">Jumlah Kamar</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="jumlahkamar" placeholder="Masukkan Jumlah Kamar">
+                        <input type="number" class="form-control" id="jumlahkamar" name="jumlahkamar" placeholder="Masukkan Jumlah Kamar" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="tipekos" class="col-sm-2 col-form-label">Disewakan Untuk</label>
                     <div class="col-sm-10">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipekos" id="putra" value="Putra">
+                            <input class="form-check-input" type="radio" name="tipekos" id="putra" value="Putra" required>
                             <label class="form-check-label" for="putra">Putra</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -66,29 +66,30 @@
                 <div class="mb-3 row">
                     <label for="deskripsikos" class="col-sm-2 col-form-label">Deskripsi Kos</label>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control" id="deskripsikos" placeholder="Tuliskan deskripsi kos anda..." rows="3" style="resize: none;"></textarea>
+                        <textarea class="form-control" id="deskripsikos" name="deskripsikos" placeholder="Tuliskan deskripsi kos anda..." rows="3" style="resize: none;" required></textarea>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="peraturankos" class="col-sm-2 col-form-label">Peraturan Kos</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="peraturankos" placeholder="Tentukan aturan kos disini...">
+                        <input type="text" class="form-control" id="peraturankos" name="peraturankos" placeholder="Tentukan aturan kos disini..." required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="catatan" class="col-sm-2 col-form-label">Catatan Lainnya (Opsional)</label>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control" id="catatan"
-                            placeholder="Masukan catatan lainnya disini..." rows="3" style="resize: none;"></textarea>
+                        <textarea class="form-control" id="catatan" name="catatan" placeholder="Masukan catatan lainnya disini..." rows="3" style="resize: none;"></textarea>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="text-end mx-5">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
-                    class="fas fa-chevron-right ms-2"></i></button>
+        <a href="http://localhost/web_rekost/fasilitaskos" class="text-decoration-none"> 
+            <!-- //ragu -->
+            <button type="button" class="btn btn-lanjut">
+                Lanjutkan <i class="fas fa-chevron-right ms-2"></i>
+            </button>
         </a>
     </div>
 </div>
