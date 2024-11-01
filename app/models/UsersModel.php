@@ -14,6 +14,14 @@ class UsersModel extends Controller
         $this->db = new Database();
     }
 
+    public function getData()
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE  email='gamerid452@gmail.com'";
+        $this->db->query($query);
+
+        return $this->db->single();
+    }
+
     public function getProfile($email, $password)
     {
         $query = "SELECT * FROM " . $this->table . " WHERE email=:email AND password=:password";

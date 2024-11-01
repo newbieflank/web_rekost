@@ -38,4 +38,6 @@ Router::get('/echo', 'HomeController@echo');
 
 //APi
 Router::get('/api/user/{id}', 'API@user');
-Router::get('/api/data', 'API@getProfile');
+Router::post('/api/data', 'API@getProfile');
+Router::post('/api/login', 'API@login');
+Router::get('/api/imgProfile/{userId}', 'API@getProfileImage');
