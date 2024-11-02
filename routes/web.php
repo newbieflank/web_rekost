@@ -38,6 +38,9 @@ Router::post('/register', 'LoginController@create');
 Router::post('/create', 'LoginController@Google');
 Router::post('/profile/update', 'ProfileController@update');
 Router::post('/upImg', 'FileController@upload');
+Router::post('/datakos/tambah', 'DataKosController@tambah');
+Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
+Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 
 
 Router::get('/echo', 'HomeController@echo');
