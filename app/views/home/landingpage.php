@@ -50,9 +50,12 @@
                         <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                            <a class="dropdown-item" href="#services">Layanan Kost</a>
+                            <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                                <a class="dropdown-item" href="#services">Profile Kost</a>
+                            <?php endif; ?>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout">Logout</a>
                         </div>

@@ -14,9 +14,10 @@ class UsersModel extends Controller
         $this->db = new Database();
     }
 
-    public function getData()
+    public function findKost($id)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE  email='gamerid452@gmail.com'";
+        $query = "SELECT nama_kos FROM detail_kos where id_user=:id_user";
+        $this->db->bind('id_user', $id);
         $this->db->query($query);
 
         return $this->db->single();
@@ -82,25 +83,6 @@ class UsersModel extends Controller
         return $this->db->rowCount();
     }
 
-
-    public function getSchools()
-    {
-        $query = "SELECT id, name FROM schools";
-        $this->db->query($query);
-        $school = $this->db->resultSet();
-
-        return $school;
-    }
-
-    public function insertNewSchool()
-    {
-        $this->db->query("INSERT INTO schools (name) VALUES (:name)");
-        $this->db->bind(':name', 'New School Name');
-        $this->db->execute();
-
-        return $this->db->rowCount();
-    }
-
     public function updateProfile($data)
     {
         $id = isset($_SESSION['user']['id_user']) ? $_SESSION['user']['id_user'] : null;
@@ -146,7 +128,4 @@ class UsersModel extends Controller
 
         return $date;
     }
-    
-
-
 }

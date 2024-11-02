@@ -100,8 +100,7 @@ class Database
 
     private function handleError($e)
     {
-
         error_log('Database Error: ' . $e->getMessage());
-        die('An error occurred while interacting with the database.');
+        // die('An error occurred while interacting with the database.');
     }
 }

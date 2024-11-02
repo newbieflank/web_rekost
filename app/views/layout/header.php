@@ -63,7 +63,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <na class="collapse navbar-collapse" id="mainNav">
+            <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
@@ -78,28 +78,17 @@
                         <a class="nav-link" href="<?= BASEURL; ?>#contact">Contact</a>
                     </li>
                 </ul>
-                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
-                    <div class="navbar-nav ml-auto mx-4 dropdown">
-                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                            <a class="dropdown-item" href="#services">Layanan Kost</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout">Logout</a>
-                        </div>
+                <div class="navbar-nav ml-auto mx-4 dropdown">
+                    <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                        <a class="dropdown-item" href="#services">Layanan Kost</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="logout">Logout</a>
                     </div>
-                <?php else: ?>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="login" class="btn btn-outline-primary mr-2">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="register" class="btn btn-primary">Sign Up</a>
-                        </li>
-                    </ul>
-                <?php endif; ?>
                 </div>
+            </div>
         </nav>
     </header>

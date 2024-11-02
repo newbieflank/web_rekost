@@ -30,15 +30,20 @@ class ProfileController extends Controller
 
     public function profile()
     {
+        if (!isset($_SESSION['user']['email'])) {
+            die("User not logged in.");
+        }
+
         $email = $_SESSION['user']['email'];
-        $user = $this->model('UsersModel')->findUserByEmail($email);
+        $user = $this->userModel->findUserByEmail($email);
+        $tanggal = DateTime::createFromFormat('Y-m-d', $user['tanggal_lahir']);
+        $formattedTanggal = $tanggal ? $tanggal->format('d-F-Y') : null;
 
         ob_start();
         $role = $this->getRole();
 
         if ($role === 'pencari kos') {
-            $tanggal = DateTime::createFromFormat('Y-m-d', $user['tanggal_lahir']);
-            $formattedTanggal = $tanggal ? $tanggal->format('d-F-Y') : null;
+
 
             $userData = [
                 "id_user" => $user['id_user'],
@@ -54,10 +59,30 @@ class ProfileController extends Controller
                 "id_gambar" => $user['id_gambar']
 
             ];
-            // echo json_encode($userData);
             $this->renderProfile('profile/profile', 'Profile', $userData);
         } else {
-            $this->renderProfile('profile/profileKost', 'Profile');
+            $kost = $this->userModel->findKost($_SESSION['user']['id_user']);
+            if (!$kost) {
+                $namaKost = '';
+            } else {
+                $namaKost = $kost['nama_kos'];
+            }
+
+            $userData = [
+                "id_user" => $user['id_user'],
+                "username" => $user['nama'],
+                "gender" => $user['jenis_kelamin'],
+                "pekerjaan" => $user['pekerjaan'],
+                "tanggal" => $formattedTanggal,
+                "instansi" => $user['Instansi'],
+                "kota" => $user['kota_asal'],
+                "nomor" => $user['number_phone'],
+                "status" => $user['status'],
+                "alamat" => $user['alamat'],
+                "id_gambar" => $user['id_gambar'],
+                "kost" => $namaKost
+            ];
+            $this->renderProfile('profile/profileKost', 'Profile', $userData);
         }
     }
 
