@@ -161,4 +161,15 @@ class DataKosController extends Controller
         }
     }
 
+    public function tambahHarga()
+    {
+        if ($this->model('KosModel')->updateHarga($_POST) > 0) {
+            header('Location: ' . BASEURL . '/fotokamar');  
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/harga');  
+            exit;
+        }
+    }
+
 }
