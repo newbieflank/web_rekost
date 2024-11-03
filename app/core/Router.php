@@ -69,11 +69,36 @@ class Router
     }
 
 
+    // private static function callControllerAction($action, $params = [])
+    // {
+    //     list($controller, $method) = explode('@', $action);
+    //     $controller = ucfirst($controller);
+    //     $controllerFile = "./app/controllers/$controller.php";
+
+    //     if (file_exists($controllerFile)) {
+    //         require_once $controllerFile;
+    //         $controllerInstance = new $controller();
+    //         if (method_exists($controllerInstance, $method)) {
+    //             call_user_func_array([$controllerInstance, $method], $params);
+    //         } else {
+    //             echo "Method $method not found in controller $controller.";
+    //         }
+    //     } else {
+    //         echo "Controller $controller not found.";
+    //     }
+    // }
+
     private static function callControllerAction($action, $params = [])
     {
         list($controller, $method) = explode('@', $action);
+
+        // Detect if this is an API route by checking if the URI starts with /api/
+        $isApiRoute = strpos(self::getUri(), '/api/') === 0;
+
+        // Set the controller directory based on route type
+        $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers';
         $controller = ucfirst($controller);
-        $controllerFile = "./app/controllers/$controller.php";
+        $controllerFile = "$controllerDir/$controller.php";
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
@@ -85,6 +110,7 @@ class Router
             }
         } else {
             echo "Controller $controller not found.";
+            echo $controllerFile;
         }
     }
 }

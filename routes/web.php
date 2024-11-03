@@ -22,7 +22,6 @@ Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
 Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
-//Ragu
 
 //login Google
 Router::get('/auth', 'AuthController@login');
@@ -41,13 +40,3 @@ Router::post('/upImg', 'FileController@upload');
 Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
-
-
-Router::get('/echo', 'HomeController@echo');
-
-
-//APi
-Router::get('/api/user/{id}', 'API@user');
-Router::post('/api/data', 'API@getProfile');
-Router::post('/api/login', 'API@login');
-Router::get('/api/imgProfile/{userId}', 'API@getProfileImage');
