@@ -28,34 +28,51 @@ class LoginController extends Controller
 
         $user = $this->userModel->getProfile($email, $password);
         if (isset($user['id_user'])) {
-            if (isset($_POST['remember'])) {
-                setcookie("user", $user, time() + (86400 * 30), "/", "", true);
-                $this->header('/');
-                exit();
-            }
             if ($user['role'] === 'pemilik kos') {
-                $data = $this->userModel->findOwnerById($user['id_user']);
 
-                $_SESSION['user'] = [
+                $data = $this->userModel->findOwnerById($user['id_user']);
+                $data = [
                     "id_user" => $user['id_user'],
                     "email" => $user['email'],
                     "role" => $user['role'],
                     "id_kos" => $data['id_kos']
                 ];
+
+                if (isset($_POST['remember'])) {
+                    setcookie("user", json_encode($data), time() + (86400 * 30), "/", "", true);
+                    $this->header('/');
+                    exit();
+                }
+
+                $_SESSION['user'] = $data;
             } else {
-                $_SESSION['user'] = [
+                $user = [
                     "id_user" => $user['id_user'],
                     "email" => $user['email'],
                     "role" => $user['role']
                 ];
+
+                if (isset($_POST['remember'])) {
+                    setcookie("user", json_encode($user), time() + (86400 * 30), "/", "", true);
+                    $this->header('/');
+                    exit();
+                }
+
+                $_SESSION['user'] = $user;
             }
 
             $this->header('/');
             exit();
         } else {
-            Flasher::setFlash('*Akun Tidak di Temukan', 'danger');
-            $this->header('/login');
-            exit();
+            if ($this->userModel->findUserByEmail($email)) {
+                Flasher::setFlash('*Password Salah', 'danger');
+                $this->header('/login');
+                exit();
+            } else {
+                Flasher::setFlash('*Akun Tidak di Temukan', 'danger');
+                $this->header('/login');
+                exit();
+            }
         }
     }
     public function logout()

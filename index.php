@@ -5,6 +5,10 @@ if (!session_start()) {
     session_start();
 }
 
+if ($_COOKIE['user']) {
+    $_SESSION['user'] = $_COOKIE['user'];
+}
+
 $file = './.env';
 
 if (!file_exists($file)) {
