@@ -37,6 +37,18 @@
 
 
         <form action="<?= BASEURL; ?>register" method="post">
+            <div class="row">
+                <div class="col-lg-6">
+                    <?php if (isset($_SESSION['flash'])): ?>
+                        <?php Flasher::flash(); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <select class="form-select" name="role" id="role">
+                <option value="" selected>Daftar Sebagai</option>
+                <option value="pencari kos">Pencari Kost</option>
+                <option value="pemilik kos">Pemilik Kost</option>
+            </select>
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
             <label for="email">Email</label>

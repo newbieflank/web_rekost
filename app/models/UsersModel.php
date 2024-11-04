@@ -17,11 +17,21 @@ class UsersModel extends Controller
     public function findKost($id)
     {
         $query = "SELECT nama_kos FROM detail_kos where id_user=:id_user";
-        $this->db->bind('id_user', $id);
         $this->db->query($query);
+        $this->db->bind('id_user', $id);
 
         return $this->db->single();
     }
+    public function findUserById($id)
+    {
+        $query = "SELECT * FROM user where id_user=:id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+
+        return $this->db->single();
+    }
+
+
 
     public function getProfile($email, $password)
     {
@@ -81,6 +91,39 @@ class UsersModel extends Controller
         $this->db->execute();
 
         return $this->db->rowCount();
+    }
+
+    public function pemilik($data)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            // Insert user data
+            $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
+                   VALUES (:id, :nama, :email, :pass, :nomor, :role)";
+            $this->db->query($query1);
+            $this->db->bind('id', $data['id']);
+            $this->db->bind('nama', $data['username']);
+            $this->db->bind('email', $data['email']);
+            $this->db->bind('pass', $data['password']);
+            $this->db->bind('nomor', $data['number']);
+            $this->db->bind('role', $data['role']);
+            $this->db->execute();
+
+            // Insert kos data
+            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+            $this->db->query($query2);
+            $this->db->bind('id_kos', $data['id_kos']);
+            $this->db->bind('id', $data['id']);
+            $this->db->execute();
+
+            $this->db->commit();
+
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
     }
 
     public function updateProfile($data)
