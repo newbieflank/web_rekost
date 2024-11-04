@@ -18,25 +18,25 @@
             $uploadDir = $baseDir . $id . '/';
 
             if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true); 
+                mkdir($uploadDir, 0777, true);
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 $file = $_FILES['file'];
 
-               
+
                 if ($file['error'] !== UPLOAD_ERR_OK) {
                     echo "An error occurred during file upload.";
                     return;
                 }
 
-                
-                if ($file['size'] > 2 * 1024 * 1024) { 
+
+                if ($file['size'] > 2 * 1024 * 1024) {
                     echo "File size exceeds the limit.";
                     return;
                 }
 
-                
+
                 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 if (!in_array($file['type'], $allowedTypes)) {
                     echo "Only JPG, PNG, and GIF files are allowed.";
@@ -47,7 +47,7 @@
                 if ($existingImage) {
                     $existingFilePath = $uploadDir . $existingImage['id_gambar'];
 
-                    if (file_exists($existingFilePath)) {
+                    if (is_file($existingFilePath) && file_exists($existingFilePath)) {
                         unlink($existingFilePath);
                     }
                 }

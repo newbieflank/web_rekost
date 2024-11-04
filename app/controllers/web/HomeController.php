@@ -40,6 +40,6 @@ class HomeController extends Controller
 
     public function echo()
     {
-        echo $_SESSION['user']['role'];
+        echo json_encode($_SESSION['user']);
     }
 }

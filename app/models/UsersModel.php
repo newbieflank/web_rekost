@@ -31,7 +31,14 @@ class UsersModel extends Controller
         return $this->db->single();
     }
 
+    public function findOwnerById($id)
+    {
+        $query = "SELECT * FROM pemilik where id_user=:id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
 
+        return $this->db->single();
+    }
 
     public function getProfile($email, $password)
     {
@@ -63,7 +70,7 @@ class UsersModel extends Controller
     public function create($data)
     {
 
-        $query = "INSERT INTO user (id_user, nama, email, password, number_phone) VALUES (:id, :nama, :email, :pass, :nomor)";
+        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) VALUES (:id, :nama, :email, :pass, :nomor, :role)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
@@ -71,6 +78,7 @@ class UsersModel extends Controller
         $this->db->bind('email', $data['email']);
         $this->db->bind('pass', $data['password']);
         $this->db->bind('nomor', $data['number']);
+        $this->db->bind('role', $data['role']);
 
         $this->db->execute();
 

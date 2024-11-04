@@ -72,11 +72,23 @@ class AuthController extends Controller
                     exit();
                 }
 
-                $_SESSION['user'] = [
-                    "id_user" => $user['id_user'],
-                    "email" => $user['email'],
-                    "role" => $user['role']
-                ];
+                if ($user['role'] === 'pemilik kos') {
+                    $data = $this->userModel->findOwnerById($user['id_user']);
+
+                    $_SESSION['user'] = [
+                        "id_user" => $user['id_user'],
+                        "email" => $user['email'],
+                        "role" => $user['role'],
+                        "id_kos" => $data['id_kos']
+                    ];
+                } else {
+                    $_SESSION['user'] = [
+                        "id_user" => $user['id_user'],
+                        "email" => $user['email'],
+                        "role" => $user['role']
+                    ];
+                }
+
                 unset($_SESSION['form']);
                 $this->header('/');
                 break;

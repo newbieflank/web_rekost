@@ -33,12 +33,22 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             }
-            session_set_cookie_params(0);
-            $_SESSION['user'] = [
-                "id_user" => $user['id_user'],
-                "email" => $user['email'],
-                "role" => $user['role']
-            ];
+            if ($user['role'] === 'pemilik kos') {
+                $data = $this->userModel->findOwnerById($user['id_user']);
+
+                $_SESSION['user'] = [
+                    "id_user" => $user['id_user'],
+                    "email" => $user['email'],
+                    "role" => $user['role'],
+                    "id_kos" => $data['id_kos']
+                ];
+            } else {
+                $_SESSION['user'] = [
+                    "id_user" => $user['id_user'],
+                    "email" => $user['email'],
+                    "role" => $user['role']
+                ];
+            }
 
             $this->header('/');
             exit();
@@ -119,7 +129,7 @@ class LoginController extends Controller
             Flasher::setFlash('Password Tidak Cocok', 'danger');
             $this->header('/setpassword');
             exit();
-        } elseif (strlen($password) < 8) { // Adjusted for minimum length check
+        } elseif (strlen($password) < 8) {
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
             $this->header('/setpassword');
             exit();
@@ -142,7 +152,7 @@ class LoginController extends Controller
             if ($this->userModel->pemilik($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
-                    "id_user" => $data['id'],  // Fixed undefined variable
+                    "id_user" => $data['id'],
                     "email" => $data['email'],
                     "role" => $data['role'],
                     "id_kos" => $data['id_kos']
