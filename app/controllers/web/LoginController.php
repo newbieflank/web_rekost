@@ -67,7 +67,10 @@ class LoginController extends Controller
 
     public function create()
     {
-        $id = $this->generateRandomId();
+        do {
+            $id = $this->generateRandomId();
+            $cekID = $this->userModel->findUserById($id);
+        } while ($cekID);
 
         $username = $_POST['fullname'];
         $email = $_POST['email'];
@@ -100,42 +103,79 @@ class LoginController extends Controller
     public function Google()
     {
 
-        $id = $this->generateRandomId();
+        do {
+            $id = $this->generateRandomId();
+            $cekID = $this->userModel->findUserById($id);
+        } while ($cekID);
+
         $username = $_POST['username'];
         $email = $_POST['email'];
         $role = $_POST['role'];
         $password = $_POST['Password'];
         $confirm = $_POST['confirmPassword'];
 
-
-        if (!($password == $confirm)) {
+        // Validate password
+        if ($password !== $confirm) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
             $this->header('/setpassword');
             exit();
-        } else if (!(strlen($password) == 8)) {
+        } elseif (strlen($password) < 8) { // Adjusted for minimum length check
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
             $this->header('/setpassword');
             exit();
         }
 
-        $data = [
-            'id' => $id,
-            'username' => $username,
-            'email' => $email,
-            'password' => $password,
-            'role' => $role
-        ];
-        if ($this->userModel->createG($data) > 0) {
-            session_set_cookie_params(0);
+        if ($role === 'pemilik kos') {
+            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
+            $kosID = $id . $randomNumber;
 
-            $_SESSION['user'] = [
-                "id_user" => $data['id_user'],
-                "email" => $data['email'],
-                "role" => $data['role']
+            $data = [
+                'id' => $id,
+                'username' => $username,
+                'email' => $email,
+                'number' => '',
+                'password' => $password,
+                'role' => $role,
+                'id_kos' => $kosID
             ];
 
-            $this->header('/');
-            exit();
+            if ($this->userModel->pemilik($data) > 0) {
+                session_set_cookie_params(0);
+                $_SESSION['user'] = [
+                    "id_user" => $data['id'],  // Fixed undefined variable
+                    "email" => $data['email'],
+                    "role" => $data['role'],
+                    "id_kos" => $data['id_kos']
+                ];
+
+                $this->header('/');
+                exit();
+            } else {
+                echo json_encode($data);
+            }
+        } else {
+            $data = [
+                'id' => $id,
+                'username' => $username,
+                'email' => $email,
+                'number' => '',
+                'password' => $password,
+                'role' => $role
+            ];
+
+            if ($this->userModel->createG($data) > 0) {
+                session_set_cookie_params(0);
+                $_SESSION['user'] = [
+                    "id_user" => $data['id'],  // Fixed undefined variable
+                    "email" => $data['email'],
+                    "role" => $data['role']
+                ];
+
+                $this->header('/');
+                exit();
+            } else {
+                echo json_encode($data);
+            }
         }
     }
 
@@ -148,8 +188,6 @@ class LoginController extends Controller
         $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
 
         $generatedId = $dateTime . $randomNumber;
-
-        echo $generatedId;
         return $generatedId;
     }
 }

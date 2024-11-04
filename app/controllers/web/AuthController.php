@@ -72,7 +72,6 @@ class AuthController extends Controller
                     exit();
                 }
 
-
                 $_SESSION['user'] = [
                     "id_user" => $user['id_user'],
                     "email" => $user['email'],

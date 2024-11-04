@@ -98,6 +98,33 @@ class Database
         }
     }
 
+    public function beginTransaction()
+    {
+        try {
+            $this->dbh->beginTransaction();
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
+    }
+
+    public function commit()
+    {
+        try {
+            $this->dbh->commit();
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
+    }
+
+    public function rollBack()
+    {
+        try {
+            $this->dbh->rollBack();
+        } catch (PDOException $e) {
+            $this->handleError($e);
+        }
+    }
+
     private function handleError($e)
     {
         error_log('Database Error: ' . $e->getMessage());
