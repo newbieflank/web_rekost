@@ -76,7 +76,7 @@ class Router
         $isApiRoute = strpos(self::getUri(), '/api') === 0;
 
         // Set the controller directory based on route type
-        $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers';
+        $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
         $controller = ucfirst($controller);
         $controllerFile = "$controllerDir/$controller.php";
 
