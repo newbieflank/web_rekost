@@ -77,17 +77,28 @@ class LoginController extends Controller
     }
     public function logout()
     {
-        // Ensure session is started before manipulating it
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Unset all session variables
         $_SESSION = array();
         session_unset();
         session_destroy();
 
-        // Redirect to home or login page
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                'user',
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+
+
         $this->header('/');
         exit();
     }

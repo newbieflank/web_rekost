@@ -5,8 +5,8 @@ if (!session_start()) {
     session_start();
 }
 
-if ($_COOKIE['user']) {
-    $_SESSION['user'] = $_COOKIE['user'];
+if (isset($_COOKIE['user'])) {
+    $_SESSION['user'] = json_decode($_COOKIE['user'], true);
 }
 
 $file = './.env';
