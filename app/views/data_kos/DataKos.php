@@ -94,7 +94,6 @@ async function handleSubmit(event) {
         const form = event.target;
         const formData = new FormData(form);
         
-        // submit data 
         const response = await fetch(form.action, {
             method: 'POST',
             body: formData

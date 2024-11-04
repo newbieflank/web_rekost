@@ -111,4 +111,22 @@ class KosModel
         }
     }
 
+    public function updateHarga($data)
+    {
+        $query = "UPDATE kos 
+              SET harga_kos = :harga_kos
+              WHERE id_kos = (SELECT MAX(id_kos) FROM kos)";
+
+        try {
+            $this->db->query($query);
+            $this->db->bind('harga_kos', $data['harga_kos']);
+
+            $this->db->execute();
+            return $this->db->rowCount();
+        } catch (PDOException $e) {
+            error_log('Error updating harga: ' . $e->getMessage());
+            return false;
+        }
+    }
+
 }

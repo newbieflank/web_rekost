@@ -82,14 +82,13 @@ async function handleSubmitFasilitas(event) {
         const form = event.target;
         const formData = new FormData(form);
         
-        // Submit form data
         const response = await fetch(form.action, {
             method: 'POST',
             body: formData
         });
         
         if (response.ok) {
-            // Redirect to alamat kos page after successful submission
+            // Redirect ke alamat kos 
             window.location.href = '<?= BASEURL; ?>alamatkos';
         } else {
             throw new Error('Form submission failed');

@@ -135,7 +135,7 @@
         </div>
     </div>
     <div class="text-end mb-4">
-        <a href="http://localhost/web_rekost/ketersediaanKamar">
+        <a href="<?= BASEURL; ?>ketersediaanKamar">
             <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
                     class="fas fa-chevron-right ms-2"></i></button>
         </a>
