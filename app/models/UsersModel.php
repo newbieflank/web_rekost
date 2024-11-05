@@ -103,10 +103,6 @@ class UsersModel extends Controller
 
     public function pemilik($data)
     {
-        try {
-            $this->db->beginTransaction();
-
-            // Insert user data
             $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
                    VALUES (:id, :nama, :email, :pass, :nomor, :role)";
             $this->db->query($query1);
@@ -117,21 +113,20 @@ class UsersModel extends Controller
             $this->db->bind('nomor', $data['number']);
             $this->db->bind('role', $data['role']);
             $this->db->execute();
+           
+            return $this->db->rowCount();
+    }
 
-            // Insert kos data
-            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+    public function createKos($id_kos, $id)
+    {
+         $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
             $this->db->query($query2);
-            $this->db->bind('id_kos', $data['id_kos']);
-            $this->db->bind('id', $data['id']);
+            $this->db->bind('id_kos', $id_kos);
+            $this->db->bind('id', $id);
+
             $this->db->execute();
 
-            $this->db->commit();
-
-            return $this->db->rowCount();
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            return false;
-        }
+           return $this->db->rowCount();
     }
 
     public function updateProfile($data)
