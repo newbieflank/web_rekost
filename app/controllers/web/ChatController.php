@@ -2,13 +2,18 @@
 session_start();
 include_once "config.php";
 
-class ChatController
+class ChatController extends Controller
 {
     private $conn;
 
     public function __construct($dbConn)
     {
         $this->conn = $dbConn;
+    }
+
+    public function index()
+    {
+        $this->view('detail/chats');
     }
 
     // Memastikan pengguna telah login
@@ -97,4 +102,3 @@ if (isset($_POST['action']) && $_POST['action'] == 'sendMessage') {
     $chatController->sendMessage($_POST['incoming_id'], $_SESSION['unique_id'], $_POST['message']);
     exit();
 }
-?>
