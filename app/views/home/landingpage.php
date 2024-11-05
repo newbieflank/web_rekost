@@ -47,6 +47,42 @@
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
                     <div class="navbar-nav ml-auto mx-4 dropdown">
+                        <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge badge-danger">3</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    <div>
+                                        <small class="text-muted">2 menit yang lalu</small>
+                                        <p class="mb-0">Pembayaran Kost Anda berhasil dikonfirmasi.</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <div>
+                                        <small class="text-muted">10 menit yang lalu</small>
+                                        <p class="mb-0">Pesan baru dari pemilik kost.</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                                    <div>
+                                        <small class="text-muted">1 jam yang lalu</small>
+                                        <p class="mb-0">Jatuh tempo pembayaran kost Anda besok.</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
+                        </div>
+
                         <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                         </a>
@@ -603,7 +639,7 @@
             </div>
         </div>
     </footer>
-    <!-- <a href="#" class="float-button" onclick="toggleChat()">
+    <a href="#" class="float-button" onclick="toggleChat()">
         <i class="fas fa-comment-dots"></i>
     </a>
     <div id="chatBox" class="chat-popup">
@@ -625,7 +661,7 @@
                 <button type="button" onclick="sendChatMessage()">Send</button>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();
