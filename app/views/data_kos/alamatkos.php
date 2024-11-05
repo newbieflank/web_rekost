@@ -1,88 +1,180 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
 
-<style>
-    body {
-        background-color: #F3F2FF;
-    }
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    .card {
-        border: 1px solid #d3d3d3;
-    }
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    .card-header {
-        background-color: #e5e4ff;
-        border: 1px solid #d3d3d3;
-    }
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-    .btn-lanjut {
-        background-color: #303030;
-        color: #FFFFFF;
-    }
-
-    input.form-control,
-    textarea.form-control {
-        color: black;
-    }
-</style>
-
-<!-- Form Alamat Kos -->
 <div class="container">
     <div class="card mx-auto mr-5 mt-5 mb-3">
         <h5 class="card-header">Cari Alamat Kos</h5>
         <div class="card-body">
             <div class="container mt-3 mb-5">
-                <div class="imgMap d-block mx-auto">
-                    <img src="<?= asset('img/map.png') ?>" class="d-block mx-auto" alt="">
-                </div>
+                <div id="map" style="height: 400px; width: 100%;" class="mb-3"></div>
+                <button type="button" class="btn btn-primary mb-3" onclick="getCurrentLocation()">
+                    <i class="fas fa-location-arrow"></i> Gunakan Lokasi Saat Ini
+                </button>
             </div>
-            <form id="myForm" class="row m-5 custom-form">
+            <form id="alamatForm" class="row m-5 custom-form" action="<?= BASEURL; ?>alamatkos/tambah" method="post"
+                onsubmit="handleSubmitAlamat(event)">
                 <div class="mb-3 row">
-                    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                    <label for="alamat" class="col-sm-2 col-form-label">Alamat Lengkap</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="alamat" placeholder="Masukan Alamat">
+                        <textarea class="form-control" id="alamat" name="alamat"
+                            placeholder="Alamat akan terisi otomatis ketika memilih lokasi di peta" rows="3"
+                            style="resize: none;" required></textarea>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="provinsi" placeholder="Masukkan Provinsi">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="kabupaten" class="col-sm-2 col-form-label">Kabupaten/Kota</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kabupaten" placeholder="Masukkan Kabupaten">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
-                    <div class="col-sm-10">
-                        <textarea type="text" class="form-control" id="kecamatan" placeholder="Masukkan Kecamatan"
-                            rows="3" style="resize: none;"></textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="catatanalamat" class="col-sm-2 col-form-label">Catatan Alamat</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="catatanalamat"
-                            placeholder="Masukkan Catatan Alamat">
-                    </div>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <div class="text-end mx-5">
+                    <button type="submit" class="btn btn-lanjut">
+                        Simpan & Lanjutkan <i class="fas fa-chevron-right ms-2"></i>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="text-end mx-5">
-        <a href="http://localhost/web_rekost/fotokos">
-            <button type="button" form="myForm" class="btn btn-lanjut">Lanjutkan<i
-                    class="fas fa-chevron-right ms-2"></i></button>
-        </a>
-    </div>
 </div>
+
+<script>
+    // Peta
+    var map = L.map('map').setView([-2.5489, 118.0149], 5);
+    var marker;
+
+    // Layer peta
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Tambahkan pencarian
+    var geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false
+    }).addTo(map);
+
+    // Mendapatkan lokasi pengguna
+    function getCurrentLocation() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Hapus marker sebelumnya 
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+
+                // Untuk Marker
+                marker = L.marker([latitude, longitude], { draggable: true }).addTo(map);
+
+                // Set view ke lokasi pengguna
+                map.setView([latitude, longitude], 16);
+
+                // Update form koordinat
+                document.getElementById('latitude').value = latitude;
+                document.getElementById('longitude').value = longitude;
+
+                // Dapatkan alamat dari koordinat
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('alamat').value = data.display_name;
+                    });
+
+                marker.on('dragend', updateMarkerPosition);
+            }, function (error) {
+                // Handle error
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("Izin menggunakan lokasi ditolak. Mohon aktifkan akses lokasi di browser Anda.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Informasi lokasi tidak tersedia.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("Waktu permintaan lokasi habis.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("Terjadi kesalahan yang tidak diketahui.");
+                        break;
+                }
+            });
+        } else {
+            alert("Browser Anda tidak mendukung geolokasi.");
+        }
+    }
+
+    function updateMarkerPosition(event) {
+        var position = marker.getLatLng();
+        // Update koordinat
+        document.getElementById('latitude').value = position.lat;
+        document.getElementById('longitude').value = position.lng;
+
+        // Reverse geocoding untuk mendapatkan alamat
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.lat}&lon=${position.lng}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('alamat').value = data.display_name;
+            });
+    }
+
+    // Event handler untuk hasil pencarian
+    geocoder.on('markgeocode', function (e) {
+        var location = e.geocode.center;
+        var address = e.geocode.name;
+
+        // Hapus marker sebelumnya jika ada
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        // Tambah marker baru
+        marker = L.marker(location, { draggable: true }).addTo(map);
+
+        // Set view ke lokasi yang dipilih
+        map.setView(location, 16);
+
+        // Update form
+        document.getElementById('alamat').value = address;
+        document.getElementById('latitude').value = location.lat;
+        document.getElementById('longitude').value = location.lng;
+
+        // Event saat marker di-drag
+        marker.on('dragend', updateMarkerPosition);
+    });
+
+    document.addEventListener('DOMContentLoaded', getCurrentLocation);
+
+    async function handleSubmitAlamat(event) {
+        event.preventDefault();
+
+        try {
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Debug: cek data yang akan dikirim
+            console.log('Data yang akan dikirim:');
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                window.location.href = '<?= BASEURL; ?>harga';
+            } else {
+
+                const errorText = await response.text();
+                console.error('Error response:', errorText);
+                throw new Error('Form submission failed: ' + errorText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+        }
+    }
+</script>

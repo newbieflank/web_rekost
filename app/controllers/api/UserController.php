@@ -1,6 +1,6 @@
 <?php
 
-class API extends Controller
+class UserController extends Controller
 {
 
     private $user;

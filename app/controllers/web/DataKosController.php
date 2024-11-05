@@ -130,4 +130,46 @@ class DataKosController extends Controller
 
         $this->view('layout/main', $data);
     }
+
+    public function tambah()
+    {
+
+        if ($this->model('KosModel')->tambahDataKos($_POST) > 0)
+            ;
+        $this->header('/datakos');
+        exit;
+    }
+
+    public function tambahFasilitas()
+    {
+        if ($this->model('KosModel')->updateFasilitas($_POST) > 0) {
+            header('Location: ' . BASEURL . '/alamatkos');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/fasilitaskos');
+            exit;
+        }
+    }
+    public function tambahAlamat()
+    {
+        if ($this->model('KosModel')->updateAlamat($_POST) > 0) {
+            header('Location: ' . BASEURL . '/fotokos');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/alamatkos');
+            exit;
+        }
+    }
+
+    public function tambahHarga()
+    {
+        if ($this->model('KosModel')->updateHarga($_POST) > 0) {
+            header('Location: ' . BASEURL . '/fotokamar');  
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/harga');  
+            exit;
+        }
+    }
+
 }

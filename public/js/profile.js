@@ -1,6 +1,6 @@
 $(function () {
 
-    const inputs = document.querySelectorAll("#myForm input, #myForm select");
+    const inputs = document.querySelectorAll("#myForm input, #myForm select, #myForm textarea");
     const saveBtn = document.getElementById("saveBtn");
     const resetBtn = document.getElementById("resetBtn");
 

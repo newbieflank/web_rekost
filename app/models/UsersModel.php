@@ -14,10 +14,28 @@ class UsersModel extends Controller
         $this->db = new Database();
     }
 
-    public function getData()
+    public function findKost($id)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE  email='gamerid452@gmail.com'";
+        $query = "SELECT nama_kos FROM detail_kos where id_user=:id_user";
         $this->db->query($query);
+        $this->db->bind('id_user', $id);
+
+        return $this->db->single();
+    }
+    public function findUserById($id)
+    {
+        $query = "SELECT * FROM user where id_user=:id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+
+        return $this->db->single();
+    }
+
+    public function findOwnerById($id)
+    {
+        $query = "SELECT * FROM pemilik where id_user=:id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
 
         return $this->db->single();
     }
@@ -52,7 +70,7 @@ class UsersModel extends Controller
     public function create($data)
     {
 
-        $query = "INSERT INTO user (id_user, nama, email, password, number_phone) VALUES (:id, :nama, :email, :pass, :nomor)";
+        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) VALUES (:id, :nama, :email, :pass, :nomor, :role)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
@@ -60,6 +78,7 @@ class UsersModel extends Controller
         $this->db->bind('email', $data['email']);
         $this->db->bind('pass', $data['password']);
         $this->db->bind('nomor', $data['number']);
+        $this->db->bind('role', $data['role']);
 
         $this->db->execute();
 
@@ -82,23 +101,37 @@ class UsersModel extends Controller
         return $this->db->rowCount();
     }
 
-
-    public function getSchools()
+    public function pemilik($data)
     {
-        $query = "SELECT id, name FROM schools";
-        $this->db->query($query);
-        $school = $this->db->resultSet();
+        try {
+            $this->db->beginTransaction();
 
-        return $school;
-    }
+            // Insert user data
+            $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
+                   VALUES (:id, :nama, :email, :pass, :nomor, :role)";
+            $this->db->query($query1);
+            $this->db->bind('id', $data['id']);
+            $this->db->bind('nama', $data['username']);
+            $this->db->bind('email', $data['email']);
+            $this->db->bind('pass', $data['password']);
+            $this->db->bind('nomor', $data['number']);
+            $this->db->bind('role', $data['role']);
+            $this->db->execute();
 
-    public function insertNewSchool()
-    {
-        $this->db->query("INSERT INTO schools (name) VALUES (:name)");
-        $this->db->bind(':name', 'New School Name');
-        $this->db->execute();
+            // Insert kos data
+            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+            $this->db->query($query2);
+            $this->db->bind('id_kos', $data['id_kos']);
+            $this->db->bind('id', $data['id']);
+            $this->db->execute();
 
-        return $this->db->rowCount();
+            $this->db->commit();
+
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
     }
 
     public function updateProfile($data)
@@ -146,7 +179,4 @@ class UsersModel extends Controller
 
         return $date;
     }
-    
-
-
 }

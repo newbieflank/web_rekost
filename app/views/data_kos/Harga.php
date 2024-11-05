@@ -26,6 +26,20 @@
         background-color: #303030;
         color: #FFFFFF;
     }
+
+    .modal-header {
+        background-color: #e5e4ff;
+    }
+
+    .modal-footer .btn-primary {
+        background-color: #303030;
+        border-color: #303030;
+    }
+
+    .modal-footer .btn-primary:hover {
+        background-color: #404040;
+        border-color: #404040;
+    }
 </style>
 
 <!-- Form Harga -->
@@ -33,44 +47,95 @@
     <div class="card mx-auto mr-5 mt-5 mb-3">
         <h5 class="card-header">Harga</h5>
         <div class="card-body">
-            <form id="myForm" class="row m-5 custom-form" method="post" action="update">
+            <form id="hargaForm" class="row m-5 custom-form" action="<?= BASEURL; ?>harga/tambah" method="post">
                 <div class="mb-3 row">
                     <label for="pertahun" class="col-sm-2 col-form-label">Harga Per Tahun</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="pertahun" placeholder="Rp.0">
+                        <input type="number" class="form-control" name="harga_tahun" id="pertahun" placeholder="Rp.0">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="perbulan" placeholder="Rp.0">
+                        <input type="number" class="form-control" name="harga_kos" id="perbulan" placeholder="Rp.0"
+                            required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
                     <div class="col-sm-10">
-                       <input type="number" class="form-control" id="perminggu"placeholder="Rp.0">
+                        <input type="number" class="form-control" name="harga_minggu" id="perminggu" placeholder="Rp.0">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="perhari" placeholder="Rp.0">
+                        <input type="number" class="form-control" name="harga_hari" id="perhari" placeholder="Rp.0">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="biayatambahan" class="col-sm-2 col-form-label">Biaya Tambahan (opsional)</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="biayatambahan" placeholder="ex. Listrik.">
+                        <input type="text" class="form-control" name="biaya_tambahan" id="biayatambahan"
+                            placeholder="ex. Listrik.">
                     </div>
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-lanjut">
+                        Simpan <i class="fas fa-save ms-2"></i>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="text-end mx-5">
-        <a href="popular">
-            <button type="submit" form="myForm" class="btn btn-lanjut">Lanjutkan<i
-                    class="fas fa-chevron-right ms-2"></i></button>
-        </a>
+</div>
+
+        <!-- Pop up data telah dikirim ke db -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Sukses</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Data kos telah berhasil disimpan!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="redirectToPopular()">OK</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    function redirectToPopular() {
+        window.location.href = '<?= BASEURL; ?>popular';
+    }
+
+    document.getElementById('hargaForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        try {
+            const formData = new FormData(this);
+
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
+        }
+    });
+
+
+</script>
