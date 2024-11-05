@@ -46,7 +46,7 @@
                     </li>
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
-                    <div class="navbar-nav ml-auto mx-4 dropdown">
+                    <div class="navbar-nav ml-auto mx-3 dropdown">
                         <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
                             <span class="badge badge-danger">3</span>
