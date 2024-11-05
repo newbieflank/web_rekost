@@ -134,8 +134,7 @@ class DataKosController extends Controller
     public function tambah()
     {
 
-        if ($this->model('KosModel')->tambahDataKos($_POST) > 0)
-            ;
+        if ($this->model('KosModel')->tambahDataKos($_POST) > 0);
         $this->header('/datakos');
         exit;
     }
@@ -164,12 +163,11 @@ class DataKosController extends Controller
     public function tambahHarga()
     {
         if ($this->model('KosModel')->updateHarga($_POST) > 0) {
-            header('Location: ' . BASEURL . '/fotokamar');  
+            header('Location: ' . BASEURL . '/fotokamar');
             exit;
         } else {
-            header('Location: ' . BASEURL . '/harga');  
+            header('Location: ' . BASEURL . '/harga');
             exit;
         }
     }
-
 }
