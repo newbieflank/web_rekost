@@ -22,13 +22,7 @@ Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
 Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
-<<<<<<< HEAD
-Router::get('/notif', 'NotifController@Notif');
-//Ragu
-
-=======
 Router::get('/echo', 'HomeController@echo');
->>>>>>> 49ddffe52a73d5a3d67147a106652f7229c138b0
 //login Google
 Router::get('/auth', 'AuthController@login');
 Router::get('/auth/callback', 'AuthController@callback');
