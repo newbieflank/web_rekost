@@ -135,6 +135,10 @@ class LoginController extends Controller
 
             $this->header('/');
             exit();
+        } else {
+            Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+            $this->header('/register');
+            exit();
         }
     }
 
@@ -189,7 +193,9 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
-                echo json_encode($data);
+                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                $this->header('/register');
+                exit();
             }
         } else {
             $data = [
@@ -212,7 +218,9 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
-                echo json_encode($data);
+                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                $this->header('/register');
+                exit();
             }
         }
     }
