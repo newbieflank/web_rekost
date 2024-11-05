@@ -114,31 +114,74 @@ class LoginController extends Controller
         $email = $_POST['email'];
         $number = $_POST['number'];
         $password = $_POST['password'];
+        $role = $_POST['role'];
 
+        if ($role === 'pemilik kos') {
+            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
+            $kosID = $id . $randomNumber;
 
-        $data = [
-            'id' => $id,
-            'username' => $username,
-            'email' => $email,
-            'number' => $number,
-            'password' => $password
-        ];
-
-
-        if ($this->userModel->create($data) > 0) {
-            session_set_cookie_params(0);
-            $_SESSION['user'] = [
-                "id_user" => $data['id_user'],
-                "email" => $data['email'],
-                "role" => $data['role']
+            $data = [
+                'id' => $id,
+                'username' => $username,
+                'email' => $email,
+                'number' => '',
+                'password' => $password,
+                'role' => $role,
+                'id_kos' => $kosID
             ];
 
-            $this->header('/');
-            exit();
+            if ($this->userModel->pemilik($data) > 0) {
+                if ($this->userModel->findUserByEmail($email)) {
+                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+                    $this->header('/register');
+                    exit();
+                }
+                session_set_cookie_params(0);
+                $_SESSION['user'] = [
+                    "id_user" => $data['id'],
+                    "email" => $data['email'],
+                    "role" => $data['role'],
+                    "id_kos" => $data['id_kos']
+                ];
+
+                $this->header('/');
+                exit();
+            } else {
+                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                $this->header('/register');
+                exit();
+            }
         } else {
-            Flasher::setFlash('*Gagal Membuat Akun', 'danger');
-            $this->header('/register');
-            exit();
+            $data = [
+                'id' => $id,
+                'username' => $username,
+                'email' => $email,
+                'number' => '',
+                'password' => $password,
+                'role' => $role
+            ];
+
+
+            if ($this->userModel->create($data) > 0) {
+                if ($this->userModel->findUserByEmail($email)) {
+                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+                    $this->header('/register');
+                    exit();
+                }
+                session_set_cookie_params(0);
+                $_SESSION['user'] = [
+                    "id_user" => $data['id_user'],
+                    "email" => $data['email'],
+                    "role" => $data['role']
+                ];
+
+                $this->header('/');
+                exit();
+            } else {
+                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                $this->header('/register');
+                exit();
+            }
         }
     }
 
@@ -182,6 +225,11 @@ class LoginController extends Controller
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
+                if ($this->userModel->findUserByEmail($email)) {
+                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+                    $this->header('/register');
+                    exit();
+                }
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -208,6 +256,12 @@ class LoginController extends Controller
             ];
 
             if ($this->userModel->createG($data) > 0) {
+                if ($this->userModel->findUserByEmail($email)) {
+                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+                    $this->header('/register');
+                    exit();
+                }
+
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],  // Fixed undefined variable
