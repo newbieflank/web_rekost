@@ -116,6 +116,12 @@ class LoginController extends Controller
         $password = $_POST['password'];
         $role = $_POST['role'];
 
+        if ($this->userModel->findUserByEmail($email)) {
+            Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+            $this->header('/register');
+            exit();
+        }
+
         if ($role === 'pemilik kos') {
             $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
             $kosID = $id . $randomNumber;
@@ -124,18 +130,14 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => '',
+                'number' => $number,
                 'password' => $password,
                 'role' => $role,
                 'id_kos' => $kosID
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
-                if ($this->userModel->findUserByEmail($email)) {
-                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
-                    $this->header('/register');
-                    exit();
-                }
+               if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -146,6 +148,9 @@ class LoginController extends Controller
 
                 $this->header('/');
                 exit();
+                } else {
+                    echo json_encode($data);
+                }
             } else {
                 Flasher::setFlash('*Gagal Membuat Akun', 'danger');
                 $this->header('/register');
@@ -156,18 +161,13 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => '',
+                'number' => $number,
                 'password' => $password,
                 'role' => $role
             ];
 
 
             if ($this->userModel->create($data) > 0) {
-                if ($this->userModel->findUserByEmail($email)) {
-                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
-                    $this->header('/register');
-                    exit();
-                }
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id_user'],
@@ -178,7 +178,7 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
-                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
                 $this->header('/register');
                 exit();
             }
@@ -218,18 +218,14 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => '',
+                'number' => null,
                 'password' => $password,
                 'role' => $role,
                 'id_kos' => $kosID
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
-                if ($this->userModel->findUserByEmail($email)) {
-                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
-                    $this->header('/register');
-                    exit();
-                }
+                if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -240,8 +236,11 @@ class LoginController extends Controller
 
                 $this->header('/');
                 exit();
+                } else {
+                    echo json_encode($data);
+                }
             } else {
-                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
                 $this->header('/register');
                 exit();
             }
@@ -250,21 +249,16 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => '',
+                'number' => null,
                 'password' => $password,
                 'role' => $role
             ];
 
-            if ($this->userModel->createG($data) > 0) {
-                if ($this->userModel->findUserByEmail($email)) {
-                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
-                    $this->header('/register');
-                    exit();
-                }
 
+            if ($this->userModel->createG($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
-                    "id_user" => $data['id'],  // Fixed undefined variable
+                    "id_user" => $data['id'],
                     "email" => $data['email'],
                     "role" => $data['role']
                 ];
@@ -272,7 +266,7 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
-                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
                 $this->header('/register');
                 exit();
             }
