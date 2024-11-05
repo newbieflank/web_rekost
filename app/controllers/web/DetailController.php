@@ -18,8 +18,4 @@ class DetailController extends Controller
     {
         $this->view('detail/detailkos');
     }
-    public function chats()
-    {
-        $this->view('detail/chats');
-    }
 }

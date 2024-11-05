@@ -642,7 +642,7 @@
             </div>
         </div>
     </footer>
-    <a href="#" class="float-button" onclick="toggleChat()">
+    <!-- <a href="#" class="float-button" onclick="toggleChat()">
         <i class="fas fa-comment-dots"></i>
     </a>
     <div id="chatBox" class="chat-popup">
@@ -664,7 +664,7 @@
                 <button type="button" onclick="sendChatMessage()">Send</button>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();

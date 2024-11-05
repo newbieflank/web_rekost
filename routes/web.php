@@ -15,20 +15,14 @@ Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
 Router::get('/detailkos', 'DetailController@detailkos');
-Router::get('/chats', 'DetailController@chats');
 Router::get(uri: '/fasilitaskos', action: 'DataKosController@fasilitas');
 Router::get(uri: '/harga', action: 'DataKosController@harga');
 Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
 Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
-<<<<<<< HEAD
-Router::get('/notif', 'NotifController@Notif');
-//Ragu
-
-=======
 Router::get('/echo', 'HomeController@echo');
->>>>>>> 49ddffe52a73d5a3d67147a106652f7229c138b0
+Router::get('/chats', 'ChatController@index');
 //login Google
 Router::get('/auth', 'AuthController@login');
 Router::get('/auth/callback', 'AuthController@callback');
