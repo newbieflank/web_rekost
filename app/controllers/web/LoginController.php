@@ -28,7 +28,9 @@ class LoginController extends Controller
 
         $user = $this->userModel->getProfile($email, $password);
         if (isset($user['id_user'])) {
+
             if ($user['role'] === 'pemilik kos') {
+
 
                 $data = $this->userModel->findOwnerById($user['id_user']);
                 $data = [
@@ -40,11 +42,13 @@ class LoginController extends Controller
 
                 if (isset($_POST['remember'])) {
                     setcookie("user", json_encode($data), time() + (86400 * 30), "/", "", true);
-                    $this->header('/');
+                    $this->header('/pemilik');
                     exit();
                 }
 
                 $_SESSION['user'] = $data;
+                $this->header('/pemilik');
+                exit();
             } else {
                 $user = [
                     "id_user" => $user['id_user'],
@@ -59,10 +63,9 @@ class LoginController extends Controller
                 }
 
                 $_SESSION['user'] = $user;
+                $this->header('/');
+                exit();
             }
-
-            $this->header('/');
-            exit();
         } else {
             if ($this->userModel->findUserByEmail($email)) {
                 Flasher::setFlash('*Password Salah', 'danger');

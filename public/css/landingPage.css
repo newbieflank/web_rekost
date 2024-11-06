@@ -593,7 +593,8 @@ footer .fa {
   font-size: 24px;
   margin-right: 10px;
 }
-.chat-popup {
+
+/* .chat-popup {
   display: none;
   position: fixed;
   bottom: 80px;
@@ -723,4 +724,4 @@ footer .fa {
   background-color: #2793ff;
   transition: 0.3s;
   color: white;
-}
+} */

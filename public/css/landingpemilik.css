@@ -1,0 +1,116 @@
+.statistik {
+  background-color: #f4f8fb;
+  padding: 40px 0;
+}
+
+.chart-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#keuanganChart {
+  width: 100%;
+  height: auto;
+}
+
+.statistik .header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.statistik .text-content {
+  max-width: 60%;
+}
+
+.statistik h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.statistik p {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+.statistik .filter {
+  display: flex;
+  gap: 10px;
+}
+.customer-says {
+  padding: 32px 0;
+  background-color: #e5e4ff;
+}
+
+.customer-says h2 {
+  font-weight: bold;
+}
+
+.customer-says .card {
+  margin-top: 32px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+}
+
+.customer-says .card-body {
+  padding: 20px;
+}
+
+.customer-says .d-flex {
+  margin-bottom: 10px;
+}
+
+.customer-says .d-flex img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.card-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.card-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.card-wrapper::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.subscribe {
+  padding: 50px 0;
+  background-color: #fcfcff;
+  text-align: center;
+}
+
+.subscribe .form-inline {
+  margin-top: 20px;
+}
+
+.subscribe .form-inline .input-group {
+  width: 300px;
+}
+
+.subscribe .form-inline .input-group-prepend .input-group-text {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.star-rating {
+  color: #ffc107;
+}

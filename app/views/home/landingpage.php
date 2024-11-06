@@ -46,56 +46,64 @@
                     </li>
                 </ul>
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
-                    <div class="navbar-nav ml-auto mx-4 dropdown">
-                        <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                            <span class="badge badge-danger">3</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-info-circle mr-2"></i>
-                                    <div>
-                                        <small class="text-muted">2 menit yang lalu</small>
-                                        <p class="mb-0">Pembayaran Kost Anda berhasil dikonfirmasi.</p>
-                                    </div>
-                                </div>
+                    <div class="navbar-nav ml-auto mx-4 d-flex align-items-center">
+                        <div class="dropdown">
+                            <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge badge-danger">3</span>
                             </a>
-                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-envelope mr-2"></i>
-                                    <div>
-                                        <small class="text-muted">10 menit yang lalu</small>
-                                        <p class="mb-0">Pesan baru dari pemilik kost.</p>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-inf[o-circle mr-2"></i>
+                                        <div>
+                                            <small class="text-muted">2 menit yang lalu</small>
+                                            <p class="mb-0">Pembayaran Kost Anda berhasil dikonfirmasi.</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-exclamation-triangle mr-2"></i>
-                                    <div>
-                                        <small class="text-muted">1 jam yang lalu</small>
-                                        <p class="mb-0">Jatuh tempo pembayaran kost Anda besok.</p>
+                                </a>
+                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-envelope mr-2"></i>
+                                        <div>
+                                            <small class="text-muted">10 menit yang lalu</small>
+                                            <p class="mb-0">Pesan baru dari pemilik kost.</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
+                                </a>
+                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                                        <div>
+                                            <small class="text-muted">1 jam yang lalu</small>
+                                            <p class="mb-0">Jatuh tempo pembayaran kost Anda besok.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
+                            </div>
                         </div>
 
-                        <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
-                        </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                            <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
-                                <a class="dropdown-item" href="#services">Profile Kost</a>
-                            <?php endif; ?>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout">Logout</a>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                                <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                                    <a class="dropdown-item" href="#services">Profile Kost</a>
+                                <?php endif; ?>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout">Logout</a>
+                            </div>
                         </div>
+
                     </div>
+
+
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
