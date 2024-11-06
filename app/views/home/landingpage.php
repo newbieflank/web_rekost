@@ -650,23 +650,9 @@
             </div>
         </div>
     </footer>
-    <a href="#" class="float-button" onclick="toggleChat()">
+    <a href="chats" class="float-button" onclick="toggleChat()">
         <i class="fas fa-comment-dots"></i>
     </a>
-    <!-- <div id="chatBox" class="chat-popup">
-        <div class="chat-header">
-            <h5>Chat</h5>
-            <button type="button" class="close" onclick="toggleChat()" style="color: #fff;">&times;</button>
-        </div>
-        <div class="chat-body">
-            <div id="chatMessages" class="chat-messages">
-                <div class="chat-bubble admin">
-                    <p>Halo Selamat Datang di Re-Kost</p>
-                </div>
-                <div class="chat-bubble user">
-                    <p>Halo Selamat Datang di Re-Kost</p>
-                </div>
-            </div> -->
     <div class="chat-footer">
         <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="sendMessage(event)">
         <button type="button" onclick="sendChatMessage()">Send</button>

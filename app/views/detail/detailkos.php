@@ -217,7 +217,7 @@
                 Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim Blindungan.
             </p>
         </div>
-        <a href="#" class="float-button" onclick="toggleChat()">
+        <a href="chats" class="float-button" onclick="toggleChat()">
             <i class="fas fa-comment-dots"></i>
         </a>
         <div class="chat-footer">

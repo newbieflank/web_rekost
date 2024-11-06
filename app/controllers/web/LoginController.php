@@ -1,9 +1,9 @@
 <?php
-
+require_once './app/core/Controller.php';
 class LoginController extends Controller
 {
 
-    private $userModel;
+    public $userModel;
 
     public function __construct()
     {
@@ -140,17 +140,17 @@ class LoginController extends Controller
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
-               if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
-                session_set_cookie_params(0);
-                $_SESSION['user'] = [
-                    "id_user" => $data['id'],
-                    "email" => $data['email'],
-                    "role" => $data['role'],
-                    "id_kos" => $data['id_kos']
-                ];
+                if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
+                    session_set_cookie_params(0);
+                    $_SESSION['user'] = [
+                        "id_user" => $data['id'],
+                        "email" => $data['email'],
+                        "role" => $data['role'],
+                        "id_kos" => $data['id_kos']
+                    ];
 
-                $this->header('/');
-                exit();
+                    $this->header('/');
+                    exit();
                 } else {
                     echo json_encode($data);
                 }
@@ -229,16 +229,16 @@ class LoginController extends Controller
 
             if ($this->userModel->pemilik($data) > 0) {
                 if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
-                session_set_cookie_params(0);
-                $_SESSION['user'] = [
-                    "id_user" => $data['id'],
-                    "email" => $data['email'],
-                    "role" => $data['role'],
-                    "id_kos" => $data['id_kos']
-                ];
+                    session_set_cookie_params(0);
+                    $_SESSION['user'] = [
+                        "id_user" => $data['id'],
+                        "email" => $data['email'],
+                        "role" => $data['role'],
+                        "id_kos" => $data['id_kos']
+                    ];
 
-                $this->header('/');
-                exit();
+                    $this->header('/');
+                    exit();
                 } else {
                     echo json_encode($data);
                 }
