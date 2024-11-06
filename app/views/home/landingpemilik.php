@@ -109,7 +109,7 @@
     <section class="container overlap-container">
         <div class="row text-center">
             <div class="col-md-4">
-                <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
+                <div class="card overlap-card" style="--url: url('https://fontawesome.com/icons/chart-mixed-up-circle-dollar?f=duotone&s=solid  ')">
                     <div class="card-body">
                         <h5>Pendapatan</h5>
                         <p>Pendapatan yang didapatkan Bulan Januari</p>

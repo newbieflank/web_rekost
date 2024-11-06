@@ -11,7 +11,7 @@ class ChatController extends Controller
         $this->conn = $dbConn;
     }
 
-    public function index()
+    public function chats()
     {
         $this->view('detail/chats');
     }
