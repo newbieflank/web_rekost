@@ -101,6 +101,11 @@ class AuthController extends Controller
                     'email' => $googleUser->email,
                 ];
 
+                if ($this->userModel->findUserByEmail($googleUser->email)) {
+                    Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
+                    $this->header('/register');
+                    exit();
+                }
 
                 unset($_SESSION['form']);
                 $this->view('login/setpassword', $data);
