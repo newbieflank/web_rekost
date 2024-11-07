@@ -7,20 +7,15 @@
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= asset('css/chats.css') ?>">
-    <title>Chat UI</title>
 </head>
 
 <body>
     <section class="chat-container">
-        <!-- Chat List -->
         <aside class="chat-list">
+            <h2 style="margin-bottom: 24px;">Chats</h2>
             <div class="search-bar mb-3 d-flex">
                 <input type="text" class="form-control" placeholder="Cari...">
-                <button class="btn btn-primary ms-2">
-                    <i class="fas fa-plus"></i>
-                </button>
             </div>
-            <!-- Chat Items -->
             <div class="chat-item active d-flex align-items-center p-2 rounded mb-2">
                 <img src="<?= asset('img/user.png') ?>" alt="User profile picture" width="40" height="40" class="rounded-circle me-2">
                 <div class="chat-info flex-grow-1">
@@ -30,10 +25,7 @@
                 <div class="chat-time text-muted">18.30</div>
                 <div class="chat-unread ms-2 badge bg-primary text-white">1</div>
             </div>
-            <!-- Tambahkan chat-item lain disini -->
         </aside>
-
-        <!-- Chat Window -->
         <section class="chat-window">
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
                 <img src="<?= asset('img/user.png') ?>" alt="User profile picture" width="40" height="40" class="rounded-circle me-3">
@@ -42,8 +34,6 @@
                     <div class="text-muted">Pencari Kos</div>
                 </div>
             </header>
-
-            <!-- Chat Messages -->
             <section class="chat-messages">
                 <div class="chat-message d-flex mb-3">
                     <div class="message-content bg-light p-2 rounded">
@@ -57,7 +47,6 @@
                     </div>
                     <span class="message-time ms-2 text-muted">8:00 PM</span>
                 </div>
-                <!-- Tambahkan pesan lain disini -->
             </section>
             <footer class="chat-input">
                 <input type="text" class="form-control rounded me-2" placeholder="Tuliskan Pesan..." id="messageInput">

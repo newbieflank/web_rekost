@@ -220,10 +220,6 @@
         <a href="chats" class="float-button" onclick="toggleChat()">
             <i class="fas fa-comment-dots"></i>
         </a>
-        <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="sendMessage(event)">
-            <button type="button" onclick="sendChatMessage()">Send</button>
-        </div>
         <footer>
             <div class="d-flex justify-content-center">
                 &copy; 2024 Re-Kost. All rights reserved.

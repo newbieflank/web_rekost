@@ -24,6 +24,7 @@ Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
 Router::get('/chats', 'DetailController@chats');
+Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 //login Google
 Router::get('/auth', 'AuthController@login');
 Router::get('/auth/callback', 'AuthController@callback');

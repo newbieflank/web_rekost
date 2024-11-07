@@ -11,10 +11,8 @@ class AuthTest extends TestCase
 
     protected function setUp(): void
     {
-        // Buat mock untuk model pengguna
         $this->userModelMock = $this->createMock(UserSModel::class);
 
-        // Buat instance dari controller dan tambahkan mock userModel ke controller
         $this->controller = new loginController();
         $this->controller->userModel = $this->userModelMock;
     }
@@ -39,7 +37,6 @@ class AuthTest extends TestCase
 
         $this->controller->auth();
 
-        // Periksa apakah cookie diset untuk user dan redirect benar
         $this->assertArrayHasKey('user', $_COOKIE);
         $this->assertEquals('/pemilik', $this->controller->redirectUrl);
     }
@@ -58,7 +55,6 @@ class AuthTest extends TestCase
 
         $this->controller->auth();
 
-        // Periksa apakah session diset dan redirect benar
         $this->assertArrayHasKey('user', $_SESSION);
         $this->assertEquals('/', $this->controller->redirectUrl);
     }
@@ -76,7 +72,6 @@ class AuthTest extends TestCase
 
         $this->controller->auth();
 
-        // Periksa apakah error yang benar muncul dan redirect benar
         $this->assertEquals('*Password Salah', Flasher::getFlash('danger'));
         $this->assertEquals('/login', $this->controller->redirectUrl);
     }

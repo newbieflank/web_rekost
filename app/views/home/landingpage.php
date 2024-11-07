@@ -135,11 +135,11 @@
             <div class="row justify-content-start reviews">
                 <div class="col-auto">
                     <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">0</h2>
-                    <p style="font-size: 18px; color: #4A4A4A;">Reviews</p>
+                    <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                 </div>
                 <div class="col-auto">
                     <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">0</h2>
-                    <p style="font-size: 18px; color: #4A4A4A;">Booked</p>
+                    <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="btn btn-primary">Cari</button>
                             </div>
                         </form>
                     </div>
@@ -191,7 +191,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <h2><img src="<?= asset('img/icon.png') ?>" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!</h2>
+                    <h2><img src="<?= asset('img/icon.png') ?>" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Temukan Kost Terpopuler di Re-Kost!</h2>
                 </div>
             </div>
             <div class="row scroll-container">
@@ -205,7 +205,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -269,7 +269,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -280,7 +280,7 @@
                 <div class="col-md-12 text-center">
                     <a href="popular">
                         <button type="button" class="btn btn-light btn-wide" style="color: #007bff; font-weight: 600;">
-                            See all <i class="fas fa-angle-right"></i>
+                            Lihat Semua <i class="fas fa-angle-right"></i>
                         </button>
                     </a>
                 </div>
@@ -291,8 +291,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-left">
-                    <h2>Best Boarding House Options Near You</h2>
-                    <p>Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
+                    <h2>Kost Terbaik di Dekatmu</h2>
+                    <p>Memberikan Anda rekomendasi kos-kosan yang cepat dan mudah hanya di Re-kost.</p>
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -304,7 +304,7 @@
                 </div>
                 <a href="best">
                     <div>
-                        <button type="button" class="btn btn-custom d-inline-block" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
+                        <button type="button" class="btn btn-custom d-inline-block" style="font-weight: 400;">Lihat Semua <i class="fas fa-angle-right"></i></button>
                     </div>
                 </a>
             </div>
@@ -319,7 +319,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -335,7 +335,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -383,7 +383,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -397,11 +397,11 @@
             <div class="row">
                 <div class="col-md-12 text-left d-flex justify-content-between align-items-center">
                     <div>
-                        <h2>Strategically Located Kosts Near Campus/Office</h2>
-                        <p>Providing you with quick and convenient boarding house recommendations only at Re-kost.</p>
+                        <h2>Kost Strategis Dekat Kampus/Kantor</h2>
+                        <p>Memberikan Anda rekomendasi kos-kosan yang cepat dan mudah hanya di Re-kost.</p>
                     </div>
                     <a href="campus">
-                        <button type="button" class="btn btn-custom" style="font-weight: 400;">See all <i class="fas fa-angle-right"></i></button>
+                        <button type="button" class="btn btn-custom" style="font-weight: 400;">Lihat Semua <i class="fas fa-angle-right"></i></button>
                     </a>
                 </div>
             </div>
@@ -409,14 +409,14 @@
                 <div class="col-md-3 mb-4">
                     <a href="strategically" class="card-link">
                         <div class="card">
-                            <img src="img/home1.png" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('img/img1.png') ?>" class="card-img-top" alt="Kost Image">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 20px; font-weight: bold;">Kos Putri, Blindungan</h5>
                                 <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -432,7 +432,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -448,7 +448,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -464,7 +464,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -480,7 +480,7 @@
                                 <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
                                 <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                     IDR 500,000
-                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                    <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/bulan</span>
                                 </p>
                             </div>
                         </div>
@@ -494,7 +494,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">
-                    <h2>What our Customer Says About Re-Kost</h2>
+                    <h2>Ulasan Pelanggan Kami Tentang Re-Kost</h2>
                 </div>
             </div>
             <div class="row">
@@ -617,7 +617,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <h3 style="font-size: 32px; font-weight: bold; margin-bottom: 14px;">Re-Kost</h3>
-                    <p style="margin-bottom: 52px;">Enter your email below to be the first to know about new collection and product launches</p>
+                    <p style="margin-bottom: 52px;">Masukkan email Anda di bawah ini untuk menjadi orang pertama yang mengetahui koleksi baru dan peluncuran produk</p>
                     <form>
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="example@gmail.com">
