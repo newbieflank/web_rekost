@@ -6,7 +6,7 @@ class DataKosController extends Controller
     public function datakos()
     {
         ob_start();
-        $this->view('data_kos/DataKos');
+        $this->view('data_kos/newform');
 
         $content = ob_get_clean();
 
