@@ -11,25 +11,25 @@ class ChatController extends Controller
         $this->conn = $dbConn;
     }
 
-    public function index()
+    public function chats()
     {
         $this->view('detail/chats');
     }
 
-    // Memastikan pengguna telah login
+    // Ensure the user is authenticated
     public function authenticateUser()
     {
-        if (!isset($_SESSION['unique_id'])) {
+        if (!isset($_SESSION['id_user'])) {
             header("location: login.php");
             exit();
         }
     }
 
-    // Mendapatkan data pengguna berdasarkan unique_id
+    // Retrieve user data based on id_user
     public function getUserById($user_id)
     {
         $user_id = mysqli_real_escape_string($this->conn, $user_id);
-        $sql = "SELECT * FROM users WHERE unique_id = {$user_id}";
+        $sql = "SELECT * FROM rekost_user WHERE id_user = {$user_id}";
         $result = mysqli_query($this->conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
@@ -40,10 +40,10 @@ class ChatController extends Controller
         }
     }
 
-    // Mendapatkan daftar chat yang dimiliki pengguna
-    public function getChatList($unique_id)
+    // Retrieve chat list for a specific user
+    public function getChatList($user_id)
     {
-        $sql = "SELECT * FROM chats WHERE user_id = {$unique_id} ORDER BY created_at DESC";
+        $sql = "SELECT * FROM rekost_chat_message WHERE id_sender = {$user_id} OR id_receiver = {$user_id} ORDER BY waktu_kirim_pesan DESC";
         $result = mysqli_query($this->conn, $sql);
 
         $chats = [];
@@ -53,21 +53,21 @@ class ChatController extends Controller
         return $chats;
     }
 
-    // Mengirimkan pesan
+    // Send a message
     public function sendMessage($incoming_id, $outgoing_id, $message)
     {
         $message = mysqli_real_escape_string($this->conn, $message);
-        $sql = "INSERT INTO messages (incoming_id, outgoing_id, message) VALUES ('$incoming_id', '$outgoing_id', '$message')";
+        $sql = "INSERT INTO rekost_chat_message (id_sender, id_receiver, message, waktu_kirim_pesan) VALUES ('$outgoing_id', '$incoming_id', '$message', NOW())";
         return mysqli_query($this->conn, $sql);
     }
 
-    // Mendapatkan pesan antara dua pengguna
+    // Retrieve messages between two users
     public function getMessages($user1, $user2)
     {
-        $sql = "SELECT * FROM messages WHERE 
-                (incoming_id = '$user1' AND outgoing_id = '$user2') 
-                OR (incoming_id = '$user2' AND outgoing_id = '$user1') 
-                ORDER BY created_at ASC";
+        $sql = "SELECT * FROM rekost_chat_message WHERE 
+                (id_sender = '$user1' AND id_receiver = '$user2') 
+                OR (id_sender = '$user2' AND id_receiver = '$user1') 
+                ORDER BY waktu_kirim_pesan ASC";
         $result = mysqli_query($this->conn, $sql);
 
         $messages = [];
@@ -78,27 +78,27 @@ class ChatController extends Controller
     }
 }
 
-// Inisialisasi dan penggunaan controller
+// Initialize and use the controller
 $chatController = new ChatController($conn);
 $chatController->authenticateUser();
 
 if (isset($_GET['user_id'])) {
     $user = $chatController->getUserById($_GET['user_id']);
-    $chatList = $chatController->getChatList($_SESSION['unique_id']);
+    $chatList = $chatController->getChatList($_SESSION['id_user']);
 } else {
     header("location: users.php");
     exit();
 }
 
-// Menampilkan pesan (fungsi ini bisa dipanggil dengan AJAX untuk memperbarui pesan secara dinamis)
+// Fetch messages (can be called with AJAX to dynamically update messages)
 if (isset($_POST['action']) && $_POST['action'] == 'fetchMessages') {
-    $messages = $chatController->getMessages($_SESSION['unique_id'], $_POST['incoming_id']);
+    $messages = $chatController->getMessages($_SESSION['id_user'], $_POST['incoming_id']);
     echo json_encode($messages);
     exit();
 }
 
-// Mengirim pesan (fungsi ini juga bisa dipanggil dengan AJAX untuk mengirim pesan tanpa reload)
+// Send message (can also be called with AJAX to send messages without reloading)
 if (isset($_POST['action']) && $_POST['action'] == 'sendMessage') {
-    $chatController->sendMessage($_POST['incoming_id'], $_SESSION['unique_id'], $_POST['message']);
+    $chatController->sendMessage($_POST['incoming_id'], $_SESSION['id_user'], $_POST['message']);
     exit();
 }

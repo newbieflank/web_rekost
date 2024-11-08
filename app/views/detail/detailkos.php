@@ -217,6 +217,9 @@
                 Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim Blindungan.
             </p>
         </div>
+        <a href="chats" class="float-button" onclick="toggleChat()">
+            <i class="fas fa-comment-dots"></i>
+        </a>
         <footer>
             <div class="d-flex justify-content-center">
                 &copy; 2024 Re-Kost. All rights reserved.

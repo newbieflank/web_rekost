@@ -1,7 +1,6 @@
 <?php
-
-
-class UsersModel extends Controller
+require_once './app/core/Database.php';;
+class UsersModel
 {
     private $table = 'user';
     private $db;
@@ -13,7 +12,6 @@ class UsersModel extends Controller
     {
         $this->db = new Database();
     }
-
     public function findKost($id)
     {
         $query = "SELECT nama_kos FROM detail_kos where id_user=:id_user";
@@ -63,7 +61,7 @@ class UsersModel extends Controller
     {
         $_SESSION['register'] = $data;
 
-        $this->view('login/setpassword');
+        // $this->view('login/setpassword');
         exit();
     }
 
@@ -103,30 +101,30 @@ class UsersModel extends Controller
 
     public function pemilik($data)
     {
-            $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
+        $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
                    VALUES (:id, :nama, :email, :pass, :nomor, :role)";
-            $this->db->query($query1);
-            $this->db->bind('id', $data['id']);
-            $this->db->bind('nama', $data['username']);
-            $this->db->bind('email', $data['email']);
-            $this->db->bind('pass', $data['password']);
-            $this->db->bind('nomor', $data['number']);
-            $this->db->bind('role', $data['role']);
-            $this->db->execute();
-           
-            return $this->db->rowCount();
+        $this->db->query($query1);
+        $this->db->bind('id', $data['id']);
+        $this->db->bind('nama', $data['username']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('pass', $data['password']);
+        $this->db->bind('nomor', $data['number']);
+        $this->db->bind('role', $data['role']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 
     public function createKos($id_kos, $id)
     {
-         $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
-            $this->db->query($query2);
-            $this->db->bind('id_kos', $id_kos);
-            $this->db->bind('id', $id);
+        $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+        $this->db->query($query2);
+        $this->db->bind('id_kos', $id_kos);
+        $this->db->bind('id', $id);
 
-            $this->db->execute();
+        $this->db->execute();
 
-           return $this->db->rowCount();
+        return $this->db->rowCount();
     }
 
     public function updateProfile($data)

@@ -27,6 +27,10 @@ class HomeController extends Controller
     {
         $this->view('detail/bestkos');
     }
+    public function home()
+    {
+        $this->view('home/landingpemilik');
+    }
 
 
 

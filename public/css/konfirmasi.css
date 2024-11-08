@@ -1,0 +1,76 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.step div {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.step div:not(:last-child)::after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background-color: #6f42c1;
+  margin: 0 10px;
+}
+
+.step .active {
+  color: #6f42c1;
+}
+
+.step .inactive {
+  color: #6c757d;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.alert {
+  margin-bottom: 20px;
+}
+
+.detail-card {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.detail-card h5 {
+  margin-bottom: 20px;
+}
+
+.detail-card .total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fd7e14;
+}
+
+.btn-primary {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+.btn-primary:hover {
+  background-color: #5a379e;
+  border-color: #5a379e;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
