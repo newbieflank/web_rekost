@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="<?= asset('css/konfirmasi.css') ?>">
@@ -12,24 +12,30 @@
 
 <body>
     <?php include __DIR__ . '/../layout/header.php'; ?>
-    <section class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <button class="btn btn-danger">Batal</button>
-            <div class="step">
-                <div class="active">1 <span class="ms-2">Pembayaran</span></div>
-                <div class="active">2 <span class="ms-2">Selesai</span></div>
-            </div>
-        </div>
-    </section>
     <section class="container my-4">
-        <h2>Konfirmasi Pemesanan</h2>
+        <div class="d-flex align-items-center">
+            <button class="btn btn-danger me-3">
+                <i class="bi bi-chevron-left"></i> Kembali
+            </button>
+            <h2>Konfirmasi Pemesanan</h2>
+        </div>
     </section>
     <section class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="alert alert-warning" role="alert">
                     <i class="fas fa-exclamation-circle"></i> Pemesanan Anda Ditunda
-                    <p>Kami menunggu konfirmasi anda sampai <strong>Feb 14, 12:00 AM.</strong></p>
+                    <p>Lakukan pembayaran <strong>sekarang.</strong></p>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Unggah Bukti Pembayaran</h5>
+                        <p>Silakan unggah bukti pembayaran Anda agar pemesanan dapat diproses lebih lanjut.</p>
+                        <div class="mb-3">
+                            <label for="paymentProof" class="form-label">Bukti Pembayaran</label>
+                            <input type="file" class="form-control" id="paymentProof" accept="image/*,application/pdf">
+                        </div>
+                    </div>
                 </div>
                 <div class="card mb-4">
                     <div class="card-body">
@@ -64,7 +70,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="totalKamar" class="form-label">Total Kamar</label>
-                                <input type="text" class="form-control" id="totalKamar" value="1 Kamar" readonly>
+                                <input type="text" class="form-control" id="totalKamar" value="1 Kamar">
                             </div>
                             <div class="mb-3">
                                 <label for="location" class="form-label">Lokasi</label>
@@ -74,7 +80,6 @@
                                 <label for="startDate" class="form-label">Tanggal Mulai</label>
                                 <input type="date" class="form-control" id="startDate" value="2024-02-01">
                             </div>
-
                             <div class="mb-3">
                                 <label for="endDate" class="form-label">Tanggal Akhir</label>
                                 <input type="date" class="form-control" id="endDate" value="2024-03-01">
@@ -102,11 +107,35 @@
                             Setuju dengan Ketentuan <a href="#" class="text-primary">Terms & Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
                         </label>
                     </div>
-                    <button class="btn btn-primary w-100">Lanjutkan</button>
+                    <button class="btn btn-primary w-100">Seleseai</button>
                 </div>
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelector('.btn-primary').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const paymentProof = document.getElementById('paymentProof').files.length;
+
+            if (paymentProof > 0) {
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Pembayaran Berhasil Dilakukan',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Silakan unggah bukti pembayaran terlebih dahulu.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg6tv6WJoREp+lG1er1kLtmYlP9+MVRt+8aK9I2GxD" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-pZfHC6QpZrK3Qe2m6Qm5Q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5Y5q
