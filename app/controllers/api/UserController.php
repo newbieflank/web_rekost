@@ -68,7 +68,7 @@ class UserController extends Controller
 
         if (file_exists($imageFile)) {
 
-            header('Content-Type: image/png');
+            header('Content-Type: image/*');
             header('Content-Length: ' . filesize($imageFile));
             readfile($imageFile);
 

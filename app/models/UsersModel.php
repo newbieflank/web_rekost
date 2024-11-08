@@ -47,7 +47,7 @@ class UsersModel extends Controller
         $this->db->bind('email', $email);
         $this->db->bind('password', $password);
 
-        return $this->db->single(); // Return user data, including the hashed password
+        return $this->db->single(); 
     }
 
 
