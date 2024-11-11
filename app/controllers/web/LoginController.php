@@ -241,7 +241,7 @@ class LoginController extends Controller
                     $this->header('/');
                     exit();
                 } else {
-                    echo json_encode($data);
+                    echo json_encode($data['id_kos'], $id);
                 }
             } else {
                 Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');

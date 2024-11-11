@@ -70,7 +70,7 @@ class UsersModel
     {
         $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
                   VALUES (:id, :nama, :email, :pass, :nomor, :role)";
-        
+
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
         $this->db->bind('nama', $data['username']);
@@ -119,14 +119,18 @@ class UsersModel
 
     public function createKos($id_kos, $id)
     {
-        $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
-        $this->db->query($query2);
-        $this->db->bind('id_kos', $id_kos);
-        $this->db->bind('id', $id);
+        try {
+            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+            $this->db->query($query2);
+            $this->db->bind('id_kos', $id_kos);
+            $this->db->bind('id', $id);
 
-        $this->db->execute();
+            $this->db->execute();
 
-        return $this->db->rowCount();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return ["error" => $e->getMessage()];
+        }
     }
 
     public function updateProfile($data)
