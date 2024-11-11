@@ -92,7 +92,7 @@ body {
 }
 
 .chat-window .chat-message .message-content {
-  max-width: 40%;
+  max-width: 60%; /* Adjusted to avoid clipping */
   padding: 0.5rem 1rem;
   border-radius: 10px;
   background-color: #eaf4ff;
@@ -113,13 +113,11 @@ body {
 }
 
 .chat-window .chat-input {
-  display: flex;
+  display: none; /* Initially hidden, shown with JavaScript */
   align-items: center;
   padding: 1rem;
   border-top: 1px solid #e0e0e0;
   background-color: #ffffff;
-  position: sticky;
-  margin-bottom: 0;
 }
 
 .chat-window .chat-input input {

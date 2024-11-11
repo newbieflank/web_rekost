@@ -1,5 +1,6 @@
 <?php
-require_once './app/core/Database.php';;
+require_once './app/core/Database.php';
+
 class UsersModel
 {
     private $table = 'user';
@@ -12,17 +13,19 @@ class UsersModel
     {
         $this->db = new Database();
     }
+
     public function findKost($id)
     {
-        $query = "SELECT nama_kos FROM detail_kos where id_user=:id_user";
+        $query = "SELECT nama_kos FROM detail_kos WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id);
 
         return $this->db->single();
     }
+
     public function findUserById($id)
     {
-        $query = "SELECT * FROM user where id_user=:id_user";
+        $query = "SELECT * FROM user WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id);
 
@@ -31,7 +34,7 @@ class UsersModel
 
     public function findOwnerById($id)
     {
-        $query = "SELECT * FROM pemilik where id_user=:id_user";
+        $query = "SELECT * FROM pemilik WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id);
 
@@ -40,36 +43,34 @@ class UsersModel
 
     public function getProfile($email, $password)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE email=:email AND password=:password";
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND password = :password";
         $this->db->query($query);
         $this->db->bind('email', $email);
         $this->db->bind('password', $password);
 
-        return $this->db->single(); 
+        return $this->db->single();
     }
-
 
     public function findUserByEmail($email)
     {
-        $query = "SELECT * FROM user WHERE email= :email";
+        $query = "SELECT * FROM user WHERE email = :email";
         $this->db->query($query);
         $this->db->bind('email', $email);
+
         return $this->db->single();
     }
 
     public function registerUser($data)
     {
         $_SESSION['register'] = $data;
-
-        // $this->view('login/setpassword');
         exit();
     }
 
     public function create($data)
     {
-
-        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) VALUES (:id, :nama, :email, :pass, :nomor, :role)";
-
+        $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
+                  VALUES (:id, :nama, :email, :pass, :nomor, :role)";
+        
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
         $this->db->bind('nama', $data['username']);
@@ -85,7 +86,8 @@ class UsersModel
 
     public function createG($data)
     {
-        $query = "INSERT INTO user (id_user, nama, email, password, role) VALUES (:id, :nama, :email, :pass, :role)";
+        $query = "INSERT INTO user (id_user, nama, email, password, role) 
+                  VALUES (:id, :nama, :email, :pass, :role)";
 
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
@@ -145,7 +147,7 @@ class UsersModel
         $status = isset($data['status']) ? $data['status'] : null;
         $alamat = isset($data['alamat']) ? $data['alamat'] : null;
 
-        $query = 'UPDATE user SET nama=:nama, jenis_kelamin=:gender, tanggal_lahir=:tanggal, Instansi=:instansi, pekerjaan=:pekerjaan, kota_asal=:kota, number_phone=:telp, status=:status, alamat=:alamat WHERE id_user=:id';
+        $query = 'UPDATE user SET nama = :nama, jenis_kelamin = :gender, tanggal_lahir = :tanggal, Instansi = :instansi, pekerjaan = :pekerjaan, kota_asal = :kota, number_phone = :telp, status = :status, alamat = :alamat WHERE id_user = :id';
         $this->db->query($query);
         $this->db->bind('nama', $nama);
         $this->db->bind('gender', $gender);
@@ -163,13 +165,30 @@ class UsersModel
         return $this->db->rowCount();
     }
 
+    // Update the user's online status
+    public function updateUserStatus($userId, $status)
+    {
+        $query = "UPDATE user SET status1 = :status WHERE id_user = :id_user";
+        $this->db->query($query);
+        $this->db->bind('status', $status);
+        $this->db->bind('id_user', $userId);
 
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    // Retrieve online users
+    public function getOnlineUsers()
+    {
+        $query = "SELECT * FROM user WHERE online_status = 'online'";
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
 
     private function getDate($date)
     {
         $tanggal = DateTime::createFromFormat('d-F-Y', $date);
-        $date = $tanggal ? $tanggal->format('Y-m-d') : null;
-
-        return $date;
+        return $tanggal ? $tanggal->format('Y-m-d') : null;
     }
 }

@@ -1,104 +1,87 @@
 <?php
-session_start();
-include_once "config.php";
+// Mulai sesi hanya jika belum dimulai
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include_once __DIR__ . "/../../../config/config.php";
 
 class ChatController extends Controller
 {
     private $conn;
 
-    public function __construct($dbConn)
+    // Konstruktor menerima objek koneksi dan menyimpannya ke properti $conn
+    public function __construct($Conn)
     {
-        $this->conn = $dbConn;
+        $this->conn = $Conn;
     }
 
+    // Metode untuk mendapatkan daftar pengguna online
     public function chats()
-    {
-        $this->view('detail/chats');
-    }
+    {   
+        $user_id = $_SESSION['user']['id_user'];
+        $sql = "SELECT id_user, nama FROM user WHERE status1 = 'online' AND id_user != :id_user";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_user', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
 
-    // Ensure the user is authenticated
-    public function authenticateUser()
-    {
-        if (!isset($_SESSION['id_user'])) {
-            header("location: login.php");
-            exit();
+        $onlineUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($onlineUsers)) {
+            $onlineUsers = []; // Set data kosong jika tidak ada pengguna online
         }
+
+        // Panggil tampilan dengan data pengguna online
+        $this->view('detail/chats', ['onlineUsers' => $onlineUsers]);
     }
 
-    // Retrieve user data based on id_user
-    public function getUserById($user_id)
+    // Metode untuk mendapatkan chat berdasarkan user_id
+    public function getChatByUserId($user_id)
     {
-        $user_id = mysqli_real_escape_string($this->conn, $user_id);
-        $sql = "SELECT * FROM rekost_user WHERE id_user = {$user_id}";
-        $result = mysqli_query($this->conn, $sql);
+        if ($user_id) {
+            // Query untuk mengambil data chat berdasarkan user_id
+            $sql = "SELECT message, sent_by_user, time FROM chat_message WHERE id_user = :id_user ORDER BY time ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id_user', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
+            // Mengembalikan hasil dalam format JSON
+            echo json_encode($chats);
         } else {
-            header("location: users.php");
-            exit();
+            // Jika user_id tidak ada, return JSON kosong
+            echo json_encode([]);
         }
     }
 
-    // Retrieve chat list for a specific user
-    public function getChatList($user_id)
+    // Metode untuk mengirim pesan
+    public function sendMessage()
     {
-        $sql = "SELECT * FROM rekost_chat_message WHERE id_sender = {$user_id} OR id_receiver = {$user_id} ORDER BY waktu_kirim_pesan DESC";
-        $result = mysqli_query($this->conn, $sql);
+        // Pastikan sesi dimulai dan pengguna sudah login
+        if (isset($_SESSION['id_user'])) {
+            $outgoing_id = $_SESSION['id_user']; // ID pengguna yang mengirim pesan
+            $incoming_id = mysqli_real_escape_string($this->conn, $_POST['incoming_id']);
+            $message = mysqli_real_escape_string($this->conn, $_POST['message']);
 
-        $chats = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $chats[] = $row;
+            // Cek jika pesan tidak kosong
+            if (!empty($message)) {
+                $sql = "INSERT INTO chat_message (id_user, sent_by_user, msg) 
+                        VALUES (:incoming_id, :outgoing_id, :message)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':incoming_id', $incoming_id, PDO::PARAM_INT);
+                $stmt->bindParam(':outgoing_id', $outgoing_id, PDO::PARAM_INT);
+                $stmt->bindParam(':message', $message, PDO::PARAM_STR);
+                $stmt->execute();
+
+                // Setelah pesan dikirim, bisa memberi respons berupa status sukses
+                echo json_encode(['status' => 'success', 'message' => 'Message sent successfully.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Message cannot be empty.']);
+            }
+        } else {
+            // Pengguna belum login
+            echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
         }
-        return $chats;
-    }
-
-    // Send a message
-    public function sendMessage($incoming_id, $outgoing_id, $message)
-    {
-        $message = mysqli_real_escape_string($this->conn, $message);
-        $sql = "INSERT INTO rekost_chat_message (id_sender, id_receiver, message, waktu_kirim_pesan) VALUES ('$outgoing_id', '$incoming_id', '$message', NOW())";
-        return mysqli_query($this->conn, $sql);
-    }
-
-    // Retrieve messages between two users
-    public function getMessages($user1, $user2)
-    {
-        $sql = "SELECT * FROM rekost_chat_message WHERE 
-                (id_sender = '$user1' AND id_receiver = '$user2') 
-                OR (id_sender = '$user2' AND id_receiver = '$user1') 
-                ORDER BY waktu_kirim_pesan ASC";
-        $result = mysqli_query($this->conn, $sql);
-
-        $messages = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $messages[] = $row;
-        }
-        return $messages;
     }
 }
-
-// Initialize and use the controller
-$chatController = new ChatController($conn);
-$chatController->authenticateUser();
-
-if (isset($_GET['user_id'])) {
-    $user = $chatController->getUserById($_GET['user_id']);
-    $chatList = $chatController->getChatList($_SESSION['id_user']);
-} else {
-    header("location: users.php");
-    exit();
-}
-
-// Fetch messages (can be called with AJAX to dynamically update messages)
-if (isset($_POST['action']) && $_POST['action'] == 'fetchMessages') {
-    $messages = $chatController->getMessages($_SESSION['id_user'], $_POST['incoming_id']);
-    echo json_encode($messages);
-    exit();
-}
-
-// Send message (can also be called with AJAX to send messages without reloading)
-if (isset($_POST['action']) && $_POST['action'] == 'sendMessage') {
-    $chatController->sendMessage($_POST['incoming_id'], $_SESSION['id_user'], $_POST['message']);
-    exit();
-}
+?>

@@ -23,7 +23,8 @@ Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
-Router::get('/chats', 'DetailController@chats');
+Router::get('/chats', 'ChatController@chats');
+Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 //login Google
 Router::get('/auth', 'AuthController@login');
