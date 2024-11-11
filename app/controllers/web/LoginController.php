@@ -276,10 +276,15 @@ class LoginController extends Controller
         }
     }
 
+    public function out()
+    {
+        //model user untuk mengganti status online user
+    }
+
     private function generateRandomId()
     {
 
-        $dateTime = date('Ym'); // This gives you 12 characters (YYYYMMDDHHMM)
+        $dateTime = date('Ym');
 
 
         $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);

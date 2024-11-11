@@ -60,26 +60,52 @@ class UserController extends Controller
         echo json_encode($response);
     }
 
-    public function getProfileImage($userId)
+    public function getProfileImage()
     {
-        // Define the path to your image folder
-        $imagePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/2024105278/';
-        $imageFile = $imagePath . $userId . ".png";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'])) {
+            $userId = $_POST['user_id'];
+            $user = $this->model('UsersModel')->findUserById($userId);
+            if (!isset($user['id_gambar'])) {
+                $imageFile = BASEURL . 'public/img/Vector.svg';
+                header("Content-Type: image/*");
+                header("Content-Length: " . filesize($imageFile));
 
-        if (file_exists($imageFile)) {
+                readfile($imageFile);
+                exit;
+            }
 
-            header('Content-Type: image/*');
-            header('Content-Length: ' . filesize($imageFile));
-            readfile($imageFile);
+            // Define the path where user images are stored
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
+            $userDir = $baseDir . $userId . '/';
 
-            // echo json_encode(['status' => 'done', 'message' => 'Image found']);
 
-            exit();
+            if (is_dir($userDir)) {
+
+                $imageFiles = glob($userDir . "*.png");
+                if (!empty($imageFiles)) {
+                    $imageFilePath = $imageFiles[0];
+
+                    header("Content-Type: image/*");
+                    header("Content-Length: " . filesize($imageFilePath));
+
+                    readfile($imageFilePath);
+                    exit;
+                } else {
+                    header("HTTP/1.0 404 Not Found");
+                    echo json_encode(["success" => false, "message" => "No image found for this user."]);
+                    exit;
+                }
+            } else {
+                // User directory does not exist
+                header("HTTP/1.0 404 Not Found");
+                echo json_encode(["success" => false, "message" => "User directory does not exist."]);
+                exit;
+            }
         } else {
-            // Image not found, return an error response
-            header('Content-Type: application/json', true, 404);
-            echo json_encode(['status' => 'error', 'message' => 'Image not found']);
-            exit();
+            // user_id not provided
+            header("HTTP/1.0 400 Bad Request");
+            echo json_encode(["success" => false, "message" => "No user_id provided."]);
+            exit;
         }
     }
 }
