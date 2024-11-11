@@ -2,4 +2,6 @@
 <main>
     <?php echo $content ?>
 </main>
-<?php include 'footer.php' ?>
+<?php if (isset($footer) && $footer) : ?>
+    <?php include 'footer.php'; ?>
+<?php endif; ?>

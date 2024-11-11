@@ -69,39 +69,33 @@ class Router
     }
 
     private static function callControllerAction($action, $params = [])
-{
-    list($controller, $method) = explode('@', $action);
+    {
+        list($controller, $method) = explode('@', $action);
 
-    // Detect if this is an API route by checking if the URI starts with /api/
-    $isApiRoute = strpos(self::getUri(), '/api') === 0;
+        // Detect if this is an API route by checking if the URI starts with /api/
+        $isApiRoute = strpos(self::getUri(), '/api') === 0;
 
-    // Set the controller directory based on route type
-    $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
-    $controller = ucfirst($controller);
-    $controllerFile = "$controllerDir/$controller.php";
+        // Set the controller directory based on route type
+        $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
+        $controller = ucfirst($controller);
+        $controllerFile = "$controllerDir/$controller.php";
 
-    if (file_exists($controllerFile)) {
-        require_once $controllerFile;
-        
-        // Cek apakah controller membutuhkan parameter di konstruktor
-        if (class_exists($controller)) {
-            // Misalnya, jika controller memerlukan koneksi database
-            if (method_exists($controller, '__construct')) {
-                $controllerInstance = new $controller($GLOBALS['conn']); // Mengirimkan $conn ke konstruktor
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+
+            $controllerInstance = new $controller();
+            // Cek apakah controller membutuhkan parameter di konstruktor
+            if (class_exists($controller)) {
+                if (method_exists($controllerInstance, $method)) {
+                    call_user_func_array([$controllerInstance, $method], $params);
+                } else {
+                    echo "Method $method not found in controller $controller.";
+                }
             } else {
-                $controllerInstance = new $controller();
-            }
-
-            if (method_exists($controllerInstance, $method)) {
-                call_user_func_array([$controllerInstance, $method], $params);
-            } else {
-                echo "Method $method not found in controller $controller.";
+                echo "Controller $controller not found.";
             }
         } else {
-            echo "Controller $controller not found.";
+            echo "Controller file $controllerFile not found.";
         }
-    } else {
-        echo "Controller file $controllerFile not found.";
     }
-}
 }

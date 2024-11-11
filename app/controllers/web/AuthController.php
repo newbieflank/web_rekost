@@ -81,14 +81,16 @@ class AuthController extends Controller
                         "role" => $user['role'],
                         "id_kos" => $data['id_kos']
                     ];
-                    return $this->view('home/landingpemilik');
+
+                    $this->header('/pemilik');
                 } else {
                     $_SESSION['user'] = [
                         "id_user" => $user['id_user'],
                         "email" => $user['email'],
                         "role" => $user['role']
                     ];
-                    return $this->view('home/landingpage');
+
+                    $this->header('/');
                 }
 
                 unset($_SESSION['form']);
