@@ -84,11 +84,9 @@
                                 <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
                             </div>
                         </div>
-
-
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
+                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/user.png') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">

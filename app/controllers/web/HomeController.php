@@ -31,6 +31,10 @@ class HomeController extends Controller
     {
         $this->view('home/landingpemilik');
     }
+    public function verif()
+    {
+        $this->view('login/verifpemilik');
+    }
 
 
 
