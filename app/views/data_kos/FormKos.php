@@ -195,81 +195,65 @@
             </div>
             <!-- Step 2: Fasilitas Kos -->
             <div class="step-container" data-step="2">
-                <h5 class="card-header">Fasilitas Kos</h5>
+                <h5 class="card-header">Fasilitas Kamar</h5>
                 <div class="card-body">
                     <div class="row m-5">
                         <div class="mb-4">
-                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Umum</label>
-                            <div class="row g-4">
-                                <div class="col-md-6">
+                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="WiFi"
-                                            id="wifi">
-                                        <label class="form-check-label" for="wifi">
-                                            WiFi
+                                        <input class="form-check-input" type="checkbox" id="kasur">
+                                        <label class="form-check-label" for="kasur">
+                                            Kasur
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Parkiran" id="parkiran">
-                                        <label class="form-check-label" for="parkiran">
-                                            Parkiran
+                                        <input class="form-check-input" type="checkbox" id="ac">
+                                        <label class="form-check-label" for="ac">
+                                            AC
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="MesinCuci" id="mesinCuci">
-                                        <label class="form-check-label" for="mesinCuci">
-                                            Mesin Cuci
+                                        <input class="form-check-input" type="checkbox" id="kipas_angin">
+                                        <label class="form-check-label" for="kipas_angin">
+                                            Kipas Angin
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="kulkas" id="kulkas">
-                                        <label class="form-check-label" for="kulkas">
-                                            Kulkas
+                                        <input class="form-check-input" type="checkbox" id="lemari">
+                                        <label class="form-check-label" for="lemari">
+                                            Lemari
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="tv"
-                                            id="tv">
-                                        <label class="form-check-label" for="tv">
-                                            TV
+                                        <input class="form-check-input" type="checkbox" id="meja">
+                                        <label class="form-check-label" for="meja">
+                                            Meja
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="dapur"
-                                            id="dapur">
-                                        <label class="form-check-label" for="dapur">
-                                            Dapur Bersama
+                                        <input class="form-check-input" type="checkbox" id="kamar_mandi_dalam">
+                                        <label class="form-check-label" for="kamar_mandi_dalam">
+                                            Kamar Mandi Dalam
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="kamarMandi" id="kamarMandi">
-                                        <label class="form-check-label" for="kamarMandi">
-                                            Kamar Mandi Umum
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="listrikAir" id="listrikAir">
-                                        <label class="form-check-label" for="listrikAir">
-                                            Listrik dan Air
+                                        <input class="form-check-input" type="checkbox" id="air_hangat">
+                                        <label class="form-check-label" for="air_hangat">
+                                            Air Hangat
                                         </label>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ class DataKosController extends Controller
         }
 
         ob_start();
-        $this->view('data_kos/inputkos');
+        $this->view('data_kos/formkos');
         $content = ob_get_clean();
 
         $data = [
@@ -109,7 +109,7 @@ class DataKosController extends Controller
         }
 
         ob_start();
-        $this->view('data_kos/inputkamar');
+        $this->view('data_kos/formkamar');
         $content = ob_get_clean();
 
         $data = [
