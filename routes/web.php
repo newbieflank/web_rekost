@@ -26,6 +26,7 @@ Router::get('/echo', 'HomeController@echo');
 Router::get('/chats', 'ChatController@ch');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
+Router::get('/verif', 'HomeController@verif');
 Router::get('/getChat/{userId}', 'ChatController@get_chat');
 
 //login Google
