@@ -72,25 +72,30 @@ class Router
     {
         list($controller, $method) = explode('@', $action);
 
-        // Detect if this is an API route by checking if the URI starts with /api/
         $isApiRoute = strpos(self::getUri(), '/api') === 0;
 
-        // Set the controller directory based on route type
+
         $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
         $controller = ucfirst($controller);
         $controllerFile = "$controllerDir/$controller.php";
 
+
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
-            $controllerInstance = new $controller();
-            if (method_exists($controllerInstance, $method)) {
-                call_user_func_array([$controllerInstance, $method], $params);
+
+            if (class_exists($controller)) {
+                $controllerInstance = new $controller();
+
+                if (method_exists($controllerInstance, $method)) {
+                    call_user_func_array([$controllerInstance, $method], $params);
+                } else {
+                    echo "Error: Method '$method' not found in controller '$controller'.";
+                }
             } else {
-                echo "Method $method not found in controller $controller.";
+                echo "Error: Controller class '$controller' not found.";
             }
         } else {
-            echo "Controller $controller not found.";
-            echo $controllerFile;
+            echo "Error: Controller file '$controllerFile' not found.";
         }
     }
 }

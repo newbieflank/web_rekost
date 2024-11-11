@@ -23,9 +23,12 @@ Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
-Router::get('/chats', 'DetailController@chats');
+Router::get('/chats', 'ChatController@ch');
+Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
+Router::get('/getChat/{userId}', 'ChatController@get_chat');
+
 //login Google
 Router::get('/auth', 'AuthController@login');
 Router::get('/auth/callback', 'AuthController@callback');
@@ -44,3 +47,6 @@ Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
+
+
+Router::get('/out', 'LoginController@out');

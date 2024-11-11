@@ -1,4 +1,5 @@
 <?php
+
 require_once './app/core/Controller.php';
 class LoginController extends Controller
 {
@@ -240,7 +241,7 @@ class LoginController extends Controller
                     $this->header('/');
                     exit();
                 } else {
-                    echo json_encode($data);
+                    echo json_encode($data['id_kos'], $id);
                 }
             } else {
                 Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
@@ -276,10 +277,15 @@ class LoginController extends Controller
         }
     }
 
+    public function out()
+    {
+        //model user untuk mengganti status online user
+    }
+
     private function generateRandomId()
     {
 
-        $dateTime = date('Ym'); // This gives you 12 characters (YYYYMMDDHHMM)
+        $dateTime = date('Ym');
 
 
         $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);

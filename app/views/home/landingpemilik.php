@@ -333,5 +333,6 @@
         };
     </script>
 </body>
+<script src="<? asset('js/file.js') ?>"></script>
 
 </html>
