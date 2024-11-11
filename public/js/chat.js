@@ -1,56 +1,64 @@
 // Fungsi untuk memuat percakapan
 function loadChat(userId, userName, userImage) {
-    // Tampilkan area input pesan dan sembunyikan placeholder hanya setelah nama pengguna diklik
     const chatInputArea = document.getElementById('chat-input-area');
+    const chatPlaceholder = document.getElementById('chat-placeholder');
+    const chatMessages = document.getElementById('chat-messages');
+    
     if (chatInputArea) {
         chatInputArea.style.display = 'flex'; // Tampilkan area input pesan
-    } else {
-        console.warn('chat-input-area element tidak ditemukan');
     }
 
-    const chatPlaceholder = document.getElementById('chat-placeholder');
     if (chatPlaceholder) {
         chatPlaceholder.style.display = 'none'; // Sembunyikan placeholder
     }
 
     // Bersihkan pesan sebelumnya
-    const chatMessages = document.querySelector('.chat-messages');
-    chatMessages.innerHTML = '';
+    if (chatMessages) {
+        chatMessages.innerHTML = '';
+    }
 
     // Perbarui gambar profil dan detail pengguna di header chat
     const chatUserImage = document.getElementById('chat-user-image');
-    chatUserImage.src = userImage || 'path/to/default-image.png'; // Gambar default jika gambar tidak ada
-    chatUserImage.style.display = 'block';
+    if (chatUserImage) {
+        chatUserImage.src = userImage || 'path/to/default-image.png'; // Gambar default jika gambar tidak ada
+        chatUserImage.style.display = 'block';
+    }
 
     document.getElementById('chat-user-name').textContent = userName;
     document.getElementById('chat-user-status').textContent = 'Sedang online';
 
     // Muat pesan chat
-    fetch(`get_chat.php?user_id=${userId}`)
-        .then(response => response.json())
+    fetch(`get_chat.php?id_user=${userId}`)
+        .then(response => {
+            // Periksa apakah konten adalah JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('Response is not JSON');
+            }
+            return response.json();
+        })
         .then(data => {
-            if (data.length === 0) {
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(chat => {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : '', 'mb-3');
+                    
+                    // Sanitasi pesan untuk mencegah XSS
+                    const sanitizedMessage = document.createElement('div');
+                    sanitizedMessage.textContent = chat.message;
+
+                    messageElement.innerHTML = `
+                        <div class="message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
+                            ${sanitizedMessage.textContent}
+                        </div>
+                        <span class="message-time ms-2 text-muted">${chat.time}</span>
+                    `;
+                    chatMessages.appendChild(messageElement);
+                });
+            } else {
                 chatMessages.innerHTML = '<div class="text-center text-muted">Tidak ada pesan di chat ini. Mulai percakapan!</div>';
             }
-
-            // Tambahkan pesan ke antarmuka
-            data.forEach(chat => {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : '', 'mb-3');
-                
-                // Sanitize message content
-                const sanitizedMessage = chat.message.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                
-                messageElement.innerHTML = `
-                    <div class="message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
-                        ${sanitizedMessage}
-                    </div>
-                    <span class="message-time ms-2 text-muted">${chat.time}</span>
-                `;
-                chatMessages.appendChild(messageElement);
-            });
-
-            // Scroll chat window ke bawah
+            // Scroll window chat ke bagian bawah
             chatMessages.scrollTop = chatMessages.scrollHeight;
         })
         .catch(error => {
@@ -58,16 +66,3 @@ function loadChat(userId, userName, userImage) {
             chatMessages.innerHTML = '<div class="text-center text-muted">Gagal memuat pesan. Coba lagi nanti.</div>';
         });
 }
-
-// Fungsi yang memulai tampilan chat saat pengguna dipilih
-function showChatButton() {
-    const chatInputArea = document.getElementById('chat-input-area');
-    if (chatInputArea) {
-        chatInputArea.style.display = 'flex'; // Tampilkan tombol pesan
-    }
-}
-
-// Panggil fungsi `showChatButton` ketika nama pengguna diklik
-document.getElementById('user-name').addEventListener('click', () => {
-    showChatButton();
-});
