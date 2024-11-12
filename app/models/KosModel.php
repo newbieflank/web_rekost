@@ -113,8 +113,4 @@ class KosModel
         return $result ? $result['id_kos'] : null;
     }
 
-    // public function lastInsertId()
-    // {
-    //     return $this->dbh->lastInsertId();
-    // } untuk core database
 }
