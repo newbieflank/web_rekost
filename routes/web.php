@@ -29,6 +29,12 @@ Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/getChat/{userId}', 'ChatController@get_chat');
 
+//admin
+Router::get('/dashboard', 'AdminController@dashboard');
+Router::get('/acceptance', 'AdminController@acceptance');
+Router::get('/peencarikos', 'AdminController@pencarikos');
+Router::get('/pemilikkos', 'AdminController@pemilikkos');
+
 //login Google
 Router::get('/auth', 'AuthController@login');
 Router::get('/auth/callback', 'AuthController@callback');

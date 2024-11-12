@@ -95,9 +95,9 @@
                     </div>
                     <h5>Detail Pembayaran</h5>
                     <p><strong>Nama Kos</strong>: Kos Putri Muslimah</p>
-                    <p><strong>Total Kamar</strong>: 1 Kamar</p>
+                    <p><strong>Total Kamar</strong>: <span id="detailTotalKamar">1 Kamar</span></p>
                     <p><strong>Lokasi</strong>: Jl. Blindungan, Bondowoso</p>
-                    <p><strong>Tanggal</strong>: 01 Feb - 01 Mar</p>
+                    <p><strong>Tanggal</strong>: <span id="detailTanggal">01 Feb - 01 Mar</span></p>
                     <p><strong>Harga</strong>: Rp 1.000.000</p>
                     <p><strong>Pajak dan Biaya</strong>: Rp 0</p>
                     <p class="total"><strong>Total:</strong> Rp 1.000.000</p>
@@ -135,6 +135,34 @@
                 });
             }
         });
+    </script>
+    <script>
+        document.getElementById('totalKamar').addEventListener('input', function() {
+            const totalKamar = this.value;
+            document.getElementById('detailTotalKamar').textContent = totalKamar;
+        });
+
+        document.getElementById('startDate').addEventListener('input', updateTanggal);
+        document.getElementById('endDate').addEventListener('input', updateTanggal);
+
+        function updateTanggal() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            if (startDate && endDate) {
+                const formattedStartDate = new Date(startDate).toLocaleDateString('id-ID', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                const formattedEndDate = new Date(endDate).toLocaleDateString('id-ID', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                document.getElementById('detailTanggal').textContent = `${formattedStartDate} - ${formattedEndDate}`;
+            }
+        }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg6tv6WJoREp+lG1er1kLtmYlP9+MVRt+8aK9I2GxD" crossorigin="anonymous"></script>
