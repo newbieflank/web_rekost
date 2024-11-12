@@ -141,7 +141,7 @@ class LoginController extends Controller
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
-                if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
+                if ($this->userModel->createKos($data['id_kos'], $id) > 0) {
                     session_set_cookie_params(0);
                     $_SESSION['user'] = [
                         "id_user" => $data['id'],

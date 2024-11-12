@@ -8,15 +8,21 @@ class HomeController extends Controller
     {
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
+            $role = $_SESSION['user']['role'];
             $user = $this->model('UsersModel')->findUserByEmail($email);
 
             $layoutData = [
                 "id_user" => $user['id_user'],
                 "id_gambar" => $user['id_gambar']
             ];
-            $this->view('home/landingpage', $layoutData);
+            if ($role === 'pemilik kos') {
+                $this->view('home/landingpemilik', $layoutData);
+            } else {
+                $this->view('home/landingpage', $layoutData);
+            }
+        } else {
+            $this->view('home/landingpage');
         }
-        $this->view('home/landingpage');
     }
     public function popularkos()
     {
