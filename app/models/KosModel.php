@@ -9,13 +9,29 @@ class KosModel
         $this->db = new Database;
     }
 
+    public function getData($id)
+    {
+        $query = "SELECT * FROM kos where id_kos = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        return $this->db->single();
+    }
+
     public function tambahDataKos($data)
     {
         try {
-            $this->db->beginTransaction();
-
-            $query = "INSERT INTO kos (nama_kos, deskripsi, tipe_kos, peraturan_kos, jenis_fasilitas, alamat, latitude, longitude, id_user) 
-                     VALUES (:nama_kos, :deskripsi, :tipe_kos, :peraturan_kos, :jenis_fasilitas, :alamat, :latitude, :longitude, :id_user)";
+            $query = "UPDATE kos 
+                      SET nama_kos = :nama_kos, 
+                          deskripsi = :deskripsi, 
+                          tipe_kos = :tipe_kos, 
+                          peraturan_kos = :peraturan_kos, 
+                          jenis_fasilitas = :jenis_fasilitas, 
+                          alamat = :alamat, 
+                          latitude = :latitude, 
+                          longitude = :longitude 
+                      WHERE id_kos = :id_kos";
 
             $this->db->query($query);
             $this->db->bind('nama_kos', $data['nama_kos']);
@@ -26,17 +42,13 @@ class KosModel
             $this->db->bind('alamat', $data['alamat']);
             $this->db->bind('latitude', $data['latitude']);
             $this->db->bind('longitude', $data['longitude']);
-            $this->db->bind('id_user', $data['id_user']);
+            $this->db->bind('id_kos', $data['id_kos']); // id_kos sebagai parameter untuk klausa WHERE
 
             $this->db->execute();
-            $kosId = $this->db->lastInsertId();
 
-            $this->db->commit();
-            return $kosId;
-
-        } catch (PDOException $e) {
-            $this->db->rollBack();
-            throw $e;
+            return $this->db->rowCount(); // Jalankan query
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
@@ -75,11 +87,7 @@ class KosModel
             $this->db->bind('id_kos', $data['id_kos']);
 
             $this->db->execute();
-            $kamarId = $this->db->lastInsertId();
-
             $this->db->commit();
-            return $kamarId;
-
         } catch (PDOException $e) {
             $this->db->rollBack();
             throw $e;
@@ -112,5 +120,4 @@ class KosModel
         $result = $this->db->single();
         return $result ? $result['id_kos'] : null;
     }
-
 }

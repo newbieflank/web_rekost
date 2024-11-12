@@ -93,7 +93,7 @@
 
     .progress-step-item.completed {
         background-color: #4a4af3;
-        border-color: ##4a4af3;
+        border-color: #4a4af3;
         color: white;
     }
 
@@ -456,10 +456,8 @@
 
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         showStep(currentStep);
         updateProgressBar();
     });
-
-
 </script>
