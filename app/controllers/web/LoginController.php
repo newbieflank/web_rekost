@@ -258,7 +258,7 @@ class LoginController extends Controller
             ];
 
 
-            if ($this->userModel->createG($data) > 0) {
+            if ($this->userModel->create($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -270,7 +270,7 @@ class LoginController extends Controller
                 exit();
             } else {
                 Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
-                $this->header('/register');
+                $this->header('/setpassword');
                 exit();
             }
         }
