@@ -214,8 +214,10 @@ class LoginController extends Controller
         }
 
         if ($role === 'pemilik kos') {
-            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-            $kosID = $id . $randomNumber;
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->userModel->findKosById($idKos);
+            } while ($cekID);
 
             $data = [
                 'id' => $id,
@@ -224,7 +226,7 @@ class LoginController extends Controller
                 'number' => null,
                 'password' => $password,
                 'role' => $role,
-                'id_kos' => $kosID
+                'id_kos' => $idKos
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
