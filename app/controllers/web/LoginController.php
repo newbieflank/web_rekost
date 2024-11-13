@@ -119,7 +119,6 @@ class LoginController extends Controller
         $number = $_POST['number'];
         $password = $_POST['password'];
         $role = $_POST['role'];
-
         if ($this->userModel->findUserByEmail($email)) {
             Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
             $this->header('/register');
@@ -153,10 +152,10 @@ class LoginController extends Controller
                     $this->header('/');
                     exit();
                 } else {
-                    echo json_encode($data);
+                    echo json_encode($data['id_kos'], $data['id']);
                 }
             } else {
-                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
                 $this->header('/register');
                 exit();
             }
@@ -165,16 +164,16 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => $number,
+                'number' => null,
                 'password' => $password,
                 'role' => $role
             ];
 
 
-            if ($this->userModel->create($data) > 0) {
+            if ($this->userModel->createG($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
-                    "id_user" => $data['id_user'],
+                    "id_user" => $data['id'],
                     "email" => $data['email'],
                     "role" => $data['role']
                 ];
