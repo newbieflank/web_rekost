@@ -43,6 +43,7 @@ Router::get('/create', 'AuthController@register');
 //logout
 Router::get('/logout', 'LoginController@logout');
 
+
 //POST METHOD
 Router::post('/login', 'LoginController@auth');
 Router::post('/register', 'LoginController@create');

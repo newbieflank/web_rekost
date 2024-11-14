@@ -1,6 +1,5 @@
 <?php
 
-require_once './app/core/Controller.php';
 class LoginController extends Controller
 {
 
@@ -43,12 +42,12 @@ class LoginController extends Controller
 
                 if (isset($_POST['remember'])) {
                     setcookie("user", json_encode($data), time() + (86400 * 30), "/", "", true);
-                    $this->header('/pemilik');
+                    $this->header('/');
                     exit();
                 }
 
                 $_SESSION['user'] = $data;
-                $this->header('/pemilik');
+                $this->header('/');
                 exit();
             } else {
                 $user = [
@@ -126,8 +125,10 @@ class LoginController extends Controller
         }
 
         if ($role === 'pemilik kos') {
-            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-            $kosID = $id . $randomNumber;
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->userModel->findKosById($idKos);
+            } while ($cekID);
 
             $data = [
                 'id' => $id,
@@ -136,7 +137,7 @@ class LoginController extends Controller
                 'number' => $number,
                 'password' => $password,
                 'role' => $role,
-                'id_kos' => $kosID
+                'id_kos' => $idKos
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
@@ -149,7 +150,7 @@ class LoginController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
-                    $this->header('/');
+                    $this->view('login/verifpemilik', $data);
                     exit();
                 } else {
                     echo json_encode($data['id_kos'], $data['id']);
@@ -170,7 +171,7 @@ class LoginController extends Controller
             ];
 
 
-            if ($this->userModel->createG($data) > 0) {
+            if ($this->userModel->create($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -198,24 +199,37 @@ class LoginController extends Controller
 
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $role = $_POST['role'];
         $password = $_POST['Password'];
         $confirm = $_POST['confirmPassword'];
 
+        if (isset($_POST['role'])) {
+            $role = $_POST['role'];
+        } else {
+            $role = null;
+        }
+
+
+        $data = [
+            'username' => $username,
+            'email' => $email,
+            'role' => $role
+        ];
         // Validate password
         if ($password !== $confirm) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
-            $this->header('/setpassword');
+            $this->view('login/setpassword', $data);
             exit();
         } elseif (strlen($password) < 8) {
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
-            $this->header('/setpassword');
+            $this->view('login/setpassword', $data);
             exit();
         }
 
         if ($role === 'pemilik kos') {
-            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-            $kosID = $id . $randomNumber;
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->userModel->findKosById($idKos);
+            } while ($cekID);
 
             $data = [
                 'id' => $id,
@@ -224,7 +238,7 @@ class LoginController extends Controller
                 'number' => null,
                 'password' => $password,
                 'role' => $role,
-                'id_kos' => $kosID
+                'id_kos' => $idKos
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
@@ -258,7 +272,7 @@ class LoginController extends Controller
             ];
 
 
-            if ($this->userModel->createG($data) > 0) {
+            if ($this->userModel->create($data) > 0) {
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -269,8 +283,13 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
+                $data = [
+                    'username' => $username,
+                    'email' => $email,
+                    'role' => $role
+                ];
                 Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
-                $this->header('/register');
+                $this->view('login/setpassword', $data);
                 exit();
             }
         }

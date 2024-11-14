@@ -32,6 +32,15 @@ class UsersModel
         return $this->db->single();
     }
 
+    public function findKosById($id)
+    {
+        $query = "SELECT * FROM kos WHERE id_kos = :id_kos";
+        $this->db->query($query);
+        $this->db->bind('id_kos', $id);
+
+        return $this->db->single();
+    }
+
     public function findOwnerById($id)
     {
         $query = "SELECT * FROM pemilik WHERE id_user = :id_user";
@@ -84,23 +93,6 @@ class UsersModel
         return $this->db->rowCount();
     }
 
-    public function createG($data)
-    {
-        $query = "INSERT INTO user (id_user, nama, email, password, role) 
-                  VALUES (:id, :nama, :email, :pass, :role)";
-
-        $this->db->query($query);
-        $this->db->bind('id', $data['id']);
-        $this->db->bind('nama', $data['username']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('pass', $data['password']);
-        $this->db->bind('role', $data['role']);
-
-        $this->db->execute();
-
-        return $this->db->rowCount();
-    }
-
     public function pemilik($data)
     {
         $query1 = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
@@ -120,10 +112,10 @@ class UsersModel
     public function createKos($id_kos, $id)
     {
         try {
-            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
+            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id_user)";
             $this->db->query($query2);
             $this->db->bind('id_kos', $id_kos);
-            $this->db->bind('id', $id);
+            $this->db->bind('id_user', $id);
 
             $this->db->execute();
 
