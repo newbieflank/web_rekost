@@ -209,7 +209,7 @@ class LoginController extends Controller
         }
 
 
-        $data = [
+        $data1 = [
             'username' => $username,
             'email' => $email,
             'role' => $role
@@ -217,11 +217,11 @@ class LoginController extends Controller
         // Validate password
         if ($password !== $confirm) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
-            $this->view('login/setpassword', $data);
+            $this->view('login/setpassword', $data1);
             exit();
         } elseif (strlen($password) < 8) {
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
-            $this->view('login/setpassword', $data);
+            $this->view('login/setpassword', $data1);
             exit();
         }
 
