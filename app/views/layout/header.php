@@ -89,7 +89,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                         <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                        <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Layanan Kost</a>
+                        <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                            <a class="dropdown-item" href="#services">Profile Kost</a>
+                        <?php endif; ?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout">Logout</a>
                     </div>
