@@ -99,7 +99,7 @@ class AuthController extends Controller
 
             case 'register':
                 $data = [
-                    'name' => $googleUser->name,
+                    'username' => $googleUser->name,
                     'email' => $googleUser->email,
                 ];
 

@@ -17,9 +17,9 @@ class Controller
         return new $model;
     }
 
-    protected function header($route)
+    protected function header($route, $data = [])
     {
-        header('Location: http://localhost/web_rekost' . $route);
+        header('Location:' . BASEURL . $route);
     }
 
     protected function helper($helper)
