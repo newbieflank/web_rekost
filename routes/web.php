@@ -2,7 +2,6 @@
 
 //GET METHOD
 Router::get('/', 'HomeController@index');
-Router::get('/pemilik', 'HomeController@home');
 Router::get('/login', 'LoginController@login');
 Router::get('/register', 'LoginController@register');
 Router::get('/id/{id}', 'LoginController@show');
@@ -54,6 +53,7 @@ Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
+Router::post('/verif', 'FileController@lampiran');
 
 
 Router::get('/out', 'LoginController@out');

@@ -14,7 +14,7 @@
             <h2 class="card-title text-center">Upload Dokumen dan Persetujuan</h2>
             <p class="text-center">Pastikan dokumen sesuai dengan persyaratan yang berlaku.</p>
 
-            <form action="<?= BASEURL; ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL; ?>verif" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php if (isset($data['username']) && !empty($data['username'])): ?>
                         <label for="username" class="form-label">Username</label>

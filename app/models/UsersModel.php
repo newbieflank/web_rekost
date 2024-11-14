@@ -161,6 +161,17 @@ class UsersModel
         return $this->db->rowCount();
     }
 
+    public function insert($id)
+    {
+        $query = "INSERT INTO status_user (id_user) VALUES (:id_user)";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
     // Update the user's online status
     public function updateUserStatus($userId, $status)
     {
