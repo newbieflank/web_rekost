@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         $user = $this->userModel->getProfile($email, $password);
         if (isset($user['id_user'])) {
-
+            $this->userModel->updateUserStatus($user['id_user'], 'online');
             if ($user['role'] === 'pemilik kos') {
 
 
