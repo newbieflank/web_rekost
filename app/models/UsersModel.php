@@ -29,6 +29,15 @@ class UsersModel
         return $this->db->single();
     }
 
+    public function findKosById($id)
+    {
+        $query = "SELECT * FROM kos WHERE id_kos = :id_kos";
+        $this->db->query($query);
+        $this->db->bind('id_kos', $id);
+
+        return $this->db->single();
+    }
+
     public function findOwnerById($id)
     {
         $query = "SELECT * FROM pemilik WHERE id_user = :id_user";
@@ -72,30 +81,13 @@ class UsersModel
     {
         $query = "INSERT INTO user (id_user, nama, email, password, number_phone, role) 
                   VALUES (:id, :nama, :email, :pass, :nomor, :role)";
-        
+
         $this->db->query($query);
         $this->db->bind('id', $data['id']);
         $this->db->bind('nama', $data['username']);
         $this->db->bind('email', $data['email']);
         $this->db->bind('pass', $data['password']);
         $this->db->bind('nomor', $data['number']);
-        $this->db->bind('role', $data['role']);
-
-        $this->db->execute();
-
-        return $this->db->rowCount();
-    }
-
-    public function createG($data)
-    {
-        $query = "INSERT INTO user (id_user, nama, email, password, role) 
-                  VALUES (:id, :nama, :email, :pass, :role)";
-
-        $this->db->query($query);
-        $this->db->bind('id', $data['id']);
-        $this->db->bind('nama', $data['username']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('pass', $data['password']);
         $this->db->bind('role', $data['role']);
 
         $this->db->execute();
@@ -121,14 +113,18 @@ class UsersModel
 
     public function createKos($id_kos, $id)
     {
-        $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id)";
-        $this->db->query($query2);
-        $this->db->bind('id_kos', $id_kos);
-        $this->db->bind('id', $id);
+        try {
+            $query2 = "INSERT INTO kos (id_kos, id_user) VALUES (:id_kos, :id_user)";
+            $this->db->query($query2);
+            $this->db->bind('id_kos', $id_kos);
+            $this->db->bind('id_user', $id);
 
-        $this->db->execute();
+            $this->db->execute();
 
-        return $this->db->rowCount();
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            return ["error" => $e->getMessage()];
+        }
     }
 
     public function updateProfile($data)
@@ -157,6 +153,18 @@ class UsersModel
         return $this->db->rowCount();
     }
 
+    public function insert($id)
+    {
+        $query = "INSERT INTO status_user (id_user) VALUES (:id_user)";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    // Update the user's online status
     public function updateUserStatus($userId, $status)
     {
         var_dump($userId, $status);  // Tambahkan pengecekan untuk melihat nilai yang dikirim

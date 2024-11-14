@@ -99,7 +99,8 @@ class ProfileController extends Controller
             "content" => $content,
             "title" => $pageTitle,
             "id_user" => $user['id_user'],
-            "id_gambar" => $user['id_gambar']
+            "id_gambar" => $user['id_gambar'],
+            "footer" => false
         ];
 
         // echo $role = $this->getRole();

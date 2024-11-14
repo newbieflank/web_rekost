@@ -2,130 +2,40 @@
 
 class DataKosController extends Controller
 {
+    private $KosModel;
+
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
+        $this->KosModel = $this->model('KosModel');
+    }
 
     public function datakos()
     {
-        ob_start();
-        $this->view('data_kos/newform');
+        $kos = $this->KosModel->getData($_SESSION['user']['id_kos']);
 
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
+        $dataKos = [
+            'namaKos' => $kos['nama_kos'],
+            'deskripsi' => $kos['deskripsi'],
+            'tipe' => $kos['tipe_kos'],
+            'alamat' => $kos['alamat'],
+            'peraturan' => $kos['peraturan_kos'],
+            'fasilitas' => $kos['jenis_fasilitas'],
+            'latitude' => $kos['latitude'],
+            'longitude' => $kos['longitude']
         ];
 
-        $this->view('layout/main', $data);
-    }
-
-    public function fasilitas()
-    {
         ob_start();
-        $this->view('data_kos/Fasilitaskos');
-
+        $this->view('data_kos/formkos', $dataKos);
         $content = ob_get_clean();
 
         $data = [
             "content" => $content,
             "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function alamat()
-    {
-        ob_start();
-        $this->view('data_kos/Alamatkos');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function fotokmr()
-    {
-        ob_start();
-        $this->view('data_kos/Fotokamar');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function harga()
-    {
-        ob_start();
-        $this->view('data_kos/Harga');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function fotokos()
-    {
-        ob_start();
-        $this->view('data_kos/Fotokos');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function ke()
-    {
-        ob_start();
-        $this->view('data_kos/KetersediaanKamar');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
-        ];
-
-        $this->view('layout/main', $data);
-    }
-
-    public function ke2()
-    {
-        ob_start();
-        $this->view('data_kos/KetersediaanKamar2');
-
-        $content = ob_get_clean();
-
-        $data = [
-            "content" => $content,
-            "title" => "DataKos",
-
+            // "footer" => false
         ];
 
         $this->view('layout/main', $data);
@@ -133,41 +43,104 @@ class DataKosController extends Controller
 
     public function tambah()
     {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'login');
+            exit;
+        }
 
-        if ($this->model('KosModel')->tambahDataKos($_POST) > 0);
-        $this->header('/datakos');
+        try {
+            $userId = $_SESSION['user']['id_kos'];
+
+            $kosData = [
+                'nama_kos' => $_POST['nama_kos'],
+                'deskripsi' => $_POST['deskripsi'],
+                'tipe_kos' => $_POST['tipekos'],
+                'peraturan_kos' => $_POST['peraturan'],
+                'jenis_fasilitas' => $_POST['fasilitas'],
+                'alamat' => $_POST['alamat'],
+                'latitude' => $_POST['latitude'],
+                'longitude' => $_POST['longitude'],
+                'id_kos' => $userId
+            ];
+
+            // Insert kos data into the database
+            $kosId = $this->KosModel->tambahDataKos($kosData);
+
+            if ($kosId > 0) {
+                $response = ['success' => true, 'message' => 'Data kos berhasil ditambahkan'];
+                // $this->header('/datakos');
+            } else {
+                $response = ['success' => false, 'message' => 'Gagal menambahkan data kos', $kosData];
+            }
+        } catch (Exception $e) {
+            $response = ['success' => false, 'message' => $e->getMessage()];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
+    }
+
+    public function fasilitas()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'login');
+            exit;
+        }
+
+        ob_start();
+        $this->view('data_kos/formkamar');
+        $content = ob_get_clean();
+
+        $data = [
+            "content" => $content,
+            "title" => "DataKos",
+        ];
+
+        $this->view('layout/main', $data);
     }
 
     public function tambahFasilitas()
     {
-        if ($this->model('KosModel')->updateFasilitas($_POST) > 0) {
-            header('Location: ' . BASEURL . '/alamatkos');
-            exit;
-        } else {
-            header('Location: ' . BASEURL . '/fasilitaskos');
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'login');
             exit;
         }
-    }
-    public function tambahAlamat()
-    {
-        if ($this->model('KosModel')->updateAlamat($_POST) > 0) {
-            header('Location: ' . BASEURL . '/fotokos');
-            exit;
-        } else {
-            header('Location: ' . BASEURL . '/alamatkos');
-            exit;
+
+        try {
+
+            $userId = $_SESSION['user']['id_kos'];
+
+
+            $KamarData = [
+                'luas_kamar' => $_POST['luas_kamar'],
+                'jenis_fasilitas' => $_POST['fasilitas'],
+                'harga_bulan' => $_POST['harga_bulan'],
+                'kamar_tersedia' => $_POST['kamar_tersedia'],
+                'tipe_kamar' => $_POST['tipe_kamar'],
+                'total_kamar' => $_POST['total_kamar'],
+                'harga_minggu' => $_POST['harga_minggu'],
+                'harga_hari' => $_POST['harga_hari'],
+                'id_kos' => $userId
+            ];
+
+            -
+
+                $kamarid = $this->KosModel->tambahDataKamar($KamarData);
+
+            if ($kamarid > 0) {
+                $response = ['success' => true, 'message' => 'Data kamar berhasil ditambahkan', $KamarData];
+            } else {
+                $response = ['success' => false, 'message' => 'Gagal menambahkan data kamar', $KamarData];
+            }
+        } catch (Exception $e) {
+            error_log('Error Message: ' . $e->getMessage());
+            $response = ['success' => false, 'message' => $e->getMessage()];
         }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
     }
 
-    public function tambahHarga()
-    {
-        if ($this->model('KosModel')->updateHarga($_POST) > 0) {
-            header('Location: ' . BASEURL . '/fotokamar');
-            exit;
-        } else {
-            header('Location: ' . BASEURL . '/harga');
-            exit;
-        }
-    }
 }

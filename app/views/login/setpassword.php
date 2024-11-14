@@ -12,24 +12,25 @@
 
 <body>
     <form action="<?= BASEURL; ?>create" method="post">
-        <div class="row">
-            <div class="col-lg-6">
-                <?php if (isset($_SESSION['flash'])): ?>
-                    <?php Flasher::flash(); ?>
-                <?php endif; ?>
-            </div>
-        </div>
+
         <div class="password-container">
             <span class="close-btn">&times;</span>
             <h2>Set Password</h2>
             <p>Pastikan password yang anda masukkan benar</p>
+            <div class="row">
+                <div class="mb-3">
+                    <?php if (isset($_SESSION['flash'])): ?>
+                        <?php Flasher::flash(); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
             <div class="mb-3">
-                <input type="hidden" name="username" id="username" value="<?php echo $data['name'] ?>">
+                <input type="hidden" name="username" id="username" value="<?php echo $data['username'] ?>">
                 <input type="hidden" name="email" id="email" value="<?php echo $data['email'] ?>">
                 <select class="form-select" name="role" id="role">
-                    <option value="" selected>Daftar Sebagai</option>
-                    <option value="pencari kos">Pencari Kost</option>
-                    <option value="pemilik kos">Pemilik Kost</option>
+                    <option value="" <?php echo empty($data['role']) ? 'selected' : ''; ?>>Daftar Sebagai</option>
+                    <option value="pencari kos" <?php echo (isset($data['role']) && $data['role'] == 'pencari kos') ? 'selected' : ''; ?>>Pencari Kos</option>
+                    <option value="pemilik kos" <?php echo (isset($data['role']) && $data['role'] == 'pemilik kos') ? 'selected' : ''; ?>>Pemilik Kos</option>
                 </select>
                 <label for="Password" class="form-label">Password</label>
                 <div class="form-control position-relative">

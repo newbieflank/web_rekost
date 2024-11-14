@@ -117,7 +117,7 @@
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR 500.000</span> <br>
                         <span class="text-grey">/kamar/bulan</span>
-                        <button type="button" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</button>
+                        <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>
@@ -217,14 +217,12 @@
                 Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim Blindungan.
             </p>
         </div>
-        <a href="chats" class="float-button" onclick="toggleChat()">
-            <i class="fas fa-comment-dots"></i>
-        </a>
-        <footer>
-            <div class="d-flex justify-content-center">
-                &copy; 2024 Re-Kost. All rights reserved.
-            </div>
-        </footer>
+        <div class="d-flex justify-content-center mt-4">
+            <a href="chats" class="btn btn-primary btn-lg w-50 mb-4 text-center">
+                Tanya Pemilik Sebelum Sewa
+            </a>
+        </div>
+
     </section>
     <script crossorigin="anonymous" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1p6QF1bM4Jp+7F2m1i6U8zTnm5zT9UJ0Zr+2QIT3hK" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

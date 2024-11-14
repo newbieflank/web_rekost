@@ -2,4 +2,4 @@
 <main>
     <?php echo $content ?>
 </main>
-<?php include 'footer.php' ?>
+<?php include 'footer.php'; ?>
