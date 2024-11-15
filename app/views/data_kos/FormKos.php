@@ -149,13 +149,6 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="jumlahkamar" class="col-sm-2 col-form-label">Jumlah Kamar</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="jumlah_kos" id="jumlahkamar"
-                                    placeholder="Masukkan Jumlah Kamar">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
                             <label for="tipekos" class="col-sm-2 col-form-label">Disewakan Untuk</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
@@ -278,72 +271,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <h5 class="card-header">Fasilitas Kamar</h5>
-                <div class="card-body">
-                    <div class="row m-5">
-                        <div class="mb-4">
-                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kasur">
-                                        <label class="form-check-label" for="kasur">
-                                            Kasur
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="ac">
-                                        <label class="form-check-label" for="ac">
-                                            AC
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kipas_angin">
-                                        <label class="form-check-label" for="kipas_angin">
-                                            Kipas Angin
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="lemari">
-                                        <label class="form-check-label" for="lemari">
-                                            Lemari
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="meja">
-                                        <label class="form-check-label" for="meja">
-                                            Meja
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kamar_mandi_dalam">
-                                        <label class="form-check-label" for="kamar_mandi_dalam">
-                                            Kamar Mandi Dalam
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="air_hangat">
-                                        <label class="form-check-label" for="air_hangat">
-                                            Air Hangat
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
 
             <!-- Step 3: Alamat Kos -->

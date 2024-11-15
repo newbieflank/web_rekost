@@ -29,8 +29,8 @@
                         <input type="text" class="form-control mb-3" id="number" value="<?= htmlspecialchars($data['number']) ?>" readonly placeholder="No. Telepon">
                     <?php endif; ?>
 
-                    <label for="ktp" class="form-label">Upload KTP</label>
-                    <input type="file" class="form-control mb-3" id="ktp" required placeholder="Upload KTP">
+                    <label for="file" class="form-label">Upload Lampiran (KTP atau Surat Izin Usaha)</label>
+                    <input type="file" class="form-control mb-3" id="file" name="file" required placeholder="Upload KTP">
                 </div>
 
                 <div class="mb-3 form-check">

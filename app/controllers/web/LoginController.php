@@ -172,6 +172,7 @@ class LoginController extends Controller
 
 
             if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -273,6 +274,7 @@ class LoginController extends Controller
 
 
             if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -311,4 +313,6 @@ class LoginController extends Controller
         $generatedId = $dateTime . $randomNumber;
         return $generatedId;
     }
+
+    public function verifPemilik() {}
 }

@@ -11,25 +11,27 @@ class FileController extends Controller
 
     public function upload()
     {
+        header("Access-Control-Allow-Origin: *");
         header('Content-Type: application/json');
-        $allowedFileTypes = ['image/jpeg', 'image/png'];  // Allowed image types
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file']) && isset($_POST['userId'])) {
-            $userId = $_POST['userId'];
+        $allowedFileTypes = ['image/*'];
+
+        if (isset($_FILES['file']) && isset($_POST['user_id'])) {
+            $userId = intval($_POST['user_id']);
             $image = $_FILES['file'];
+
 
             $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
             $uploadDir = $baseDir . $userId . '/';
 
-            // Create directory if it does not exist
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Check if the uploaded file type is allowed
             if (in_array($image['type'], $allowedFileTypes)) {
 
-                // Check if there are no upload errors
+                $type = $image['type'];
+
                 if ($image['error'] === 0) {
 
                     // Check for existing image and delete it
@@ -45,7 +47,7 @@ class FileController extends Controller
 
                     // Generate a unique filename for the new image
                     $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-                    $imageName = $randomNumber . basename($userId . '.png');
+                    $imageName = $randomNumber . basename($userId . '.jpg');
                     $imageTmpName = $image['tmp_name'];
                     $imagePath = $uploadDir . $imageName;
 
