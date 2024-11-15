@@ -49,14 +49,12 @@ class UserController extends Controller
                 ],
             ];
         } else {
-            // Handle error
             $response = [
                 'status' => 'error',
                 'message' => 'Email or password missing',
             ];
         }
 
-        error_log(json_encode($response));
         echo json_encode($response);
     }
 
