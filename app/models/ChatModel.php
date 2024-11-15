@@ -1,5 +1,4 @@
 <?php
-
 class ChatModel {
 
     private $db;
@@ -44,8 +43,9 @@ class ChatModel {
 }
 
 
-    // Method to send a message
+
     public function sendMessage($data)
+    
     {
         if (!empty($data['id_receiver']) && !empty($data['message']) && !empty($data['id_sender'])) {
             $sql = "INSERT INTO chat_message (id_receiver, id_sender, message) 
@@ -55,7 +55,7 @@ class ChatModel {
             $this->db->bind('id_receiver', $data['id_receiver']);
             $this->db->bind('id_sender', $data['id_sender']);
             $this->db->bind('message', $data['message']);
-            // $this->db->bind('waktu_kirim_pesan', $data['waktu_kirim_pesan']);
+        
 
             if ($this->db->execute()) {
                 return true;

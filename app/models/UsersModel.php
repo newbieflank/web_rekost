@@ -164,18 +164,20 @@ class UsersModel
         return $this->db->rowCount();
     }
 
-    // Update the user's online status
-    public function updateUserStatus($userId, $status)
-    {
-        var_dump($userId, $status);  // Tambahkan pengecekan untuk melihat nilai yang dikirim
-        $query = "UPDATE user SET status_user = :status WHERE id_user = :id_user";
-        $this->db->query($query);
-        $this->db->bind('id_user', $userId);
-        $this->db->bind('status', $status);
-    
-        $this->db->execute();
-        return $this->db->rowCount();
-    }
+ // Update the user's online status
+public function updateUserStatus($userId, $status)
+{
+    // Debugging log (jika perlu)
+    // var_dump($userId, $status);  
+    $query = "UPDATE user SET status_user = :status WHERE id_user = :id_user";
+    $this->db->query($query);
+    $this->db->bind('id_user', $userId);
+    $this->db->bind('status', $status);
+
+    $this->db->execute();
+    return $this->db->rowCount();
+}
+
     
 
     public function getOnlineUsers()

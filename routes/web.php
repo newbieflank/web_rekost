@@ -26,7 +26,8 @@ Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
-Router::get('/getChat/{userId}', 'ChatController@get_chat');
+Router::get('/getchat/{userId}', 'ChatController@get_chat');
+
 
 //admin
 Router::get('/dashboard', 'AdminController@dashboard');
@@ -54,6 +55,6 @@ Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
 Router::post('/verif', 'FileController@lampiran');
-
+Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
 
 Router::get('/out', 'LoginController@out');

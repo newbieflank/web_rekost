@@ -22,8 +22,9 @@ class ChatController extends Controller {
         $this->view('detail/chats', $layoutData);
     }
     public function get_chat($userId) {
-   
-        // Ensure the current user is the outgoing user
+        echo json_encode(['status' => 'success']);
+        die;
+       
         $outgoing_id = $_SESSION['user']['id_user'];
         
         // Call get_chat method from ChatModel
@@ -38,19 +39,20 @@ class ChatController extends Controller {
     }
     public function sendMessage($receiverId) {
 
- 
+      
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
-            // Sanitasi data POST
+          
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            // Siapkan data untuk mengirim pesan
+        
             $data = [
-                'id_receiver' => trim($_POST['id_reciver']),
+                'id_receiver' => trim($_POST['id_receiver']),
                 'id_sender' => $_SESSION['user']['id_user'],
                 'message' => trim($_POST['message']),
-                // 'waktu_kirim_pesan' => date('Y-m-d H:i:s')  // Waktu sekarang
+               
             ];
-            
+            // echo json_encode(['status' => 'success']);
+            // die;
     
             // Log data untuk memverifikasi apakah sudah benar
             error_log(print_r($data, true));
