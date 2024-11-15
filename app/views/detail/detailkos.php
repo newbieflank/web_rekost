@@ -110,12 +110,12 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                         </div>
-                        <h1>Kos Putri Muslimah</h1>
-                        <span>4.5/5 | 100 Reviews</span>
+                        <h1><?= $data['nama_kos']?></h1>
+                        <span><?= $data['rating']?>/5 | <?= $data['jumlah_rating']?> Reviews</span>
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
-                        <span class="text-red">IDR 500.000</span> <br>
+                        <span class="text-red">IDR <?= $data['harga']?></span> <br>
                         <span class="text-grey">/kamar/bulan</span>
                         <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>

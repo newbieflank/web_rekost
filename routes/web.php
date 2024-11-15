@@ -15,7 +15,7 @@ Router::get(uri: '/fotokos', action: 'DataKosController@fotokos');
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
-Router::get('/detailkos', 'DetailController@detailkos');
+Router::get('/detailkos/{id}', 'DetailController@detailkos');
 Router::get(uri: '/fasilitaskos', action: 'DataKosController@fasilitas');
 Router::get(uri: '/harga', action: 'DataKosController@harga');
 Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
@@ -54,6 +54,7 @@ Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
+Router::post('/addulasan','HomeController@AddUlasan');
 
 
 Router::get('/out', 'LoginController@out');

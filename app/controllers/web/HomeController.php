@@ -18,10 +18,31 @@ class HomeController extends Controller
             if ($role === 'pemilik kos') {
                 $this->view('home/landingpemilik', $layoutData);
             } else {
-                $this->view('home/landingpage', $layoutData);
+                $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
+                $best = $this->model('CardViewModel')->SelectCardViewKosBest();
+                $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
+                $rating = $this->model('RatingAplikasiModel')->GetUlasan();
+                $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
+                $data = [
+                    "popular" => $popular,"best"=>$best,"campus"=>$campus, "rating_aplikasi" => $rating,
+                    "id_gambar" => $user['id_gambar'],"penyewa"=>$penyewa
+                ];
+                $this->view('home/landingpage', $data);
             }
         } else {
-            $this->view('home/landingpage');
+            $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
+            $best = $this->model('CardViewModel')->SelectCardViewKosBest();
+            $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
+            $rating = $this->model('RatingAplikasiModel')->GetUlasan();
+            $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
+            $data = [
+                "popular" => $popular,
+                "best"=>$best,
+                "campus"=>$campus, 
+                "rating_aplikasi" => $rating,
+                "penyewa" => $penyewa
+            ];
+            $this->view('home/landingpage',$data);
         }
     }
     public function popularkos()
@@ -57,5 +78,25 @@ class HomeController extends Controller
     public function echo()
     {
         echo json_encode($_SESSION['user']);
+    }
+
+    public function AddUlasan(){
+        if(!isset($_SESSION['user'])){
+            $this->header('/login');
+            exit;
+        }
+
+        $ulasan = $_POST['reviewInput'];
+        $id = $_SESSION['user']['id_user'];
+        $data = [
+            "ulasan" => $ulasan,
+            "id_user" => $id
+        ];
+        if ($this->model("RatingAplikasiModel")->AddRating($data) > 0) {
+            $this->header('/');
+            exit;
+        } else {
+            echo json_encode($data);
+        }
     }
 }
