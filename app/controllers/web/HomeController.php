@@ -29,7 +29,16 @@ class HomeController extends Controller
     }
     public function home()
     {
-        $this->view('home/landingpemilik');
+        $pendapatan = $this->model('chartModel')->getpendapatan();
+        $pengeluaran = $this->model ('chartModel')->getpengeluaran();
+        $ulasan=$this->model('chartmodel')->getUlasan();
+
+        $data = [
+            "pendapatan" => $pendapatan
+            ,"pengeluaran"=> $pengeluaran
+            ,"ulasan"=>$ulasan
+        ];   
+        $this->view('home/landingpemilik', $data);
     }
     public function verif()
     {
