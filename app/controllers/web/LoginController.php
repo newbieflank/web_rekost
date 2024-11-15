@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         $user = $this->userModel->getProfile($email, $password);
         if (isset($user['id_user'])) {
-
+            $this->userModel->updateUserStatus($user['id_user'], 'online');
             if ($user['role'] === 'pemilik kos') {
 
 
@@ -172,6 +172,7 @@ class LoginController extends Controller
 
 
             if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -209,7 +210,7 @@ class LoginController extends Controller
         }
 
 
-        $data = [
+        $data1 = [
             'username' => $username,
             'email' => $email,
             'role' => $role
@@ -217,11 +218,11 @@ class LoginController extends Controller
         // Validate password
         if ($password !== $confirm) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
-            $this->view('login/setpassword', $data);
+            $this->view('login/setpassword', $data1);
             exit();
         } elseif (strlen($password) < 8) {
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
-            $this->view('login/setpassword', $data);
+            $this->view('login/setpassword', $data1);
             exit();
         }
 
@@ -273,6 +274,7 @@ class LoginController extends Controller
 
 
             if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -311,4 +313,6 @@ class LoginController extends Controller
         $generatedId = $dateTime . $randomNumber;
         return $generatedId;
     }
+
+    public function verifPemilik() {}
 }

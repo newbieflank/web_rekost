@@ -5,9 +5,6 @@ class UsersModel
 {
     private $table = 'user';
     private $db;
-    public $username;
-    public $email;
-    public $id;
 
     public function __construct()
     {
@@ -50,12 +47,17 @@ class UsersModel
         return $this->db->single();
     }
 
-    public function getProfile($email, $password)
+    public function getProfile($email, $password = null)
     {
-        $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND password = :password";
-        $this->db->query($query);
+        if ($password) {
+            $query = "SELECT * FROM " . $this->table . " WHERE email = :email AND password = :password";
+            $this->db->query($query);
+            $this->db->bind('password', $password);
+        } else {
+            $query = "SELECT * FROM " . $this->table . " WHERE email = :email";
+            $this->db->query($query);
+        }
         $this->db->bind('email', $email);
-        $this->db->bind('password', $password);
 
         return $this->db->single();
     }
@@ -127,34 +129,36 @@ class UsersModel
 
     public function updateProfile($data)
     {
-        $id = isset($_SESSION['user']['id_user']) ? $_SESSION['user']['id_user'] : null;
+        $id = $_SESSION['user']['id_user'] ?? null;
         if (!$id) {
             echo "User ID not found in session.";
             return;
         }
 
-        $nama = isset($data['name']) ? $data['name'] : null;
-        $gender = isset($data['inputGender']) ? $data['inputGender'] : null;
-        $tanggal = isset($data['customDate']) ? $this->getDate($data['customDate']) : null;
-        $pekerjaan = isset($data['pekerjaan']) ? $data['pekerjaan'] : null;
-        $instansi = isset($data['inputInstansi']) ? $data['inputInstansi'] : null;
-        $kota = isset($data['kotaAsal']) ? $data['kotaAsal'] : null;
-        $telp = isset($data['noTelp']) ? $data['noTelp'] : null;
-        $status = isset($data['status']) ? $data['status'] : null;
-        $alamat = isset($data['alamat']) ? $data['alamat'] : null;
-
         $query = 'UPDATE user SET nama = :nama, jenis_kelamin = :gender, tanggal_lahir = :tanggal, Instansi = :instansi, pekerjaan = :pekerjaan, kota_asal = :kota, number_phone = :telp, status = :status, alamat = :alamat WHERE id_user = :id';
         $this->db->query($query);
-        $this->db->bind('nama', $nama);
-        $this->db->bind('gender', $gender);
-        $this->db->bind('tanggal', $tanggal);
-        $this->db->bind('pekerjaan', $pekerjaan);
-        $this->db->bind('instansi', $instansi);
-        $this->db->bind('kota', $kota);
-        $this->db->bind('telp', $telp);
-        $this->db->bind('status', $status);
-        $this->db->bind('alamat', $alamat);
+        $this->db->bind('nama', $data['name'] ?? null);
+        $this->db->bind('gender', $data['inputGender'] ?? null);
+        $this->db->bind('tanggal', isset($data['customDate']) ? $this->formatDate($data['customDate']) : null);
+        $this->db->bind('pekerjaan', $data['pekerjaan'] ?? null);
+        $this->db->bind('instansi', $data['inputInstansi'] ?? null);
+        $this->db->bind('kota', $data['kotaAsal'] ?? null);
+        $this->db->bind('telp', $data['noTelp'] ?? null);
+        $this->db->bind('status', $data['status'] ?? null);
+        $this->db->bind('alamat', $data['alamat'] ?? null);
         $this->db->bind('id', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function insert($id, $status)
+    {
+        $query = "INSERT INTO status_user (id_user, status) VALUES (:id_user, :status)";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+        $this->db->bind('status', $status);
 
         $this->db->execute();
 
@@ -164,25 +168,26 @@ class UsersModel
     // Update the user's online status
     public function updateUserStatus($userId, $status)
     {
-        $query = "UPDATE user SET status1 = :status WHERE id_user = :id_user";
+        var_dump($userId, $status);  // Tambahkan pengecekan untuk melihat nilai yang dikirim
+        $query = "UPDATE user SET status_user = :status WHERE id_user = :id_user";
         $this->db->query($query);
-        $this->db->bind('status', $status);
         $this->db->bind('id_user', $userId);
+        $this->db->bind('status', $status);
 
         $this->db->execute();
         return $this->db->rowCount();
     }
 
-    // Retrieve online users
+
     public function getOnlineUsers()
     {
-        $query = "SELECT * FROM user WHERE online_status = 'online'";
+        $query = "SELECT * FROM user WHERE status_user = 'online'";
         $this->db->query($query);
 
         return $this->db->resultSet();
     }
 
-    private function getDate($date)
+    private function formatDate($date)
     {
         $tanggal = DateTime::createFromFormat('d-F-Y', $date);
         return $tanggal ? $tanggal->format('Y-m-d') : null;

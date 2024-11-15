@@ -13,7 +13,8 @@ class HomeController extends Controller
 
             $layoutData = [
                 "id_user" => $user['id_user'],
-                "id_gambar" => $user['id_gambar']
+                "id_gambar" => $user['id_gambar'],
+                "title" => 'Home'
             ];
             if ($role === 'pemilik kos') {
                 $this->view('home/landingpemilik', $layoutData);
@@ -62,7 +63,7 @@ class HomeController extends Controller
     {
         $this->view('login/verifpemilik');
     }
-    
+
 
 
 

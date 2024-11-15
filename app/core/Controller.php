@@ -19,7 +19,7 @@ class Controller
 
     protected function header($route, $data = [])
     {
-        header('Location:' . BASEURL . $route);
+        header('Location: http://localhost/web_rekost' . $route);
     }
 
     protected function helper($helper)

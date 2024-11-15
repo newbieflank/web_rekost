@@ -82,7 +82,7 @@ class AuthController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
-                    $this->header('/pemilik');
+                    $this->header('/');
                 } else {
                     $_SESSION['user'] = [
                         "id_user" => $user['id_user'],

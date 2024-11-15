@@ -2,7 +2,6 @@
 
 //GET METHOD
 Router::get('/', 'HomeController@index');
-Router::get('/pemilik', 'HomeController@home');
 Router::get('/login', 'LoginController@login');
 Router::get('/register', 'LoginController@register');
 Router::get('/id/{id}', 'LoginController@show');
@@ -23,7 +22,7 @@ Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
-Router::get('/chats', 'ChatController@ch');
+Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
@@ -55,6 +54,7 @@ Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
 Router::post('/addulasan','HomeController@AddUlasan');
+Router::post('/verif', 'FileController@lampiran');
 
 
 Router::get('/out', 'LoginController@out');

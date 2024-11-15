@@ -14,8 +14,6 @@ class Router
         self::$routes['POST'][$uri] = $action;
     }
 
-
-
     public static function dispatch()
     {
         $uri = self::getUri();
@@ -41,24 +39,16 @@ class Router
             }
         }
 
-        // If no route matches, redirect to the home route or handle 404
+        // Handle 404 response with JSON and redirect to the home route
         header('Content-Type: application/json', true, 404);
         echo json_encode(['status' => 'error', 'message' => 'Route not found']);
         header('Location: /web_rekost/');
         exit();
     }
 
-
-
-
-
-
-
     public static function getUri()
     {
-
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
 
         $baseDir = 'web_rekost';
         if (strpos($uri, $baseDir) === 0) {
@@ -72,30 +62,32 @@ class Router
     {
         list($controller, $method) = explode('@', $action);
 
-        $isApiRoute = strpos(self::getUri(), '/api') === 0;
+        // Detect if this is an API route by checking if the URI starts with /api/
+        $isApiRoute = strpos(self::getUri(), 'api/') === 0;
 
-
+        // Set the controller directory based on route type
         $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
         $controller = ucfirst($controller);
         $controllerFile = "$controllerDir/$controller.php";
 
-
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
 
+            // Check if the controller class exists
             if (class_exists($controller)) {
                 $controllerInstance = new $controller();
 
+                // Check if the method exists in the controller
                 if (method_exists($controllerInstance, $method)) {
                     call_user_func_array([$controllerInstance, $method], $params);
                 } else {
-                    echo "Error: Method '$method' not found in controller '$controller'.";
+                    echo json_encode(['status' => 'error', 'message' => "Method $method not found in controller $controller."]);
                 }
             } else {
-                echo "Error: Controller class '$controller' not found.";
+                echo json_encode(['status' => 'error', 'message' => "Controller $controller not found."]);
             }
         } else {
-            echo "Error: Controller file '$controllerFile' not found.";
+            echo json_encode(['status' => 'error', 'message' => "Controller file $controllerFile not found."]);
         }
     }
 }
