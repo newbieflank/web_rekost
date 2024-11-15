@@ -22,7 +22,7 @@ Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
-Router::get('/chats', 'ChatController@ch');
+Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
