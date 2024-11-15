@@ -58,10 +58,10 @@ class UsersModel
             $this->db->query($query);
         }
         $this->db->bind('email', $email);
-    
+
         return $this->db->single();
     }
-    
+
     public function findUserByEmail($email)
     {
         $query = "SELECT * FROM user WHERE email = :email";
@@ -153,11 +153,12 @@ class UsersModel
         return $this->db->rowCount();
     }
 
-    public function insert($id)
+    public function insert($id, $status)
     {
-        $query = "INSERT INTO status_user (id_user) VALUES (:id_user)";
+        $query = "INSERT INTO status_user (id_user, status) VALUES (:id_user, :status)";
         $this->db->query($query);
         $this->db->bind('id_user', $id);
+        $this->db->bind('status', $status);
 
         $this->db->execute();
 
@@ -172,11 +173,11 @@ class UsersModel
         $this->db->query($query);
         $this->db->bind('id_user', $userId);
         $this->db->bind('status', $status);
-    
+
         $this->db->execute();
         return $this->db->rowCount();
     }
-    
+
 
     public function getOnlineUsers()
     {
