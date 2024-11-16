@@ -177,16 +177,5 @@ GROUP BY
         }
     }
 
-    public function getAdditionalAreas() {
-        // Daftar daerah tambahan
-        $additionalAreas = [
-            "Bangorejo",
-            "Purwoharjo",
-            "Cluring",
-            "Srono",
-            "Gambiran",
-        ];
-    }
-
 }
 ?>

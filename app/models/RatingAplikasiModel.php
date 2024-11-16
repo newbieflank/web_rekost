@@ -18,11 +18,12 @@ class RatingAplikasiModel
     ulasan_aplikasi.rating AS rating,
     ulasan_aplikasi.tanggal_ulas AS tanggal_review,
     COUNT(*) OVER() AS total_rating
-FROM 
+    FROM 
     ulasan_aplikasi
-JOIN 
+    JOIN 
     user ON ulasan_aplikasi.id_user = user.id_user
-";
+    ORDER BY 
+    ulasan_aplikasi.rating DESC;";
 
             $this->db->query($query);
             $results = $this->db->resultSet();
@@ -47,10 +48,11 @@ JOIN
 
     public function AddRating($data){
         try {
-            $query = "INSERT INTO `ulasan_aplikasi` (`id_user`, `ulasan`) VALUES (:id_user, :ulasan)";
+            $query = "INSERT INTO `ulasan_aplikasi` (`id_user`, `ulasan`,`rating`) VALUES (:id_user, :ulasan, :rating)";
             $this->db->query($query);
             $this->db->bind('id_user', $data['id_user']);
             $this->db->bind('ulasan', $data['ulasan']);
+            $this->db->bind('rating',$data['rating']);
             $this->db->execute();
             return $this->db->rowCount();
 

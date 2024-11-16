@@ -19,6 +19,40 @@
             scroll-behavior: smooth;
             scroll-padding-top: 50px;
         }
+
+        .card {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .card-title,
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .star-rating .fa-star {
+            cursor: pointer;
+            font-size: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating .fa-star.inactive {
+            color: #ccc;
+        }
+
+        .star-rating .fa-star.active {
+            color: #f39c12;
+        }
     </style>
 </head>
 
@@ -142,7 +176,8 @@
                 <?php foreach ($data['rating_aplikasi'] as $rating): ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
-                            <?php echo $rating['total_rating'] ?></h2>
+                            <?php echo $rating['total_rating'] ?>
+                        </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
                     <?php break; ?>
@@ -150,7 +185,8 @@
                 <?php foreach ($data['penyewa'] as $penyewa): ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
-                            <?php echo $penyewa['jumlah_penyewa'] ?></h2>
+                            <?php echo $penyewa['jumlah_penyewa'] ?>
+                        </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                     </div>
                     <?php break; ?>
@@ -215,11 +251,12 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $popular["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
-                                    alt="Kost Image">
+                                <img src="<?= asset('uploads' . $popular["id_kos"] . 'foto_luar.jpg') ?>"
+                                    class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $popular['nama_kos'] ?></h5>
+                                        <?php echo $popular['nama_kos'] ?>
+                                    </h5>
                                     <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $popular['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
@@ -277,7 +314,8 @@
                                     alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $best['nama_kos'] ?></h5>
+                                        <?php echo $best['nama_kos'] ?>
+                                    </h5>
                                     <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
@@ -314,11 +352,12 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $campus["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
-                                    alt="Kost Image">
+                                <img src="<?= asset('uploads' . $campus["id_kos"] . 'foto_luar.jpg') ?>"
+                                    class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $campus['nama_kos'] ?></h5>
+                                        <?php echo $campus['nama_kos'] ?>
+                                    </h5>
                                     <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
@@ -355,93 +394,29 @@
                                             alt="User Profile">
                                         <div>
                                             <h5 class="card-title" style="margin-bottom: 5px;">
-                                                <?php echo $rating['nama_user'] ?></h5>
+                                                <?php echo $rating['nama_user'] ?>
+                                            </h5>
                                             <p class="card-text" style="margin-top: 0;"><i
                                                     class="fas fa-map-marker-alt"></i> <?php echo $rating['alamat_user'] ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="mb-3" style="color: #FFC107;">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                                        <?php
+                                        $ratingValue = $rating['rating'];
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $ratingValue) {
+                                                echo '<i class="fas fa-star"></i>';
+                                            } else {
+                                                echo '<i class="far fa-star"></i>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                     <p class="card-text"><?php echo $rating['review'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
-
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -455,15 +430,18 @@
                     <div class="mt-2">
                         <img src="<?= asset('img/user.png') ?>" alt="Circle Image" class="rounded-circle"
                             style="width: 50px; height: 50px;">
-                        <div class="star-rating mt-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                        <div class="star-rating mt-2" id="rating-container">
+                            <i class="fas fa-star inactive" data-rating="1"></i>
+                            <i class="fas fa-star inactive" data-rating="2"></i>
+                            <i class="fas fa-star inactive" data-rating="3"></i>
+                            <i class="fas fa-star inactive" data-rating="4"></i>
+                            <i class="fas fa-star inactive" data-rating="5"></i>
                         </div>
                     </div>
-                    <form id="ulasanForm" method="post" action="<?= BASEURL; ?>addulasan" class="form-inline mt-4">
+
+                    <form id="ulasanForm" method="post" action="<?= BASEURL; ?>addulasan" class="form-inline mt-4"
+                        onsubmit="return validateForm()">
+                        <input type="hidden" id="ratingInput" name="rating">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Tuliskan ulasan anda disini...."
                                 id="reviewInput" name="reviewInput">
@@ -473,13 +451,10 @@
                             </button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </section>
-
     <hr style="border: 1px solid #EEEEEE; margin: 0px;">
     <footer id="contact">
         <div class="container">
@@ -529,8 +504,9 @@
   <script>
     AOS.init();
   </script> -->
-  <script src="<?= asset('js/navbar.js') ?>"></script>
+    <script src="<?= asset('js/navbar.js') ?>"></script>
     <script src="<? asset('js/file.js') ?>"></script>
+    <script src="<?= asset('js/StarRating.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
