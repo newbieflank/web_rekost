@@ -4,14 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+    <title>Persetujuan Kost</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
     <style>
         body {
             background-color: #F9FCFF;
             font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            text-align: center;
         }
 
         .sidebar {
@@ -52,15 +58,14 @@
             padding: 0.5rem;
         }
 
-        h2 {
-            margin-bottom: 24px;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 400;
+        .table-responsive {
+            overflow-x: auto;
         }
 
-        table tr {
-            text-align: center;
+        .badge {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            border-radius: 5px;
         }
 
         table th,
@@ -73,14 +78,6 @@
         table thead {
             background-color: #343a40;
             color: #fff;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .dataTables_wrapper .dataTables_filter {
-            margin-bottom: 12px;
         }
 
         .icon-box {
@@ -98,13 +95,6 @@
             font-size: 1.5rem;
             color: #fff;
         }
-
-        h2 {
-            margin-bottom: 24px;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 400;
-        }
     </style>
 </head>
 
@@ -118,24 +108,16 @@
                 <a class="nav-link" href="dashboard" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
-                <a class="nav-link active" href="acceptance" id="persetujuanLink">
+                <a class="nav-link" href="acceptance" id="persetujuanLink">
                     <i class="fas fa-check-circle"></i> Persetujuan Kost
                 </a>
-                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1" id="daftarPenggunaBtn">
+                <button class="btn w-100 text-start active" type="button" data-bs-toggle="collapse" data-bs-target="#dataPenggunaCollapse" aria-expanded="false" aria-controls="dataPenggunaCollapse">
                     <i class="bi bi-people"></i> Data Pengguna
                 </button>
-                <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="p-3">
-                            <div class="nav flex-column">
-                                <a href="#" class="nav-link w-100 mb-2" id="pencariKosLink">
-                                    <i class="bi bi-person-fill"></i> Pencari Kos
-                                </a>
-                                <a href="#" class="nav-link active w-100" id="pemilikKosLink">
-                                    <i class="bi bi-person-bounding-box"></i> Pemilik Kos
-                                </a>
-                            </div>
-                        </div>
+                <div class="collapse" id="dataPenggunaCollapse">
+                    <div class="mt-2 ps-3">
+                        <a href="pencarikos" class="nav-link">Pencari Kos</a>
+                        <a href="pemilikkos" class="nav-link active">Pemilik Kos</a>
                     </div>
                 </div>
             </nav>
@@ -146,67 +128,48 @@
                     <span class="navbar-text me-auto fw-bold" style="color: #000; font-size: 18px;">
                         Selamat Datang, Admin!
                     </span>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-bell"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-user-circle"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
             <div class="container mt-4">
                 <h2>Daftar Pemilik Kos</h2>
-                <div class="table-responsive">
-                    <table id="pencariKosTable" class="table table-bordered">
+                <div class="table-responsive mt-4">
+                    <table id="userTable" class="table table-bordered">
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
-                                <th>Nama Lengkap</th>
+                                <th>Nama</th>
                                 <th>Email</th>
-                                <th>No. Telepon</th>
+                                <th>Status</th>
                                 <th>Alamat</th>
-                                <th>Tanggal Registrasi</th>
+                                <th>No Telephone</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Pekerjaan</th>
+                                <th>Kota Asal</th>
+                                <th>Instansi</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Status User</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            // $pencariKos = [
-                            //     [
-                            //         "no" => 1,
-                            //         "nama" => "Mafira Aurelia",
-                            //         "email" => "mafira@example.com",
-                            //         "telepon" => "08123456789",
-                            //         "alamat" => "Jember",
-                            //         "tanggal_lahir" => "2024-11-01"
-                            //     ],
-                            //     [
-                            //         "no" => 2,
-                            //         "nama" => "Aurel Salsabila",
-                            //         "email" => "aurel@example.com",
-                            //         "telepon" => "08198765432",
-                            //         "alamat" => "Bondowoso",
-                            //         "tanggal_lahir" => "2024-11-02"
-                            //     ]
-                            // ];
-                            // foreach ($pencariKos as $pencari) {
-                            //     echo "<tr>";
-                            //     echo "<td>" . $pencari['no'] . "</td>";
-                            //     echo "<td>" . $pencari['nama'] . "</td>";
-                            //     echo "<td>" . $pencari['email'] . "</td>";
-                            //     echo "<td>" . $pencari['telepon'] . "</td>";
-                            //     echo "<td>" . $pencari['alamat'] . "</td>";
-                            //     echo "<td>" . $pencari['tanggal_lahir'] . "</td>" . $pencari['email'] . "</td>";
-                            //     echo "</tr>";
-                            // }
+                            $no = 1;
+                            foreach ($data as $user) :
                             ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $user['nama'] ?></td>
+                                    <td><?= $user['email'] ?></td>
+                                    <td><?= $user['status'] ?></td>
+                                    <td><?= $user['alamat'] ?></td>
+                                    <td><?= $user['number_phone'] ?></td>
+                                    <td><?= $user['tanggal_lahir'] ?></td>
+                                    <td><?= $user['pekerjaan'] ?></td>
+                                    <td><?= $user['kota_asal'] ?></td>
+                                    <td><?= $user['instansi'] ?></td>
+                                    <td><?= $user['jenis_kelamin'] ?></td>
+                                    <td><?= $user['status_user'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -214,15 +177,16 @@
         </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#pencariKosTable').DataTable();
+            $('#dataPenggunaCollapse').addClass('show');
+            $('#userTable').DataTable();
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

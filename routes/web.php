@@ -15,7 +15,7 @@ Router::get(uri: '/fotokos', action: 'DataKosController@fotokos');
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
-Router::get('/detailkos', 'DetailController@detailkos');
+Router::get('/detailkos/{id}', 'DetailController@detailkos');
 Router::get(uri: '/fasilitaskos', action: 'DataKosController@fasilitas');
 Router::get(uri: '/harga', action: 'DataKosController@harga');
 Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
@@ -25,15 +25,15 @@ Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
 Router::get('/echo', 'HomeController@echo');
 Router::get('/chats', 'ChatController@ch');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
-Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
+Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/getChat/{userId}', 'ChatController@get_chat');
 
 //admin
 Router::get('/dashboard', 'AdminController@dashboard');
-Router::get('/acceptance', 'AdminController@acceptance');
-Router::get('/peencarikos', 'AdminController@pencarikos');
-Router::get('/pemilikkos', 'AdminController@pemilikkos');
+Router::get('/acceptance', 'AdminController@getPersetujuanKos');
+Router::get('/pencarikos', 'AdminController@getPencarikos');
+Router::get('/pemilikkos', 'AdminController@getPemilikkos');
 
 //login Google
 Router::get('/auth', 'AuthController@login');

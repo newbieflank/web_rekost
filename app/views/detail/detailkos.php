@@ -117,7 +117,7 @@
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR 500.000</span> <br>
                         <span class="text-grey">/kamar/bulan</span>
-                        <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
+                        <a href="2147483647/konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>

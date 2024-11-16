@@ -195,4 +195,68 @@ class UsersModel
         $tanggal = DateTime::createFromFormat('d-F-Y', $date);
         return $tanggal ? $tanggal->format('Y-m-d') : null;
     }
+
+    public function getPersetujuanKos()
+    {
+        $query = "SELECT user.id_user, user.email, user.nama, kos.nama_kos, kos.alamat, user.kota_asal, user.number_phone, status_user.status FROM user JOIN kos ON user.id_user = kos.id_user JOIN status_user ON user.id_user = status_user.id_user WHERE role = 'pemilik kos';";
+
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+    public function getPemilikKos()
+    {
+        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, status_user FROM user WHERE role='pemilik kos'";
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+    public function getPencariKos()
+    {
+        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, status_user FROM user WHERE role='pencari kos'";
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+    public function countPemilikKos()
+    {
+        $query = "SELECT COUNT(*) AS total FROM user WHERE role='pemilik kos'";
+        $this->db->query($query);
+        return $this->db->single()['total'];
+    }
+    public function countPencariKos()
+    {
+        $query = "SELECT COUNT(*) AS total FROM user WHERE role='pencari kos'";
+        $this->db->query($query);
+        return $this->db->single()['total'];
+    }
+    public function countKos()
+    {
+        $query = "SELECT COUNT(*) AS total FROM kos";
+        $this->db->query($query);
+        return $this->db->single()['total'];
+    }
+    public function countRating() {}
+    public function getUserRegistration()
+    {
+        $query = "SELECT DATE(created_at) as date, COUNT(*) as total FROM user GROUP BY DATE(created_at) ORDER BY created_at DESC";
+        $this->db->query($query);
+
+        return $this->db->resultSet();
+    }
+
+    public function getUserRegistrationByDate($date, $role = null)
+    {
+        $query = "SELECT COUNT(*) as total FROM user WHERE DATE(created_at) = :date";
+        if ($role) {
+            $query .= " AND role = :role";
+        }
+        $query .= " GROUP BY DATE(created_at) ORDER BY created_at DESC";
+        $this->db->query($query);
+        $this->db->bind('date', $date);
+        if ($role) {
+            $this->db->bind('role', $role);
+        }
+        return $this->db->single();
+    }
 }
