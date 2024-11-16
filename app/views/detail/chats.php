@@ -44,9 +44,8 @@
     <!-- Chat Window -->
     <section class="chat-window flex-grow-1 p-3">
         <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
-        <img src="<?= !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : 'path/to/your/img/default.png' ?>" 
-     alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
-
+            <img src="<?= !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : 'path/to/your/img/default.png' ?>" 
+                 alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
             <div class="chat-info">
                 <div id="chat-user-name"></div>
                 <div class="text-muted" id="chat-user-status"></div>
@@ -59,14 +58,12 @@
         </section>
 
         <!-- Chat Input -->
-        <!-- Chat Input -->
-<footer class="chat-input align-items-center mt-3" id="chat-input-area">
-    <input type="text" class="form-control rounded me-2" placeholder="Tulis Pesan..." id="messageInput">
-    <button class="btn btn-primary" id="sendButton">
-        <i class="fas fa-paper-plane"></i>
-    </button>
-</footer>
-
+        <footer class="chat-input align-items-center mt-3" id="chat-input-area">
+            <input type="text" class="form-control rounded me-2" placeholder="Tulis Pesan..." id="messageInput">
+            <button class="btn btn-primary" id="sendButton">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </footer>
     </section>
 </section>
 
@@ -76,33 +73,26 @@
     // Load Chat Function
     function loadChat(userId, userName, userImage) {
         incomingUserId = userId;
-        
+
         const chatInputArea = document.getElementById('chat-input-area');
         const chatPlaceholder = document.getElementById('chat-placeholder');
         const chatMessages = document.getElementById('chat-messages');
-        
-        if (chatInputArea) chatInputArea.style.display = 'flex';
-        if (chatPlaceholder) chatPlaceholder.style.display = 'none';
-        if (chatMessages) chatMessages.innerHTML = '';
 
-        const chatUserImage = document.getElementById('chat-user-image');
-        if (chatUserImage) {
-            chatUserImage.src = userImage || 'path/to/default-image.png';
-            chatUserImage.style.display = 'block';
-        }
+        chatInputArea.style.display = 'flex';
+        chatPlaceholder.style.display = 'none';
+        chatMessages.innerHTML = '';
 
         document.getElementById('chat-user-name').textContent = userName;
         document.getElementById('chat-user-status').textContent = 'Sedang online';
 
-        fetch(`get_chat/${userId}`)
+        fetch(`getchat/${userId}`)
             .then(response => response.ok ? response.json() : Promise.reject('Failed to load'))
             .then(data => {
-                if (Array.isArray(data) && data.length > 0) {
-                    data.forEach(chat => {
+                if (Array.isArray(data.messages) && data.messages.length > 0) {
+                    data.messages.forEach(chat => {
                         const messageElement = document.createElement('div');
                         messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : '', 'mb-3');
-                        
-                        // Sanitasi pesan
+
                         const sanitizedMessage = document.createElement('div');
                         sanitizedMessage.textContent = chat.message;
 
@@ -147,17 +137,16 @@
             const chatMessages = document.querySelector('.chat-messages');
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Mengirim pesan ke server
-            fetch('send_chat/'+incomingUserId, {
+            fetch(`sendchat/${incomingUserId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `id_reciver=${incomingUserId}&message=${encodeURIComponent(messageText)}`
+                body: `id_receiver=${incomingUserId}&message=${encodeURIComponent(messageText)}`
             })
             .then(response => response.json())
             .then(data => {
+                if (data.status === 'error') alert(data.message);
                 console.log(data);
                 
-                if (data.status === 'error') alert(data.message);   
             })
             .catch(error => console.log('Error sending message:', error));
         }

@@ -2,6 +2,7 @@
 let map;
 let marker;
 
+
 // Fungsi untuk menginisialisasi peta
 function initMap() {
     if (map) {
@@ -36,11 +37,26 @@ function initMap() {
         updateMarker(location.lat, location.lng);
     });
 
+    // Ambil koordinat dari input tersembunyi
+    const latitude = parseFloat(document.getElementById('latitude').value);
+    const longitude = parseFloat(document.getElementById('longitude').value);
+
+    console.log('Initializing map with:', latitude, longitude);
+
+    // If coordinates are valid, update the marker and center map
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+        updateMarker(latitude, longitude);
+    } else {
+        console.warn('Latitude or Longitude is not valid.');
+    }
+
     // Invalidate size setelah map dibuat
     setTimeout(() => {
         map.invalidateSize();
     }, 100);
 }
+
+
 
 // Fungsi untuk memperbarui marker dan data lokasi
 function updateMarker(latitude, longitude) {
@@ -67,7 +83,7 @@ function updateMarker(latitude, longitude) {
         const position = marker.getLatLng();
         document.getElementById('latitude').value = position.lat;
         document.getElementById('longitude').value = position.lng;
-        await updateAddress(position.lat, position.lng);
+        updateAddress(position.lat, position.lng);
     });
 }
 
@@ -132,4 +148,8 @@ function getCurrentLocation() {
     } else {
         alert("Browser Anda tidak mendukung geolokasi.");
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        initMap();
+    });
 }

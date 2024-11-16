@@ -91,12 +91,8 @@ class KosModel
 
             $this->db->execute();
             return $this->db->rowCount();
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-
-
-
 }
