@@ -82,7 +82,7 @@ class AuthController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
-                    $this->header('/pemilik');
+                    $this->header('/');
                 } else {
                     $_SESSION['user'] = [
                         "id_user" => $user['id_user'],
@@ -99,7 +99,7 @@ class AuthController extends Controller
 
             case 'register':
                 $data = [
-                    'name' => $googleUser->name,
+                    'username' => $googleUser->name,
                     'email' => $googleUser->email,
                 ];
 

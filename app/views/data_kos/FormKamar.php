@@ -135,7 +135,7 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" method="post">
+    <form id="multiStepForm" action="<?= BASEURL; ?>fasilitaskos/tambah" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
             <div class="step-container" data-step="2">
                 <h5 class="card-header">
@@ -202,7 +202,7 @@
                         <div class="mb-3 row">
                             <label for="TipeKamar" class="col-sm-2 col-form-label">Tipe Kamar</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="TipeKamar" name="tipe_kamar">
+                                <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
                                     <option value="">Pilih tipe kamar</option>
                                     <option value="A">Tipe A</option>
                                     <option value="B">Tipe B</option>
@@ -214,15 +214,16 @@
                         <div class="mb-3 row">
                             <label for="Ukuran" class="col-sm-2 col-form-label">Ukuran Kamar</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="UkuranSelect" onchange="setUkuran(this.value)">
+                                <select class="form-control" id="UkuranSelect" name="luas_kamar">
                                     <option value="">Pilih ukuran</option>
+                                    <option value="2x2">2x2 m</option>
+                                    <option value="2x3">2x3 m</option>
+                                    <option value="3x3">3x3 m</option>
                                     <option value="3x4">3x4 m</option>
+                                    <option value="4x4">4x4 m</option>
                                     <option value="4x5">4x5 m</option>
-                                    <option value="5x6">5x6 m</option>
-                                    <option value="custom">Custom</option>
+                                    <option value="5x5">5x5 m</option>
                                 </select>
-                                <input type="text" class="form-control mt-2" name="ukuran_kamar" id="UkuranCustom"
-                                    placeholder="Contoh: 3x4 m" style="display: none;" oninput="formatInput(this)">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -236,18 +237,7 @@
                             <label for="kamartersedia" class="col-sm-2 col-form-label">Jumlah Kamar Tersedia</label>
                             <div class="col-sm-10">
                                 <input type="number" name="kamar_tersedia" class="form-control" id="kamartersedia"
-                                    placeholder="Masukkan jumlah ketersediaan kamar">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="StatusKamar" class="col-sm-2 col-form-label">Status Kamar</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="StatusKamar" name="status_kamar">
-                                    <option value="">Pilih status</option>
-                                    <option value="tersedia">Tersedia</option>
-                                    <option value="tidak_tersedia">Tidak Tersedia</option>
-                                    <option value="maintenance">Dalam Perbaikan</option>
-                                </select>
+                                    placeholder="Masukkan jumlah ">
                             </div>
                         </div>
                     </div>
@@ -262,110 +252,126 @@
                     <div class="row m-5">
                     </div>
                     <div class="mb-3 row">
+                        <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="harga_hari" id="harga_minggu" class="form-control"
+                                placeholder="Rp.0">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="harga_minggu" id="harga_minggu" class="form-control"
+                                placeholder="Rp.0">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
                         <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" name="harga" id="perbulan" placeholder="Rp.0">
+                            <input type="number" name="harga_bulan" id="harga_bulan" class="form-control"
+                                placeholder="Rp.0">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-</div>
 
-<!-- //Step 3: Tambahan  -->
-<div class="step-container" data-step="3">
-    <h5 class="card-header">Fasilitas Kos</h5>
-    <div class="card-body">
-        <div class="row m-5">
-            <div class="mb-4">
-                <label class="form-label fw-bold fs-5 mb-3">Fasilitas Umum</label>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="WiFi" id="wifi">
-                            <label class="form-check-label" for="wifi">
-                                WiFi
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Parkiran"
-                                id="parkiran">
-                            <label class="form-check-label" for="parkiran">
-                                Parkiran
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="MesinCuci"
-                                id="mesinCuci">
-                            <label class="form-check-label" for="mesinCuci">
-                                Mesin Cuci
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="kulkas"
-                                id="kulkas">
-                            <label class="form-check-label" for="kulkas">
-                                Kulkas
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="tv" id="tv">
-                            <label class="form-check-label" for="tv">
-                                TV
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="dapur" id="dapur">
-                            <label class="form-check-label" for="dapur">
-                                Dapur Bersama
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="kamarMandi"
-                                id="kamarMandi">
-                            <label class="form-check-label" for="kamarMandi">
-                                Kamar Mandi Umum
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="fasilitas[]" value="listrikAir"
-                                id="listrikAir">
-                            <label class="form-check-label" for="listrikAir">
-                                Listrik dan Air
-                            </label>
+            <!-- //Step 3: Tambahan  -->
+            <div class="step-container" data-step="3">
+                <h5 class="card-header">Fasilitas Kos</h5>
+                <div class="card-body">
+                    <div class="row m-5">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Kasur"
+                                            id="Kasur">
+                                        <label class="form-check-label" for="Kasur">
+                                            Kasur
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Kipas_Angin" id="Kipas_Angin">
+                                        <label class="form-check-label" for="Kipas_Angin">
+                                            Kipas Angin
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="AC"
+                                            id="AC">
+                                        <label class="form-check-label" for="AC">
+                                            AC
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Meja"
+                                            id="Meja">
+                                        <label class="form-check-label" for="Meja">
+                                            Meja
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Lemari" id="Lemari">
+                                        <label class="form-check-label" for="Lemari">
+                                            Lemari
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Kamar_Mandi_Dalam" id="Kamar_Mandi_Dalam">
+                                        <label class="form-check-label" for="Kamar_Mandi_Dalam">
+                                            Kamar Mandi Dalam
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Air_Hangat" id="Air_Hangat">
+                                        <label class="form-check-label" for="Air_Hangat">
+                                            Air Hangat
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Bantal" id="Bantal">
+                                        <label class="form-check-label" for="Bantal">
+                                            Bantal
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
 
-<!-- Tombol Navigasi -->
-<div class="d-flex justify-content-between mt-3 mb-5">
-    <button type="button" class="btn btn-prev" onclick="prevStep()">
-        <i class="fas fa-chevron-left me-2"></i>Sebelumnya
-    </button>
-    <button type="button" class="btn btn-next" onclick="nextStep()">
-        Selanjutnya<i class="fas fa-chevron-right ms-2"></i>
-    </button>
-</div>
-</form>
+            <!-- Tombol Navigasi -->
+            <div class="d-flex justify-content-between mt-3 mb-5">
+                <button type="button" class="btn btn-prev" onclick="prevStep()">
+                    <i class="fas fa-chevron-left me-2"></i>Sebelumnya
+                </button>
+                <button type="button" class="btn btn-next" onclick="nextStep()">
+                    Selanjutnya<i class="fas fa-chevron-right ms-2"></i>
+                </button>
+            </div>
+    </form>
 </div>
 
 <script>
@@ -406,6 +412,19 @@
         }
     }
 
+    function formatInput(input) {
+        let value = input.value.replace(/[^0-9x]/g, '');
+        let parts = value.split('x');
+        if (parts.length > 2) {
+            parts = [parts[0], parts.slice(1).join('')];
+        }
+        if (parts.length === 2 && parts[1] !== '') {
+            input.value = `${parts[0]}x${parts[1]} m`;
+        } else {
+            input.value = value;
+        }
+    }
+
     function nextStep() {
         if (currentStep < totalSteps) {
             currentStep++;
@@ -430,34 +449,62 @@
         updateProgressBar();
     }
 
-    function setUkuran(value) {
-        var customInput = document.getElementById('UkuranCustom');
-        if (value === "custom") {
-            customInput.style.display = 'block';
-            customInput.focus();
-        } else {
-            customInput.style.display = 'none';
-            customInput.value = value;
-        }
-    }
+    function submitForm() {
+        const form = document.getElementById('multiStepForm');
+        const formData = new FormData(form);
 
-    function formatInput(input) {
-        let value = input.value.replace(/[^0-9x]/g, '');
-        let parts = value.split('x');
-        if (parts.length > 2) {
-            parts = [parts[0], parts.slice(1).join('')];
-        }
-        if (parts.length === 2 && parts[1] !== '') {
-            input.value = `${parts[0]}x${parts[1]} m`;
-        } else {
-            input.value = value;
-        }
+        // Collect checked fasilitas
+        const fasilitas = [];
+        document.querySelectorAll('input[name="fasilitas[]"]:checked').forEach(checkbox => {
+            fasilitas.push(checkbox.value);
+        });
+
+        // Tambahkan fasilitas yang dicentang ke formData
+        formData.append('fasilitas', (fasilitas));
+
+        // Kirim data menggunakan fetch
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Data kos berhasil disimpan',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = BASEURL + 'datakos/';
+                    });
+                } else {
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: data.message,
+                        icon: 'error'
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Sukses!',
+                    text: 'Data kos berhasil disimpan',
+                    icon: 'success'
+                });
+            });
     }
 
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         showStep(currentStep);
         updateProgressBar();
     });
+
 </script>

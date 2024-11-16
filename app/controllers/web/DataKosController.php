@@ -15,7 +15,16 @@ class DataKosController extends Controller
 
     public function datakos()
     {
-        $kos = $this->KosModel->getData($_SESSION['user']['id_kos']);
+        $id_user = $_SESSION['user']['id_user'];
+        $id_kos = $_SESSION['user']['id_kos'];
+
+        $kos = $this->KosModel->getData($id_kos);
+        $user = $this->model('UsersModel')->findUserById($id_user);
+
+        $array = $kos['jenis_fasilitas'];
+        $fasilitas = explode(',', $array);
+        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
+        $imagePath = $baseDir . $id_user . '/' . $id_kos;
 
         $dataKos = [
             'namaKos' => $kos['nama_kos'],
@@ -23,9 +32,12 @@ class DataKosController extends Controller
             'tipe' => $kos['tipe_kos'],
             'alamat' => $kos['alamat'],
             'peraturan' => $kos['peraturan_kos'],
-            'fasilitas' => $kos['jenis_fasilitas'],
+            'fasilitas' => $fasilitas,
             'latitude' => $kos['latitude'],
-            'longitude' => $kos['longitude']
+            'longitude' => $kos['longitude'],
+            'imagePath' => $imagePath,
+            'id_user' => $id_user,
+            'id_kos' => $id_kos
         ];
 
         ob_start();
@@ -35,6 +47,9 @@ class DataKosController extends Controller
         $data = [
             "content" => $content,
             "title" => "DataKos",
+            "id_user" => $user['id_user'],
+            "id_gambar" => $user['id_gambar'],
+            "id_kos" => $id_kos
             // "footer" => false
         ];
 
@@ -49,7 +64,8 @@ class DataKosController extends Controller
         }
 
         try {
-            $userId = $_SESSION['user']['id_kos'];
+            $idKos = $_SESSION['user']['id_kos'];
+            $user = $_SESSION['user']['id_user'];
 
             $kosData = [
                 'nama_kos' => $_POST['nama_kos'],
@@ -60,17 +76,72 @@ class DataKosController extends Controller
                 'alamat' => $_POST['alamat'],
                 'latitude' => $_POST['latitude'],
                 'longitude' => $_POST['longitude'],
-                'id_kos' => $userId
+                'id_kos' => $idKos
+            ];
+
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
+            $uploadDir = $baseDir . $user . '/' . $idKos . '/';
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $fileMappings = [
+                'foto_depan' => 'foto_depan',
+                'foto_belakang' => 'foto_belakang',
+                'foto_dalam' => 'foto_dalam',
+                'foto_jalan' => 'foto_jalan',
             ];
 
             // Insert kos data into the database
             $kosId = $this->KosModel->tambahDataKos($kosData);
 
             if ($kosId > 0) {
-                $response = ['success' => true, 'message' => 'Data kos berhasil ditambahkan'];
-                // $this->header('/datakos');
+                foreach ($fileMappings as $inputName => $customName) {
+                    if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
+                        $fileTmpPath = $_FILES[$inputName]['tmp_name'];
+                        $newFileName = $customName . '.jpg';
+                        $targetFilePath = $uploadDir . $newFileName;
+
+                        if (file_exists($targetFilePath)) {
+                            // Replace the existing file
+                            unlink($targetFilePath);
+                        }
+
+                        // Move the uploaded file to the target directory
+                        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+                            $response = ['success' => true, 'message' => 'Data kos berhasil di Ubah'];
+                        } else {
+                            $response = ['success' => false, 'message' => 'Gagal Mengunggah Foto'];
+                        }
+                    } else {
+                        $response = ['success' => true, 'message' => 'Data Kos berhasil di Ubah'];
+                    }
+                }
+            } else if ($_FILES) {
+                foreach ($fileMappings as $inputName => $customName) {
+                    if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
+                        $fileTmpPath = $_FILES[$inputName]['tmp_name'];
+                        $newFileName = $customName . '.jpg';
+                        $targetFilePath = $uploadDir . $newFileName;
+
+                        if (file_exists($targetFilePath)) {
+                            // Replace the existing file
+                            unlink($targetFilePath);
+                        }
+
+                        // Move the uploaded file to the target directory
+                        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+                            $response = ['success' => true, 'message' => 'Data kos berhasil di Ubah'];
+                        } else {
+                            $response = ['success' => false, 'message' => 'Gagal Mengunggah Foto'];
+                        }
+                    } else {
+                        $response = ['success' => true, 'message' => 'Data Kos berhasil di Ubah'];
+                    }
+                }
             } else {
-                $response = ['success' => false, 'message' => 'Gagal menambahkan data kos', $kosData];
+                $response = ['success' => false, 'message' => 'Gagal Mengubah Data Kos', $kosData];
             }
         } catch (Exception $e) {
             $response = ['success' => false, 'message' => $e->getMessage()];
@@ -80,7 +151,6 @@ class DataKosController extends Controller
         echo json_encode($response);
         exit;
     }
-
 
     public function fasilitas()
     {
@@ -109,58 +179,33 @@ class DataKosController extends Controller
         }
 
         try {
-            $userId = $_SESSION['user']['id_user'];
 
-            $kosId = $this->KosModel->getLatestKosId($userId);
+            $userId = $_SESSION['user']['id_kos'];
 
-            $kamarData = [
-                'tipe_kamar' => $_POST['tipe_kamar'],
-                'luas_kamar' => $_POST['ukuran_kamar'],
-                'status_kamar' => $_POST['status_kamar'],
-                'fasilitas_kamar' => implode(',', $_POST['fasilitas_kamar']),
-                'harga' => $_POST['harga'],
+
+            $KamarData = [
+                'luas_kamar' => $_POST['luas_kamar'],
+                'jenis_fasilitas' => $_POST['fasilitas'],
+                'harga_bulan' => $_POST['harga_bulan'],
                 'kamar_tersedia' => $_POST['kamar_tersedia'],
-                'id_kos' => $kosId
+                'tipe_kamar' => $_POST['tipe_kamar'],
+                'total_kamar' => $_POST['total_kamar'],
+                'harga_minggu' => $_POST['harga_minggu'],
+                'harga_hari' => $_POST['harga_hari'],
+                'id_kos' => $userId
             ];
 
-            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/' . $userId . '/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
+            -$kamarid = $this->KosModel->tambahDataKamar($KamarData);
 
-            $imageFields = ['foto_depan_kamar', 'foto_kamar_mandi', 'foto_dalam_kamar', 'foto_lain'];
-            $uploadedImages = [];
-
-            foreach ($imageFields as $field) {
-                if (isset($_FILES[$field]) && $_FILES[$field]['error'] === UPLOAD_ERR_OK) {
-                    $file = $_FILES[$field];
-                    $fileName = uniqid() . '_' . basename($file['name']);
-                    $targetPath = $uploadDir . $fileName;
-
-                    if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-                        $uploadedImages[$field] = $fileName;
-                    }
-                }
-            }
-
-            $kamarId = $this->KosModel->tambahDataKamar($kamarData);
-
-            if ($kamarId) {
-                foreach ($uploadedImages as $imageType => $fileName) {
-                    $imageData = [
-                        'id_gambar' => $fileName,
-                        'id_kamar' => $kamarId,
-                        'id_kos' => $kosId,
-                        'deskripsi' => $imageType
-                    ];
-                    $this->KosModel->tambahGambarKamar($imageData);
-                }
-
-                $response = ['success' => true, 'message' => 'Data kamar berhasil ditambahkan'];
+            if ($kamarid > 0) {
+                $response = ['success' => true, 'message' => 'Data kamar berhasil ditambahkan', $KamarData];
+                $this->header('/datakos');
+                exit;
             } else {
-                $response = ['success' => false, 'message' => 'Gagal menambahkan data kamar'];
+                $response = ['success' => false, 'message' => 'Gagal menambahkan data kamar', $KamarData];
             }
         } catch (Exception $e) {
+            error_log('Error Message: ' . $e->getMessage());
             $response = ['success' => false, 'message' => $e->getMessage()];
         }
 

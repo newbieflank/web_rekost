@@ -14,7 +14,7 @@
             <h2 class="card-title text-center">Upload Dokumen dan Persetujuan</h2>
             <p class="text-center">Pastikan dokumen sesuai dengan persyaratan yang berlaku.</p>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL; ?>verif" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <?php if (isset($data['username']) && !empty($data['username'])): ?>
                         <label for="username" class="form-label">Username</label>
@@ -29,8 +29,8 @@
                         <input type="text" class="form-control mb-3" id="number" value="<?= htmlspecialchars($data['number']) ?>" readonly placeholder="No. Telepon">
                     <?php endif; ?>
 
-                    <label for="ktp" class="form-label">Upload KTP</label>
-                    <input type="file" class="form-control mb-3" id="ktp" required placeholder="Upload KTP">
+                    <label for="file" class="form-label">Upload Lampiran (KTP atau Surat Izin Usaha)</label>
+                    <input type="file" class="form-control mb-3" id="file" name="file" required placeholder="Upload KTP">
                 </div>
 
                 <div class="mb-3 form-check">

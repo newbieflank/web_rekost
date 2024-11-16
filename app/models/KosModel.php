@@ -42,7 +42,7 @@ class KosModel
             $this->db->bind('alamat', $data['alamat']);
             $this->db->bind('latitude', $data['latitude']);
             $this->db->bind('longitude', $data['longitude']);
-            $this->db->bind('id_kos', $data['id_kos']); // id_kos sebagai parameter untuk klausa WHERE
+            $this->db->bind('id_kos', $data['id_kos']);
 
             $this->db->execute();
 
@@ -52,72 +52,47 @@ class KosModel
         }
     }
 
-    public function tambahGambarKos($data)
-    {
-        try {
-            $query = "INSERT INTO gambar (id_gambar, id_kos, deskripsi) 
-                     VALUES (:id_gambar, :id_kos, :deskripsi)";
-
-            $this->db->query($query);
-            $this->db->bind('id_gambar', $data['id_gambar']);
-            $this->db->bind('id_kos', $data['id_kos']);
-            $this->db->bind('deskripsi', $data['deskripsi']);
-
-            return $this->db->execute();
-        } catch (PDOException $e) {
-            throw $e;
-        }
-    }
-
     public function tambahDataKamar($data)
     {
         try {
-            $this->db->beginTransaction();
+            $query2 = "INSERT INTO kamar (
+            luas_kamar, 
+            jenis_fasilitas, 
+            harga_bulan,      
+            tipe_kamar,
+            kamar_tersedia, 
+            id_kos,
+            total_kamar,
+            harga_minggu,     
+            harga_hari        
+        ) VALUES (
+            :luas_kamar,
+            :jenis_fasilitas,
+            :harga_bulan,     
+            :tipe_kamar,
+            :kamar_tersedia,
+            :id_kos,
+            :total_kamar,
+            :harga_minggu,    
+            :harga_hari       
+        )";
 
-            $query = "INSERT INTO kamar (tipe_kamar, luas_kamar, status_kamar, fasilitas_kamar, harga, kamar_tersedia, id_kos) 
-                     VALUES (:tipe_kamar, :luas_kamar, :status_kamar, :fasilitas_kamar, :harga, :kamar_tersedia, :id_kos)";
+            $this->db->query($query2);
 
-            $this->db->query($query);
-            $this->db->bind('tipe_kamar', $data['tipe_kamar']);
-            $this->db->bind('luas_kamar', $data['luas_kamar']);
-            $this->db->bind('status_kamar', $data['status_kamar']);
-            $this->db->bind('fasilitas_kamar', $data['fasilitas_kamar']);
-            $this->db->bind('harga', $data['harga']);
-            $this->db->bind('kamar_tersedia', $data['kamar_tersedia']);
-            $this->db->bind('id_kos', $data['id_kos']);
+            $this->db->bind(':luas_kamar', $data['luas_kamar']);
+            $this->db->bind('jenis_fasilitas', $data['jenis_fasilitas']);
+            $this->db->bind(':harga_bulan', $data['harga_bulan']);
+            $this->db->bind(':tipe_kamar', $data['tipe_kamar']);
+            $this->db->bind(':kamar_tersedia', $data['kamar_tersedia']);
+            $this->db->bind(':total_kamar', $data['total_kamar']);
+            $this->db->bind(':harga_minggu', $data['harga_minggu']);
+            $this->db->bind(':harga_hari', $data['harga_hari']);
+            $this->db->bind(':id_kos', $data['id_kos']);
 
             $this->db->execute();
-            $this->db->commit();
-        } catch (PDOException $e) {
-            $this->db->rollBack();
-            throw $e;
+            return $this->db->rowCount();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
-    }
-
-    public function tambahGambarKamar($data)
-    {
-        try {
-            $query = "INSERT INTO gambar (id_gambar, id_kamar, id_kos, deskripsi) 
-                     VALUES (:id_gambar, :id_kamar, :id_kos, :deskripsi)";
-
-            $this->db->query($query);
-            $this->db->bind('id_gambar', $data['id_gambar']);
-            $this->db->bind('id_kamar', $data['id_kamar']);
-            $this->db->bind('id_kos', $data['id_kos']);
-            $this->db->bind('deskripsi', $data['deskripsi']);
-
-            return $this->db->execute();
-        } catch (PDOException $e) {
-            throw $e;
-        }
-    }
-
-    public function getLatestKosId($userId)
-    {
-        $query = "SELECT id_kos FROM kos WHERE id_user = :id_user ORDER BY id_kos DESC LIMIT 1";
-        $this->db->query($query);
-        $this->db->bind('id_user', $userId);
-        $result = $this->db->single();
-        return $result ? $result['id_kos'] : null;
     }
 }
