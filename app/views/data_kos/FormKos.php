@@ -248,7 +248,7 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="MesinCuci" id="mesinCuci"
+                                            value="Mesin Cuci" id="mesinCuci"
                                             <?= in_array('MesinCuci', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="mesinCuci">
                                             Mesin Cuci
@@ -431,5 +431,6 @@
 
     </form>
 </div>
-<script src="<?= asset('js/steps.js') ?>"></script>
+<!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
 <script src="<?= asset('js/map.js') ?>"></script>
+<script src="<?= asset('js/steps.js') ?>"></script>

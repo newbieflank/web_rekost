@@ -48,7 +48,7 @@ Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
-Router::post('/addulasan','HomeController@AddUlasan');
+Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
 
