@@ -79,24 +79,46 @@ class DataKosController extends Controller
                 'id_kos' => $idKos
             ];
 
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
+            $uploadDir = $baseDir . $user . '/' . $idKos . '/';
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            $fileMappings = [
+                'foto_depan' => 'foto_depan',
+                'foto_belakang' => 'foto_belakang',
+                'foto_dalam' => 'foto_dalam',
+                'foto_jalan' => 'foto_jalan',
+            ];
+
             // Insert kos data into the database
             $kosId = $this->KosModel->tambahDataKos($kosData);
 
             if ($kosId > 0) {
-                $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-                $uploadDir = $baseDir . $user . '/' . $idKos . '/';
+                foreach ($fileMappings as $inputName => $customName) {
+                    if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
+                        $fileTmpPath = $_FILES[$inputName]['tmp_name'];
+                        $newFileName = $customName . '.jpg';
+                        $targetFilePath = $uploadDir . $newFileName;
 
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
+                        if (file_exists($targetFilePath)) {
+                            // Replace the existing file
+                            unlink($targetFilePath);
+                        }
+
+                        // Move the uploaded file to the target directory
+                        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+                            $response = ['success' => true, 'message' => 'Data kos berhasil di Ubah'];
+                        } else {
+                            $response = ['success' => false, 'message' => 'Gagal Mengunggah Foto'];
+                        }
+                    } else {
+                        $response = ['success' => true, 'message' => 'Data Kos berhasil di Ubah'];
+                    }
                 }
-
-                $fileMappings = [
-                    'foto_depan' => 'foto_depan',
-                    'foto_belakang' => 'foto_belakang',
-                    'foto_dalam' => 'foto_dalam',
-                    'foto_jalan' => 'foto_jalan',
-                ];
-
+            } else if ($_FILES) {
                 foreach ($fileMappings as $inputName => $customName) {
                     if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] === UPLOAD_ERR_OK) {
                         $fileTmpPath = $_FILES[$inputName]['tmp_name'];

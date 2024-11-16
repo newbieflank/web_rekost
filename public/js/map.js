@@ -88,29 +88,25 @@ function updateMarker(latitude, longitude) {
 }
 
 // Fungsi untuk mengupdate alamat menggunakan reverse geocoding
-async function updateAddress(lat, lng) {
-    try {
-        const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=id`
-        );
+let debounceTimer;
+function updateAddress(lat, lng) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(async () => {
+        try {
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=id`
+            );
 
-        if (!response.ok) {
-            throw new Error('Gagal mendapatkan alamat');
+            if (!response.ok) {
+                throw new Error('Gagal mendapatkan alamat');
+            }
+
+            const data = await response.json();
+            document.getElementById('alamat').value = data.display_name;
+        } catch (error) {
+            console.error('Error saat mengupdate alamat:', error);
         }
-
-        const data = await response.json();
-        console.log('Data alamat:', data);
-
-        const alamatTextarea = document.getElementById('alamat');
-        if (alamatTextarea) {
-            alamatTextarea.value = data.display_name;  // Mengisi alamat ke textarea
-            console.log('Alamat diupdate:', data.display_name);
-        } else {
-            console.error('Elemen textarea alamat tidak ditemukan');
-        }
-    } catch (error) {
-        console.error('Error saat mengupdate alamat:', error);
-    }
+    }, 500); // Delay request by 500ms after the last input
 }
 
 
@@ -148,6 +144,7 @@ function getCurrentLocation() {
     } else {
         alert("Browser Anda tidak mendukung geolokasi.");
     }
+
 
     document.addEventListener("DOMContentLoaded", function () {
         initMap();
