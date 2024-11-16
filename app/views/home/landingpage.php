@@ -53,6 +53,21 @@
         .star-rating .fa-star.active {
             color: #f39c12;
         }
+        #cityContainer {
+            max-width: 700px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+        }
+        #cityContainer::-webkit-scrollbar {
+            height: 8px;
+        }
+        #cityContainer::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -292,11 +307,11 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
+                <div id="cityContainer">
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Blindungan</button>
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Tamanan</button>
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Wonosari</button>
-                    <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">10+</button>
+                    <button type="button" class="btn btn-outline-primary mr-3 d-inline-block" id="showMore">10+</button>
                 </div>
                 <a href="best">
                     <div>
@@ -507,6 +522,7 @@
     <script src="<?= asset('js/navbar.js') ?>"></script>
     <script src="<? asset('js/file.js') ?>"></script>
     <script src="<?= asset('js/StarRating.js') ?>"></script>
+    <script src="<?= asset('js/AddArea.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

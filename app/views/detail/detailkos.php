@@ -117,12 +117,12 @@
                             ?>
                         </div>
                         <h1><?= $data['nama_kos'] ?></h1>
-                        <span><?= $data['rating'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews</span>
+                        <span><?= $data['rating_kamar'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews</span>
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
-                        <span class="text-grey">/kamar/bulan</span>
+                        <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
                         <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
@@ -135,15 +135,33 @@
                     Fasilitas Populer
                 </h3>
                 <div class="icons">
-                    <div><i class="fas fa-wifi"></i>Wifi</div>
-                    <div><i class="fas fa-utensils"> </i> Dapur</div>
-                    <div> <i class="fas fa-clock"> </i> 24 Jam</div>
-                    <div> <i class="fas fa-fan"> </i> AC/Kipas Angin</div>
-                    <div> <i class="fas fa-table"> </i> Meja</div>
-                    <div> <i class="fas fa-car"> </i> Parkir</div>
-                    <div> <i class="fas fa-archive"> </i> Lemari</div>
-                    <div> <i class="fas fa-calendar-alt"> </i> Mingguan/Bulanan</div>
-                    <div> <i class="fas fa-tv"> </i> Televisi</div>
+                    <?php if (in_array('WiFi', $fasilitas_kos)): ?>
+                        <div><i class="fas fa-wifi"></i>WiFi</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Parkiran',$fasilitas_kos)):?>
+                        <div><i class="fas fa-car"></i>Parkiran</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Mesin Cuci',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Mesin Cuci</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Kulkas',$fasilitas_kos)):?>
+                        <div><i class="fas fa-archive"></i>Kulkas</div>
+                    <?php endif; ?>
+                    <?php if(in_array('TV',$fasilitas_kos)):?>
+                        <div><i class="fas fa-tv"></i>TV</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Dapur Bersama',$fasilitas_kos)):?>
+                        <div><i class="fas fa-utensils"></i>Dapur Bersama</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Kamar Mandi Umum',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Kamar Mandi Umum</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Listrik',$fasilitas_kos)):?>
+                        <div><i class="fas fa-clock"></i>Listrik</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Air',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Air</div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="px-4">
