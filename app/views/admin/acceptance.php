@@ -1,7 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persetujuan Kost</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
@@ -10,6 +14,10 @@
         body {
             background-color: #F9FCFF;
             font-family: 'Arial', sans-serif;
+        }
+
+        h2 {
+            text-align: center;
         }
 
         .sidebar {
@@ -50,31 +58,8 @@
             padding: 0.5rem;
         }
 
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            margin-left: auto;
-            opacity: 0.7;
-        }
-
-        .icon-box i {
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
-        h2 {
-            margin-bottom: 24px;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 400;
-        }
-
-        table tr {
-            text-align: center;
+        .table-responsive {
+            overflow-x: auto;
         }
 
         .badge {
@@ -95,12 +80,20 @@
             color: #fff;
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-left: auto;
+            opacity: 0.7;
         }
 
-        .dataTables_wrapper .dataTables_filter {
-            margin-bottom: 12px;
+        .icon-box i {
+            font-size: 1.5rem;
+            color: #fff;
         }
     </style>
 </head>
@@ -115,24 +108,16 @@
                 <a class="nav-link" href="dashboard" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
-                <a class="nav-link active" href="accpetance" id="persetujuanLink">
+                <a class="nav-link active" href="acceptance" id="persetujuanLink">
                     <i class="fas fa-check-circle"></i> Persetujuan Kost
                 </a>
-                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1" id="daftarPenggunaBtn">
+                <button class="btn w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#dataPenggunaCollapse" aria-expanded="false" aria-controls="dataPenggunaCollapse">
                     <i class="bi bi-people"></i> Data Pengguna
                 </button>
-                <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="p-3">
-                            <div class="nav flex-column">
-                                <a href="#" class="nav-link w-100 mb-2" id="pencariKosLink">
-                                    <i class="bi bi-person-fill"></i> Pencari Kos
-                                </a>
-                                <a href="#" class="nav-link w-100" id="pemilikKosLink">
-                                    <i class="bi bi-person-bounding-box"></i> Pemilik Kos
-                                </a>
-                            </div>
-                        </div>
+                <div class="collapse" id="dataPenggunaCollapse">
+                    <div class="mt-2 ps-3">
+                        <a href="pencarikos" class="nav-link">Pencari Kos</a>
+                        <a href="pemilikkos" class="nav-link">Pemilik Kos</a>
                     </div>
                 </div>
             </nav>
@@ -143,115 +128,88 @@
                     <span class="navbar-text me-auto fw-bold" style="color: #000; font-size: 18px;">
                         Selamat Datang, Admin!
                     </span>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-bell"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-user-circle"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
             <div class="container mt-4">
+                <h2>Daftar Persetujuan Kos</h2>
                 <div class="table-responsive mt-4">
-                    <h2>Daftar Persetujuan Kos</h2>
                     <table id="userTable" class="table table-bordered">
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
                                 <th>Nama Pemilik</th>
+                                <th>Email</th>
                                 <th>Nama Kos</th>
-                                <th>Lokasi</th>
-                                <th>Jumlah Kamar</th>
-                                <th>Tanggal Pendaftaran</th>
+                                <th>Alamat</th>
+                                <th>Kota Asal</th>
+                                <th>No Telephone</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mafir</td>
-                                <td>Kos Putri</td>
-                                <td>Bondowoso</td>
-                                <td>1</td>
-                                <td>2024-11-01</td>
-                                <td><span class="badge bg-warning">Pending</span></td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#approvalModal">Detail</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Aurel</td>
-                                <td>Kos Muslimah</td>
-                                <td>Jember</td>
-                                <td>5</td>
-                                <td>2024-11-02</td>
-                                <td><span class="badge bg-success">Disetujui</span></td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#approvalModal">Detail</button>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($data as $user) :
+                            ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $user['nama'] ?></td>
+                                    <td><?= $user['email'] ?></td>
+                                    <td><?= $user['nama_kos'] ?></td>
+                                    <td><?= $user['alamat'] ?></td>
+                                    <td><?= $user['kota_asal'] ?></td>
+                                    <td><?= $user['number_phone'] ?></td>
+                                    <td>
+                                        <span class="badge <?= $user['status'] == 'pending' ? 'bg-warning' : 'bg-success' ?>">
+                                            <?= $user['status'] ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal<?= $user['id_user'] ?>">Detail</button>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="detailModal<?= $user['id_user'] ?>" tabindex="-1" aria-labelledby="detailModalLabel<?= $user['id_user'] ?>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailModalLabel<?= $user['id_user'] ?>">Detail Kos: <?= $user['nama_kos'] ?></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><strong>Nama Pemilik:</strong> <?= $user['nama'] ?></p>
+                                                <p><strong>Email:</strong> <?= $user['email'] ?></p>
+                                                <p><strong>Nama Kos:</strong> <?= $user['nama_kos'] ?></p>
+                                                <p><strong>Alamat:</strong> <?= $user['alamat'] ?></p>
+                                                <p><strong>Kota Asal:</strong> <?= $user['kota_asal'] ?></p>
+                                                <p><strong>Nomor Telepon:</strong> <?= $user['number_phone'] ?></p>
+                                                <p><strong>Status:</strong> <?= $user['status'] ?></p>
+                                                <form action="acceptance.php" method="POST" id="statusForm<?= $user['id_user'] ?>">
+                                                    <input type="hidden" name="id" value="<?= $user['id_user'] ?>">
+                                                    <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">Setujui</button>
+                                                    <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Tolak</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="approvalModalLabel">Persetujuan Kos</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Apakah Anda ingin menyetujui atau menolak ajuan kos ini?</p>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-success">Setujui</button>
-                        <button class="btn btn-danger">Tolak</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#userTable').DataTable();
-
-            // Menambahkan event listener untuk tombol "Data Pengguna"
-            $('#daftarPenggunaBtn').click(function() {
-                // Menghapus class active dari semua tombol
-                $('.nav-link').removeClass('active');
-
-                // Menambahkan class active ke tombol yang diklik
-                $(this).addClass('active');
-            });
-
-            // Menambahkan event listener untuk sidebar link
-            const navLinks = document.querySelectorAll('.nav-link, .btn');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

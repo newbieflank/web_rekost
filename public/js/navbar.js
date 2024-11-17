@@ -27,31 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching bookings count:', error));
 });
-// document.addEventListener('DOMContentLoaded', function() {
-//     let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-//     const seeAllButton = document.querySelector('.btn-wide');
-//     seeAllButton.addEventListener('click', function(event) {
-//         event.preventDefault(); 
-//         if (!isLoggedIn) {
-//             alert('Silakan login terlebih dahulu untuk melihat semua kost!');
-//              window.location.href = 'login'; 
-//         } else {
-//             window.location.href = 'popular'; 
-//         }
-//     });
-//     const cards = document.querySelectorAll('.card');
-//     cards.forEach(card => {
-//         card.addEventListener('click', function(event) {
-//             if (!isLoggedIn) {
-//                 event.preventDefault(); 
-//                 alert('Silakan login terlebih dahulu untuk melihat detail kost ini!');
-//                  window.location.href = 'login'; 
-//             } else {
-//                 window.location.href = 'best'; 
-//             }
-//         });
-//     });
-// });
 function scrollToBottom() {
     var chatMessages = document.getElementById("chatMessages");
     chatMessages.scrollTop = chatMessages.scrollHeight;
