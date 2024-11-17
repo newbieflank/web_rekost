@@ -14,17 +14,28 @@
             <h2 class="card-title text-center">Upload Dokumen dan Persetujuan</h2>
             <p class="text-center">Pastikan dokumen sesuai dengan persyaratan yang berlaku.</p>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL; ?>verif" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <input type="text" class="form-control mb-3" value="<?= htmlspecialchars($data['nama']) ?>" readonly placeholder="Nama">
-                    <input type="email" class="form-control mb-3" value="<?= htmlspecialchars($data['email']) ?>" readonly placeholder="Email">
-                    <input type="text" class="form-control mb-3" value="<?= htmlspecialchars($data['number_phone']) ?>" readonly placeholder="No. Telepon">
-                    <input type="file" class="form-control mb-3" required placeholder="Upload KTP">
+                    <?php if (isset($data['username']) && !empty($data['username'])): ?>
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control mb-3" id="username" value="<?= htmlspecialchars($data['username']) ?>" readonly placeholder="username">
+                    <?php endif; ?>
+
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control mb-3" id="email" value="<?= htmlspecialchars($data['email']) ?>" readonly placeholder="Email">
+
+                    <?php if (isset($data['number']) && !empty($data['number'])): ?>
+                        <label for="number" class="form-label">No. Telepon</label>
+                        <input type="text" class="form-control mb-3" id="number" value="<?= htmlspecialchars($data['number']) ?>" readonly placeholder="No. Telepon">
+                    <?php endif; ?>
+
+                    <label for="file" class="form-label">Upload Lampiran (KTP atau Surat Izin Usaha)</label>
+                    <input type="file" class="form-control mb-3" id="file" name="file" required placeholder="Upload KTP">
                 </div>
 
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" required>
-                    <span>Saya menyetujui <a href="#" target="_blank">syarat dan ketentuan</a> pembuatan kost di platform ini</span>
+                    <input type="checkbox" class="form-check-input" id="agreement" required>
+                    <label class="form-check-label" for="agreement">Saya menyetujui <a href="#" target="_blank">syarat dan ketentuan</a> pembuatan kost di platform ini</label>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Konfirmasi</button>

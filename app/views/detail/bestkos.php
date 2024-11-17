@@ -107,136 +107,28 @@
         <div class="container-fluid">
             <div class="row" style="margin-top: 32px;">
                 <div class="col-md-3 p-3 mb-5">
+                <?php foreach($data['best'] as $best):?>    
                     <div class="card">
+                    <a href="<?= BASEURL.'detailkos/'.$best["id_kos"]?>" class="card-link">
                         <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
+                            <h5 class="card-title"><?php echo $best['nama_kos'] ?></h5>
+                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> <?php echo $best['alamat'] ?></p>
+                            <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5 (<?php echo $best['review_count'] ?>)</p>
+                            <span class="btn-available" style="border-radius: 4px;"><?php echo $best['status_kamar'] ?></span>
                             <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
+                                IDR <?php echo $best['harga'] ?>
+                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $best['waktu_penyewaan'] ?></span>
                             </p>
                             <a class="btn-order" href="#">Pesan sekarang</a>
                         </div>
+                        </a>
                     </div>
+                    <?php endforeach;?>     
                 </div>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
                         <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title">Kos Putri Syariah</h5>
                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>

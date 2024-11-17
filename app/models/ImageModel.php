@@ -20,7 +20,6 @@ class ImageModel
             return $this->db->rowCount();
         } catch (PDOException $e) {
             echo $e . '</br>';
-            echo "kontol";
             return 0;
         }
     }

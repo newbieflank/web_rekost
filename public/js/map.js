@@ -30,7 +30,7 @@ function initMap() {
     }).addTo(map);
 
     // Event handler untuk hasil pencarian
-    geocoder.on('markgeocode', async function(e) {
+    geocoder.on('markgeocode', async function (e) {
         const location = e.geocode.center;
         console.log('Lokasi dari pencarian:', location);
         updateMarker(location.lat, location.lng);
@@ -63,7 +63,7 @@ function updateMarker(latitude, longitude) {
     updateAddress(latitude, longitude);
 
     // Event saat marker di-drag
-    marker.on('dragend', async function(event) {
+    marker.on('dragend', async function (event) {
         const position = marker.getLatLng();
         document.getElementById('latitude').value = position.lat;
         document.getElementById('longitude').value = position.lng;
@@ -77,17 +77,17 @@ async function updateAddress(lat, lng) {
         const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&accept-language=id`
         );
-        
+
         if (!response.ok) {
             throw new Error('Gagal mendapatkan alamat');
         }
-        
+
         const data = await response.json();
         console.log('Data alamat:', data);
-        
+
         const alamatTextarea = document.getElementById('alamat');
         if (alamatTextarea) {
-            alamatTextarea.value = data.display_name;
+            alamatTextarea.value = data.display_name;  // Mengisi alamat ke textarea
             console.log('Alamat diupdate:', data.display_name);
         } else {
             console.error('Elemen textarea alamat tidak ditemukan');
@@ -97,19 +97,20 @@ async function updateAddress(lat, lng) {
     }
 }
 
+
 // Fungsi untuk mendapatkan lokasi saat ini
 function getCurrentLocation() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             // Success callback
-            function(position) {
+            function (position) {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
                 console.log('Lokasi ditemukan:', latitude, longitude);
                 updateMarker(latitude, longitude);
             },
             // Error callback
-            function(error) {
+            function (error) {
                 console.error('Error getting location:', error);
                 let errorMessage;
                 switch (error.code) {

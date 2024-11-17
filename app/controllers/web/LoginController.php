@@ -1,6 +1,5 @@
 <?php
 
-require_once './app/core/Controller.php';
 class LoginController extends Controller
 {
 
@@ -29,7 +28,7 @@ class LoginController extends Controller
 
         $user = $this->userModel->getProfile($email, $password);
         if (isset($user['id_user'])) {
-
+            $this->userModel->updateUserStatus($user['id_user'], 'online');
             if ($user['role'] === 'pemilik kos') {
 
 
@@ -43,12 +42,12 @@ class LoginController extends Controller
 
                 if (isset($_POST['remember'])) {
                     setcookie("user", json_encode($data), time() + (86400 * 30), "/", "", true);
-                    $this->header('/pemilik');
+                    $this->header('/');
                     exit();
                 }
 
                 $_SESSION['user'] = $data;
-                $this->header('/pemilik');
+                $this->header('/');
                 exit();
             } else {
                 $user = [
@@ -119,7 +118,6 @@ class LoginController extends Controller
         $number = $_POST['number'];
         $password = $_POST['password'];
         $role = $_POST['role'];
-
         if ($this->userModel->findUserByEmail($email)) {
             Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
             $this->header('/register');
@@ -127,8 +125,10 @@ class LoginController extends Controller
         }
 
         if ($role === 'pemilik kos') {
-            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-            $kosID = $id . $randomNumber;
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->userModel->findKosById($idKos);
+            } while ($cekID);
 
             $data = [
                 'id' => $id,
@@ -137,11 +137,11 @@ class LoginController extends Controller
                 'number' => $number,
                 'password' => $password,
                 'role' => $role,
-                'id_kos' => $kosID
+                'id_kos' => $idKos
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
-                if ($this->userModel->createKos($data['id_kos'], $data['id']) > 0) {
+                if ($this->userModel->createKos($data['id_kos'], $id) > 0) {
                     session_set_cookie_params(0);
                     $_SESSION['user'] = [
                         "id_user" => $data['id'],
@@ -150,13 +150,13 @@ class LoginController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
-                    $this->header('/');
+                    $this->view('login/verifpemilik', $data);
                     exit();
                 } else {
-                    echo json_encode($data);
+                    echo json_encode($data['id_kos'], $data['id']);
                 }
             } else {
-                Flasher::setFlash('*Gagal Membuat Akun', 'danger');
+                Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
                 $this->header('/register');
                 exit();
             }
@@ -165,16 +165,17 @@ class LoginController extends Controller
                 'id' => $id,
                 'username' => $username,
                 'email' => $email,
-                'number' => $number,
+                'number' => null,
                 'password' => $password,
                 'role' => $role
             ];
 
 
             if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
-                    "id_user" => $data['id_user'],
+                    "id_user" => $data['id'],
                     "email" => $data['email'],
                     "role" => $data['role']
                 ];
@@ -199,24 +200,37 @@ class LoginController extends Controller
 
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $role = $_POST['role'];
         $password = $_POST['Password'];
         $confirm = $_POST['confirmPassword'];
 
+        if (isset($_POST['role'])) {
+            $role = $_POST['role'];
+        } else {
+            $role = null;
+        }
+
+
+        $data1 = [
+            'username' => $username,
+            'email' => $email,
+            'role' => $role
+        ];
         // Validate password
         if ($password !== $confirm) {
             Flasher::setFlash('Password Tidak Cocok', 'danger');
-            $this->header('/setpassword');
+            $this->view('login/setpassword', $data1);
             exit();
         } elseif (strlen($password) < 8) {
             Flasher::setFlash('Password Minimal 8 Character', 'danger');
-            $this->header('/setpassword');
+            $this->view('login/setpassword', $data1);
             exit();
         }
 
         if ($role === 'pemilik kos') {
-            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
-            $kosID = $id . $randomNumber;
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->userModel->findKosById($idKos);
+            } while ($cekID);
 
             $data = [
                 'id' => $id,
@@ -225,12 +239,12 @@ class LoginController extends Controller
                 'number' => null,
                 'password' => $password,
                 'role' => $role,
-                'id_kos' => $kosID
+                'id_kos' => $idKos
             ];
 
             if ($this->userModel->pemilik($data) > 0) {
                 if ($this->userModel->createKos($data['id_kos'], $id) > 0) {
-                    session_set_cookie_params(0);
+                    // session_set_cookie_params(0);
                     $_SESSION['user'] = [
                         "id_user" => $data['id'],
                         "email" => $data['email'],
@@ -238,7 +252,7 @@ class LoginController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
-                    $this->header('/');
+                    $this->view('login/verifpemilik', $data);
                     exit();
                 } else {
                     echo json_encode($data['id_kos'], $id);
@@ -259,7 +273,8 @@ class LoginController extends Controller
             ];
 
 
-            if ($this->userModel->createG($data) > 0) {
+            if ($this->userModel->create($data) > 0) {
+                $this->userModel->insert($id, 'aktif');
                 session_set_cookie_params(0);
                 $_SESSION['user'] = [
                     "id_user" => $data['id'],
@@ -270,8 +285,13 @@ class LoginController extends Controller
                 $this->header('/');
                 exit();
             } else {
+                $data = [
+                    'username' => $username,
+                    'email' => $email,
+                    'role' => $role
+                ];
                 Flasher::setFlash('*Pastikan Semua Data Terisi Dengan Benar', 'danger');
-                $this->header('/register');
+                $this->view('login/setpassword', $data);
                 exit();
             }
         }
@@ -293,4 +313,6 @@ class LoginController extends Controller
         $generatedId = $dateTime . $randomNumber;
         return $generatedId;
     }
+
+    public function verifPemilik() {}
 }

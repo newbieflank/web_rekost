@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-    <script src="<? asset('js/file.js') ?>"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= asset('css/profile.css') ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <title><?php echo $title ?></title>
     <style>
         @media (max-width: 768px) {
@@ -85,7 +87,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                         <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                        <a class="dropdown-item" href="#services">Layanan Kost</a>
+                        <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                            <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
+                        <?php endif; ?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout">Logout</a>
                     </div>

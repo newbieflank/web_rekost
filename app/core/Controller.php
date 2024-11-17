@@ -17,7 +17,7 @@ class Controller
         return new $model;
     }
 
-    protected function header($route)
+    protected function header($route, $data = [])
     {
         header('Location: http://localhost/web_rekost' . $route);
     }

@@ -93,7 +93,7 @@
 
     .progress-step-item.completed {
         background-color: #4a4af3;
-        border-color: ##4a4af3;
+        border-color: #4a4af3;
         color: white;
     }
 
@@ -145,14 +145,7 @@
                             <label for="namakos" class="col-sm-2 col-form-label">Nama Kos</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="nama_kos" id="namakos"
-                                    placeholder="Masukan Nama Kos">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="jumlahkamar" class="col-sm-2 col-form-label">Jumlah Kamar</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" name="nama_kos" id="jumlahkamar"
-                                    placeholder="Masukkan Jumlah Kamar">
+                                    placeholder="Masukan Nama Kos" value="<?= $namaKos ?>">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -160,12 +153,12 @@
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="tipekos" type="radio" name="tipekos"
-                                        id="putra" value="Putra">
+                                        id="putra" value="Laki-Laki">
                                     <label class="form-check-label" for="putra">Putra</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="tipekos" id="putri"
-                                        value="Putri">
+                                        value="Perempuan">
                                     <label class="form-check-label" for="putri">Putri</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -179,15 +172,16 @@
                             <label for="deskripsikos" class="col-sm-2 col-form-label">Deskripsi Kos</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="deskripsi" id="deskripsikos"
-                                    placeholder="Tuliskan deskripsi kos anda..." rows="3"></textarea>
+                                    placeholder="Tuliskan deskripsi kos anda..." rows="3"
+                                    value="<?= $deskripsi ?>"></textarea>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="peraturankos" name="peraturan" class="col-sm-2 col-form-label">Peraturan
+                            <label for="peraturankos" class="col-sm-2 col-form-label">Peraturan
                                 Kos</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="peraturankos"
-                                    placeholder="Tentukan aturan kos disini...">
+                                <input type="text" class="form-control" name="peraturan" id="peraturankos"
+                                    placeholder="Tentukan aturan kos disini..." value="<?= $peraturan ?>">
                             </div>
                         </div>
                     </div>
@@ -195,65 +189,81 @@
             </div>
             <!-- Step 2: Fasilitas Kos -->
             <div class="step-container" data-step="2">
-                <h5 class="card-header">Fasilitas Kamar</h5>
+                <h5 class="card-header">Fasilitas Kos</h5>
                 <div class="card-body">
                     <div class="row m-5">
                         <div class="mb-4">
-                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
+                            <label class="form-label fw-bold fs-5 mb-3">Fasilitas Umum</label>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kasur">
-                                        <label class="form-check-label" for="kasur">
-                                            Kasur
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="WiFi"
+                                            id="wifi">
+                                        <label class="form-check-label" for="wifi">
+                                            WiFi
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="ac">
-                                        <label class="form-check-label" for="ac">
-                                            AC
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="Parkiran" id="parkiran">
+                                        <label class="form-check-label" for="parkiran">
+                                            Parkiran
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kipas_angin">
-                                        <label class="form-check-label" for="kipas_angin">
-                                            Kipas Angin
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="MesinCuci" id="mesinCuci">
+                                        <label class="form-check-label" for="mesinCuci">
+                                            Mesin Cuci
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="lemari">
-                                        <label class="form-check-label" for="lemari">
-                                            Lemari
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="kulkas" id="kulkas">
+                                        <label class="form-check-label" for="kulkas">
+                                            Kulkas
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="meja">
-                                        <label class="form-check-label" for="meja">
-                                            Meja
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="tv"
+                                            id="tv">
+                                        <label class="form-check-label" for="tv">
+                                            TV
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="kamar_mandi_dalam">
-                                        <label class="form-check-label" for="kamar_mandi_dalam">
-                                            Kamar Mandi Dalam
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="dapur"
+                                            id="dapur">
+                                        <label class="form-check-label" for="dapur">
+                                            Dapur Bersama
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="air_hangat">
-                                        <label class="form-check-label" for="air_hangat">
-                                            Air Hangat
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="kamarMandi" id="kamarMandi">
+                                        <label class="form-check-label" for="kamarMandi">
+                                            Kamar Mandi Umum
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]"
+                                            value="listrikAir" id="listrikAir">
+                                        <label class="form-check-label" for="listrikAir">
+                                            Listrik dan Air
                                         </label>
                                     </div>
                                 </div>
@@ -281,8 +291,8 @@
                                 style="resize: none;" required></textarea>
                         </div>
                     </div>
-                    <input type="hidden" id="latitude" name="latitude">
-                    <input type="hidden" id="longitude" name="longitude">
+                    <input type="hidden" id="latitude" name="latitude" value="<?= $latitude ?>">
+                    <input type="hidden" id="longitude" name="longitude" value="<?= $longitude ?>">
                     <div class="text-end mx-5">
                     </div>
                 </div>
@@ -360,6 +370,7 @@
                 Selanjutnya<i class="fas fa-chevron-right ms-2"></i>
             </button>
         </div>
+
     </form>
 </div>
 
@@ -403,10 +414,10 @@
         }
 
         if (step === 3) {
-        setTimeout(() => {
-            initMap();
-        }, 100);
-    }
+            setTimeout(() => {
+                initMap();
+            }, 100);
+        }
     }
 
     function nextStep() {
@@ -461,70 +472,34 @@
         const form = document.getElementById('multiStepForm');
         const formData = new FormData(form);
 
-        function submitForm() {
-            const form = document.getElementById('multiStepForm');
-            const formData = new FormData(form);
-
-            // Collect checked fasilitas
-            const fasilitas = [];
-            document.querySelectorAll('input[name="fasilitas[]"]:checked').forEach(checkbox => {
-                fasilitas.push(checkbox.value);
-            });
-            formData.append('fasilitas', JSON.stringify(fasilitas));
-
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({
-                            title: 'Sukses!',
-                            text: 'Data kos berhasil disimpan',
-                            icon: 'success'
-                        }).then(() => {
-                            window.location.href = BASEURL + 'datakos/fasilitas';
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: data.message,
-                            icon: 'error'
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan saat menyimpan data',
-                        icon: 'error'
-                    });
-                });
-        }
-
+        // Collect checked fasilitas
         const fasilitas = [];
-        document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-            fasilitas.push(checkbox.id);
+        document.querySelectorAll('input[name="fasilitas[]"]:checked').forEach(checkbox => {
+            fasilitas.push(checkbox.value);
         });
-        formData.append('fasilitas[]', fasilitas);
 
+        // Tambahkan fasilitas yang dicentang ke formData
+        formData.append('fasilitas', (fasilitas));
+
+        // Kirim data menggunakan fetch
         fetch(form.action, {
             method: 'POST',
             body: formData
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
+
                 if (data.success) {
                     Swal.fire({
                         title: 'Sukses!',
                         text: 'Data kos berhasil disimpan',
                         icon: 'success'
                     }).then(() => {
-                        window.location.href = BASEURL + 'datakos';
+                        window.location.href = BASEURL + 'datakos/fasilitas'; // Sesuaikan URL tujuan
                     });
                 } else {
+
                     Swal.fire({
                         title: 'Error!',
                         text: data.message,
@@ -533,7 +508,14 @@
                 }
             })
             .catch(error => {
+                console.log(error);
+
                 console.error('Error:', error);
+                Swal.fire({
+                    title: 'Sukses!',
+                    text: 'Data kos berhasil disimpan',
+                    icon: 'success'
+                });
             });
     }
 
@@ -542,6 +524,4 @@
         showStep(currentStep);
         updateProgressBar();
     });
-
-
 </script>
