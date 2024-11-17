@@ -68,6 +68,26 @@ class HomeController extends Controller
         ];   
         $this->view('home/landingpemilik', $data);
     }
+
+    public function Ulasan(){
+        if(!isset($_SESSION['user'])){
+            $this->header('/login');
+            exit;
+        }
+
+        $ulasan = $_POST['reviewInput'];
+        $id = $_SESSION['user']['id_user'];
+        $data = [
+            "ulasan" => $ulasan,
+            "id_user" => $id
+        ];
+        if ($this->model("chartModel")->AddRating($data) > 0) {
+            $this->header('/');
+            exit;
+        } else {
+            echo json_encode($data);
+        }
+    }
     public function verif()
     {
         $this->view('login/verifpemilik');

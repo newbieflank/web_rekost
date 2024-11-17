@@ -27,6 +27,7 @@ Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
+Router::get('/pemilik','HomeController@home');
 
 
 //admin
