@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
     <link rel="stylesheet" href="<?= asset('css/landingPage.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -22,7 +23,7 @@
 
         .card {
             width: 100%;
-            height: 400px;
+            height: 420px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -53,6 +54,7 @@
         .star-rating .fa-star.active {
             color: #f39c12;
         }
+
         #cityContainer {
             max-width: 700px;
             display: flex;
@@ -61,9 +63,11 @@
             white-space: nowrap;
             padding: 10px;
         }
+
         #cityContainer::-webkit-scrollbar {
             height: 8px;
         }
+
         #cityContainer::-webkit-scrollbar-thumb {
             background: #007bff;
             border-radius: 4px;
@@ -272,8 +276,11 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $popular['nama_kos'] ?>
                                     </h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
-                                        <?php echo $popular['alamat'] ?></p>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $popular['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                        <?php echo $popular['alamat'] ?>
+                                    </p>
+
                                     <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
                                         (<?php echo $popular['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
@@ -331,7 +338,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $best['nama_kos'] ?>
                                     </h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $best['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
                                         (<?php echo $best['review_count'] ?>)</p>
@@ -373,7 +381,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $campus['nama_kos'] ?>
                                     </h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $campus['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
                                         (<?php echo $campus['review_count'] ?>)</p>

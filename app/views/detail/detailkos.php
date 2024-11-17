@@ -6,6 +6,7 @@
         Re-Kost
     </title>
     <link rel="stylesheet" href="<?= asset('css/detailkos.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -117,7 +118,15 @@
                             ?>
                         </div>
                         <h1><?= $data['nama_kos'] ?></h1>
-                        <span><?= $data['rating_kamar'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews</span>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span class="btn-available" style="border-radius: 4px;">
+                                <?php echo $data['tipe_kos'] ?>
+                            </span>
+                            <span>
+                                <?= $data['rating_kamar'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews
+                            </span>
+                        </div>
+
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
@@ -132,34 +141,34 @@
             </div>
             <div class="fasilitas col-md-6 px-4" id="fasilitas">
                 <h3>
-                    Fasilitas Populer
+                    Fasilitas Kos
                 </h3>
                 <div class="icons">
                     <?php if (in_array('WiFi', $fasilitas_kos)): ?>
                         <div><i class="fas fa-wifi"></i>WiFi</div>
                     <?php endif; ?>
-                    <?php if(in_array('Parkiran',$fasilitas_kos)):?>
+                    <?php if (in_array('Parkiran', $fasilitas_kos)): ?>
                         <div><i class="fas fa-car"></i>Parkiran</div>
                     <?php endif; ?>
-                    <?php if(in_array('Mesin Cuci',$fasilitas_kos)):?>
+                    <?php if (in_array('Mesin Cuci', $fasilitas_kos)): ?>
                         <div><i class="fas fa-washer"></i>Mesin Cuci</div>
                     <?php endif; ?>
-                    <?php if(in_array('Kulkas',$fasilitas_kos)):?>
+                    <?php if (in_array('Kulkas', $fasilitas_kos)): ?>
                         <div><i class="fas fa-archive"></i>Kulkas</div>
                     <?php endif; ?>
-                    <?php if(in_array('TV',$fasilitas_kos)):?>
+                    <?php if (in_array('TV', $fasilitas_kos)): ?>
                         <div><i class="fas fa-tv"></i>TV</div>
                     <?php endif; ?>
-                    <?php if(in_array('Dapur Bersama',$fasilitas_kos)):?>
+                    <?php if (in_array('Dapur Bersama', $fasilitas_kos)): ?>
                         <div><i class="fas fa-utensils"></i>Dapur Bersama</div>
                     <?php endif; ?>
-                    <?php if(in_array('Kamar Mandi Umum',$fasilitas_kos)):?>
+                    <?php if (in_array('Kamar Mandi Umum', $fasilitas_kos)): ?>
                         <div><i class="fas fa-washer"></i>Kamar Mandi Umum</div>
                     <?php endif; ?>
-                    <?php if(in_array('Listrik',$fasilitas_kos)):?>
+                    <?php if (in_array('Listrik', $fasilitas_kos)): ?>
                         <div><i class="fas fa-clock"></i>Listrik</div>
                     <?php endif; ?>
-                    <?php if(in_array('Air',$fasilitas_kos)):?>
+                    <?php if (in_array('Air', $fasilitas_kos)): ?>
                         <div><i class="fas fa-washer"></i>Air</div>
                     <?php endif; ?>
                 </div>
@@ -169,22 +178,15 @@
             </div>
             <div class="fasilitas col-md-6 px-4">
                 <h3>
-                    Fasilitas Lainnya
+                    Fasilitas Kamar
                 </h3>
                 <div class="icons">
-                    <div> <i class="fas fa-praying-hands"></i> Musholla</div>
-                    <div><i class="fas fa-shopping-cart"></i> Supermarket</div>
-                    <div><i class="fas fa-university"></i> ATM/Bank</div>
-                    <div><i class="fas fa-tshirt"></i> Laundry</div>
-                    <div><i class="fas fa-prescription-bottle-alt"></i> Apotek</div>
-                    <div> <i class="fas fa-praying-hands"></i> Musholla</div>
-                    <div><i class="fas fa-shopping-cart"></i> Supermarket</div>
-                    <div><i class="fas fa-university"></i> ATM/Bank</div>
-                    <div><i class="fas fa-tshirt"></i> Laundry</div>
-                    <div><i class="fas fa-prescription-bottle-alt"></i> Apotek</div>
+                    <?php if (in_array('Lemari', $fasilitas_kamar)): ?>
+                        <div><i class="fas fa-archive"></i>Lemari</div>
+                    <?php endif; ?>
                 </div>
-                <span class="toggle-btn" onclick="toggleFasilitas()">Lihat lebih banyak <i
-                        class="fas fa-chevron-down"></i></span>
+                <!-- <span class="toggle-btn" onclick="toggleFasilitas()">Lihat lebih banyak <i
+                        class="fas fa-chevron-down"></i></span> -->
             </div>
         </div>
         <div class="px-4">
@@ -197,7 +199,7 @@
                     <div id="map"></div>
                 </div>
                 <div class="address" style="margin-top: 24px; font-size: 18px">
-                    Jl. Mastrip, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121.
+                    <?= $data['alamat'] ?>
                 </div>
             </div>
         </div>
@@ -212,20 +214,15 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <h6>Hewan Peliharaan</h6>
-                        <p>Hewan Peliharaan Tidak Diperbolehkan.</p>
-                    </div>
-                    <div class="row">
-                        <h6>Tamu</h6>
-                        <p>Tidak diperbolehkan membawa lawan jenis masuk ke dalam kos/kamar.</p>
-                    </div>
-                    <div class="row">
-                        <h6>Deposit</h6>
-                        <p>Teman menginap dikenakan biaya.</p>
-                    </div>
-                    <div class="row">
-                        <h6>Alkohol</h6>
-                        <p>Tidak diperbolehkan membawa minuman keras atau obat-obatan.</p>
+                        <?php if (!empty($data['peraturan_kos'])): ?>
+                            <?php foreach ($data['peraturan_kos'] as $peraturan): ?>
+                                <div class="col-12 mb-2">
+                                    <p><?php echo htmlspecialchars($peraturan); ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Tidak ada peraturan yang ditentukan.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -236,13 +233,7 @@
         <div class="about" id="about">
             <h3>Tentang Kos Putri Muslimah Blindungan</h3>
             <p>
-                Kos Putri Muslimah berlokasi di Blindungan, Bondowoso yang dapat kalian temukan di aplikasi maupun
-                website Re-Kost.
-            </p>
-            <p>
-                Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam
-                yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim
-                Blindungan.
+                <?= $data['kos_deskripsi'] ?>
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
@@ -263,7 +254,7 @@
     </script>
     <script>
         function initMap() {
-            var map = L.map('map').setView([-8.15946626438085, 113.72347203723199], 13);
+            var map = L.map('map').setView([-7.922773, 113.808810], 13);
 
             // Menambahkan tile layer dari OpenStreetMap
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
