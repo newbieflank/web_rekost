@@ -159,6 +159,11 @@ class DataKosController extends Controller
             exit;
         }
 
+
+        $id_user = $_SESSION['user']['id_user'];
+        $user = $this->model('UsersModel')->findUserById($id_user);
+
+
         ob_start();
         $this->view('data_kos/formkamar');
         $content = ob_get_clean();
@@ -166,6 +171,8 @@ class DataKosController extends Controller
         $data = [
             "content" => $content,
             "title" => "DataKos",
+            "id_gambar" => $user['id_gambar'],
+            "id_user" => $id_user
         ];
 
         $this->view('layout/main', $data);

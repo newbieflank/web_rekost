@@ -227,11 +227,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="search-box p-4" style="margin-top: 32px;">
-                        <form class="form-row">
+                        <form id="searchForm" method="post" action="<?= BASEURL; ?>search" class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pl-5 pr-5" id="location">
+                                    <select class="form-control pl-5 pr-5" id="location" name="location">
                                         <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
@@ -246,7 +246,7 @@
                             <div class="form-group col-md-6">
                                 <label for="cost">Harga</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pr-5" id="cost">
+                                    <select class="form-control pr-5" id="cost" name="cost">
                                         <option value="">Pilih Harga</option>
                                         <option value="0-100000">Dibawah 100,000</option>
                                         <option value="100000-500000">100,000 - 500,000</option>
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary">Cari</button>
+                                <button type="submit" form="searchForm" class="btn btn-primary">Cari</button>
                             </div>
                         </form>
                     </div>
@@ -464,7 +464,7 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <div class="mt-2">
-                        <img src="<?= asset('img/user.png') ?>" alt="Circle Image" class="rounded-circle"
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" alt="Circle Image" class="rounded-circle"
                             style="width: 50px; height: 50px;">
                         <div class="star-rating mt-2" id="rating-container">
                             <i class="fas fa-star inactive" data-rating="1"></i>
