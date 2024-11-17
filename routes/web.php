@@ -49,7 +49,7 @@ Router::post('/create', 'LoginController@Google');
 Router::post('/profile/update', 'ProfileController@update');
 Router::post('/upImg', 'FileController@upload');
 Router::post('/datakos/tambah', 'DataKosController@tambah');
-Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
+Router::post('/datakamar/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');

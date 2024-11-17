@@ -135,7 +135,7 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" action="<?= BASEURL; ?>fasilitaskos/tambah" method="post" onsubmit="handleSubmit(event)">
+    <form id="multiStepForm" action="<?= BASEURL; ?>datakamar/tambah" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
             <div class="step-container" data-step="2">
                 <h5 class="card-header">
