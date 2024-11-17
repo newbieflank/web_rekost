@@ -244,16 +244,31 @@ class UsersModel
 
     public function getUserRegistrationByDate($date, $role = null)
     {
-        $query = "SELECT COUNT(*) as total FROM user WHERE DATE(created_at) = :date";
+        $query = "SELECT COUNT(*) as total FROM user JOIN status_user ON user.id_user = status_user.id_user WHERE DATE(tgl_daftar) = :date";
         if ($role) {
             $query .= " AND role = :role";
         }
-        $query .= " GROUP BY DATE(created_at) ORDER BY created_at DESC";
+
+        $query .= " GROUP BY DATE(tgl_daftar) ORDER BY tgl_daftar DESC";
         $this->db->query($query);
         $this->db->bind('date', $date);
+
         if ($role) {
             $this->db->bind('role', $role);
         }
+
         return $this->db->single();
+    }
+    public function updateStatusPemilik($userId, $status)
+    {
+        // var_dump($userId, $status);
+        // die; // Tambahkan pengecekan untuk melihat nilai yang dikirim
+        $query = "UPDATE `status_user` SET `status` = :status WHERE `status_user`.`id_user` = :id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $userId);
+        $this->db->bind('status', $status);
+
+        $this->db->execute();
+        return $this->db->rowCount();
     }
 }

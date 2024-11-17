@@ -26,6 +26,7 @@ Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
+Router::get('/search', 'HomeController@search');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
 
 
@@ -34,6 +35,8 @@ Router::get('/dashboard', 'AdminController@dashboard');
 Router::get('/acceptance', 'AdminController@getPersetujuanKos');
 Router::get('/pencarikos', 'AdminController@getPencarikos');
 Router::get('/pemilikkos', 'AdminController@getPemilikkos');
+
+Router::post('/acceptance', 'AdminController@postPersetujuanKos');
 
 //login Google
 Router::get('/auth', 'AuthController@login');

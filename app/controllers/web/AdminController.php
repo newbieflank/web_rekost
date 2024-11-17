@@ -13,6 +13,13 @@ class AdminController extends Controller
         $data = $this->userModel->getPersetujuanKos();
         $this->view('admin/acceptance', ['data' => $data]);
     }
+    public  function postPersetujuanKos()
+    {
+        $id = $_POST['id'];
+        $status = $_POST['status'];
+        $this->userModel->updateStatusPemilik($id, $status);
+        $this->header('/acceptance');
+    }
 
     public function getPemilikKos()
     {
@@ -46,7 +53,10 @@ class AdminController extends Controller
             $formatChartPencari["date"][] = $i;
             $formatChartPencari["count"][] = $pencariRegister["total"] ?? 0;
         }
-
+        // echo "<pre>";
+        // var_dump($formatChartPemilik);
+        // echo "</pre>";
+        // die;
         $this->view('admin/dashboard', [
             'totalPemilikKos' => $totalPemilikKos,
             'totalPencariKos' => $totalPencariKos,
