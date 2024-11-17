@@ -105,38 +105,50 @@
                             <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
-                                <span class="badge badge-danger">3</span>
+                                <?php if (isset($unreadCount) && $unreadCount > 0): ?>
+                                    <span class="badge badge-danger"><?= $unreadCount ?></span>
+                                <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-inf[o-circle mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">2 menit yang lalu</small>
-                                            <p class="mb-0">Pembayaran Kost Anda berhasil dikonfirmasi.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-envelope mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">10 menit yang lalu</small>
-                                            <p class="mb-0">Pesan baru dari pemilik kost.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-exclamation-triangle mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">1 jam yang lalu</small>
-                                            <p class="mb-0">Jatuh tempo pembayaran kost Anda besok.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
+                                <?php if (empty($notifikasi)): ?>
+                                    <div class="dropdown-item text-center">Tidak ada notifikasi pembayaran terbaru</div>
+                                <?php else: ?>
+                                    <?php foreach ($notifikasi as $notif): ?>
+                                        <a class="dropdown-item"
+                                            href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-info-circle mr-2"></i>
+                                                <div>
+                                                    <small class="text-muted">
+                                                        <?php
+                                                        $date1 = new DateTime($notif['tanggal_pembayaran']);
+                                                        $date2 = new DateTime();
+                                                        $interval = $date1->diff($date2);
+
+                                                        if ($interval->days == 0) {
+                                                            if ($interval->h == 0) {
+                                                                echo $interval->i . " menit yang lalu";
+                                                            } else {
+                                                                echo $interval->h . " jam yang lalu";
+                                                            }
+                                                        } else {
+                                                            echo $interval->days . " hari yang lalu";
+                                                        }
+                                                        ?>
+                                                    </small>
+                                                    <p class="mb-0">
+                                                        Pembayaran kost sebesar Rp
+                                                        <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?>
+                                                        telah dikonfirmasi
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <?php endforeach; ?>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>/pembayaran">Lihat semua
+                                        pembayaran</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="dropdown">
@@ -155,10 +167,7 @@
                                 <a class="dropdown-item" href="logout">Logout</a>
                             </div>
                         </div>
-
                     </div>
-
-
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -276,7 +285,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $popular['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $popular['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $popular['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $popular['alamat'] ?>
                                     </p>
@@ -338,7 +348,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $best['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $best['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $best['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
@@ -381,7 +392,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $campus['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $campus['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $campus['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
