@@ -25,11 +25,12 @@ class HomeController extends Controller
                 $rating = $this->model('RatingAplikasiModel')->GetUlasan();
                 $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
                 $data = [
+                    "id_user" => $user['id_user'],
+                    "id_gambar" => $user['id_gambar'],
                     "popular" => $popular,
                     "best" => $best,
                     "campus" => $campus,
                     "rating_aplikasi" => $rating,
-                    "id_gambar" => $user['id_gambar'],
                     "penyewa" => $penyewa
                 ];
                 $this->view('home/landingpage', $data);
@@ -65,7 +66,37 @@ class HomeController extends Controller
     }
     public function home()
     {
-        $this->view('home/landingpemilik');
+        $pendapatan = $this->model('chartModel')->getpendapatan();
+        $pengeluaran = $this->model('chartModel')->getpengeluaran();
+        $ulasan = $this->model('chartmodel')->getUlasan();
+
+        $data = [
+            "pendapatan" => $pendapatan,
+            "pengeluaran" => $pengeluaran,
+            "ulasan" => $ulasan
+        ];
+        $this->view('home/landingpemilik', $data);
+    }
+
+    public function Ulasan()
+    {
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
+
+        $ulasan = $_POST['reviewInput'];
+        $id = $_SESSION['user']['id_user'];
+        $data = [
+            "ulasan" => $ulasan,
+            "id_user" => $id
+        ];
+        if ($this->model("chartModel")->AddRating($data) > 0) {
+            $this->header('/');
+            exit;
+        } else {
+            echo json_encode($data);
+        }
     }
     public function verif()
     {

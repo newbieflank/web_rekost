@@ -362,16 +362,16 @@
             </div>
 
 
-            <!-- Tombol Navigasi -->
-            <div class="d-flex justify-content-between mt-3 mb-5">
-                <button type="button" class="btn btn-prev" onclick="prevStep()">
-                    <i class="fas fa-chevron-left me-2"></i>Sebelumnya
-                </button>
-                <button type="button" class="btn btn-next" onclick="nextStep()">
-                    Selanjutnya<i class="fas fa-chevron-right ms-2"></i>
-                </button>
-            </div>
     </form>
+</div>
+<!-- Tombol Navigasi -->
+<div class="d-flex justify-content-between mt-3 mb-5">
+    <button type="button" class="btn btn-prev" onclick="prevStep()">
+        <i class="fas fa-chevron-left me-2"></i>Sebelumnya
+    </button>
+    <button type="button" class="btn btn-next" onclick="nextStep()">
+        Selanjutnya<i class="fas fa-chevron-right ms-2"></i>
+    </button>
 </div>
 
 <script>
@@ -464,9 +464,9 @@
 
         // Kirim data menggunakan fetch
         fetch(form.action, {
-            method: 'POST',
-            body: formData
-        })
+                method: 'POST',
+                body: formData
+            })
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -502,9 +502,8 @@
 
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         showStep(currentStep);
         updateProgressBar();
     });
-
 </script>

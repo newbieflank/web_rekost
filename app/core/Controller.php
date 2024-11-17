@@ -2,10 +2,13 @@
 
 class Controller
 {
-
-
     protected function view($view, $data = [])
     {
+        if (isset($_SESSION['user'])) {
+            $notifmodel = $this->model('Notifmodel');
+            $data['notifikasi'] = $notifmodel->getNotifikasi($_SESSION['user']['id_user']);
+            $data['unreadCount'] = $notifmodel->getUnreadCount($_SESSION['user']['id_user']);
+        }
 
         extract($data);
         require_once './app/views/' . $view . '.php';

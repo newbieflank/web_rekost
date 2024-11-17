@@ -125,7 +125,9 @@
                         <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $campus['nama_kos'] ?></h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> <?php echo $campus['alamat'] ?></p>
+                            <span class="btn-available"
+                            style="border-radius: 4px;"><?php echo $campus['tipe_kos'] ?></span>
+                            <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> <?php echo $campus['alamat'] ?></p>
                             <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5 (<?php echo $campus['review_count'] ?>)</p>
                             <span class="btn-available" style="border-radius: 4px;"><?php echo $campus['status_kamar'] ?></span>
                             <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
@@ -137,22 +139,6 @@
                     </div>
                 </div>
                 <?php endforeach;?>     
-                <div class="col-md-4 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="#">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

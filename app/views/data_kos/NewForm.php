@@ -88,7 +88,7 @@
 
     .progress-step-item.completed {
         background-color: #4a4af3;
-        border-color: ##4a4af3;
+        border-color: #4a4af3;
         color: white;
     }
 
@@ -570,81 +570,81 @@
 
         <!-- Step 9: Tambahan  -->
         <div class="step-container" data-step="6">
-    <h5 class="card-header">Fasilitas Kamar</h5>
-    <div class="card-body">
-        <div class="row m-5">
-            <div class="mb-4">
-                <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="kasur">
-                            <label class="form-check-label" for="kasur">
-                                Kasur
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="ac">
-                            <label class="form-check-label" for="ac">
-                                Ac
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="kipas_angin">
-                            <label class="form-check-label" for="kipas_angin">
-                                Kipas Angin
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="lemari">
-                            <label class="form-check-label" for="lemari">
-                                Lemari
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="meja">
-                            <label class="form-check-label" for="meja">
-                                Meja
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="kamar_mandi_dalam">
-                            <label class="form-check-label" for="kamar_mandi_dalam">
-                                Kamar Mandi Dalam
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="kasur">
-                            <label class="form-check-label" for="kasur">
-                                Kasur
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="air_hangat">
-                            <label class="form-check-label" for="air_hangat">
-                                Air Hangat 
-                            </label>
+            <h5 class="card-header">Fasilitas Kamar</h5>
+            <div class="card-body">
+                <div class="row m-5">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold fs-5 mb-3">Fasilitas Kamar</label>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="kasur">
+                                    <label class="form-check-label" for="kasur">
+                                        Kasur
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ac">
+                                    <label class="form-check-label" for="ac">
+                                        Ac
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="kipas_angin">
+                                    <label class="form-check-label" for="kipas_angin">
+                                        Kipas Angin
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="lemari">
+                                    <label class="form-check-label" for="lemari">
+                                        Lemari
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="meja">
+                                    <label class="form-check-label" for="meja">
+                                        Meja
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="kamar_mandi_dalam">
+                                    <label class="form-check-label" for="kamar_mandi_dalam">
+                                        Kamar Mandi Dalam
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="kasur">
+                                    <label class="form-check-label" for="kasur">
+                                        Kasur
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="air_hangat">
+                                    <label class="form-check-label" for="air_hangat">
+                                        Air Hangat
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
         <!-- Tombol Navigasi -->
         <div class="d-flex justify-content-between mt-3 mb-5">
@@ -697,14 +697,14 @@
     }
 
     function nextStep() {
-    if (currentStep < totalSteps) {
-        currentStep++;
-        showStep(currentStep);
-        updateProgressBar();
-    } else {
-        submitForm(); 
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+            updateProgressBar();
+        } else {
+            submitForm();
+        }
     }
-}
 
     function prevStep() {
         if (currentStep > 1) {
@@ -745,10 +745,8 @@
     }
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         showStep(currentStep);
         updateProgressBar();
     });
-
-    
 </script>
