@@ -109,31 +109,46 @@
     <section class="container overlap-container">
         <div class="row text-center">
             <div class="col-md-4">
+
+
+
+                <?php foreach($data['pendapatan'] as $pendapatan):?>
                 <div class="card overlap-card" style="--url: url('https://fontawesome.com/icons/chart-mixed-up-circle-dollar?f=duotone&s=solid  ')">
                     <div class="card-body">
                         <h5>Pendapatan</h5>
                         <p>Pendapatan yang didapatkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pendapatan['total_jumlah']?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
+
+
+
+
+
             </div>
             <div class="col-md-4">
+            <?php foreach($data['pengeluaran'] as $pengeluaran):?>
+               
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
-                    <div class="card-body">
+                    <div  class="card-body">
                         <h5>Pengeluaran</h5>
                         <p>Pengeluaran yang dikeluarkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pengeluaran['total_jumlah'] ?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
             </div>
             <div class="col-md-4">
+            <?php foreach($data['ulasan'] as $ulasan):?>
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
                     <div class="card-body">
                         <h5>Rating</h5>
                         <p>Ulasan yang diberikan untuk kost ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $ulasan['rata_rata_rating'] ?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
             </div>
     </section>
     <section id="graph" class="statistik" style="background-color: #f4f8fb; padding: 40px 0;">
