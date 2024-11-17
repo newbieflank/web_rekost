@@ -133,7 +133,7 @@
                 <a class="nav-link active" href="dashboard" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
-                <a class="nav-link" href="accpetance" id="persetujuanLink">
+                <a class="nav-link" href="acceptance" id="persetujuanLink">
                     <i class="fas fa-check-circle"></i> Persetujuan Kost
                 </a>
                 <button class="btn w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#dataPenggunaCollapse" aria-expanded="false" aria-controls="dataPenggunaCollapse">
@@ -142,7 +142,7 @@
                 <div class="collapse" id="dataPenggunaCollapse">
                     <div class="mt-2 ps-3">
                         <a href="pencarikos.php" class="nav-link">Pencari Kos</a>
-                        <a href="pemilikkos.php" class="nav-link">Pemilik Kos</a>
+                        <a href="pemilikkos" class="nav-link">Pemilik Kos</a>
                     </div>
                 </div>
             </nav>
@@ -178,7 +178,7 @@
                             <div class="card-body">
                                 <div>
                                     <h5>Pemilik Kos</h5>
-                                    <h3>100</h3>
+                                    <h5><?= $totalPemilikKos ?></h5>
                                     <p>Total Pemilik Kos</p>
                                 </div>
                                 <div class="icon-box bg-primary">
@@ -192,7 +192,7 @@
                             <div class="card-body">
                                 <div>
                                     <h5>Pencari Kos</h5>
-                                    <h3>1000</h3>
+                                    <h5><?= $totalPencariKos ?></h5>
                                     <p>Total Pencari Kos</p>
                                 </div>
                                 <div class="icon-box bg-success">
@@ -206,7 +206,7 @@
                             <div class="card-body">
                                 <div>
                                     <h5>Kos</h5>
-                                    <h3>100</h3>
+                                    <h5><?= $totalKos ?></h5>
                                     <p>Total Kos</p>
                                 </div>
                                 <div class="icon-box bg-danger">
@@ -220,7 +220,7 @@
                             <div class="card-body">
                                 <div>
                                     <h5>Rating</h5>
-                                    <h3>4,5<span class="text-muted">/5</span></h3>
+                                    <!-- <h3><?= $totalRatingKos ?><span class="text-muted">/5</span></h3> -->
                                     <p>Total Rating Kos</p>
                                 </div>
                                 <div class="icon-box bg-warning">
@@ -230,61 +230,121 @@
                         </div>
                     </div>
                     <div class="chart-container mt-4">
-                        <h5>Grafik</h5>
-                        <canvas id="grafikChart">
-                        </canvas>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Grafik Pengguna</h5>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="roleSelection" id="rolePemilik" value="pemilik" checked>
+                                    <label class="form-check-label" for="rolePemilik">Pemilik Kos</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="roleSelection" id="rolePencari" value="pencari">
+                                    <label class="form-check-label" for="rolePencari">Pencari Kos</label>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="userRegisterChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <script>
-        // Mengambil semua link yang ada dalam sidebar
         const navLinks = document.querySelectorAll('.nav-link, .btn');
 
-        // Menambahkan event listener untuk setiap link
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                // Menghapus kelas 'active' dari semua link
                 navLinks.forEach(item => item.classList.remove('active'));
 
-                // Menambahkan kelas 'active' ke link yang diklik
                 this.classList.add('active');
             });
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('grafikChart').getContext('2d');
-        var grafikChart = new Chart(ctx, {
+        // Data
+        const chartPemilik = {
+            labels: <?php echo json_encode($chartPemilik["date"]); ?>,
+            counts: <?php echo json_encode($chartPemilik["count"]); ?>
+        };
+        const chartPencari = {
+            labels: <?php echo json_encode($chartPencari["date"]); ?>,
+            counts: <?php echo json_encode($chartPencari["count"]); ?>
+        };
+
+        const ctx = document.getElementById('userRegisterChart');
+        let currentRole = 'pemilik';
+
+        function getChartData(role) {
+            return role === 'pemilik' ? chartPemilik : chartPencari;
+        }
+
+        function getChartColor(role) {
+            return role === 'pemilik' ? {
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)'
+            } : {
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)'
+            };
+        }
+
+        const initialColor = getChartColor(currentRole);
+
+        const chartInstance = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['5k', '10k', '15k', '20k', '25k', '30k', '35k', '40k', '45k', '50k', '55k', '60k'],
+                labels: getChartData(currentRole).labels,
                 datasets: [{
-                    label: 'Sales',
-                    data: [20, 40, 60, 80, 100, 60, 40, 80, 60, 40, 60, 80],
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                    borderColor: 'rgba(0, 123, 255, 1)',
-                    borderWidth: 1,
-                    pointBackgroundColor: 'rgba(0, 123, 255, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+                    label: 'Grafik Pemilik Kos',
+                    data: getChartData(currentRole).counts,
+                    backgroundColor: initialColor.backgroundColor,
+                    borderColor: initialColor.borderColor,
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
+                plugins: {
+                    legend: {
+                        position: 'top'
                     },
-                    y: {
-                        beginAtZero: true
+                    title: {
+                        display: false
                     }
                 }
             }
         });
+
+        function updateChart(role) {
+            const newData = getChartData(role);
+            const newColor = getChartColor(role);
+
+            chartInstance.data.labels = newData.labels;
+            chartInstance.data.datasets[0].data = newData.counts;
+            chartInstance.data.datasets[0].label = `Grafik ${role === 'pemilik' ? 'Pemilik Kos' : 'Pencari Kos'}`;
+            chartInstance.data.datasets[0].backgroundColor = newColor.backgroundColor;
+            chartInstance.data.datasets[0].borderColor = newColor.borderColor;
+            chartInstance.update();
+        }
+
+        // Event Listeners for Radio Buttons
+        document.getElementById('rolePemilik').addEventListener('change', function() {
+            if (this.checked) {
+                currentRole = 'pemilik';
+                updateChart(currentRole);
+            }
+        });
+
+        document.getElementById('rolePencari').addEventListener('change', function() {
+            if (this.checked) {
+                currentRole = 'pencari';
+                updateChart(currentRole);
+            }
+        });
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

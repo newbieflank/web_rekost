@@ -117,10 +117,12 @@ class HomeController extends Controller
         }
 
         $ulasan = $_POST['reviewInput'];
+        $rating = $_POST['rating'];
         $id = $_SESSION['user']['id_user'];
         $data = [
             "ulasan" => $ulasan,
-            "id_user" => $id
+            "id_user" => $id,
+            "rating" => $rating
         ];
         if ($this->model("RatingAplikasiModel")->AddRating($data) > 0) {
             $this->header('/');

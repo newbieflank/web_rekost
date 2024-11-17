@@ -6,14 +6,13 @@
         Re-Kost
     </title>
     <link rel="stylesheet" href="<?= asset('css/detailkos.css') ?>">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin="" />
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         html {
             scroll-behavior: smooth;
@@ -104,19 +103,26 @@
                 <div class="d-flex justify-content-between info-content" id="info-content">
                     <div class="left-section">
                         <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                            <?php
+                            $ratingValue = $data['rating_kamar'];
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= floor($ratingValue)) {
+                                    echo '<i class="fas fa-star"></i>';
+                                } elseif ($i - $ratingValue == 0.5) {
+                                    echo '<i class="fas fa-star-half-alt"></i>';
+                                } else {
+                                    echo '<i class="far fa-star"></i>';
+                                }
+                            }
+                            ?>
                         </div>
-                        <h1><?= $data['nama_kos']?></h1>
-                        <span><?= $data['rating']?>/5 | <?= $data['jumlah_rating']?> Reviews</span>
+                        <h1><?= $data['nama_kos'] ?></h1>
+                        <span><?= $data['rating_kamar'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews</span>
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
-                        <span class="text-red">IDR <?= $data['harga']?></span> <br>
-                        <span class="text-grey">/kamar/bulan</span>
+                        <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
+                        <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
                         <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
@@ -129,15 +135,33 @@
                     Fasilitas Populer
                 </h3>
                 <div class="icons">
-                    <div><i class="fas fa-wifi"></i>Wifi</div>
-                    <div><i class="fas fa-utensils"> </i> Dapur</div>
-                    <div> <i class="fas fa-clock"> </i> 24 Jam</div>
-                    <div> <i class="fas fa-fan"> </i> AC/Kipas Angin</div>
-                    <div> <i class="fas fa-table"> </i> Meja</div>
-                    <div> <i class="fas fa-car"> </i> Parkir</div>
-                    <div> <i class="fas fa-archive"> </i> Lemari</div>
-                    <div> <i class="fas fa-calendar-alt"> </i> Mingguan/Bulanan</div>
-                    <div> <i class="fas fa-tv"> </i> Televisi</div>
+                    <?php if (in_array('WiFi', $fasilitas_kos)): ?>
+                        <div><i class="fas fa-wifi"></i>WiFi</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Parkiran',$fasilitas_kos)):?>
+                        <div><i class="fas fa-car"></i>Parkiran</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Mesin Cuci',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Mesin Cuci</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Kulkas',$fasilitas_kos)):?>
+                        <div><i class="fas fa-archive"></i>Kulkas</div>
+                    <?php endif; ?>
+                    <?php if(in_array('TV',$fasilitas_kos)):?>
+                        <div><i class="fas fa-tv"></i>TV</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Dapur Bersama',$fasilitas_kos)):?>
+                        <div><i class="fas fa-utensils"></i>Dapur Bersama</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Kamar Mandi Umum',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Kamar Mandi Umum</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Listrik',$fasilitas_kos)):?>
+                        <div><i class="fas fa-clock"></i>Listrik</div>
+                    <?php endif; ?>
+                    <?php if(in_array('Air',$fasilitas_kos)):?>
+                        <div><i class="fas fa-washer"></i>Air</div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="px-4">
@@ -159,7 +183,8 @@
                     <div><i class="fas fa-tshirt"></i> Laundry</div>
                     <div><i class="fas fa-prescription-bottle-alt"></i> Apotek</div>
                 </div>
-                <span class="toggle-btn" onclick="toggleFasilitas()">Lihat lebih banyak <i class="fas fa-chevron-down"></i></span>
+                <span class="toggle-btn" onclick="toggleFasilitas()">Lihat lebih banyak <i
+                        class="fas fa-chevron-down"></i></span>
             </div>
         </div>
         <div class="px-4">
@@ -211,10 +236,13 @@
         <div class="about" id="about">
             <h3>Tentang Kos Putri Muslimah Blindungan</h3>
             <p>
-                Kos Putri Muslimah berlokasi di Blindungan, Bondowoso yang dapat kalian temukan di aplikasi maupun website Re-Kost.
+                Kos Putri Muslimah berlokasi di Blindungan, Bondowoso yang dapat kalian temukan di aplikasi maupun
+                website Re-Kost.
             </p>
             <p>
-                Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim Blindungan.
+                Kamar ber-AC yang dilengkapi dengan meja belajar, TV, lemari dan kasur yang nyaman. Kamar mandi dalam
+                yang bersih dan dilengkapi dengan berbagai fasilitas lain yang dapat kalian dapatkan di Kos Putri Muslim
+                Blindungan.
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
@@ -224,7 +252,8 @@
         </div>
 
     </section>
-    <script crossorigin="anonymous" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1p6QF1bM4Jp+7F2m1i6U8zTnm5zT9UJ0Zr+2QIT3hK" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1p6QF1bM4Jp+7F2m1i6U8zTnm5zT9UJ0Zr+2QIT3hK"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var scrollSpy = new bootstrap.ScrollSpy(document.body, {

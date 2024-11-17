@@ -29,6 +29,7 @@ class DetailController extends Controller
     public function detailkos($id)
     {
         $DetailKos = $this->model('CardViewModel')->DetailKos($id);
+        $DetailKos['fasilitas_kos'] = explode(',', $DetailKos['fasilitas_kos']);
         $this->view('detail/detailkos',$DetailKos);
     }
     public function chats()

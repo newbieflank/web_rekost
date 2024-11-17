@@ -9,8 +9,6 @@ Router::get('/profile', 'ProfileController@profile');
 Router::get('/Kost', 'ProfileController@profileKost');
 Router::get('/popular', 'HomeController@popular');
 Router::get('/best', 'HomeController@best');
-Router::get(uri: '/datakos', action: 'DataKosController@datakos');
-Router::get(uri: '/fotokos', action: 'DataKosController@fotokos');
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
@@ -21,10 +19,12 @@ Router::get(uri: '/fotokamar', action: 'DataKosController@fotokmr');
 Router::get(uri: '/alamatkos', action: 'DataKosController@alamat');
 Router::get(uri: '/ketersediaanKamar', action: 'DataKosController@ke');
 Router::get(uri: '/ketersediaanKamar2', action: 'DataKosController@ke2');
+Router::get(uri: '/datakos', action: 'DataKosController@datakos');
+Router::get(uri: '/datakamar', action: 'DataKosController@fasilitas');
 Router::get('/echo', 'HomeController@echo');
 Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
-Router::get('/konfirmasi', 'PembayaranController@konfirmasi');
+Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
 Router::get('/pemilik','HomeController@home');
@@ -32,9 +32,9 @@ Router::get('/pemilik','HomeController@home');
 
 //admin
 Router::get('/dashboard', 'AdminController@dashboard');
-Router::get('/acceptance', 'AdminController@acceptance');
-Router::get('/peencarikos', 'AdminController@pencarikos');
-Router::get('/pemilikkos', 'AdminController@pemilikkos');
+Router::get('/acceptance', 'AdminController@getPersetujuanKos');
+Router::get('/pencarikos', 'AdminController@getPencarikos');
+Router::get('/pemilikkos', 'AdminController@getPemilikkos');
 
 //login Google
 Router::get('/auth', 'AuthController@login');
@@ -55,7 +55,7 @@ Router::post('/datakos/tambah', 'DataKosController@tambah');
 Router::post('/fasilitaskos/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/alamatkos/tambah', 'DataKosController@tambahAlamat');
 Router::post('/harga/tambah', 'DataKosController@tambahHarga');
-Router::post('/addulasan','HomeController@AddUlasan');
+Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
 

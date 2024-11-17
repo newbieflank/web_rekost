@@ -15,6 +15,20 @@
         html {
             scroll-behavior: smooth;
         }
+        .card {
+            width: 300px;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            padding: 15px;
+            overflow: hidden;
+        }
     </style>
 </head>
 
