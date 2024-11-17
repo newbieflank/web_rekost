@@ -1,17 +1,19 @@
 <?php
-class chartModel{
-    
+class chartModel
+{
+
     private $db;
-    
+
     public function __construct()
     {
         $this->db = new Database();
     }
 
 
-    public function getpendapatan(){
-    try {
-    $query = "SELECT 
+    public function getpendapatan()
+    {
+        try {
+            $query = "SELECT 
     jenis_transaksi,
     SUM(jumlah) AS total_jumlah
 FROM 
@@ -21,21 +23,20 @@ WHERE
 GROUP BY 
     jenis_transaksi;
 ";
-    
-    $this ->db->query ($query);
-    $results = $this ->db->resultSet();
-    return $results;
-} 
-    catch (\Throwable $e) {
-    echo "error" . Se->getMessage();
-    //throw $th;
-}
 
+            $this->db->query($query);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (\Throwable $e) {
+            echo "error" . $e->getMessage();
+            //throw $th;
+        }
     }
 
-    public function getpengeluaran(){
+    public function getpengeluaran()
+    {
         try {
-        $query = "SELECT 
+            $query = "SELECT 
         jenis_transaksi,
         SUM(jumlah) AS total_jumlah
     FROM 
@@ -45,21 +46,20 @@ GROUP BY
     GROUP BY 
         jenis_transaksi;
     ";
-        
-        $this ->db->query ($query);
-        $results = $this ->db->resultSet();
-        return $results;
-    } 
-        catch (\Throwable $e) {
-        echo "error" . Se->getMessage();
-    }
-    
+
+            $this->db->query($query);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (\Throwable $e) {
+            echo "error" . $e->getMessage();
         }
+    }
 
 
 
-    public function getUlasan(){
-        try{
+    public function getUlasan()
+    {
+        try {
             $query = "SELECT 
             k.id_kos,
             k.nama_kos,
@@ -71,23 +71,21 @@ GROUP BY
         GROUP BY 
             k.id_kos, k.nama_kos;
             ";
-        
 
 
-            $this ->db->query($query);
-            $results = $this ->db->resultSet();
+
+            $this->db->query($query);
+            $results = $this->db->resultSet();
             return $results;
-
-        }
-        catch (\Throwable $e){
-            echo "error". Se->getMessage();
-
+        } catch (\Throwable $e) {
+            echo "error" . $e->getMessage();
         }
     }
 
-    public function Ulasanuser(){
+    public function Ulasanuser()
+    {
         try {
-            $query="SELECT 
+            $query = "SELECT 
             ulasan.id_ulasan,
             ulasan.tanggal_ulas,
             ulasan.ulasan,
@@ -105,21 +103,20 @@ GROUP BY
         JOIN 
             kos ON ulasan.id_kos = kos.id_kos
         ORDER BY 
-            ulasan.tanggal_ulas DESC;"
-        
+            ulasan.tanggal_ulas DESC";
+
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-        
-        
 
-    public function AddRating($data){
+
+
+    public function AddRating($data)
+    {
         try {
             $query = "INSERT INTO `ulasan` (`id_user`, `ulasan`) VALUES (:id_user, :ulasan)";
             $this->db->query($query);
@@ -127,10 +124,8 @@ GROUP BY
             $this->db->bind('ulasan', $data['ulasan']);
             $this->db->execute();
             return $this->db->rowCount();
-
         } catch (\Throwable $th) {
             //throw $th;
         }
     }
 }
-?>
