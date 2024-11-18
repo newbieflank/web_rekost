@@ -249,7 +249,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
                                             value="Mesin Cuci" id="mesinCuci"
-                                            <?= in_array('MesinCuci', $fasilitas) ? 'checked' : ''; ?>>
+                                            <?= in_array('Mesin Cuci', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="mesinCuci">
                                             Mesin Cuci
                                         </label>
@@ -357,7 +357,7 @@
                             <input type="file" accept="image/*" id="foto-depan" name="foto_depan" style="display: none;" onchange="previewImage(this, 'preview-depan')">
                             <div id="preview-depan" class="image-preview">
                                 <?php if (file_exists($imagePath . '/foto_depan.jpg')) : ?>
-                                    <img src="<?= asset('uploads/' . $id_user . '/' . $id_kos . '/foto_depan.jpg') ?>" alt="Preview">
+                                    <img src="<?= asset('uploads/' . $id_kos . '/foto_depan.jpg') ?>" alt="Preview">
                                 <?php else : ?>
                                     <i class="fas fa-camera"></i>
                                     <p class="text-gray-400">Tambah foto bangunan depan</p>
@@ -373,7 +373,7 @@
                             <input type="file" accept="image/*" id="foto-belakang" name="foto_belakang" style="display: none;" onchange="previewImage(this, 'preview-belakang')">
                             <div id="preview-belakang" class="image-preview">
                                 <?php if (file_exists($imagePath . '/foto_belakang.jpg')) : ?>
-                                    <img src="<?= asset('uploads/' . $id_user . '/' . $id_kos . '/foto_belakang.jpg') ?>" alt="Preview">
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_belakang.jpg') ?>" alt="Preview">
                                 <?php else : ?>
                                     <i class="fas fa-camera"></i>
                                     <p class="text-gray-400">Tambah foto bangunan dari belakang</p>
@@ -389,7 +389,7 @@
                             <input type="file" accept="image/*" id="foto-dalam" name="foto_dalam" style="display: none;" onchange="previewImage(this, 'preview-dalam')">
                             <div id="preview-dalam" class="image-preview">
                                 <?php if (file_exists($imagePath . '/foto_dalam.jpg')) : ?>
-                                    <img src="<?= asset('uploads/' . $id_user . '/' . $id_kos . '/foto_dalam.jpg') ?>" alt="Preview">
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_dalam.jpg') ?>" alt="Preview">
                                 <?php else : ?>
                                     <i class="fas fa-camera"></i>
                                     <p class="text-gray-400">Tambah foto dari dalam bangunan</p>
@@ -405,7 +405,7 @@
                             <input type="file" accept="image/*" id="foto-jalan" name="foto_jalan" style="display: none;" onchange="previewImage(this, 'preview-jalan')">
                             <div id="preview-jalan" class="image-preview">
                                 <?php if (file_exists($imagePath . '/foto_jalan.jpg')) : ?>
-                                    <img src="<?= asset('uploads/' . $id_user . '/' . $id_kos . '/foto_jalan.jpg') ?>" alt="Preview">
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_jalan.jpg') ?>" alt="Preview">
                                 <?php else : ?>
                                     <i class="fas fa-camera"></i>
                                     <p class="text-gray-400">Tambah foto bangunan dari jalan</p>

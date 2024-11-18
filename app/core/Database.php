@@ -83,6 +83,7 @@ class Database
     {
         try {
             $this->execute();
+
             return $this->stm->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             $this->handleError($e);

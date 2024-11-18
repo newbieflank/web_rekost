@@ -143,6 +143,7 @@
                                 <th>Alamat</th>
                                 <th>Kota Asal</th>
                                 <th>No Telephone</th>
+                                <!-- <th>KTP</th> -->
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -161,7 +162,7 @@
                                     <td><?= $user['kota_asal'] ?></td>
                                     <td><?= $user['number_phone'] ?></td>
                                     <td>
-                                        <span class="badge <?= $user['status'] == 'pending' ? 'bg-warning' : 'bg-success' ?>">
+                                        <span class="badge <?= $user['status'] == 'pending' ? 'bg-warning' : ($user['status'] == 'aktif' ? 'bg-success' : 'bg-danger') ?>">
                                             <?= $user['status'] ?>
                                         </span>
                                     </td>
@@ -184,10 +185,11 @@
                                                 <p><strong>Kota Asal:</strong> <?= $user['kota_asal'] ?></p>
                                                 <p><strong>Nomor Telepon:</strong> <?= $user['number_phone'] ?></p>
                                                 <p><strong>Status:</strong> <?= $user['status'] ?></p>
-                                                <form action="acceptance.php" method="POST" id="statusForm<?= $user['id_user'] ?>">
+                                                <p><strong>KTP:</strong> <img src="<?= asset('uploads/' . $user['id_user'] . '/Lampiran.jpg') ?>" alt="thumbnail" class="thumbnail w-100"></p>
+                                                <form action="acceptance " method="POST" id="statusForm<?= $user['id_user'] ?>">
                                                     <input type="hidden" name="id" value="<?= $user['id_user'] ?>">
-                                                    <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">Setujui</button>
-                                                    <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Tolak</button>
+                                                    <button type="submit" name="status" value="aktif" class="btn btn-success btn-sm">Setujui</button>
+                                                    <button type="submit" name="status" value="blokir" class="btn btn-danger btn-sm">Tolak</button>
                                                 </form>
                                             </div>
                                         </div>

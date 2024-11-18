@@ -25,8 +25,13 @@ class HomeController extends Controller
                 $rating = $this->model('RatingAplikasiModel')->GetUlasan();
                 $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
                 $data = [
-                    "popular" => $popular,"best"=>$best,"campus"=>$campus, "rating_aplikasi" => $rating,
-                    "id_gambar" => $user['id_gambar'],"penyewa"=>$penyewa
+                    "id_user" => $user['id_user'],
+                    "id_gambar" => $user['id_gambar'],
+                    "popular" => $popular,
+                    "best" => $best,
+                    "campus" => $campus,
+                    "rating_aplikasi" => $rating,
+                    "penyewa" => $penyewa
                 ];
                 $this->view('home/landingpage', $data);
             }
@@ -38,17 +43,21 @@ class HomeController extends Controller
             $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
             $data = [
                 "popular" => $popular,
-                "best"=>$best,
-                "campus"=>$campus, 
+                "best" => $best,
+                "campus" => $campus,
                 "rating_aplikasi" => $rating,
                 "penyewa" => $penyewa
             ];
-            $this->view('home/landingpage',$data);
+            $this->view('home/landingpage', $data);
         }
     }
     public function popularkos()
     {
         $this->view('detail/popularkos');
+    }
+    public function search()
+    {
+        $this->view('home/search');
     }
 
     public function best()
@@ -58,19 +67,20 @@ class HomeController extends Controller
     public function home()
     {
         $pendapatan = $this->model('chartModel')->getpendapatan();
-        $pengeluaran = $this->model ('chartModel')->getpengeluaran();
-        $ulasan=$this->model('chartmodel')->getUlasan();
+        $pengeluaran = $this->model('chartModel')->getpengeluaran();
+        $ulasan = $this->model('chartmodel')->getUlasan();
 
         $data = [
-            "pendapatan" => $pendapatan
-            ,"pengeluaran"=> $pengeluaran
-            ,"ulasan"=>$ulasan
-        ];   
+            "pendapatan" => $pendapatan,
+            "pengeluaran" => $pengeluaran,
+            "ulasan" => $ulasan
+        ];
         $this->view('home/landingpemilik', $data);
     }
 
-    public function Ulasan(){
-        if(!isset($_SESSION['user'])){
+    public function Ulasan()
+    {
+        if (!isset($_SESSION['user'])) {
             $this->header('/login');
             exit;
         }
@@ -110,8 +120,9 @@ class HomeController extends Controller
         echo json_encode($_SESSION['user']);
     }
 
-    public function AddUlasan(){
-        if(!isset($_SESSION['user'])){
+    public function AddUlasan()
+    {
+        if (!isset($_SESSION['user'])) {
             $this->header('/login');
             exit;
         }

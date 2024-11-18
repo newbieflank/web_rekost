@@ -114,4 +114,9 @@ class KosModel
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function cekIdTransaksi($id)
+    {
+        //isi query buat check ID Transaksi
+    }
 }

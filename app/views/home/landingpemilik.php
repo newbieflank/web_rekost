@@ -140,12 +140,12 @@
                 <?php endforeach;?>
             </div>
             <div class="col-md-4">
-            <?php foreach($data['ulasan'] as $ulasan):?>
+            <?php foreach($data['rataRating'] as $rataRating):?>
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
                     <div class="card-body">
                         <h5>Rating</h5>
                         <p>Ulasan yang diberikan untuk kost ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $ulasan['rata_rata_rating'] ?></p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $rataRating['rata_rata_rating'] ?></p>
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -200,103 +200,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
+                                <p class="card-text"><?php echo $ulasan['ulasan'] ?></p>
                             </div>
                         </div>
                     </div>
