@@ -80,7 +80,7 @@ class DataKosController extends Controller
             ];
 
             $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-            $uploadDir = $baseDir . $user . '/' . $idKos . '/';
+            $uploadDir = $baseDir . $idKos . '/';
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
