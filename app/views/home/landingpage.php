@@ -449,7 +449,7 @@
                                         }
                                         ?>
                                     </div>
-                                    <p class="card-text"><?php echo $Ulasanuser['review'] ?></p>
+                                    <p class="card-text"><?php echo $rating['review'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
