@@ -135,7 +135,7 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" action="<?= BASEURL; ?>fasilitaskos/tambah" method="post" onsubmit="handleSubmit(event)">
+    <form id="multiStepForm" action="<?= BASEURL; ?>datakamar/tambah" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
             <div class="step-container" data-step="2">
                 <h5 class="card-header">
@@ -295,8 +295,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kipas_Angin" id="Kipas_Angin">
-                                        <label class="form-check-label" for="Kipas_Angin">
+                                            value="Kipas Angin" id="Kipas Angin">
+                                        <label class="form-check-label" for="Kipas Angin">
                                             Kipas Angin
                                         </label>
                                     </div>
@@ -331,8 +331,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kamar_Mandi_Dalam" id="Kamar_Mandi_Dalam">
-                                        <label class="form-check-label" for="Kamar_Mandi_Dalam">
+                                            value="Kamar Mandi Dalam" id="Kamar Mandi Dalam">
+                                        <label class="form-check-label" for="Kamar Mandi Dalam">
                                             Kamar Mandi Dalam
                                         </label>
                                     </div>
@@ -340,8 +340,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Air_Hangat" id="Air_Hangat">
-                                        <label class="form-check-label" for="Air_Hangat">
+                                            value="Air Hangat" id="Air Hangat">
+                                        <label class="form-check-label" for="Air Hangat">
                                             Air Hangat
                                         </label>
                                     </div>
@@ -364,7 +364,7 @@
 
     </form>
 </div>
-<!-- Tombol Navigasi -->
+<!-- Tombol Navigasi test -->
 <div class="d-flex justify-content-between mt-3 mb-5">
     <button type="button" class="btn btn-prev" onclick="prevStep()">
         <i class="fas fa-chevron-left me-2"></i>Sebelumnya
