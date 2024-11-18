@@ -295,8 +295,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kipas_Angin" id="Kipas_Angin">
-                                        <label class="form-check-label" for="Kipas_Angin">
+                                            value="Kipas Angin" id="Kipas Angin">
+                                        <label class="form-check-label" for="Kipas Angin">
                                             Kipas Angin
                                         </label>
                                     </div>
@@ -331,8 +331,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kamar_Mandi_Dalam" id="Kamar_Mandi_Dalam">
-                                        <label class="form-check-label" for="Kamar_Mandi_Dalam">
+                                            value="Kamar Mandi Dalam" id="Kamar Mandi Dalam">
+                                        <label class="form-check-label" for="Kamar Mandi Dalam">
                                             Kamar Mandi Dalam
                                         </label>
                                     </div>
@@ -340,8 +340,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Air_Hangat" id="Air_Hangat">
-                                        <label class="form-check-label" for="Air_Hangat">
+                                            value="Air Hangat" id="Air Hangat">
+                                        <label class="form-check-label" for="Air Hangat">
                                             Air Hangat
                                         </label>
                                     </div>
