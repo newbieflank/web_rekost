@@ -249,7 +249,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
                                             value="Mesin Cuci" id="mesinCuci"
-                                            <?= in_array('MesinCuci', $fasilitas) ? 'checked' : ''; ?>>
+                                            <?= in_array('Mesin Cuci', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="mesinCuci">
                                             Mesin Cuci
                                         </label>

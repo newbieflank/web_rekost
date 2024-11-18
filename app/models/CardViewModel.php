@@ -15,7 +15,8 @@ class CardViewModel
             $query = "SELECT 
     k.id_kos, 
     k.nama_kos, 
-    k.alamat, 
+    k.alamat,
+    k.tipe_kos,
     km.harga AS harga, 
     (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, 
     AVG(u.rating) AS avg_rating, 
@@ -51,7 +52,8 @@ LIMIT 0, 25";
             $query = "SELECT 
     k.id_kos, 
     k.nama_kos, 
-    k.alamat, 
+    k.alamat,
+    k.tipe_kos,
     km.harga AS harga, 
     (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, 
     AVG(u.rating) AS avg_rating, 
@@ -88,7 +90,8 @@ LIMIT 0, 25;
             $query = "SELECT 
     k.id_kos, 
     k.nama_kos, 
-    k.alamat, 
+    k.alamat,
+    k.tipe_kos, 
     km.harga AS harga, 
     (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, 
     AVG(u.rating) AS avg_rating, 
