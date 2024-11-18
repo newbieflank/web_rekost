@@ -59,35 +59,20 @@ class HomeController extends Controller
     {
         $pendapatan = $this->model('chartModel')->getpendapatan();
         $pengeluaran = $this->model ('chartModel')->getpengeluaran();
-        $ulasan=$this->model('chartmodel')->getUlasan();
+        $ulasan_user= $this->model('chartModel')->Ulasanuser();
+        $rataRating = $this->model('chartModel')->getUlasan();
 
         $data = [
             "pendapatan" => $pendapatan
-            ,"pengeluaran"=> $pengeluaran
-            ,"ulasan"=>$ulasan
+            ,"pengeluaran"=> $pengeluaran,
+            "ulasan" => $ulasan_user
+            ,"rataRating"=>$rataRating
         ];   
+
+        // echo json_encode($ulasan_user);
         $this->view('home/landingpemilik', $data);
     }
 
-    public function Ulasan(){
-        if(!isset($_SESSION['user'])){
-            $this->header('/login');
-            exit;
-        }
-
-        $ulasan = $_POST['reviewInput'];
-        $id = $_SESSION['user']['id_user'];
-        $data = [
-            "ulasan" => $ulasan,
-            "id_user" => $id
-        ];
-        if ($this->model("chartModel")->AddRating($data) > 0) {
-            $this->header('/');
-            exit;
-        } else {
-            echo json_encode($data);
-        }
-    }
     public function verif()
     {
         $this->view('login/verifpemilik');

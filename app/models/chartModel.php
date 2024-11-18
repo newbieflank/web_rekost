@@ -104,32 +104,16 @@ GROUP BY
             user ON ulasan.id_user = user.id_user
         JOIN 
             kos ON ulasan.id_kos = kos.id_kos
-        ORDER BY 
-            ulasan.tanggal_ulas DESC;"
-        
-            $this->db->query($query);
+        ORDER BY
+            ulasan.tanggal_ulas DESC";        
+        $this->db->query($query);
             $results = $this->db->resultSet();
+            
             return $results;
 
         } 
         catch (Exception $e) {
             echo "Error: " . $e->getMessage();
-        }
-    }
-        
-        
-
-    public function AddRating($data){
-        try {
-            $query = "INSERT INTO `ulasan` (`id_user`, `ulasan`) VALUES (:id_user, :ulasan)";
-            $this->db->query($query);
-            $this->db->bind('id_user', $data['id_user']);
-            $this->db->bind('ulasan', $data['ulasan']);
-            $this->db->execute();
-            return $this->db->rowCount();
-
-        } catch (\Throwable $th) {
-            //throw $th;
         }
     }
 }
