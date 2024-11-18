@@ -11,7 +11,26 @@ class KosModel
 
     public function getData($id)
     {
-        $query = "SELECT * FROM kos where id_kos = :id";
+        $query = "SELECT     kos.id_kos,
+    kos.nama_kos,
+    kos.deskripsi,
+    kos.tipe_kos,
+    kos.alamat,
+    kos.latitude,
+    kos.longitude,
+    kos.jenis_fasilitas,
+    kos.peraturan_kos,
+    kos.id_user,
+    kamar.id_kamar,
+    kamar.luas_kamar,
+    kamar.status_kamar,
+    kamar.fasilitas_kamar,
+    kamar.harga,
+    kamar.tipe_kamar,
+    kamar.kamar_tersedia,
+    kamar.waktu_penyewaan
+ FROM kos JOIN 
+    kamar ON kos.id_kos = kamar.id_Kos; where id_kos = :id";
 
         $this->db->query($query);
         $this->db->bind('id', $id);

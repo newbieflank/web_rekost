@@ -96,10 +96,10 @@
                     </div>
                     <h5>Detail Pembayaran</h5>
                     <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
-                    <p><strong>Total Kamar</strong>: <span id="detailTotalKamar">1</span></p>
+                    <p><strong>Total Kamar</strong>:  <span id="detailTotalKamar">1</span></p>
                     <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
                     <p><strong>Tanggal</strong>: <span id="detailTanggal"></span></p>
-                    <p><strong>Harga</strong>: <?= $kos['harga_kos'] ?></p>
+                    <p><strong>Harga</strong>: <?= $kos['harga'] ?></p>
                     <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="" id="termsCheck">

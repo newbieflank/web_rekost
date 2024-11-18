@@ -192,24 +192,32 @@
                 </div>
             </div>
             <div class="row justify-content-start reviews">
-                <?php foreach ($data['rating_aplikasi'] as $rating): ?>
+                <?php
+                // Menampilkan total rating
+                if (!empty($data['rating_aplikasi'])):
+                    $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
-                            <?php echo $rating['total_rating'] ?>
+                            <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
-                <?php foreach ($data['penyewa'] as $penyewa): ?>
+                <?php
+                endif;
+
+                // Menampilkan jumlah penyewa
+                if (!empty($data['penyewa'])):
+                    $penyewa = current($data['penyewa']); // Ambil elemen pertama
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
-                            <?php echo $penyewa['jumlah_penyewa'] ?>
+                            <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
+                <?php endif; ?>
+
             </div>
         </div>
     </section>
@@ -276,7 +284,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $popular['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $popular['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $popular['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $popular['alamat'] ?>
                                     </p>
@@ -338,7 +347,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $best['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $best['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $best['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
@@ -381,7 +391,8 @@
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $campus['nama_kos'] ?>
                                     </h5>
-                                    <span class="btn-available mb-3" style="border-radius: 4px;"> <?php echo $campus['tipe_kos'] ?></span>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $campus['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5

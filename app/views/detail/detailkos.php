@@ -46,16 +46,17 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="/web_rekost/#home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web_rekost/#bookings">Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bookings">Bookings</a>
+                        <a class="nav-link" href="/web_rekost/#service">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#service">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="/web_rekost/#contact">Contact</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -132,7 +133,7 @@
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
                         <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
-                        <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
+                        <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi'?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>
@@ -237,7 +238,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <a href="chats" class="btn btn-primary btn-lg w-50 mb-4 text-center">
+            <a href="<?= BASEURL . '/chats'.$data['id_user']?>" class="btn btn-primary btn-lg w-50 mb-4 text-center">
                 Tanya Pemilik Sebelum Sewa
             </a>
         </div>
