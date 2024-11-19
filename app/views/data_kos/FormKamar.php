@@ -216,13 +216,13 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="UkuranSelect" name="luas_kamar">
                                     <option value="">Pilih ukuran</option>
-                                    <option value="2x2">2x2 m</option>
-                                    <option value="2x3">2x3 m</option>
-                                    <option value="3x3">3x3 m</option>
-                                    <option value="3x4">3x4 m</option>
-                                    <option value="4x4">4x4 m</option>
-                                    <option value="4x5">4x5 m</option>
-                                    <option value="5x5">5x5 m</option>
+                                    <option value="2x2 m">2x2 m</option>
+                                    <option value="2x3 m">2x3 m</option>
+                                    <option value="3x3 m">3x3 m</option>
+                                    <option value="3x4 m">3x4 m</option>
+                                    <option value="4x4 m">4x4 m</option>
+                                    <option value="4x5 m">4x5 m</option>
+                                    <option value="5x5 m">5x5 m</option>
                                 </select>
                             </div>
                         </div>
