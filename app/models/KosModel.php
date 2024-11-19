@@ -100,4 +100,9 @@ class KosModel
     {
         //isi query buat check ID Transaksi
     }
+
+    public function CariKos($alamat, $harga)
+    {
+        $query = "SELECT * FROM kos WHERE ";
+    }
 }

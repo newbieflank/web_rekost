@@ -57,6 +57,7 @@ class HomeController extends Controller
     }
     public function search()
     {
+        
         $this->view('home/search');
     }
 
