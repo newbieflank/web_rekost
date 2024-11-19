@@ -167,6 +167,18 @@ class KosModel
 
     public function CariKos($alamat, $harga)
     {
-        $query = "SELECT * FROM kos WHERE ";
+        if (isset($harga)) {
+            $query = "SELECT kos.*, kamar.harga_bulan FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos WHERE kos.alamat LIKE '%:alamat%' AND kamar.harga_bulan = :harga";
+        } else {
+            $query = "SELECT kos.*, kamar.harga_bulan FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos WHERE kos.alamat LIKE '%:alamat%'";
+        }
+
+        $this->db->query($query);
+        if (isset($harga)) {
+            $this->db->bind('harga', $harga);
+        }
+        $this->db->bind('alamat', $alamat);
+
+        return $this->db->resultSet();
     }
 }

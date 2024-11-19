@@ -57,7 +57,11 @@ class HomeController extends Controller
     }
     public function search()
     {
-        
+        $alamat = $_POST['location'];
+        $harga = $_POST['cost'];
+
+        $search = $this->model('KosModel')->CariKos($alamat, $harga);
+
         $this->view('home/search');
     }
 
@@ -68,12 +72,12 @@ class HomeController extends Controller
     public function home()
     {
         $pendapatan = $this->model('chartModel')->getpendapatan();
-        $pengeluaran = $this->model ('chartModel')->getpengeluaran();
+        $pengeluaran = $this->model('chartModel')->getpengeluaran();
         $rataRating = $this->model('chartModel')->getUlasan();
         $ratingatas = $this->model('chartModel')->getulasanatas();
         $chartpendapatan = $this->model('chartModel')->gettransaksi();
         $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
-    
+
         $pendapatanPerBulan = array_fill(0, 12, 0);
         foreach ($chartpendapatan as $item) {
             $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
@@ -85,24 +89,24 @@ class HomeController extends Controller
             $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
             $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
         }
-        
+
 
         $data = [
-            "pendapatan" => $pendapatan
-            ,"pengeluaran"=> $pengeluaran
-            ,"rataRating"=>$rataRating
-            ,"ratingatas"=>$ratingatas,
+            "pendapatan" => $pendapatan,
+            "pengeluaran" => $pengeluaran,
+            "rataRating" => $rataRating,
+            "ratingatas" => $ratingatas,
             "chartpendapatan" => $pendapatanPerBulan,
             "chartpengeluaran" => $pengeluaranPerBulan
 
-            
-        ];   
+
+        ];
         $this->view('home/landingpemilik', $data);
     }
 
-    
 
-    
+
+
     public function verif()
     {
         $this->view('login/verifpemilik');
