@@ -205,7 +205,7 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
@@ -218,7 +218,7 @@
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -265,14 +265,13 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" form="searchForm" class="btn btn-primary">Cari</button>
+                                <button type="submit" class="btn btn-primary">Cari</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
     </section>
     <section id="bookings" class="popular">
         <div class="container">

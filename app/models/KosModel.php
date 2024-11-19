@@ -188,17 +188,41 @@ class KosModel
 
     public function CariKos($alamat, $harga)
     {
-        if (isset($harga)) {
-            $query = "SELECT kos.*, kamar.harga_bulan FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos WHERE kos.alamat LIKE '%:alamat%' AND kamar.harga_bulan = :harga";
-        } else {
-            $query = "SELECT kos.*, kamar.harga_bulan FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos WHERE kos.alamat LIKE '%:alamat%'";
+        // Base query with common SELECT and JOIN clauses
+        $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
+            AS review_count, km.waktu_penyewaan, km.status_kamar 
+            FROM kos k 
+            LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
+            LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos ";
+
+        // Add conditions based on the input values
+        $conditions = [];
+        if (!empty($alamat)) {
+            $conditions[] = "k.alamat LIKE :alamat";
+        }
+        if (!empty($harga)) {
+            $conditions[] = "km.harga_bulan = :harga";
         }
 
+        // Append WHERE and GROUP BY clauses
+        if (!empty($conditions)) {
+            $query .= "WHERE " . implode(" AND ", $conditions) . " ";
+        }
+        $query .= "GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
+
+        // Prepare and bind the query
         $this->db->query($query);
-        if (isset($harga)) {
+
+        // Bind parameters only if they have values
+        if (!empty($alamat)) {
+            $this->db->bind('alamat', '%' . $alamat . '%');
+        }
+        if (!empty($harga)) {
             $this->db->bind('harga', $harga);
         }
-        $this->db->bind('alamat', $alamat);
 
         return $this->db->resultSet();
     }

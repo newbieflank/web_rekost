@@ -57,12 +57,15 @@ class HomeController extends Controller
     }
     public function search()
     {
-        $alamat = $_POST['location'];
-        $harga = $_POST['cost'];
+
+        $alamat = isset($_POST['location']) ? $_POST['location'] : '';
+        $harga = isset($_POST['cost']) ? $_POST['cost'] : null;
 
         $search = $this->model('KosModel')->CariKos($alamat, $harga);
-
-        $this->view('home/search');
+        $data = [
+            'search' => $search
+        ];
+        $this->view('home/search', $data);
     }
 
     public function best()
