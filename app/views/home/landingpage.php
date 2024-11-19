@@ -239,11 +239,11 @@
                             <div class="form-group col-md-6">
                                 <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pl-5 pr-5" id="location" name="location">
+                                    <select class="form-control pl-5 pr-5" id="location" name="location" required>
                                         <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
-                                        <option value="tamnanan">Tamanan</option>
+                                        <option value="Sumbersari">Sumbersari</option>
                                         <option value="tamansari">Tamansari</option>
                                         <option value="sempol">Sempol</option>
                                     </select>
@@ -394,7 +394,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>`1`1"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">

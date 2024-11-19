@@ -23,7 +23,6 @@ class CardViewModel
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -43,7 +42,6 @@ class CardViewModel
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -63,7 +61,6 @@ class CardViewModel
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -129,6 +126,4 @@ GROUP BY
             echo "Error: " . $e->getMessage();
         }
     }
-
 }
-?>
