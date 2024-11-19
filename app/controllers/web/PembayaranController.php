@@ -67,4 +67,16 @@ class PembayaranController extends Controller
         move_uploaded_file($tmp_name, $targetFilePath);
         $this->header('/riwayat');
     }
+    public function getId()
+    {
+        do {
+            $dateTime = date('Ymd');
+            $randomNumber = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
+
+            $generatedId = $dateTime . $randomNumber;
+            $check = $this->kosModel->cekIdTransaksi($generatedId);
+        } while ($check);
+
+        return $generatedId;
+    }
 }

@@ -135,9 +135,9 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" action="<?= BASEURL; ?>fasilitaskos/tambah" method="post" onsubmit="handleSubmit(event)">
+    <form id="multiStepForm" action="<?= BASEURL; ?>datakamar/tambah" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
-            <div class="step-container" data-step="2">
+            <div class="step-container" data-step="1">
                 <h5 class="card-header">
                     Pasang Foto Kamar
                     <div class="tips">
@@ -195,7 +195,7 @@
             </div>
 
             <!-- //Step 2: Spesifikasi Kamar  -->
-            <div class="step-container" data-step="1">
+            <div class="step-container" data-step="2">
                 <h5 class="card-header">Spesifikasi Kamar</h5>
                 <div class="card-body">
                     <div class="row m-5">
@@ -204,10 +204,10 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
                                     <option value="">Pilih tipe kamar</option>
-                                    <option value="A">Tipe A</option>
-                                    <option value="B">Tipe B</option>
-                                    <option value="C">Tipe C</option>
-                                    <option value="D">Tipe D</option>
+                                    <option value="TIPE A">Tipe A</option>
+                                    <option value="TIPE B">Tipe B</option>
+                                    <option value="TIPE C">Tipe C</option>
+                                    <option value="TIPE D">Tipe D</option>
                                 </select>
                             </div>
                         </div>
@@ -216,13 +216,13 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="UkuranSelect" name="luas_kamar">
                                     <option value="">Pilih ukuran</option>
-                                    <option value="2x2">2x2 m</option>
-                                    <option value="2x3">2x3 m</option>
-                                    <option value="3x3">3x3 m</option>
-                                    <option value="3x4">3x4 m</option>
-                                    <option value="4x4">4x4 m</option>
-                                    <option value="4x5">4x5 m</option>
-                                    <option value="5x5">5x5 m</option>
+                                    <option value="2x2 m">2x2 m</option>
+                                    <option value="2x3 m">2x3 m</option>
+                                    <option value="3x3 m">3x3 m</option>
+                                    <option value="3x4 m">3x4 m</option>
+                                    <option value="4x4 m">4x4 m</option>
+                                    <option value="4x5 m">4x5 m</option>
+                                    <option value="5x5 m">5x5 m</option>
                                 </select>
                             </div>
                         </div>
@@ -295,8 +295,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kipas_Angin" id="Kipas_Angin">
-                                        <label class="form-check-label" for="Kipas_Angin">
+                                            value="Kipas Angin" id="Kipas Angin">
+                                        <label class="form-check-label" for="Kipas Angin">
                                             Kipas Angin
                                         </label>
                                     </div>
@@ -331,8 +331,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kamar_Mandi_Dalam" id="Kamar_Mandi_Dalam">
-                                        <label class="form-check-label" for="Kamar_Mandi_Dalam">
+                                            value="Kamar Mandi Dalam" id="Kamar Mandi Dalam">
+                                        <label class="form-check-label" for="Kamar Mandi Dalam">
                                             Kamar Mandi Dalam
                                         </label>
                                     </div>
@@ -340,8 +340,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Air_Hangat" id="Air_Hangat">
-                                        <label class="form-check-label" for="Air_Hangat">
+                                            value="Air Hangat" id="Air Hangat">
+                                        <label class="form-check-label" for="Air Hangat">
                                             Air Hangat
                                         </label>
                                     </div>
@@ -364,7 +364,7 @@
 
     </form>
 </div>
-<!-- Tombol Navigasi -->
+<!-- Tombol Navigasi test -->
 <div class="d-flex justify-content-between mt-3 mb-5">
     <button type="button" class="btn btn-prev" onclick="prevStep()">
         <i class="fas fa-chevron-left me-2"></i>Sebelumnya
@@ -374,136 +374,4 @@
     </button>
 </div>
 
-<script>
-    let currentStep = 1;
-    const totalSteps = 4;
-
-    function updateProgressBar() {
-        document.querySelectorAll('.progress-step-item').forEach(item => {
-            const step = parseInt(item.dataset.step);
-            item.classList.remove('active', 'completed');
-            if (step === currentStep) {
-                item.classList.add('active');
-            } else if (step < currentStep) {
-                item.classList.add('completed');
-            }
-        });
-    }
-
-    function showStep(step) {
-        document.querySelectorAll('.step-container').forEach(container => {
-            container.classList.remove('active');
-        });
-        document.querySelector(`.step-container[data-step="${step}"]`).classList.add('active');
-
-        const prevBtn = document.querySelector('.btn-prev');
-        const nextBtn = document.querySelector('.btn-next');
-
-        if (step === 1) {
-            prevBtn.style.display = 'none';
-        } else {
-            prevBtn.style.display = 'block';
-        }
-
-        if (step === totalSteps) {
-            nextBtn.innerHTML = 'Selesai<i class="fas fa-check ms-2"></i>';
-        } else {
-            nextBtn.innerHTML = 'Selanjutnya<i class="fas fa-chevron-right ms-2"></i>';
-        }
-    }
-
-    function formatInput(input) {
-        let value = input.value.replace(/[^0-9x]/g, '');
-        let parts = value.split('x');
-        if (parts.length > 2) {
-            parts = [parts[0], parts.slice(1).join('')];
-        }
-        if (parts.length === 2 && parts[1] !== '') {
-            input.value = `${parts[0]}x${parts[1]} m`;
-        } else {
-            input.value = value;
-        }
-    }
-
-    function nextStep() {
-        if (currentStep < totalSteps) {
-            currentStep++;
-            showStep(currentStep);
-            updateProgressBar();
-        } else {
-            submitForm();
-        }
-    }
-
-    function prevStep() {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-            updateProgressBar();
-        }
-    }
-
-    function goToStep(step) {
-        currentStep = step;
-        showStep(currentStep);
-        updateProgressBar();
-    }
-
-    function submitForm() {
-        const form = document.getElementById('multiStepForm');
-        const formData = new FormData(form);
-
-        // Collect checked fasilitas
-        const fasilitas = [];
-        document.querySelectorAll('input[name="fasilitas[]"]:checked').forEach(checkbox => {
-            fasilitas.push(checkbox.value);
-        });
-
-        // Tambahkan fasilitas yang dicentang ke formData
-        formData.append('fasilitas', (fasilitas));
-
-        // Kirim data menggunakan fetch
-        fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                if (data.success) {
-                    Swal.fire({
-                        title: 'Sukses!',
-                        text: 'Data kos berhasil disimpan',
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.href = BASEURL + 'datakos/';
-                    });
-                } else {
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: data.message,
-                        icon: 'error'
-                    });
-                }
-            })
-            .catch(error => {
-                console.log(error);
-
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Sukses!',
-                    text: 'Data kos berhasil disimpan',
-                    icon: 'success'
-                });
-            });
-    }
-
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        showStep(currentStep);
-        updateProgressBar();
-    });
-</script>
+<script src="<?= asset('js/steps2.js') ?>"></script>

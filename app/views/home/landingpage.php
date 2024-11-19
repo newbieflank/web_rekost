@@ -279,7 +279,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $popular["id_kos"] . 'foto_luar.jpg') ?>"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
@@ -342,7 +342,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $best["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>" class="card-img-top"
                                     alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
@@ -386,7 +386,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $campus["id_kos"] . 'foto_luar.jpg') ?>"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
