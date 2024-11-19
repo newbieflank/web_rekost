@@ -204,10 +204,10 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
                                     <option value="">Pilih tipe kamar</option>
-                                    <option value="A">Tipe A</option>
-                                    <option value="B">Tipe B</option>
-                                    <option value="C">Tipe C</option>
-                                    <option value="D">Tipe D</option>
+                                    <option value="TIPE A">Tipe A</option>
+                                    <option value="TIPE B">Tipe B</option>
+                                    <option value="TIPE C">Tipe C</option>
+                                    <option value="TIPE D">Tipe D</option>
                                 </select>
                             </div>
                         </div>
@@ -216,13 +216,13 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="UkuranSelect" name="luas_kamar">
                                     <option value="">Pilih ukuran</option>
-                                    <option value="2x2">2x2 m</option>
-                                    <option value="2x3">2x3 m</option>
-                                    <option value="3x3">3x3 m</option>
-                                    <option value="3x4">3x4 m</option>
-                                    <option value="4x4">4x4 m</option>
-                                    <option value="4x5">4x5 m</option>
-                                    <option value="5x5">5x5 m</option>
+                                    <option value="2x2 m">2x2 m</option>
+                                    <option value="2x3 m">2x3 m</option>
+                                    <option value="3x3 m">3x3 m</option>
+                                    <option value="3x4 m">3x4 m</option>
+                                    <option value="4x4 m">4x4 m</option>
+                                    <option value="4x5 m">4x5 m</option>
+                                    <option value="5x5 m">5x5 m</option>
                                 </select>
                             </div>
                         </div>
