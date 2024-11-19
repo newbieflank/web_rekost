@@ -243,33 +243,31 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- //Step 4: Harga  -->
             <div class="step-container" data-step="4">
                 <h5 class="card-header">Harga</h5>
                 <div class="card-body">
                     <div class="row m-5">
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="harga_hari" id="harga_minggu" class="form-control"
-                                placeholder="Rp.0">
+                        <div class="mb-3 row">
+                            <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="harga_hari" id="harga_minggu" class="form-control"
+                                    placeholder="Rp.0">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="harga_minggu" id="harga_minggu" class="form-control"
-                                placeholder="Rp.0">
+                        <div class="mb-3 row">
+                            <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="harga_minggu" id="harga_minggu" class="form-control"
+                                    placeholder="Rp.0">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="harga_bulan" id="harga_bulan" class="form-control"
-                                placeholder="Rp.0">
+                        <div class="mb-3 row">
+                            <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="harga_bulan" id="harga_bulan" class="form-control"
+                                    placeholder="Rp.0">
+                            </div>
                         </div>
                     </div>
                 </div>

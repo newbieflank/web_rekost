@@ -51,11 +51,12 @@ class KosModel
         }
     }
 
-    private function generateKamarId() {
+    private function generateKamarId()
+    {
 
         $dateTime = date('Ym');
         $randomNumber = str_pad(rand(0, 999), 4, '0', STR_PAD_LEFT);
-        
+
         return $dateTime . $randomNumber;
     }
 

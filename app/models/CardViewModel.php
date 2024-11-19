@@ -40,7 +40,6 @@ LIMIT 0, 25";
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -78,7 +77,6 @@ LIMIT 0, 25;
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -113,7 +111,6 @@ LIMIT 0, 25;";
             $this->db->query($query);
             $results = $this->db->resultSet();
             return $results;
-
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -179,6 +176,4 @@ GROUP BY
             echo "Error: " . $e->getMessage();
         }
     }
-
 }
-?>
