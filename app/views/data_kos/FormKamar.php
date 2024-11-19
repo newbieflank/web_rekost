@@ -204,10 +204,10 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
                                     <option value="">Pilih tipe kamar</option>
-                                    <option value="A">Tipe A</option>
-                                    <option value="B">Tipe B</option>
-                                    <option value="C">Tipe C</option>
-                                    <option value="D">Tipe D</option>
+                                    <option value="TIPE A">Tipe A</option>
+                                    <option value="TIPE B">Tipe B</option>
+                                    <option value="TIPE C">Tipe C</option>
+                                    <option value="TIPE D">Tipe D</option>
                                 </select>
                             </div>
                         </div>
