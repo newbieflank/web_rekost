@@ -22,8 +22,10 @@ Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/search', 'HomeController@search');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
-Router::get('/pemilik','HomeController@home');
-
+Router::get('/pemilik', 'HomeController@home');
+Router::get('/riwayat', 'PembayaranController@riwayatpencari');
+Router::get('/riwayatpemilik', 'PembayaranController@riwayatpemilik');
+Router::post('/pembayaran', 'PembayaranController@insertPembayaran');
 
 //admin
 Router::get('/dashboard', 'AdminController@dashboard');

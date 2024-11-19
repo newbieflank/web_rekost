@@ -11,11 +11,10 @@ class KosModel
 
     public function getData($id)
     {
-        $query = "SELECT * FROM kos where id_kos = :id";
+        $query = "SELECT * FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos where kos.id_kos = :id";
 
         $this->db->query($query);
         $this->db->bind('id', $id);
-
         return $this->db->single();
     }
 
