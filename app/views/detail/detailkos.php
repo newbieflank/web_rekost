@@ -131,7 +131,7 @@
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
-                        <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
+                        <span class="text-red">IDR <?= $data['harga_bulan'] ?></span> <br>
                         <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
                         <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi'?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
@@ -182,7 +182,7 @@
                     Fasilitas Kamar
                 </h3>
                 <div class="icons">
-                    <?php if (in_array('Lemari', $fasilitas_kamar)): ?>
+                    <?php if (in_array('Lemari', $jenis_fasilitas)): ?>
                         <div><i class="fas fa-archive"></i>Lemari</div>
                     <?php endif; ?>
                 </div>
@@ -238,7 +238,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <a href="<?= BASEURL . '/chats'.$data['id_user']?>" class="btn btn-primary btn-lg w-50 mb-4 text-center">
+            <a href="chats" class="btn btn-primary btn-lg w-50 mb-4 text-center">
                 Tanya Pemilik Sebelum Sewa
             </a>
         </div>

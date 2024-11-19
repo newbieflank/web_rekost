@@ -30,7 +30,7 @@ class DetailController extends Controller
     {
         $DetailKos = $this->model('CardViewModel')->DetailKos($id);
         $DetailKos['fasilitas_kos'] = explode(',', $DetailKos['fasilitas_kos']);
-        $DetailKos['fasilitas_kamar'] = explode(',', $DetailKos['fasilitas_kamar']);
+        $DetailKos['jenis_fasilitas'] = explode(',', $DetailKos['jenis_fasilitas']);
         $DetailKos['peraturan_kos'] = explode(',', $DetailKos['peraturan_kos']);
         $this->view('detail/detailkos',$DetailKos);
     }
