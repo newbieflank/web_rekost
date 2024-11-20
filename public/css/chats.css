@@ -99,7 +99,7 @@ body {
   margin-left: 0.5rem;
 }
 
-.chat-window .chat-message .message-content.sent {
+.chat-window .chat-message.sent .message-content {
   background-color: #007bff;
   color: #fff;
   margin-left: auto;
@@ -134,4 +134,72 @@ body {
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 50%;
+}
+/* Pesan pengirim (sent) berada di kanan */
+.chat-message.sent {
+  flex-direction: row-reverse; /* Membalikkan urutan elemen */
+}
+
+.chat-message .message-content {
+  max-width: 60%; /* Agar pesan tidak terlalu lebar */
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: #eaf4ff; /* Pesan default (penerima) */
+  margin-left: 0.5rem;
+}
+
+.chat-message.sent .message-content {
+  background-color: #007bff; /* Pesan pengirim */
+  color: white;
+  margin-left: auto; /* Memindahkan pesan pengirim ke kanan */
+}
+
+.chat-message .message-time {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 0.5rem;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.chat-message.justify-content-end {
+  justify-content: flex-end; /* Pesan pengirim di kanan */
+}
+
+.chat-message.justify-content-start {
+  justify-content: flex-start; /* Pesan penerima di kiri */
+}
+
+.message-content {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.message-content.sent {
+  background-color: #007bff;
+  color: white;
+}
+
+.message-content.bg-light {
+  background-color: #eaf4ff;
+}
+
+.message-time {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: 5px;
 }

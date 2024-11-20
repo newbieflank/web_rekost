@@ -1,5 +1,6 @@
 <?php
 
+
 class ChatController extends Controller {
     private $chatModel;
 
@@ -10,9 +11,10 @@ class ChatController extends Controller {
 
     public function chats() {
         // Fetch the online users
+        
         $onlineUsers = $this->chatModel->chats($_SESSION["user"]["id_user"]);
 
-        // Prepare layout data to pass to the view
+
         $layoutData = [
             'onlineUsers' => $onlineUsers,  // Corrected the array structure
             'user' => $_SESSION['user']     // Example: passing user data if needed
@@ -22,14 +24,13 @@ class ChatController extends Controller {
         $this->view('detail/chats', $layoutData);
     }
     public function get_chat($userId) {
-        echo json_encode(['status' => 'success']);
-        die;
-       
-        $outgoing_id = $_SESSION['user']['id_user'];
         
+        $outgoing_id = $_SESSION['user']['id_user'];
         // Call get_chat method from ChatModel
         $messages = $this->chatModel->get_chat($userId, $outgoing_id);
       
+        // echo json_encode(['status' => 'success', 'messages' => $messages]);
+
         // Return the messages as JSON if needed or pass to view
         if ($messages) {
             echo json_encode(['status' => 'success', 'messages' => $messages]);
@@ -37,7 +38,7 @@ class ChatController extends Controller {
             echo json_encode(['status' => 'error', 'message' => 'No messages available']);
         }
     }
-    public function sendMessage($receiverId) {
+    public function sendMessage($incomingUserId){
 
       
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -46,15 +47,12 @@ class ChatController extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
             $data = [
-                'id_receiver' => trim($_POST['id_receiver']),
-                'id_sender' => $_SESSION['user']['id_user'],
+                'id_sender' => $incomingUserId,
+                'id_receiver' => $_SESSION['user']['id_user'],
                 'message' => trim($_POST['message']),
                
             ];
-            // echo json_encode(['status' => 'success']);
-            // die;
-    
-            // Log data untuk memverifikasi apakah sudah benar
+           
             error_log(print_r($data, true));
     
             // Panggil fungsi sendMessage di ChatModel
