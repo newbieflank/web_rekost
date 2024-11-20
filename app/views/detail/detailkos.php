@@ -46,16 +46,17 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="/web_rekost/#home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web_rekost/#bookings">Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bookings">Bookings</a>
+                        <a class="nav-link" href="/web_rekost/#service">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#service">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="/web_rekost/#contact">Contact</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -130,9 +131,9 @@
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
-                        <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
+                        <span class="text-red">IDR <?= $data['harga_bulan'] ?></span> <br>
                         <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
-                        <a href="<?= BASEURL; ?>detailkos/<?= $data['id_kos'] ?>/konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
+                        <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi'?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>
@@ -181,7 +182,7 @@
                     Fasilitas Kamar
                 </h3>
                 <div class="icons">
-                    <?php if (in_array('Lemari', $fasilitas_kamar)): ?>
+                    <?php if (in_array('Lemari', $jenis_fasilitas)): ?>
                         <div><i class="fas fa-archive"></i>Lemari</div>
                     <?php endif; ?>
                 </div>

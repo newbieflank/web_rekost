@@ -57,7 +57,15 @@ class HomeController extends Controller
     }
     public function search()
     {
-        $this->view('home/search');
+
+        $alamat = isset($_POST['location']) ? $_POST['location'] : '';
+        $harga = isset($_POST['cost']) ? $_POST['cost'] : null;
+
+        $search = $this->model('KosModel')->CariKos($alamat, $harga);
+        $data = [
+            'search' => $search
+        ];
+        $this->view('home/search', $data);
     }
 
     public function best()
@@ -68,36 +76,40 @@ class HomeController extends Controller
     {
         $pendapatan = $this->model('chartModel')->getpendapatan();
         $pengeluaran = $this->model('chartModel')->getpengeluaran();
-        $ulasan = $this->model('chartmodel')->getUlasan();
+        $rataRating = $this->model('chartModel')->getUlasan();
+        $ratingatas = $this->model('chartModel')->getulasanatas();
+        $chartpendapatan = $this->model('chartModel')->gettransaksi();
+        $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+
+        $pendapatanPerBulan = array_fill(0, 12, 0);
+        foreach ($chartpendapatan as $item) {
+            $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+            $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+        }
+
+        $pengeluaranPerBulan = array_fill(0, 12, 0);
+        foreach ($chartpengeluaran as $item) {
+            $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+            $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+        }
+
 
         $data = [
             "pendapatan" => $pendapatan,
             "pengeluaran" => $pengeluaran,
-            "ulasan" => $ulasan
+            "rataRating" => $rataRating,
+            "ratingatas" => $ratingatas,
+            "chartpendapatan" => $pendapatanPerBulan,
+            "chartpengeluaran" => $pengeluaranPerBulan
+
+
         ];
         $this->view('home/landingpemilik', $data);
     }
 
-    public function Ulasan()
-    {
-        if (!isset($_SESSION['user'])) {
-            $this->header('/login');
-            exit;
-        }
 
-        $ulasan = $_POST['reviewInput'];
-        $id = $_SESSION['user']['id_user'];
-        $data = [
-            "ulasan" => $ulasan,
-            "id_user" => $id
-        ];
-        if ($this->model("chartModel")->AddRating($data) > 0) {
-            $this->header('/');
-            exit;
-        } else {
-            echo json_encode($data);
-        }
-    }
+
+
     public function verif()
     {
         $this->view('login/verifpemilik');

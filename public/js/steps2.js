@@ -116,9 +116,9 @@ let currentStep = 1;
 
                 console.error('Error:', error);
                 Swal.fire({
-                    title: 'Sukses!',
-                    text: 'Data kos berhasil disimpan',
-                    icon: 'success'
+                    title: 'Error!',
+                    text: 'Data gagal disimpan',
+                    icon: 'gagal'
                 });
             });
     }

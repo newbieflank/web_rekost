@@ -20,7 +20,6 @@ Router::get('/chats', 'ChatController@chats');
 Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
-Router::get('/search', 'HomeController@search');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
 Router::get('/pemilik', 'HomeController@home');
 Router::get('/riwayat', 'PembayaranController@riwayatpencari');
@@ -45,6 +44,7 @@ Router::get('/logout', 'LoginController@logout');
 
 
 //POST METHOD
+Router::post('/search', 'HomeController@search');
 Router::post('/login', 'LoginController@auth');
 Router::post('/register', 'LoginController@create');
 Router::post('/create', 'LoginController@Google');

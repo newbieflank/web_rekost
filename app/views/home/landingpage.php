@@ -201,24 +201,32 @@
                 </div>
             </div>
             <div class="row justify-content-start reviews">
-                <?php foreach ($data['rating_aplikasi'] as $rating): ?>
+                <?php
+                // Menampilkan total rating
+                if (!empty($data['rating_aplikasi'])):
+                    $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
-                            <?php echo $rating['total_rating'] ?>
+                            <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
-                <?php foreach ($data['penyewa'] as $penyewa): ?>
+                <?php
+                endif;
+
+                // Menampilkan jumlah penyewa
+                if (!empty($data['penyewa'])):
+                    $penyewa = current($data['penyewa']); // Ambil elemen pertama
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
-                            <?php echo $penyewa['jumlah_penyewa'] ?>
+                            <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
+                <?php endif; ?>
+
             </div>
         </div>
     </section>
@@ -231,11 +239,11 @@
                             <div class="form-group col-md-6">
                                 <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pl-5 pr-5" id="location" name="location">
+                                    <select class="form-control pl-5 pr-5" id="location" name="location" required>
                                         <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
-                                        <option value="tamnanan">Tamanan</option>
+                                        <option value="Sumbersari">Sumbersari</option>
                                         <option value="tamansari">Tamansari</option>
                                         <option value="sempol">Sempol</option>
                                     </select>
@@ -257,14 +265,13 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-right">
-                                <button type="submit" form="searchForm" class="btn btn-primary">Cari</button>
+                                <button type="submit" class="btn btn-primary">Cari</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
     </section>
     <section id="bookings" class="popular">
         <div class="container">
@@ -386,7 +393,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>`1`1"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">

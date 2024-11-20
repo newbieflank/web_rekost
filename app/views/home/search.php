@@ -123,30 +123,35 @@
 
         <div class="container-fluid px-4">
             <div class="row" style="margin-top: 32px;">
-                <!-- <?php foreach ($data['popular'] as $popular): ?>
-                    <div class="col-md-3 p-3 mb-5">
-                        <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
-                            <div class="card">
-                                <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $popular['nama_kos'] ?></h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
-                                        <?php echo $popular['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
-                                        (<?php echo $popular['review_count'] ?>)</p>
-                                    <span class="btn-available"
-                                        style="border-radius: 4px;"><?php echo $popular['status_kamar'] ?></span>
-                                    <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                        IDR <?php echo $popular['harga'] ?>
-                                        <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $popular['waktu_penyewaan'] ?></span>
-                                    </p>
-                                    <a class="btn-order" href="detailkos">Pesan sekarang</a>
+                <?php if (!empty($data['search'])) : ?>
+                    <?php foreach ($data['search'] as $kos) : ?>
+                        <div class="col-md-3 p-3 mb-5">
+                            <a href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>" class="card-link">
+                                <div class="card">
+                                    <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= htmlspecialchars($kos['nama_kos'], ENT_QUOTES, 'UTF-8') ?></h5>
+                                        <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                            <?= htmlspecialchars($kos['alamat'], ENT_QUOTES, 'UTF-8') ?></p>
+                                        <p class="card-text" style="font-weight: 600;"><?= $kos['avg_rating'] ?>/5
+                                            (<?= $kos['review_count'] ?>)</p>
+                                        <span class="btn-available"
+                                            style="border-radius: 4px;"><?= htmlspecialchars($kos['status_kamar'], ENT_QUOTES, 'UTF-8') ?></span>
+                                        <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                            IDR <?= number_format($kos['harga'], 0, ',', '.') ?>
+                                            <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">
+                                                /<?= htmlspecialchars($kos['waktu_penyewaan'], ENT_QUOTES, 'UTF-8') ?>
+                                            </span>
+                                        </p>
+                                        <a class="btn-order" href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>">Pesan sekarang</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                <?php endforeach; ?> -->
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p>No results found.</p>
+                <?php endif; ?>
                 <div class="col-md-3 p-3 mb-5">
                     <div class="card">
                         <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />

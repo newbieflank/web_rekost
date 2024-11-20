@@ -11,6 +11,27 @@ class KosModel
 
     public function getData($id)
     {
+        $query = "SELECT     kos.id_kos,
+    kos.nama_kos,
+    kos.deskripsi,
+    kos.tipe_kos,
+    kos.alamat,
+    kos.latitude,
+    kos.longitude,
+    kos.jenis_fasilitas,
+    kos.peraturan_kos,
+    kos.id_user,
+    kamar.id_kamar,
+    kamar.luas_kamar,
+    kamar.status_kamar,
+    kamar.fasilitas_kamar,
+    kamar.harga,
+    kamar.tipe_kamar,
+    kamar.kamar_tersedia,
+    kamar.waktu_penyewaan
+ FROM kos JOIN 
+    kamar ON kos.id_kos = kamar.id_Kos; where id_kos = :id";
+
         $query = "SELECT * FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos where kos.id_kos = :id";
 
         $this->db->query($query);
@@ -170,5 +191,46 @@ class KosModel
     public function cekIdTransaksi($id)
     {
         //isi query buat check ID Transaksi
+    }
+
+    public function CariKos($alamat, $harga)
+    {
+        // Base query with common SELECT and JOIN clauses
+        $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
+            AS review_count, km.waktu_penyewaan, km.status_kamar 
+            FROM kos k 
+            LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
+            LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos ";
+
+        // Add conditions based on the input values
+        $conditions = [];
+        if (!empty($alamat)) {
+            $conditions[] = "k.alamat LIKE :alamat";
+        }
+        if (!empty($harga)) {
+            $conditions[] = "km.harga_bulan = :harga";
+        }
+
+        // Append WHERE and GROUP BY clauses
+        if (!empty($conditions)) {
+            $query .= "WHERE " . implode(" AND ", $conditions) . " ";
+        }
+        $query .= "GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
+
+        // Prepare and bind the query
+        $this->db->query($query);
+
+        // Bind parameters only if they have values
+        if (!empty($alamat)) {
+            $this->db->bind('alamat', '%' . $alamat . '%');
+        }
+        if (!empty($harga)) {
+            $this->db->bind('harga', $harga);
+        }
+
+        return $this->db->resultSet();
     }
 }
