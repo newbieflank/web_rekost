@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -215,9 +216,7 @@ let receiverId = null;
 } else {
     console.error('WebSocket connection is not open.');
 }
-
         }
-        
         })
     // Initialize WebSocket
     connectWebSocket();
