@@ -1,76 +1,152 @@
 <?php
-require 'vendor/autoload.php'; // Pastikan path ke Composer autoload benar
-
+require_once __DIR__ . '/vendor/autoload.php';
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use React\Socket\Server as SocketServer;
+use Ratchet\Server\IoServer;
+use Ratchet\WebSocket\WsServer;
+use Ratchet\Http\HttpServer;
 
 class ChatServer implements MessageComponentInterface {
     protected $clients;
+    private $chatModel;
 
     public function __construct() {
+        
+        $this->chatModel = $this->model('ChatModel');
         $this->clients = new \SplObjectStorage;
     }
 
     public function onOpen(ConnectionInterface $conn) {
-        // Ambil parameter id_user dari URL query string
-        $queryParams = [];
-        parse_str($conn->httpRequest->getUri()->getQuery(), $queryParams);
-var_dump($this->$queryParams);
-die;
-        // Simpan id_user ke dalam koneksi
-        if (isset($queryParams['id_user'])) {
-            $conn->userId = $queryParams['id_user']; // Menyimpan id_user di dalam objek koneksi
-            echo "New connection! (UserID: {$conn->id_user}, Resource ID: {$conn->id_receiver})\n";
-        } else {
-            echo "Connection attempt without user ID.\n";
-        }
-
-        // Menyimpan koneksi pengguna
         $this->clients->attach($conn);
+    
+        // Ambil parameter query string (contohnya: ?user_id=123)
+        $queryString = $conn->httpRequest->getUri()->getQuery();
+        parse_str($queryString, $queryParams);
+    
+        if (isset($queryParams['user_id'])) {
+            $userId = $queryParams['user_id'];
+    
+            // Perbarui status pengguna di database menjadi online
+            $this->updateUserStatus($userId, 'online');
+    
+            // Kirim daftar pengguna online ke semua klien
+            $this->broadcastOnlineUsers();
+        }
+    }
+    
+
+    // Mengambil status pengguna dari database
+    private function broadcastOnlineUsers() {
+        // Ambil daftar pengguna online dari database
+        $onlineUsers = $this->chatModel->getOnlineUsers();
+    
+        foreach ($this->clients as $client) {
+            $client->send(json_encode([
+                'type' => 'online_users',
+                'users' => $onlineUsers,
+            ]));
+        }
+    }
+    private function chats($userId) {
+        
+        // Ambil status pengguna dari database (misalnya, 'online' atau 'offline')
+        return $this->chatModel->chats($userId);
     }
 
     public function onClose(ConnectionInterface $conn) {
-        // Menghapus koneksi ketika client menutup koneksi
         $this->clients->detach($conn);
-        echo "Connection {$conn->resourceId} has disconnected\n";
+    
+        // Ambil parameter query string
+        $queryString = $conn->httpRequest->getUri()->getQuery();
+        parse_str($queryString, $queryParams);
+    
+        if (isset($queryParams['user_id'])) {
+            $userId = $queryParams['user_id'];
+    
+            // Perbarui status pengguna di database menjadi offline
+            $this->updateUserStatus($userId, 'offline');
+    
+            // Kirim daftar pengguna online ke semua klien
+            $this->broadcastOnlineUsers();
+        }
     }
+    
 
+    private function updateUserStatus($userId, $status) {
+        $stmt = $this->db->prepare("UPDATE users SET status = :status WHERE id = :id");
+        $stmt->execute([
+            ':status' => $status,
+            ':id' => $userId,
+        ]);
+    }
+    
+    // Ketika pesan diterima
     public function onMessage(ConnectionInterface $from, $msg) {
-        // Menangani pesan yang dikirim dari client
         $data = json_decode($msg, true);
 
-        if (isset($data['message']) && isset($data['id_receiver'])) {
-            $senderId = isset($data['id_sender']) ? $data['id_sender'] : null;
-            $receiverId = $data['id_receiver'];
+        // Validasi data dan proses penyimpanan pesan
+        if (isset($data['message']) && isset($data['receiver_id'])) {
+            $senderId = isset($data['sender_id']) ? $data['sender_id'] : null;
+            $receiverId = $data['receiver_id'];
             $message = $data['message'];
 
-            // Kirim pesan ke penerima (hanya jika mereka terhubung)
-            foreach ($this->clients as $client) {
-                // Hanya kirim ke penerima yang sesuai
-                if ($client !== $from && isset($client->userId) && $client->userId == $receiverId) {
+            if ($senderId && $receiverId) {
+                // Simpan pesan ke database melalui ChatModel
+                if ($this->chatModel->sendMessage([
+                    'id_sender' => $senderId,
+                    'id_receiver' => $receiverId,
+                    'message' => $message
+                ])) {
+                    // Kirimkan pesan ke semua klien yang terhubung (kecuali pengirim)
                     $responseMessage = json_encode([
                         'type' => 'message',
-                        'id' => uniqid(), // ID pesan unik
+                        'id' => uniqid(),
                         'message' => $message,
                         'sender_id' => $senderId,
                         'receiver_id' => $receiverId,
                         'time' => date('H:i'),
-                        'sent_by_user' => true // Tandai pesan dikirim oleh pengguna
+                        'sent_by_user' => true // Menandakan pesan dikirim oleh pengguna
                     ]);
-                    $client->send($responseMessage); // Kirim pesan ke penerima
+
+                    foreach ($this->clients as $client) {
+                        // Kirimkan pesan ke semua klien kecuali pengirim
+                        if ($client !== $from) {
+                            $client->send($responseMessage);
+                        }
+                    }
                 }
             }
         }
     }
 
+    // Ketika terjadi error
     public function onError(ConnectionInterface $conn, \Exception $e) {
         echo "An error has occurred: {$e->getMessage()}\n";
         $conn->close();
     }
+    public function getOnlineUsers() {
+        $stmt = $this->db->prepare("SELECT id, name, profile_image FROM users WHERE status = 'online'");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Fungsi untuk memuat model ChatModel
+    protected function model($model) {
+        require_once './app/models/' . $model . '.php';
+        return new $model;
+    }
 }
 
-// Membuat server WebSocket dan mendengarkan di port 8080
-$server = new Ratchet\App('localhost', 8080);
-$server->route('/chat', new ChatServer, ['*']);
-$server->run();
-?>
+// Menyiapkan server WebSocket di port 8080
+$server = IoServer::factory(
+    new HttpServer(
+        new WsServer(
+            new ChatServer()
+        )
+    ),
+    8080
+);
+
+echo "WebSocket server started on ws://localhost:8080\n";
+$server->run();  
