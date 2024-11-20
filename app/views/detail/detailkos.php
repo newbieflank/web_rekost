@@ -132,7 +132,7 @@
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR <?= $data['harga'] ?></span> <br>
                         <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
-                        <a href="konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
+                        <a href="<?= BASEURL; ?>detailkos/<?= $data['id_kos'] ?>/konfirmasi" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>
