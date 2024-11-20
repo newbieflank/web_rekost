@@ -1,68 +1,58 @@
-function loadChat(userId, userName, userImage) {
-    incomingUserId = userId;
+let incomingUserId = null; 
+let loadedMessageIds = new Set(); 
+let socket = null; 
 
-    const chatInputArea = document.getElementById('chat-input-area');
-    const chatPlaceholder = document.getElementById('chat-placeholder');
-    const chatMessages = document.getElementById('chat-messages');
+function connectWebSocket(userId) {
+    const wsUrl = `ws://127.0.0.1:8080/ws/chat?id_user=${userId}`;
+    console.log(`Connecting WebSocket with URL: ${wsUrl}`);
+    socket = new WebSocket(wsUrl);
 
-    if (chatInputArea) chatInputArea.style.display = 'flex';
-    if (chatPlaceholder) chatPlaceholder.style.display = 'none';
+    socket.onopen = function () {
+        console.log('WebSocket connected');
+    };
 
-    const chatUserImage = document.getElementById('chat-user-image');
-    if (chatUserImage) {
-        chatUserImage.src = userImage || 'path/to/default-image.png';
-        chatUserImage.style.display = 'block';
-    }
-
-    document.getElementById('chat-user-name').textContent = userName;
-    document.getElementById('chat-user-status').textContent = 'Sedang online';
-
-    chatMessages.innerHTML = '<div class="text-center text-muted">Memuat pesan...</div>';
-
-    fetchMessages(userId);
-}
-
-function fetchMessages(userId) {
-    const chatMessages = document.getElementById('chat-messages');
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", `getchat/${userId}`, true);
-    xhr.onload = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                chatMessages.innerHTML = ''; // Bersihkan pesan lama
-
-                if (Array.isArray(data) && data.length > 0) {
-                    data.forEach(chat => {
-                        const messageElement = document.createElement('div');
-                        messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : '', 'mb-3');
-
-                        const sanitizedMessage = document.createElement('div');
-                        sanitizedMessage.textContent = chat.message; // Gunakan textContent untuk keamanan
-
-                        const messageContent = document.createElement('div');
-                        messageContent.className = `message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded`;
-                        messageContent.appendChild(sanitizedMessage);
-
-                        const timeElement = document.createElement('span');
-                        timeElement.className = 'message-time ms-2 text-muted';
-                        timeElement.textContent = chat.time;
-
-                        messageElement.appendChild(messageContent);
-                        messageElement.appendChild(timeElement);
-
-                        chatMessages.appendChild(messageElement);
-                    });
-                } else {
-                    chatMessages.innerHTML = '<div class="text-center text-muted">Tidak ada pesan di chat ini. Mulai percakapan!</div>';
-                }
-
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll otomatis
-            }
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data); // Mengurai data yang diterima
+    
+        if (data.type === 'message') {
+            console.log('Received message:', data);
+            appendMessage({
+                id: data.id,
+                message: data.message,
+                sent_by_user: data.sent_by_user,
+                time: data.time
+            });
         }
     };
-    xhr.send();
+    
+
+    socket.onclose = function () {
+        console.warn('WebSocket closed. Reconnecting...');
+        setTimeout(() => connectWebSocket(userId), 5000); // Attempt to reconnect
+    };
+
+    socket.onerror = function (error) {
+        console.error('WebSocket error:', error);
+    };
+}
+
+function appendMessage(chat) {
+    const chatMessages = document.getElementById('chat-messages');
+    if (!chatMessages) return;
+
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : 'justify-content-start', 'mb-3');
+    messageElement.id = `chat-message-${chat.id}`;
+
+    messageElement.innerHTML = `
+        <div class="message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
+            ${chat.message}
+        </div>
+        <span class="message-time ms-2 text-muted">${chat.time}</span>
+    `;
+
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 document.getElementById('sendButton').addEventListener('click', function (event) {
@@ -72,84 +62,38 @@ document.getElementById('sendButton').addEventListener('click', function (event)
     const messageText = messageInput.value.trim();
 
     if (messageText && incomingUserId) {
-        const chatMessages = document.querySelector('.chat-messages');
+        const id_receiver = document.getElementById('receiverIdInput').value; // Ambil penerima ID dari input
 
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('chat-message', 'd-flex', 'justify-content-end', 'mb-3');
+        appendMessage({
+            id: `temp-${Date.now()}`,
+            message: messageText,
+            sent_by_user: true,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
 
-        const messageContent = document.createElement('div');
-        messageContent.className = 'message-content sent bg-primary text-white p-2 rounded';
-        messageContent.textContent = messageText; // Gunakan textContent
-
-        const timeElement = document.createElement('span');
-        timeElement.className = 'message-time ms-2 text-muted';
-        timeElement.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-        messageElement.appendChild(messageContent);
-        messageElement.appendChild(timeElement);
-
-        chatMessages.appendChild(messageElement);
-        messageInput.value = ''; // Kosongkan input
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll otomatis
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", `sendchat/${incomingUserId}`, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onload = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify({
+                type: 'send_message',
+               id_sender: incomingUserId,
+                id_receiver: id_receiver, // Kirim ke penerima sesuai dengan input
+                message: messageText
+            }));
+        } else {
+            console.warn('WebSocket not connected. Fallback to HTTP.');
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", `sendchat/${incomingUserId}`, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     const data = JSON.parse(xhr.responseText);
                     if (data.status === 'error') {
-                        alert(data.message); // Tampilkan error jika ada
+                        alert(data.message);
                     }
                 }
-            }
-        };
-        xhr.send(`id_receiver=${incomingUserId}&message=${encodeURIComponent(messageText)}`);
+            };
+            xhr.send(`id_receiver=${id_receiver}&message=${encodeURIComponent(messageText)}`);
+        }
+
+        messageInput.value = ''; // Clear the message input field
     }
 });
-
-// Perbarui pesan secara otomatis setiap 5 detik tanpa menghapus pesan sebelumnya
-function updateChat() {
-    if (incomingUserId) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", `getchat/${incomingUserId}`, true);
-        xhr.onload = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    const chatMessages = document.getElementById('chat-messages');
-                    const data = JSON.parse(xhr.responseText);
-
-                    if (Array.isArray(data) && data.length > 0) {
-                        chatMessages.innerHTML = ''; // Bersihkan pesan lama
-                        data.forEach(chat => {
-                            const messageElement = document.createElement('div');
-                            messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : '', 'mb-3');
-
-                            const sanitizedMessage = document.createElement('div');
-                            sanitizedMessage.textContent = chat.message; // Gunakan textContent untuk keamanan
-
-                            const messageContent = document.createElement('div');
-                            messageContent.className = `message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded`;
-                            messageContent.appendChild(sanitizedMessage);
-
-                            const timeElement = document.createElement('span');
-                            timeElement.className = 'message-time ms-2 text-muted';
-                            timeElement.textContent = chat.time;
-
-                            messageElement.appendChild(messageContent);
-                            messageElement.appendChild(timeElement);
-
-                            chatMessages.appendChild(messageElement);
-                        });
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                    }
-                }
-            }
-        };
-        xhr.send();
-    }
-}
-
-// Interval untuk memperbarui pesan setiap 5 detik
-setInterval(updateChat, 5000);

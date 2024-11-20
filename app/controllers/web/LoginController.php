@@ -23,6 +23,7 @@ class LoginController extends Controller
 
     public function auth()
     {
+        
         $email = $_POST['username'];
         $password = $_POST['password'];
 
@@ -108,21 +109,29 @@ class LoginController extends Controller
 
     public function create()
     {
+      
         do {
             $id = $this->generateRandomId();
             $cekID = $this->userModel->findUserById($id);
         } while ($cekID);
+      
 
+     
+
+        
         $username = $_POST['fullname'];
         $email = $_POST['email'];
         $number = $_POST['number'];
         $password = $_POST['password'];
         $role = $_POST['role'];
+        
         if ($this->userModel->findUserByEmail($email)) {
             Flasher::setFlash('*Akun Email Sudah Terdaftar', 'danger');
             $this->header('/register');
             exit();
         }
+
+        
 
         if ($role === 'pemilik kos') {
             do {
@@ -299,7 +308,7 @@ class LoginController extends Controller
 
     public function out()
     {
-        //model user untuk mengganti status online user
+        
     }
 
     private function generateRandomId()
