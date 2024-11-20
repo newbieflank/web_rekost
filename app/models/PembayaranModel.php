@@ -16,7 +16,7 @@ class PembayaranModel
     public function getRiwayatPencari()
     {
 
-        $query = "SELECT p.id_penyewaan AS id_penyewaan, DATE(p.tanggal_penyewaan) AS tanggal_penyewaan, p.waktu_penyewaan AS waktu_penyewaan, k.harga AS harga_kos FROM penyewaan p JOIN user u ON u.id_user = p.id_user JOIN kamar k ON k.id_kamar = p.id_kamar WHERE u.id_user = :id_user ORDER BY p.tanggal_penyewaan DESC";
+        $query = "SELECT penyewaan.id_penyewaan AS id_penyewaan, DATE(penyewaan.tanggal_penyewaan) AS tanggal_penyewaan, penyewaan.waktu_penyewaan AS waktu_penyewaan, penyewaan.harga AS harga_kos FROM penyewaan JOIN user ON user.id_user = penyewaan.id_user WHERE user.id_user = :id_user ORDER BY penyewaan.tanggal_penyewaan DESC";
 
         $this->db->query($query);
         $this->db->bind('id_user', $_SESSION['user']['id_user']);
@@ -58,5 +58,9 @@ class PembayaranModel
 
         $this->db->execute();
         return  $this->db->lastInsertId();
+    }
+    public function getDataPembayaran($id_penyewaan)
+    {
+        $query = "SELECT * FROM penyewaan WHERE id_penyewaan = :id_penyewaan";
     }
 }

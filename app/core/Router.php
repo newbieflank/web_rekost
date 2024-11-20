@@ -69,8 +69,6 @@ class Router
         // Tentukan apakah ini rute API berdasarkan URI
         $isApiRoute = strpos(self::getUri(), '/api') === 0;
 
-        echo self::getUri();
-
         // Tentukan direktori controller berdasarkan tipe rute
         $controllerDir = $isApiRoute ? './app/controllers/api' : './app/controllers/web';
         $controller = ucfirst($controller);

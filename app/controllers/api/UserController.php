@@ -38,16 +38,32 @@ class UserController extends Controller
 
         $user = $this->model('UsersModel')->getProfile($email, $password);
         if (isset($user)) {
-            // For demonstration, let's assume a successful login scenario
-            $response = [
-                'status' => 'success',
-                'message' => 'Login successful',
-                'data' => [
-                    'email' => $user['email'],
-                    'id' => $user['id_user'],
-                    'role' => $user['role']
-                ],
-            ];
+
+            if ($user['role'] === 'pemilik kos') {
+                $data = $this->model('UsersModel')->findOwnerById($user['id_user']);
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Login successful',
+                    'data' => [
+                        "id" => $user['id_user'],
+                        "email" => $user['email'],
+                        "role" => $user['role'],
+                        "id_kos" => $data['id_kos']
+                    ],
+                ];
+            } else {
+                // For demonstration, let's assume a successful login scenario
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Login successful',
+                    'data' => [
+                        'email' => $user['email'],
+                        'id' => $user['id_user'],
+                        'role' => $user['role'],
+                        'id_kos' => null
+                    ],
+                ];
+            }
         } else {
             $response = [
                 'status' => 'error',
