@@ -16,6 +16,6 @@ class KosController extends Controller
 
         $user = $this->kos->getDataAll();
 
-        echo json_encode($user);
+        echo json_encode(['status' => 'success', 'data' => $user]);
     }
 }

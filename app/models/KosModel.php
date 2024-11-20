@@ -40,10 +40,11 @@ class KosModel
     }
     public function getDataAll()
     {
-        $query = "SELECT * FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos";
+        $query = "SELECT * FROM kos left JOIN ulasan ON kos.id_kos = ulasan.id_kos JOIN kamar ON kos.id_kos = kamar.id_kos;
+                ";
 
         $this->db->query($query);
-        return $this->db->single();
+        return $this->db->resultSet();
     }
 
     public function tambahDataKos($data)
