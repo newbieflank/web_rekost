@@ -96,4 +96,4 @@ document.getElementById('sendButton').addEventListener('click', function (event)
 
         messageInput.value = ''; // Clear the message input field
     }
-});
+});  
