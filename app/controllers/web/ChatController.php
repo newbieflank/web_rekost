@@ -28,10 +28,7 @@ class ChatController extends Controller {
         $outgoing_id = $_SESSION['user']['id_user'];
         // Call get_chat method from ChatModel
         $messages = $this->chatModel->get_chat($userId, $outgoing_id);
-      
-        // echo json_encode(['status' => 'success', 'messages' => $messages]);
 
-        // Return the messages as JSON if needed or pass to view
         if ($messages) {
             echo json_encode(['status' => 'success', 'messages' => $messages]);
         } else {

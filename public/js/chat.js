@@ -1,6 +1,6 @@
-let incomingUserId = null; 
-let loadedMessageIds = new Set(); 
-let socket = null; 
+let incomingUserId = null;
+let loadedMessageIds = new Set();
+let socket = null;
 
 function connectWebSocket(userId) {
     const wsUrl = `ws://127.0.0.1:8080/ws/chat?id_user=${userId}`;
@@ -11,9 +11,9 @@ function connectWebSocket(userId) {
         console.log('WebSocket connected');
     };
 
-    socket.onmessage = function(event) {
+    socket.onmessage = function (event) {
         const data = JSON.parse(event.data); // Mengurai data yang diterima
-    
+
         if (data.type === 'message') {
             console.log('Received message:', data);
             appendMessage({
@@ -24,7 +24,7 @@ function connectWebSocket(userId) {
             });
         }
     };
-    
+
 
     socket.onclose = function () {
         console.warn('WebSocket closed. Reconnecting...');
@@ -55,6 +55,30 @@ function appendMessage(chat) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+function loadChat(userId, userName, userImage) {
+    incomingUserId = userId;
+    document.getElementById('chat-user-name').textContent = userName;
+    document.getElementById('chat-user-status').textContent = 'Sedang online';
+    if (document.getElementById('chat-placeholder')) document.getElementById('chat-placeholder').style.display = 'none';
+    document.getElementById('chat-input-area').style.display = 'flex';
+
+    fetch(`getchat/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = '';
+
+            if (Array.isArray(data.messages)) {
+                data.messages.forEach(chat => appendMessage(chat, userId));
+            } else {
+                chatMessages.innerHTML = '<div class="text-center text-muted">Tidak ada pesan. Mulai percakapan!</div>';
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        })
+        .catch(error => console.error('Error loading chat:', error));
+}   
+
 document.getElementById('sendButton').addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -74,7 +98,7 @@ document.getElementById('sendButton').addEventListener('click', function (event)
         if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(JSON.stringify({
                 type: 'send_message',
-               id_sender: incomingUserId,
+                id_sender: incomingUserId,
                 id_receiver: id_receiver, // Kirim ke penerima sesuai dengan input
                 message: messageText
             }));
