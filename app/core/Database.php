@@ -67,6 +67,8 @@ class Database
         try {
             return $this->stm->execute();
         } catch (PDOException $e) {
+            var_dump($e);
+            die;
             $this->handleError($e);
         }
     }
@@ -85,6 +87,7 @@ class Database
     {
         try {
             $this->execute();
+
             return $this->stm->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             $this->handleError($e);
@@ -131,5 +134,11 @@ class Database
     {
         error_log('Database Error: ' . $e->getMessage());
         // die('An error occurred while interacting with the database.');
+    }
+
+
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
     }
 }

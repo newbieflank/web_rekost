@@ -122,6 +122,34 @@
         position: absolute;
         bottom: 10px;
     }
+
+    .image-preview {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-preview i {
+        font-size: 2rem;
+        color: #ccc;
+    }
+
+    .image-preview p {
+        color: #ccc;
+        text-align: center;
+    }
 </style>
 
 <div class="container mt-5">
@@ -135,7 +163,7 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" action="<?= BASEURL; ?>datakos/tambah" method="post" onsubmit="handleSubmit(event)">
+    <form id="multiStepForm" action="<?= BASEURL; ?>datakos/tambah" enctype="multipart/form-data" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
             <div class="step-container active" data-step="1">
                 <h5 class="card-header">Data Kos</h5>
@@ -153,17 +181,20 @@
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="tipekos" type="radio" name="tipekos"
-                                        id="putra" value="Laki-Laki">
+                                        id="putra" value="Laki-Laki"
+                                        <?php echo ($tipe === 'Laki-Laki') ? 'checked' : ''; ?>>
                                     <label class="form-check-label" for="putra">Putra</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="tipekos" id="putri"
-                                        value="Perempuan">
+                                        value="Perempuan"
+                                        <?php echo ($tipe === 'Perempuan') ? 'checked' : ''; ?>>
                                     <label class="form-check-label" for="putri">Putri</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="tipekos" id="campur"
-                                        value="Campur">
+                                        value="Bebas"
+                                        <?php echo ($tipe === 'Campur') ? 'checked' : ''; ?>>
                                     <label class="form-check-label" for="campur">Campur</label>
                                 </div>
                             </div>
@@ -172,8 +203,7 @@
                             <label for="deskripsikos" class="col-sm-2 col-form-label">Deskripsi Kos</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="deskripsi" id="deskripsikos"
-                                    placeholder="Tuliskan deskripsi kos anda..." rows="3"
-                                    value="<?= $deskripsi ?>"></textarea>
+                                    placeholder="Tuliskan deskripsi kos anda..." rows="3"><?= $deskripsi ?></textarea>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -198,7 +228,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]" value="WiFi"
-                                            id="wifi">
+                                            id="wifi"
+                                            <?= in_array('WiFi', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="wifi">
                                             WiFi
                                         </label>
@@ -207,7 +238,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Parkiran" id="parkiran">
+                                            value="Parkiran" id="parkiran"
+                                            <?= in_array('Parkiran', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="parkiran">
                                             Parkiran
                                         </label>
@@ -216,7 +248,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="MesinCuci" id="mesinCuci">
+                                            value="Mesin Cuci" id="mesinCuci"
+                                            <?= in_array('Mesin Cuci', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="mesinCuci">
                                             Mesin Cuci
                                         </label>
@@ -225,7 +258,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="kulkas" id="kulkas">
+                                            value="Kulkas" id="kulkas"
+                                            <?= in_array('Kulkas', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="kulkas">
                                             Kulkas
                                         </label>
@@ -233,8 +267,9 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="tv"
-                                            id="tv">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="TV"
+                                            id="tv"
+                                            <?= in_array('TV', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="tv">
                                             TV
                                         </label>
@@ -242,8 +277,9 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="dapur"
-                                            id="dapur">
+                                        <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Dapur Bersama"
+                                            id="dapur"
+                                            <?= in_array('Dapur Bersama', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="dapur">
                                             Dapur Bersama
                                         </label>
@@ -252,7 +288,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="kamarMandi" id="kamarMandi">
+                                            value="Kamar Mandi Umum" id="kamarMandi"
+                                            <?= in_array('Kamar Mandi Umum', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="kamarMandi">
                                             Kamar Mandi Umum
                                         </label>
@@ -261,7 +298,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="listrikAir" id="listrikAir">
+                                            value="Listrik Dan Air" id="listrikAir"
+                                            <?= in_array('Listrik Dan Air', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="listrikAir">
                                             Listrik dan Air
                                         </label>
@@ -288,7 +326,7 @@
                         <div class="col-sm-10">
                             <textarea class="form-control" id="alamat" name="alamat"
                                 placeholder="Alamat akan terisi otomatis ketika memilih lokasi di peta" rows="3"
-                                style="resize: none;" required></textarea>
+                                style="resize: none;" required><?= $alamat ?></textarea>
                         </div>
                     </div>
                     <input type="hidden" id="latitude" name="latitude" value="<?= $latitude ?>">
@@ -314,49 +352,69 @@
                 <div class="row m-5">
                     <div class="col-md-6 mb-4">
                         <h2 class="font-semibold mb-2">Foto bangunan depan</h2>
-                        <p class="text-sm text-gray-500 mb-4">Foto horizontal akan terlihat lebih bagus sebagai foto
-                            utama kos.</p>
+                        <p class="text-sm text-gray-500 mb-4">Foto horizontal akan terlihat lebih bagus sebagai foto utama kos.</p>
                         <label for="foto-depan" class="photo-box">
-                            <input type="file" accept="image/*" id="foto-depan" name="foto_depan"
-                                style="display: none;">
-                            <i class="fas fa-camera"></i>
-                            <p class="text-gray-400">Tambah foto bangunan depan</p>
+                            <input type="file" accept="image/*" id="foto-depan" name="foto_depan" style="display: none;" onchange="previewImage(this, 'preview-depan')">
+                            <div id="preview-depan" class="image-preview">
+                                <?php if (file_exists($imagePath . '/foto_depan.jpg')) : ?>
+                                    <img src="<?= asset('uploads/' . $id_kos . '/foto_depan.jpg') ?>" alt="Preview">
+                                <?php else : ?>
+                                    <i class="fas fa-camera"></i>
+                                    <p class="text-gray-400">Tambah foto bangunan depan</p>
+                                <?php endif; ?>
+                            </div>
                         </label>
                     </div>
+
                     <div class="col-md-6 mb-4">
                         <h2 class="font-semibold mb-2">Foto bangunan dari belakang</h2>
-                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan kos dari belakang ke calon penyewa.
-                        </p>
+                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan kos dari belakang ke calon penyewa.</p>
                         <label for="foto-belakang" class="photo-box">
-                            <input type="file" accept="image/*" name="foto_belakang" id="foto-belakang"
-                                style="display: none;">
-                            <i class="fas fa-camera"></i>
-                            <p class="text-gray-400">Tambah foto bangunan dari belakang</p>
+                            <input type="file" accept="image/*" id="foto-belakang" name="foto_belakang" style="display: none;" onchange="previewImage(this, 'preview-belakang')">
+                            <div id="preview-belakang" class="image-preview">
+                                <?php if (file_exists($imagePath . '/foto_belakang.jpg')) : ?>
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_belakang.jpg') ?>" alt="Preview">
+                                <?php else : ?>
+                                    <i class="fas fa-camera"></i>
+                                    <p class="text-gray-400">Tambah foto bangunan dari belakang</p>
+                                <?php endif; ?>
+                            </div>
                         </label>
                     </div>
+
                     <div class="col-md-6 mb-4">
                         <h2 class="font-semibold mb-2">Foto bangunan dalam</h2>
-                        <p class="text-sm text-gray-500 mb-4">Perlihatkan suasana di dalam dengan cahaya terang agar
-                            terlihat lebih jelas</p>
+                        <p class="text-sm text-gray-500 mb-4">Perlihatkan suasana di dalam dengan cahaya terang agar terlihat lebih jelas.</p>
                         <label for="foto-dalam" class="photo-box">
-                            <input type="file" accept="image/*" name="foto_dalam" id="foto-dalam"
-                                style="display: none;">
-                            <i class="fas fa-camera"></i>
-                            <p class="text-gray-400">Tambah foto dalam bangunan</p>
+                            <input type="file" accept="image/*" id="foto-dalam" name="foto_dalam" style="display: none;" onchange="previewImage(this, 'preview-dalam')">
+                            <div id="preview-dalam" class="image-preview">
+                                <?php if (file_exists($imagePath . '/foto_dalam.jpg')) : ?>
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_dalam.jpg') ?>" alt="Preview">
+                                <?php else : ?>
+                                    <i class="fas fa-camera"></i>
+                                    <p class="text-gray-400">Tambah foto dari dalam bangunan</p>
+                                <?php endif; ?>
+                            </div>
                         </label>
                     </div>
+
                     <div class="col-md-6 mb-4">
                         <h2 class="font-semibold mb-2">Foto bangunan dari jalan</h2>
-                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan sekitar depan kos ke calon penyewa.
-                        </p>
+                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan sekitar depan kos ke calon penyewa.</p>
                         <label for="foto-jalan" class="photo-box">
-                            <input type="file" accept="image/*" name="foto_jalan" id="foto-jalan"
-                                style="display: none;">
-                            <i class="fas fa-camera"></i>
-                            <p class="text-gray-400">Tambah foto bangunan dari jalan</p>
+                            <input type="file" accept="image/*" id="foto-jalan" name="foto_jalan" style="display: none;" onchange="previewImage(this, 'preview-jalan')">
+                            <div id="preview-jalan" class="image-preview">
+                                <?php if (file_exists($imagePath . '/foto_jalan.jpg')) : ?>
+                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_jalan.jpg') ?>" alt="Preview">
+                                <?php else : ?>
+                                    <i class="fas fa-camera"></i>
+                                    <p class="text-gray-400">Tambah foto bangunan dari jalan</p>
+                                <?php endif; ?>
+                            </div>
                         </label>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -373,155 +431,6 @@
 
     </form>
 </div>
-
-<script src="<?= BASEURL; ?>public/js/map.js"></script>
-
-<script>
-    let currentStep = 1;
-    const totalSteps = 4;
-
-    function updateProgressBar() {
-        document.querySelectorAll('.progress-step-item').forEach(item => {
-            const step = parseInt(item.dataset.step);
-            item.classList.remove('active', 'completed');
-            if (step === currentStep) {
-                item.classList.add('active');
-            } else if (step < currentStep) {
-                item.classList.add('completed');
-            }
-        });
-    }
-
-    function showStep(step) {
-        document.querySelectorAll('.step-container').forEach(container => {
-            container.classList.remove('active');
-        });
-        document.querySelector(`.step-container[data-step="${step}"]`).classList.add('active');
-
-        const prevBtn = document.querySelector('.btn-prev');
-        const nextBtn = document.querySelector('.btn-next');
-
-        if (step === 1) {
-            prevBtn.style.display = 'none';
-        } else {
-            prevBtn.style.display = 'block';
-        }
-
-        if (step === totalSteps) {
-            nextBtn.innerHTML = 'Selesai<i class="fas fa-check ms-2"></i>';
-        } else {
-            nextBtn.innerHTML = 'Selanjutnya<i class="fas fa-chevron-right ms-2"></i>';
-        }
-
-        if (step === 3) {
-            setTimeout(() => {
-                initMap();
-            }, 100);
-        }
-    }
-
-    function nextStep() {
-        if (currentStep < totalSteps) {
-            currentStep++;
-            showStep(currentStep);
-            updateProgressBar();
-        } else {
-            submitForm();
-        }
-    }
-
-    function prevStep() {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-            updateProgressBar();
-        }
-    }
-
-    function goToStep(step) {
-        currentStep = step;
-        showStep(currentStep);
-        updateProgressBar();
-    }
-
-    function setUkuran(value) {
-        var customInput = document.getElementById('UkuranCustom');
-        if (value === "custom") {
-            customInput.style.display = 'block';
-            customInput.focus();
-        } else {
-            customInput.style.display = 'none';
-            customInput.value = value;
-        }
-    }
-
-    function formatInput(input) {
-        let value = input.value.replace(/[^0-9x]/g, '');
-        let parts = value.split('x');
-        if (parts.length > 2) {
-            parts = [parts[0], parts.slice(1).join('')];
-        }
-        if (parts.length === 2 && parts[1] !== '') {
-            input.value = `${parts[0]}x${parts[1]} m`;
-        } else {
-            input.value = value;
-        }
-    }
-
-    function submitForm() {
-        const form = document.getElementById('multiStepForm');
-        const formData = new FormData(form);
-
-        // Collect checked fasilitas
-        const fasilitas = [];
-        document.querySelectorAll('input[name="fasilitas[]"]:checked').forEach(checkbox => {
-            fasilitas.push(checkbox.value);
-        });
-
-        // Tambahkan fasilitas yang dicentang ke formData
-        formData.append('fasilitas', (fasilitas));
-
-        // Kirim data menggunakan fetch
-        fetch(form.action, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                if (data.success) {
-                    Swal.fire({
-                        title: 'Sukses!',
-                        text: 'Data kos berhasil disimpan',
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.href = BASEURL + 'datakos/fasilitas'; // Sesuaikan URL tujuan
-                    });
-                } else {
-
-                    Swal.fire({
-                        title: 'Error!',
-                        text: data.message,
-                        icon: 'error'
-                    });
-                }
-            })
-            .catch(error => {
-                console.log(error);
-
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Sukses!',
-                    text: 'Data kos berhasil disimpan',
-                    icon: 'success'
-                });
-            });
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function () {
-        showStep(currentStep);
-        updateProgressBar();
-    });
-</script>
+<!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
+<script src="<?= asset('js/map.js') ?>"></script>
+<script src="<?= asset('js/steps.js') ?>"></script>

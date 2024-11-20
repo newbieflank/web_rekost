@@ -109,31 +109,46 @@
     <section class="container overlap-container">
         <div class="row text-center">
             <div class="col-md-4">
+
+
+
+                <?php foreach($data['pendapatan'] as $pendapatan):?>
                 <div class="card overlap-card" style="--url: url('https://fontawesome.com/icons/chart-mixed-up-circle-dollar?f=duotone&s=solid  ')">
                     <div class="card-body">
                         <h5>Pendapatan</h5>
                         <p>Pendapatan yang didapatkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pendapatan['total_jumlah']?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
+
+
+
+
+
             </div>
             <div class="col-md-4">
+            <?php foreach($data['pengeluaran'] as $pengeluaran):?>
+               
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
-                    <div class="card-body">
+                    <div  class="card-body">
                         <h5>Pengeluaran</h5>
                         <p>Pengeluaran yang dikeluarkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pengeluaran['total_jumlah'] ?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
             </div>
             <div class="col-md-4">
+            <?php foreach($data['ratingatas'] as $ratingatas):?>
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
                     <div class="card-body">
                         <h5>Rating</h5>
                         <p>Ulasan yang diberikan untuk kost ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp 1.000.000</p>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $ratingatas['rata_rata_rating'] ?></p>
                     </div>
                 </div>
+                <?php endforeach;?>
             </div>
     </section>
     <section id="graph" class="statistik" style="background-color: #f4f8fb; padding: 40px 0;">
@@ -144,15 +159,15 @@
                     <p>Menampilkan ringkasan statistik keuangan untuk memberikan gambaran lengkap tentang pendapatan dan pengeluaran bulanan.</p>
                 </div>
                 <div class="filter mx-">
-                    <label>
-                        <input type="radio" name="keuanganFilter" value="pendapatan" checked>
-                        Pendapatan
-                    </label>
-                    <label>
-                        <input type="radio" name="keuanganFilter" value="pengeluaran">
-                        Pengeluaran
-                    </label>
-                </div>
+    <label>
+        <input type="radio" name="keuanganFilter" value="pendapatan" checked>
+        Pendapatan
+    </label>
+    <label>
+        <input type="radio" name="keuanganFilter" value="pengeluaran">
+        Pengeluaran
+    </label>
+</div>
             </div>
             <div class="chart-wrapper">
                 <canvas id="keuanganChart"></canvas>
@@ -169,121 +184,32 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-wrapper d-flex">
+                    <?php foreach ($data['rataRating'] as $rataRating): ?>
                         <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-3">
                                     <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
                                     <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
+                                        <h5 class="card-title" style="margin-bottom: 5px;"><?php echo $rataRating['pengulas_kos'] ?></h5>
+                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> <?php echo $rataRating['alamat_user'] ?></p>
                                     </div>
                                 </div>
                                 <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
+                                        <?php
+                                        $ratingValue = $rataRating['rating'];
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $ratingValue) {
+                                                echo '<i class="fas fa-star"></i>';
+                                            } else {
+                                                echo '<i class="far fa-star"></i>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
+                                <p class="card-text"><?php echo $rataRating['ulasan'] ?></p>
                             </div>
                         </div>
-
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang sesuai dengan budget dan preferensi saya.</p>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -292,46 +218,65 @@
     <?php include __DIR__ . '/../layout/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const data = {
-            labels: labels,
-            datasets: [{
-                    label: 'Dataset 1',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    backgroundColor: '#000000',
+    // Data awal untuk chart
+    const pendapatan = <?= json_encode($chartpendapatan) ?>;
+    const pengeluaran = <?= json_encode($chartpengeluaran) ?>;
+
+    const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // Konfigurasi awal chart
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Pendapatan',
+            data: pendapatan,
+            backgroundColor: '#000000',
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
                 },
-                {
-                    label: 'Dataset 2',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                    backgroundColor: '#FFC107',
-                },
-            ]
-        };
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: false,
-                    }
+                title: {
+                    display: true,
+                    text: 'Keuangan'
                 }
             }
-        };
-        const ctx = document.getElementById('keuanganChart');
+        }
+    };
 
-        new Chart(ctx, config);
-        const DATA_COUNT = 7;
-        const NUMBER_CFG = {
-            count: DATA_COUNT,
-            min: -100,
-            max: 100
-        };
-    </script>
+    // Inisialisasi chart
+    const ctx = document.getElementById('keuanganChart').getContext('2d');
+    const keuanganChart = new Chart(ctx, config);
+
+    // Fungsi untuk memperbarui data chart
+    function updateChart(value) {
+        if (value === 'pendapatan') {
+            keuanganChart.data.datasets[0].data = pendapatan;
+            keuanganChart.data.datasets[0].label = 'Pendapatan';
+            keuanganChart.data.datasets[0].backgroundColor = '#000000';
+        } else if (value === 'pengeluaran') {
+            keuanganChart.data.datasets[0].data = pengeluaran;
+            keuanganChart.data.datasets[0].label = 'Pengeluaran';
+            keuanganChart.data.datasets[0].backgroundColor = '#FFC107';
+        }
+        keuanganChart.update(); // Update chart dengan data baru
+    }
+
+    // Event listener untuk input radio
+    document.querySelectorAll('input[name="keuanganFilter"]').forEach(input => {
+        input.addEventListener('change', (event) => {
+            updateChart(event.target.value);
+        });
+    });
+</script>
+
 </body>
 <script src="<? asset('js/file.js') ?>"></script>
 

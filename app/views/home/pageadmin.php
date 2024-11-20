@@ -40,7 +40,6 @@
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/user.png') ?>" class="rounded-circle" alt="Profile Image" width="40px">
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                                 <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
                                 <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
@@ -50,7 +49,6 @@
                                 <a class="dropdown-item" href="logout">Logout</a>
                             </div>
                         </div>
-
                     </div>
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">

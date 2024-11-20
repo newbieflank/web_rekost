@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Re-Kost</title>
     <link rel="stylesheet" href="<?= asset('css/landingPage.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -18,6 +19,58 @@
         html {
             scroll-behavior: smooth;
             scroll-padding-top: 50px;
+        }
+
+        .card {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .card-title,
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .star-rating .fa-star {
+            cursor: pointer;
+            font-size: 24px;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating .fa-star.inactive {
+            color: #ccc;
+        }
+
+        .star-rating .fa-star.active {
+            color: #f39c12;
+        }
+
+        #cityContainer {
+            max-width: 700px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+        }
+
+        #cityContainer::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #cityContainer::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -52,38 +105,50 @@
                             <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
-                                <span class="badge badge-danger">3</span>
+                                <?php if (isset($unreadCount) && $unreadCount > 0): ?>
+                                    <span class="badge badge-danger"><?= $unreadCount ?></span>
+                                <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-inf[o-circle mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">2 menit yang lalu</small>
-                                            <p class="mb-0">Pembayaran Kost Anda berhasil dikonfirmasi.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-envelope mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">10 menit yang lalu</small>
-                                            <p class="mb-0">Pesan baru dari pemilik kost.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item" href="<?= BASEURL; ?>notif">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-exclamation-triangle mr-2"></i>
-                                        <div>
-                                            <small class="text-muted">1 jam yang lalu</small>
-                                            <p class="mb-0">Jatuh tempo pembayaran kost Anda besok.</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center" href="<?= BASEURL; ?>notif">Lihat semua notifikasi</a>
+                                <?php if (empty($notifikasi)): ?>
+                                    <div class="dropdown-item text-center">Tidak ada notifikasi pembayaran terbaru</div>
+                                <?php else: ?>
+                                    <?php foreach ($notifikasi as $notif): ?>
+                                        <a class="dropdown-item"
+                                            href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-info-circle mr-2"></i>
+                                                <div>
+                                                    <small class="text-muted">
+                                                        <?php
+                                                        $date1 = new DateTime($notif['tanggal_pembayaran']);
+                                                        $date2 = new DateTime();
+                                                        $interval = $date1->diff($date2);
+
+                                                        if ($interval->days == 0) {
+                                                            if ($interval->h == 0) {
+                                                                echo $interval->i . " menit yang lalu";
+                                                            } else {
+                                                                echo $interval->h . " jam yang lalu";
+                                                            }
+                                                        } else {
+                                                            echo $interval->days . " hari yang lalu";
+                                                        }
+                                                        ?>
+                                                    </small>
+                                                    <p class="mb-0">
+                                                        Pembayaran kost sebesar Rp
+                                                        <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?>
+                                                        telah dikonfirmasi
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <?php endforeach; ?>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>/pembayaran">Lihat semua
+                                        pembayaran</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="dropdown">
@@ -102,10 +167,7 @@
                                 <a class="dropdown-item" href="logout">Logout</a>
                             </div>
                         </div>
-
                     </div>
-
-
                 <?php else: ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -139,22 +201,32 @@
                 </div>
             </div>
             <div class="row justify-content-start reviews">
-                <?php foreach ($data['rating_aplikasi'] as $rating): ?>
+                <?php
+                // Menampilkan total rating
+                if (!empty($data['rating_aplikasi'])):
+                    $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
-                            <?php echo $rating['total_rating'] ?></h2>
+                            <?php echo htmlspecialchars($rating['total_rating']); ?>
+                        </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
-                <?php foreach ($data['penyewa'] as $penyewa): ?>
+                <?php
+                endif;
+
+                // Menampilkan jumlah penyewa
+                if (!empty($data['penyewa'])):
+                    $penyewa = current($data['penyewa']); // Ambil elemen pertama
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
-                            <?php echo $penyewa['jumlah_penyewa'] ?></h2>
+                            <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
+                        </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                     </div>
-                    <?php break; ?>
-                <?php endforeach; ?>
+                <?php endif; ?>
+
             </div>
         </div>
     </section>
@@ -163,15 +235,15 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="search-box p-4" style="margin-top: 32px;">
-                        <form class="form-row">
+                        <form id="searchForm" method="post" action="<?= BASEURL; ?>search" class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="location">Lokasi</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pl-5 pr-5" id="location">
+                                    <select class="form-control pl-5 pr-5" id="location" name="location" required>
                                         <option value="">Pilih Lokasi</option>
                                         <option value="blindungan">Blindungan</option>
                                         <option value="tapen">Tapen</option>
-                                        <option value="tamnanan">Tamanan</option>
+                                        <option value="Sumbersari">Sumbersari</option>
                                         <option value="tamansari">Tamansari</option>
                                         <option value="sempol">Sempol</option>
                                     </select>
@@ -182,7 +254,7 @@
                             <div class="form-group col-md-6">
                                 <label for="cost">Harga</label>
                                 <div class="input-group position-relative">
-                                    <select class="form-control pr-5" id="cost">
+                                    <select class="form-control pr-5" id="cost" name="cost">
                                         <option value="">Pilih Harga</option>
                                         <option value="0-100000">Dibawah 100,000</option>
                                         <option value="100000-500000">100,000 - 500,000</option>
@@ -201,7 +273,6 @@
             </div>
         </div>
     </section>
-    </section>
     <section id="bookings" class="popular">
         <div class="container">
             <div class="row">
@@ -215,13 +286,18 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $popular["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
-                                    alt="Kost Image">
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
+                                    class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $popular['nama_kos'] ?></h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
-                                        <?php echo $popular['alamat'] ?></p>
+                                        <?php echo $popular['nama_kos'] ?>
+                                    </h5>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $popular['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                        <?php echo $popular['alamat'] ?>
+                                    </p>
+
                                     <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
                                         (<?php echo $popular['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
@@ -255,11 +331,11 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
+                <div id="cityContainer">
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Blindungan</button>
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Tamanan</button>
                     <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">Wonosari</button>
-                    <button type="button" class="btn btn-outline-primary mr-3 d-inline-block">10+</button>
+                    <button type="button" class="btn btn-outline-primary mr-3 d-inline-block" id="showMore">10+</button>
                 </div>
                 <a href="best">
                     <div>
@@ -273,12 +349,15 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $best["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>" class="card-img-top"
                                     alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $best['nama_kos'] ?></h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                        <?php echo $best['nama_kos'] ?>
+                                    </h5>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $best['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
                                         (<?php echo $best['review_count'] ?>)</p>
@@ -314,12 +393,15 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads' . $campus["id_kos"] . 'foto_luar.jpg') ?>" class="card-img-top"
-                                    alt="Kost Image">
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>`1`1"
+                                    class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
-                                        <?php echo $campus['nama_kos'] ?></h5>
-                                    <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                        <?php echo $campus['nama_kos'] ?>
+                                    </h5>
+                                    <span class="btn-available mb-3" style="border-radius: 4px;">
+                                        <?php echo $campus['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
                                         (<?php echo $campus['review_count'] ?>)</p>
@@ -355,93 +437,29 @@
                                             alt="User Profile">
                                         <div>
                                             <h5 class="card-title" style="margin-bottom: 5px;">
-                                                <?php echo $rating['nama_user'] ?></h5>
+                                                <?php echo $rating['nama_user'] ?>
+                                            </h5>
                                             <p class="card-text" style="margin-top: 0;"><i
                                                     class="fas fa-map-marker-alt"></i> <?php echo $rating['alamat_user'] ?>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="mb-3" style="color: #FFC107;">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                                        <?php
+                                        $ratingValue = $rating['rating'];
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $ratingValue) {
+                                                echo '<i class="fas fa-star"></i>';
+                                            } else {
+                                                echo '<i class="far fa-star"></i>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                     <p class="card-text"><?php echo $rating['review'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
-
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
-                        <div class="card mx-3 mb-4" style="width: 300px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
-                                        alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;">Arlene McCoy</h5>
-                                        <p class="card-text" style="margin-top: 0;"><i
-                                                class="fas fa-map-marker-alt"></i> Surabaya</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <p class="card-text">Aplikasi Re-Kost sangat membantu saya dalam menemukan kost yang
-                                    sesuai dengan budget dan preferensi saya. Fitur pencariannya sangat mudah digunakan
-                                    dan informasi yang disediakan lengkap.</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -453,17 +471,20 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <div class="mt-2">
-                        <img src="<?= asset('img/user.png') ?>" alt="Circle Image" class="rounded-circle"
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" alt="Circle Image" class="rounded-circle"
                             style="width: 50px; height: 50px;">
-                        <div class="star-rating mt-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                        <div class="star-rating mt-2" id="rating-container">
+                            <i class="fas fa-star inactive" data-rating="1"></i>
+                            <i class="fas fa-star inactive" data-rating="2"></i>
+                            <i class="fas fa-star inactive" data-rating="3"></i>
+                            <i class="fas fa-star inactive" data-rating="4"></i>
+                            <i class="fas fa-star inactive" data-rating="5"></i>
                         </div>
                     </div>
-                    <form id="ulasanForm" method="post" action="<?= BASEURL; ?>addulasan" class="form-inline mt-4">
+
+                    <form id="ulasanForm" method="post" action="<?= BASEURL; ?>addulasan" class="form-inline mt-4"
+                        onsubmit="return validateForm()">
+                        <input type="hidden" id="ratingInput" name="rating">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Tuliskan ulasan anda disini...."
                                 id="reviewInput" name="reviewInput">
@@ -473,13 +494,10 @@
                             </button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </section>
-
     <hr style="border: 1px solid #EEEEEE; margin: 0px;">
     <footer id="contact">
         <div class="container">
@@ -529,8 +547,10 @@
   <script>
     AOS.init();
   </script> -->
-  <script src="<?= asset('js/navbar.js') ?>"></script>
+    <script src="<?= asset('js/navbar.js') ?>"></script>
     <script src="<? asset('js/file.js') ?>"></script>
+    <script src="<?= asset('js/StarRating.js') ?>"></script>
+    <script src="<?= asset('js/AddArea.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

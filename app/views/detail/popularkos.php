@@ -7,7 +7,8 @@
     <title>Re-Kost</title>
     <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -15,6 +16,21 @@
     <style>
         html {
             scroll-behavior: smooth;
+        }
+
+        .card {
+            width: 300px;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            padding: 15px;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -56,15 +72,18 @@
             <div class="row">
                 <div class="col-md-0 p-4">
                     <h2 style="font-size: 32px; font-weight: bold; margin-top: 24px">
-                        <img src="<?= asset('img/icon.png') ?>" alt="Icon" style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!
+                        <img src="<?= asset('img/icon.png') ?>" alt="Icon"
+                            style="margin-right: 16px; margin-top: -4px;">Check what's popular in Re-kost!
                     </h2>
-                    <p style="font-size: 16px; font-weight: normal; color: #5F5F5F">Temukan kost terpopuler dengan fasilitas terbaik dan lokasi strategis hanya di Re-Kost.</p>
+                    <p style="font-size: 16px; font-weight: normal; color: #5F5F5F">Temukan kost terpopuler dengan
+                        fasilitas terbaik dan lokasi strategis hanya di Re-Kost.</p>
                 </div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="mb-3 mb-md-0">
                     <div class="dropdown d-inline-block mr-3">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-map-marker-alt"></i> Lokasi
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownLokasi">
@@ -76,7 +95,8 @@
                         </div>
                     </div>
                     <div class="dropdown d-inline-block mr-3">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-dollar-sign"></i> Harga
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownHarga">
@@ -85,7 +105,8 @@
                         </div>
                     </div>
                     <div class="dropdown d-inline-block">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-filter"></i> Urutkan
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownUrutkan">
@@ -95,7 +116,8 @@
                     </div>
                 </div>
                 <div class="position-relative" style="width: 100%; max-width: 400px;">
-                    <input type="text" class="form-control search-input" placeholder="Search Boarding House" aria-label="Search Boarding House">
+                    <input type="text" class="form-control search-input" placeholder="Search Boarding House"
+                        aria-label="Search Boarding House">
                     <i class="fas fa-search search-icon"></i>
                 </div>
             </div>
@@ -103,42 +125,32 @@
 
         <div class="container-fluid px-4">
             <div class="row" style="margin-top: 32px;">
-            <?php foreach($data['popular'] as $popular):?>
-                <div class="col-md-3 p-3 mb-5">
-                <a href="<?= BASEURL.'detailkos/'.$popular["id_kos"]?>" class="card-link">
-                    <div class="card">
-                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $popular['nama_kos'] ?></h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> <?php echo $popular['alamat'] ?></p>
-                            <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5 (<?php echo $popular['review_count'] ?>)</p>
-                            <span class="btn-available" style="border-radius: 4px;"><?php echo $popular['status_kamar'] ?></span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR <?php echo $popular['harga'] ?>
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $popular['waktu_penyewaan'] ?></span>
-                            </p>
-                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
-                        </div>
+                <?php foreach ($data['popular'] as $popular): ?>
+                    <div class="col-md-3 p-3 mb-5">
+                        <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
+                            <div class="card">
+                                <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $popular['nama_kos'] ?></h5>
+                                    <span class="btn-available"
+                                    style="border-radius: 4px;"><?php echo $popular['tipe_kos'] ?></span>
+                                    <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
+                                        <?php echo $popular['alamat'] ?></p>
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
+                                        (<?php echo $popular['review_count'] ?>)</p>
+                                    <span class="btn-available"
+                                        style="border-radius: 4px;"><?php echo $popular['status_kamar'] ?></span>
+                                    <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
+                                        IDR <?php echo $popular['harga'] ?>
+                                        <span
+                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $popular['waktu_penyewaan'] ?></span>
+                                    </p>
+                                    <a class="btn-order" href="detailkos">Pesan sekarang</a>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                   </a>
-                </div>
-                <?php endforeach;?>    
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
