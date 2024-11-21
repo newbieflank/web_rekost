@@ -145,50 +145,6 @@ class KosModel
         }
     }
 
-    // public function tambahDataKamar($data)
-    // {
-    //     try {
-    //         $query2 = "INSERT INTO kamar (
-    //         luas_kamar, 
-    //         jenis_fasilitas, 
-    //         harga_bulan,      
-    //         tipe_kamar,
-    //         kamar_tersedia, 
-    //         id_kos,
-    //         total_kamar,
-    //         harga_minggu,     
-    //         harga_hari        
-    //     ) VALUES (
-    //         :luas_kamar,
-    //         :jenis_fasilitas,
-    //         :harga_bulan,     
-    //         :tipe_kamar,
-    //         :kamar_tersedia,
-    //         :id_kos,
-    //         :total_kamar,
-    //         :harga_minggu,    
-    //         :harga_hari       
-    //     )";
-
-    //         $this->db->query($query2);
-
-    //         $this->db->bind(':luas_kamar', $data['luas_kamar']);
-    //         $this->db->bind('jenis_fasilitas', $data['jenis_fasilitas']);
-    //         $this->db->bind(':harga_bulan', $data['harga_bulan']);
-    //         $this->db->bind(':tipe_kamar', $data['tipe_kamar']);
-    //         $this->db->bind(':kamar_tersedia', $data['kamar_tersedia']);
-    //         $this->db->bind(':total_kamar', $data['total_kamar']);
-    //         $this->db->bind(':harga_minggu', $data['harga_minggu']);
-    //         $this->db->bind(':harga_hari', $data['harga_hari']);
-    //         $this->db->bind(':id_kos', $data['id_kos']);
-
-    //         $this->db->execute();
-    //         return $this->db->rowCount();
-    //     } catch (Exception $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-    // }
-
     public function cekIdTransaksi($id)
     {
         //isi query buat check ID Transaksi
