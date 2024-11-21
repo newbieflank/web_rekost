@@ -11,10 +11,35 @@ class HomeController extends Controller
             $role = $_SESSION['user']['role'];
             $user = $this->model('UsersModel')->findUserByEmail($email);
 
+            $pendapatan = $this->model('chartModel')->getpendapatan();
+            $pengeluaran = $this->model('chartModel')->getpengeluaran();
+            $rataRating = $this->model('chartModel')->getUlasan();
+            $ratingatas = $this->model('chartModel')->getulasanatas();
+            $chartpendapatan = $this->model('chartModel')->gettransaksi();
+            $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+
+            $pendapatanPerBulan = array_fill(0, 12, 0);
+            foreach ($chartpendapatan as $item) {
+                $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+                $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+            }
+
+            $pengeluaranPerBulan = array_fill(0, 12, 0);
+            foreach ($chartpengeluaran as $item) {
+                $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+                $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+            }
+
             $layoutData = [
                 "id_user" => $user['id_user'],
                 "id_gambar" => $user['id_gambar'],
-                "title" => 'Home'
+                "title" => 'Home',
+                "pendapatan" => $pendapatan,
+                "pengeluaran" => $pengeluaran,
+                "rataRating" => $rataRating,
+                "ratingatas" => $ratingatas,
+                "chartpendapatan" => $pendapatanPerBulan,
+                "chartpengeluaran" => $pengeluaranPerBulan
             ];
             if ($role === 'pemilik kos') {
                 $this->view('home/landingpemilik', $layoutData);
