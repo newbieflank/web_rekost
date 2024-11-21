@@ -18,13 +18,13 @@ class DataKosController extends Controller
         $id_user = $_SESSION['user']['id_user'];
         $id_kos = $_SESSION['user']['id_kos'];
 
-        $kos = $this->KosModel->getData($id_kos);
+        $kos = $this->KosModel->Data($id_kos);
         $user = $this->model('UsersModel')->findUserById($id_user);
 
         $array = $kos['jenis_fasilitas'];
         $fasilitas = explode(',', $array);
         $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $imagePath = $baseDir . $id_user . '/' . $id_kos;
+        $imagePath = $baseDir .  $id_kos;
 
         $dataKos = [
             'namaKos' => $kos['nama_kos'],

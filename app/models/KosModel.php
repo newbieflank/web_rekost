@@ -9,6 +9,16 @@ class KosModel
         $this->db = new Database;
     }
 
+    public function Data($id)
+    {
+        $query = "SELECT * FROM kos WHERE id_kos=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        return $this->db->single();
+    }
+
     public function getData($id)
     {
         $query = "SELECT     kos.id_kos,

@@ -1,66 +1,48 @@
 let incomingUserId = null;
-let loadedMessageIds = new Set();
 let socket = null;
+let receiverId = null;
+let chatInterval = null; // Ensure it's declared here for scope
 
-function connectWebSocket(userId) {
-    const wsUrl = `ws://127.0.0.1:8080/ws/chat?id_user=${userId}`;
-    console.log(`Connecting WebSocket with URL: ${wsUrl}`);
+// Connect WebSocket
+function connectWebSocket() {
+    const wsUrl = 'ws://127.0.0.1:8080/ws/chat';
     socket = new WebSocket(wsUrl);
 
-    socket.onopen = function () {
-        console.log('WebSocket connected');
+    socket.onopen = () => console.log('WebSocket connected');
+    socket.onclose = () => {
+        console.warn('WebSocket closed. Reconnecting...');
+        setTimeout(connectWebSocket, 5000); // Reconnect after 5 seconds
     };
+    socket.onerror = (err) => console.error('WebSocket error:', err);
 
     socket.onmessage = function (event) {
-        const data = JSON.parse(event.data); // Mengurai data yang diterima
+        const data = JSON.parse(event.data); // Parse the incoming data
 
-        if (data.type === 'message') {
+        // Check the type of message and handle accordingly
+        if (data.type === 'message' && data.id_receiver === incomingUserId) {
             console.log('Received message:', data);
             appendMessage({
                 id: data.id,
                 message: data.message,
-                sent_by_user: data.sent_by_user,
-                time: data.time
+                sent_by_user: data.id_sender === incomingUserId,
+                time: data.time,
             });
         }
     };
+};
 
-
-    socket.onclose = function () {
-        console.warn('WebSocket closed. Reconnecting...');
-        setTimeout(() => connectWebSocket(userId), 5000); // Attempt to reconnect
-    };
-
-    socket.onerror = function (error) {
-        console.error('WebSocket error:', error);
-    };
-}
-
-function appendMessage(chat) {
-    const chatMessages = document.getElementById('chat-messages');
-    if (!chatMessages) return;
-
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('chat-message', 'd-flex', chat.sent_by_user ? 'justify-content-end' : 'justify-content-start', 'mb-3');
-    messageElement.id = `chat-message-${chat.id}`;
-
-    messageElement.innerHTML = `
-        <div class="message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
-            ${chat.message}
-        </div>
-        <span class="message-time ms-2 text-muted">${chat.time}</span>
-    `;
-
-    chatMessages.appendChild(messageElement);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
+// Load chat function
 function loadChat(userId, userName, userImage) {
+    if (!userId) {
+        console.warn('No user selected for chat.');
+        return;
+    }
     incomingUserId = userId;
     document.getElementById('chat-user-name').textContent = userName;
     document.getElementById('chat-user-status').textContent = 'Sedang online';
     if (document.getElementById('chat-placeholder')) document.getElementById('chat-placeholder').style.display = 'none';
     document.getElementById('chat-input-area').style.display = 'flex';
+
 
     fetch(`getchat/${userId}`)
         .then(response => response.json())
@@ -75,49 +57,102 @@ function loadChat(userId, userName, userImage) {
             }
 
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            startChatInterval(userId, userName, userImage);
         })
         .catch(error => console.error('Error loading chat:', error));
-}   
+}
 
-document.getElementById('sendButton').addEventListener('click', function (event) {
-    event.preventDefault();
+// Start the interval for refreshing chat
+function startChatInterval(userId, userName, userImage) {
+    // Clear any existing interval to avoid duplicates
+    if (chatInterval) {
+        clearInterval(chatInterval);
+    }
+    // Start a new interval for loading chat
+    chatInterval = setInterval(() => {
+        console.log('Refreshing chat...');
+        loadChat(userId, userName, userImage);
+    }, 2000); // Interval every 10 seconds
+}
 
+// Stop the interval
+function stopChatInterval() {
+    if (chatInterval) {
+        clearInterval(chatInterval);
+        chatInterval = null;
+        console.log('Chat interval stopped');
+    }
+}
+
+// Append message to chat window
+function appendMessage(chat, userId) {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message', 'd-flex', chat.id_sender == userId ? 'justify-content-end' : 'justify-content-start', 'mb-3');
+    messageElement.id = `chat-message-${chat.id}`;
+
+    messageElement.innerHTML = `
+        <div class="message-content ${chat.sent_by_user ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
+            ${chat.message}
+        </div>
+        <span class="message-time ms-2 text-muted">${chat.time}</span>`;
+
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Send message when user clicks the send button
+document.getElementById('sendButton').addEventListener('click', () => {
     const messageInput = document.getElementById('messageInput');
     const messageText = messageInput.value.trim();
-
-    if (messageText && incomingUserId) {
-        const id_receiver = document.getElementById('receiverIdInput').value; // Ambil penerima ID dari input
-
-        appendMessage({
-            id: `temp-${Date.now()}`,
+    if (messageText) {
+        const tempMessage = {
             message: messageText,
             sent_by_user: true,
-            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        });
+            time: new Date().toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            }),
+        };
+        appendMessage(tempMessage);
+        messageInput.value = '';
 
         if (socket && socket.readyState === WebSocket.OPEN) {
+            // Send message through WebSocket
             socket.send(JSON.stringify({
-                type: 'send_message',
-                id_sender: incomingUserId,
-                id_receiver: id_receiver, // Kirim ke penerima sesuai dengan input
-                message: messageText
+                type: 'send_message', // Message type
+                id_receiver: incomingUserId, // Receiver ID
+                message: messageText, // Message content
             }));
-        } else {
-            console.warn('WebSocket not connected. Fallback to HTTP.');
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", `sendchat/${incomingUserId}`, true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onload = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    const data = JSON.parse(xhr.responseText);
-                    if (data.status === 'error') {
-                        alert(data.message);
-                    }
-                }
-            };
-            xhr.send(`id_receiver=${id_receiver}&message=${encodeURIComponent(messageText)}`);
-        }
 
-        messageInput.value = ''; // Clear the message input field
+            // Send message to server via fetch for logging (optional)
+            fetch(`sendchat/${incomingUserId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id_receiver=${encodeURIComponent(incomingUserId)}&message=${encodeURIComponent(messageText)}`
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Pesan terkirim ke server:', data);
+                })
+                .catch(error => {
+                    console.error('Error sending message via fetch:', error);
+                });
+        } else {
+            console.error('WebSocket connection is not open.');
+        }
     }
-});  
+})
+
+// Initialize WebSocket connection after page load
+document.addEventListener('DOMContentLoaded', () => {
+    connectWebSocket();
+});
