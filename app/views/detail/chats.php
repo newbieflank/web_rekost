@@ -35,26 +35,27 @@
             <ul class="list-unstyled" id="userList">
                 <?php if (empty($onlineUsers)): ?>
                     <li class="text-center text-muted">Memuat pengguna...</li>
+                <?php else: ?>
+
+                    <!-- Start of user loop -->
+                    <?php foreach ($onlineUsers as $us) : ?>
+                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;">
+                            <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>"
+                                alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
+                            <span onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>')"
+                                style="cursor: pointer; color: blue;">
+                                <?= htmlspecialchars($us['nama']); ?> sedang online
+                            </span>
+                        </li>
+                    <?php endforeach; ?>
+                    <!-- End of user loop -->
                 <?php endif; ?>
-
-                <!-- Start of user loop -->
-                <?php foreach ($onlineUsers as $us) : ?>
-                    <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;">
-                        <img src="<?= !empty($us['profile_picture']) ? htmlspecialchars($us['profile_picture']) : 'path/to/your/img/default.png' ?>"
-                            alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
-                        <span onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= htmlspecialchars($us['profile_picture'] ?? 'path/to/your/img/default.png') ?>')"
-                            style="cursor: pointer; color: blue;">
-                            <?= htmlspecialchars($us['nama']); ?> sedang online
-                        </span>
-                    </li>
-                <?php endforeach; ?>
-                <!-- End of user loop -->
-
             </ul>
         </aside>
 
         <!-- Chat Window -->
         <section class="chat-window flex-grow-1 p-3">
+
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
                 <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" id="chat-user-image">
                 <div>
