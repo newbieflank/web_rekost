@@ -115,4 +115,33 @@ class UserController extends Controller
             exit;
         }
     }
+
+    public function user($id){
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json');
+        $user = $this->user->findUserById($id);
+
+        if($user) {
+            $response = [
+                'status' => 'success',
+                'message' => 'Data Berhasil Di Dapat',
+                'data' => [
+                    'id_user' => $id,
+                    'email' => $user['email']
+                ]
+            ];
+
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'Email or password missing',
+            ];
+        }
+
+        return $response;
+    }
+
+    public function getDataUser(){
+        
+    }
 }
