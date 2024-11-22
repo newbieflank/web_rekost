@@ -18,24 +18,24 @@ function initMap() {
     }).addTo(map);
 
     // Menambahkan kontrol pencarian
-    const geocoder = L.Control.geocoder({
-        defaultMarkGeocode: false,
-        placeholder: 'Cari lokasi...',
-        errorMessage: 'Lokasi tidak ditemukan',
-        geocoder: L.Control.Geocoder.nominatim({
-            geocodingQueryParams: {
-                'accept-language': 'id',
-                countrycodes: 'id'
-            }
-        })
-    }).addTo(map);
+    // const geocoder = L.Control.geocoder({
+    //     defaultMarkGeocode: false,
+    //     placeholder: 'Cari lokasi...',
+    //     errorMessage: 'Lokasi tidak ditemukan',
+    //     geocoder: L.Control.Geocoder.nominatim({
+    //         geocodingQueryParams: {
+    //             'accept-language': 'id',
+    //             countrycodes: 'id'
+    //         }
+    //     })
+    // }).addTo(map);
 
-    // Event handler untuk hasil pencarian
-    geocoder.on('markgeocode', async function (e) {
-        const location = e.geocode.center;
-        console.log('Lokasi dari pencarian:', location);
-        updateMarker(location.lat, location.lng);
-    });
+    // // Event handler untuk hasil pencarian
+    // geocoder.on('markgeocode', async function (e) {
+    //     const location = e.geocode.center;
+    //     console.log('Lokasi dari pencarian:', location);
+    //     updateMarker(location.lat, location.lng);
+    // });
 
     // Ambil koordinat dari input tersembunyi
     const latitude = parseFloat(document.getElementById('latitude').value);

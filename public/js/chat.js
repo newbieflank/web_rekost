@@ -40,6 +40,7 @@ function loadChat(userId, userName, userImage) {
     incomingUserId = userId;
     document.getElementById('chat-user-name').textContent = userName;
     document.getElementById('chat-user-status').textContent = 'Sedang online';
+    document.getElementById('chat-user-image').src = userImage;
     if (document.getElementById('chat-placeholder')) document.getElementById('chat-placeholder').style.display = 'none';
     document.getElementById('chat-input-area').style.display = 'flex';
 
