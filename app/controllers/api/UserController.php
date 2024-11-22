@@ -116,12 +116,13 @@ class UserController extends Controller
         }
     }
 
-    public function user($id){
-        header("Access-Control-Allow-Origin: *");
-        header('Content-Type: application/json');
+    public function user($id)
+    {
+        // header("Access-Control-Allow-Origin: *");
+        // header('Content-Type: application/json');
         $user = $this->user->findUserById($id);
 
-        if($user) {
+        if ($user) {
             $response = [
                 'status' => 'success',
                 'message' => 'Data Berhasil Di Dapat',
@@ -130,7 +131,6 @@ class UserController extends Controller
                     'email' => $user['email']
                 ]
             ];
-
         } else {
             $response = [
                 'status' => 'error',
@@ -138,10 +138,8 @@ class UserController extends Controller
             ];
         }
 
-        return $response;
+        echo json_encode($response);
     }
 
-    public function getDataUser(){
-        
-    }
+    public function getDataUser() {}
 }
