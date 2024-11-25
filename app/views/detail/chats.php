@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="user-id" content="<?= $_SESSION['user']['id_user'] ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <title>Chat</title>
     <style>
         .chat-input {
@@ -36,26 +36,18 @@
                 <?php if (empty($onlineUsers)): ?>
                     <li class="text-center text-muted">Memuat pengguna...</li>
                 <?php else: ?>
-
-                    <!-- Start of user loop -->
-                    <?php foreach ($onlineUsers as $us) : ?>
-                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;">
-                            <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>"
-                                alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
-                            <span onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>')"
-                                style="cursor: pointer; color: blue;">
-                                <?= htmlspecialchars($us['nama']); ?> sedang online
-                            </span>
+                    <?php foreach ($onlineUsers as $us): ?>
+                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;" onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>')">
+                            <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
+                            <span><?= htmlspecialchars($us['nama']); ?> sedang online</span>
                         </li>
                     <?php endforeach; ?>
-                    <!-- End of user loop -->
                 <?php endif; ?>
             </ul>
         </aside>
 
         <!-- Chat Window -->
         <section class="chat-window flex-grow-1 p-3">
-
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
                 <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" id="chat-user-image">
                 <div>
@@ -79,7 +71,8 @@
         </section>
     </section>
 
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="<?= asset('js/chatsHandle.js') ?>"></script>
 </body>
-<script src="<?= asset('js/chat.js') ?>"></script>
 
 </html>

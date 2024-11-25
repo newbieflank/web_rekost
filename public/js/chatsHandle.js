@@ -1,0 +1,112 @@
+let incomingUserId = null;
+let socket = null;
+let userId = document.querySelector('meta[name="user-id"]').content;
+
+// Connect to Socket.IO
+function connectSocketIO() {
+    if (socket) {
+        console.warn('Socket.IO already connected.');
+        return;
+    }
+
+    socket = io('http://127.0.0.1:3000');
+
+    socket.on('connect', () => {
+        console.log('Socket.IO connected with ID: ' + socket.id);
+        socket.emit('register', userId);
+    });
+
+    socket.on('disconnect', () => {
+        console.warn('Socket.IO disconnected. Reconnecting...');
+        setTimeout(connectSocketIO, 5000);
+    });
+
+    socket.on('error', (err) => {
+        console.error('Socket.IO error:', err);
+    });
+
+    socket.on('receive_message', (data) => {
+        console.log('Received new message:', data);
+        appendMessage(data, userId);
+    });
+
+    socket.on('chat_history', ({ messages }) => {
+        const chatMessages = document.getElementById('chat-messages');
+        chatMessages.innerHTML = '';
+        if (messages && messages.length > 0) {
+            messages.forEach(chat => appendMessage(chat, userId));
+        } else {
+            chatMessages.innerHTML = '<div class="text-center text-muted">No messages yet. Start the conversation!</div>';
+        }
+    });
+}
+
+// Load chat for a selected user
+function loadChat(userId, userName, userImage) {
+    if (!userId) {
+        console.warn('No user selected for chat.');
+        return;
+    }
+    incomingUserId = userId;
+    document.getElementById('chat-user-name').textContent = userName;
+    document.getElementById('chat-user-status').textContent = 'Online';
+    document.getElementById('chat-user-image').src = userImage;
+    document.getElementById('chat-input-area').style.display = 'flex';
+    if (socket && socket.connected) {
+        socket.emit('load_chat', { userId });
+    } else {
+        console.error('Socket.IO connection is not open. Retrying...');
+        setTimeout(() => loadChat(userId, userName, userImage), 1000);
+    }
+}
+
+// Append message to chat window
+function appendMessage(chat, userId) {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add(
+        'chat-message',
+        'd-flex',
+        chat.id_sender == userId ? 'justify-content-end' : 'justify-content-start',
+        'mb-3'
+    );
+
+    messageElement.innerHTML = `
+        <div class="message-content ${chat.id_sender == userId ? 'sent bg-primary text-white' : 'bg-light'} p-2 rounded">
+            ${chat.message}
+        </div>
+        <span class="message-time ms-2 text-muted">${chat.time}</span>
+    `;
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Send message
+document.getElementById('sendButton').addEventListener('click', () => {
+    const messageInput = document.getElementById('messageInput');
+    const messageText = messageInput.value.trim();
+    if (messageText) {
+        const tempMessage = {
+            message: messageText,
+            id_sender: userId,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        appendMessage(tempMessage, userId);
+        messageInput.value = '';
+
+        if (socket && socket.connected) {
+            socket.emit('send_message', {
+                id_sender: userId,
+                id_receiver: incomingUserId,
+                message: messageText,
+            });
+        } else {
+            console.error('Socket.IO connection is not open.');
+        }
+    }
+});
+
+// Initialize Socket.IO connection
+document.addEventListener('DOMContentLoaded', () => {
+    connectSocketIO();
+});
