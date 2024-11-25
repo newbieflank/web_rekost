@@ -44,4 +44,7 @@ require_once './app/core/Router.php';
 require_once './app/core/Helper.php';
 require_once './app/core/App.php';
 
+$chatServerCommand = 'php ' . __DIR__ . './ChatServer.php > /dev/null 2>&1 &';
+exec($chatServerCommand);
+
 $app = new App();

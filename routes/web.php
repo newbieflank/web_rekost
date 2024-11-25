@@ -25,6 +25,7 @@ Router::get('/pemilik', 'HomeController@home');
 Router::get('/riwayat', 'PembayaranController@riwayatpencari');
 Router::get('/riwayatpemilik', 'PembayaranController@riwayatpemilik');
 Router::post('/pembayaran', 'PembayaranController@insertPembayaran');
+Router::get('/chats/{id}', 'ChatController@chatUser');
 
 //admin
 Router::get('/dashboard', 'AdminController@dashboard');
