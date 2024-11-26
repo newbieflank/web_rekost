@@ -52,10 +52,10 @@
         <!-- Chat Window -->
         <section class="chat-window flex-grow-1 p-3">
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
-                <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" id="chat-user-image">
+                <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" style="display: none;" id="chat-user-image">
                 <div>
                     <div id="chat-user-name"></div>
-                    <div class="text-muted" id="chat-user-status">Tidak diketahui</div>
+                    <div class="text-muted" id="chat-user-status"></div>
                 </div>
             </header>
 

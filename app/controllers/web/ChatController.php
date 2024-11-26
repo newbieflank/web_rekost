@@ -7,6 +7,10 @@ class ChatController extends Controller
 
     public function __construct()
     {
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
         // Load the ChatModel
         $this->chatModel = $this->model('ChatModel');
     }

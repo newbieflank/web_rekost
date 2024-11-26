@@ -61,6 +61,7 @@ function loadChat(userId, userName, userImage) {
     document.getElementById('chat-user-name').textContent = userName;
     document.getElementById('chat-user-status').textContent = 'Online';
     document.getElementById('chat-user-image').src = userImage;
+    document.getElementById('chat-user-image').style.display = 'block';
     document.getElementById('chat-input-area').style.display = 'flex';
     if (socket && socket.connected) {
         socket.emit('load_chat', { userId });

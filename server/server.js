@@ -3,14 +3,17 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const mysql = require('mysql');
+require('dotenv').config();
+
+const dbConfig = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+};
 
 // Create and configure the MySQL connection
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'rekost'
-});
+const db = mysql.createConnection(dbConfig);
 
 // Connect to the database
 db.connect((err) => {
