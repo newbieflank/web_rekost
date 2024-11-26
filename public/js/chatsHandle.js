@@ -2,6 +2,7 @@ let incomingUserId = null;
 let socket = null;
 let userId = document.querySelector('meta[name="user-id"]').content;
 
+
 // Connect to Socket.IO
 function connectSocketIO() {
     if (socket) {
@@ -24,11 +25,20 @@ function connectSocketIO() {
     socket.on('error', (err) => {
         console.error('Socket.IO error:', err);
     });
+6
+    const unreadMessages = {};
 
     socket.on('receive_message', (data) => {
-        console.log('Received new message:', data);
-        appendMessage(data, userId);
+        if (data.id_sender == incomingUserId) {
+            appendMessage(data, userId);
+        } else {
+            unreadMessages[data.id_sender] = (unreadMessages[data.id_sender] || 0) + 1;
+            console.log(`User ${data.id_sender} has ${unreadMessages[data.id_sender]} unread messages.`);
+            // Update UI to show unread count
+        }
     });
+
+
 
     socket.on('chat_history', ({ messages }) => {
         const chatMessages = document.getElementById('chat-messages');
