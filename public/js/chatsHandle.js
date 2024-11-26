@@ -25,7 +25,7 @@ function connectSocketIO() {
     socket.on('error', (err) => {
         console.error('Socket.IO error:', err);
     });
-6
+    6
     const unreadMessages = {};
 
     socket.on('receive_message', (data) => {
@@ -92,7 +92,19 @@ function appendMessage(chat, userId) {
 }
 
 // Send message
-document.getElementById('sendButton').addEventListener('click', () => {
+// Add event listener for the "Enter" key
+document.getElementById('messageInput').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault(); // Prevent the default newline behavior
+        sendMessage();
+    }
+});
+
+// Existing "Send" button click handler
+document.getElementById('sendButton').addEventListener('click', sendMessage);
+
+// Function to send a message
+function sendMessage() {
     const messageInput = document.getElementById('messageInput');
     const messageText = messageInput.value.trim();
     if (messageText) {
@@ -114,7 +126,8 @@ document.getElementById('sendButton').addEventListener('click', () => {
             console.error('Socket.IO connection is not open.');
         }
     }
-});
+}
+
 
 // Initialize Socket.IO connection
 document.addEventListener('DOMContentLoaded', () => {

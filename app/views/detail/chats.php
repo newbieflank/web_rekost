@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="user-id" content="<?= $_SESSION['user']['id_user'] ?>">
+    <link rel="stylesheet" href="<?= asset('css/chats.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <title>Chat</title>
     <style>
@@ -16,9 +19,9 @@
             display: block;
         }
 
-        .chat-messages {
-            height: 400px;
-            overflow-y: auto;
+        .chat-container {
+            height: 100vh;
+            padding: 0;
         }
     </style>
 </head>
@@ -37,7 +40,7 @@
                     <li class="text-center text-muted">Memuat pengguna...</li>
                 <?php else: ?>
                     <?php foreach ($onlineUsers as $us): ?>
-                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;" onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>')">
+                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;" onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>')">
                             <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
                             <span><?= htmlspecialchars($us['nama']); ?> sedang online</span>
                         </li>
@@ -62,16 +65,17 @@
             </section>
 
             <!-- Chat Input -->
-            <footer class="chat-input align-items-center mt-3" id="chat-input-area">
+            <footer class="chat-input align-items-center mt-auto" id="chat-input-area">
                 <input type="text" class="form-control rounded me-2" placeholder="Tulis Pesan..." id="messageInput">
                 <button class="btn btn-primary" id="sendButton">
-                    <i class="fas fa-paper-plane"></i>
+                    <i class="fa-regular fa-paper-plane"></i>
                 </button>
             </footer>
         </section>
     </section>
 
     <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="<?= asset('js/chatsHandle.js') ?>"></script>
 </body>
 
