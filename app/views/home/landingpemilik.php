@@ -101,8 +101,7 @@
 </head>
 
 <body>
-    <?php include __DIR__ . '/../layout/header.php'; ?>
-    <section class="dashboard">
+    <section id="home" class="dashboard">
         <h2 style="font-weight: bold;">Dashboard</h2>
         <p>Menampilkan ringkasan pendapatan, pengeluaran, dan rekap keuangan kost secara menyeluruh.</p>
     </section>
@@ -112,15 +111,15 @@
 
 
 
-                <?php foreach($data['pendapatan'] as $pendapatan):?>
-                <div class="card overlap-card" style="--url: url('https://fontawesome.com/icons/chart-mixed-up-circle-dollar?f=duotone&s=solid  ')">
-                    <div class="card-body">
-                        <h5>Pendapatan</h5>
-                        <p>Pendapatan yang didapatkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pendapatan['total_jumlah']?></p>
+                <?php foreach ($data['pendapatan'] as $pendapatan): ?>
+                    <div class="card overlap-card" style="--url: url('https://fontawesome.com/icons/chart-mixed-up-circle-dollar?f=duotone&s=solid  ')">
+                        <div class="card-body">
+                            <h5>Pendapatan</h5>
+                            <p>Pendapatan yang didapatkan Bulan Januari</p>
+                            <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pendapatan['total_jumlah'] ?></p>
+                        </div>
                     </div>
-                </div>
-                <?php endforeach;?>
+                <?php endforeach; ?>
 
 
 
@@ -128,27 +127,27 @@
 
             </div>
             <div class="col-md-4">
-            <?php foreach($data['pengeluaran'] as $pengeluaran):?>
-               
-                <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
-                    <div  class="card-body">
-                        <h5>Pengeluaran</h5>
-                        <p>Pengeluaran yang dikeluarkan Bulan Januari</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pengeluaran['total_jumlah'] ?></p>
+                <?php foreach ($data['pengeluaran'] as $pengeluaran): ?>
+
+                    <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
+                        <div class="card-body">
+                            <h5>Pengeluaran</h5>
+                            <p>Pengeluaran yang dikeluarkan Bulan Januari</p>
+                            <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?php echo $pengeluaran['total_jumlah'] ?></p>
+                        </div>
                     </div>
-                </div>
-                <?php endforeach;?>
+                <?php endforeach; ?>
             </div>
             <div class="col-md-4">
-            <?php foreach($data['ratingatas'] as $ratingatas):?>
-                <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
-                    <div class="card-body">
-                        <h5>Rating</h5>
-                        <p>Ulasan yang diberikan untuk kost ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $ratingatas['rata_rata_rating'] ?></p>
+                <?php foreach ($data['ratingatas'] as $ratingatas): ?>
+                    <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
+                        <div class="card-body">
+                            <h5>Rating</h5>
+                            <p>Ulasan yang diberikan untuk kost ini</p>
+                            <p style="font-size: 40px; font-weight: 600; text-align:center">Rating <?php echo $ratingatas['rata_rata_rating'] ?></p>
+                        </div>
                     </div>
-                </div>
-                <?php endforeach;?>
+                <?php endforeach; ?>
             </div>
     </section>
     <section id="graph" class="statistik" style="background-color: #f4f8fb; padding: 40px 0;">
@@ -159,15 +158,15 @@
                     <p>Menampilkan ringkasan statistik keuangan untuk memberikan gambaran lengkap tentang pendapatan dan pengeluaran bulanan.</p>
                 </div>
                 <div class="filter mx-">
-    <label>
-        <input type="radio" name="keuanganFilter" value="pendapatan" checked>
-        Pendapatan
-    </label>
-    <label>
-        <input type="radio" name="keuanganFilter" value="pengeluaran">
-        Pengeluaran
-    </label>
-</div>
+                    <label>
+                        <input type="radio" name="keuanganFilter" value="pendapatan" checked>
+                        Pendapatan
+                    </label>
+                    <label>
+                        <input type="radio" name="keuanganFilter" value="pengeluaran">
+                        Pengeluaran
+                    </label>
+                </div>
             </div>
             <div class="chart-wrapper">
                 <canvas id="keuanganChart"></canvas>
@@ -184,17 +183,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-wrapper d-flex">
-                    <?php foreach ($data['rataRating'] as $rataRating): ?>
-                        <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
-                                    <div>
-                                        <h5 class="card-title" style="margin-bottom: 5px;"><?php echo $rataRating['pengulas_kos'] ?></h5>
-                                        <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> <?php echo $rataRating['alamat_user'] ?></p>
+                        <?php foreach ($data['rataRating'] as $rataRating): ?>
+                            <div class="card mx-3 mb-4 rating-card" style="width: 250px;">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3" alt="User Profile">
+                                        <div>
+                                            <h5 class="card-title" style="margin-bottom: 5px;"><?php echo $rataRating['pengulas_kos'] ?></h5>
+                                            <p class="card-text" style="margin-top: 0;"><i class="fas fa-map-marker-alt"></i> <?php echo $rataRating['alamat_user'] ?></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-3" style="color: #FFC107;">
+                                    <div class="mb-3" style="color: #FFC107;">
                                         <?php
                                         $ratingValue = $rataRating['rating'];
                                         for ($i = 1; $i <= 5; $i++) {
@@ -206,76 +205,75 @@
                                         }
                                         ?>
                                     </div>
-                                <p class="card-text"><?php echo $rataRating['ulasan'] ?></p>
+                                    <p class="card-text"><?php echo $rataRating['ulasan'] ?></p>
+                                </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <?php include __DIR__ . '/../layout/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-    // Data awal untuk chart
-    const pendapatan = <?= json_encode($chartpendapatan) ?>;
-    const pengeluaran = <?= json_encode($chartpengeluaran) ?>;
+        // Data awal untuk chart
+        const pendapatan = <?= json_encode($chartpendapatan) ?>;
+        const pengeluaran = <?= json_encode($chartpengeluaran) ?>;
 
-    const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // Konfigurasi awal chart
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Pendapatan',
-            data: pendapatan,
-            backgroundColor: '#000000',
-        }]
-    };
+        // Konfigurasi awal chart
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Pendapatan',
+                data: pendapatan,
+                backgroundColor: '#000000',
+            }]
+        };
 
-    const config = {
-        type: 'bar',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Keuangan'
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Keuangan'
+                    }
                 }
             }
+        };
+
+        // Inisialisasi chart
+        const ctx = document.getElementById('keuanganChart').getContext('2d');
+        const keuanganChart = new Chart(ctx, config);
+
+        // Fungsi untuk memperbarui data chart
+        function updateChart(value) {
+            if (value === 'pendapatan') {
+                keuanganChart.data.datasets[0].data = pendapatan;
+                keuanganChart.data.datasets[0].label = 'Pendapatan';
+                keuanganChart.data.datasets[0].backgroundColor = '#000000';
+            } else if (value === 'pengeluaran') {
+                keuanganChart.data.datasets[0].data = pengeluaran;
+                keuanganChart.data.datasets[0].label = 'Pengeluaran';
+                keuanganChart.data.datasets[0].backgroundColor = '#FFC107';
+            }
+            keuanganChart.update(); // Update chart dengan data baru
         }
-    };
 
-    // Inisialisasi chart
-    const ctx = document.getElementById('keuanganChart').getContext('2d');
-    const keuanganChart = new Chart(ctx, config);
-
-    // Fungsi untuk memperbarui data chart
-    function updateChart(value) {
-        if (value === 'pendapatan') {
-            keuanganChart.data.datasets[0].data = pendapatan;
-            keuanganChart.data.datasets[0].label = 'Pendapatan';
-            keuanganChart.data.datasets[0].backgroundColor = '#000000';
-        } else if (value === 'pengeluaran') {
-            keuanganChart.data.datasets[0].data = pengeluaran;
-            keuanganChart.data.datasets[0].label = 'Pengeluaran';
-            keuanganChart.data.datasets[0].backgroundColor = '#FFC107';
-        }
-        keuanganChart.update(); // Update chart dengan data baru
-    }
-
-    // Event listener untuk input radio
-    document.querySelectorAll('input[name="keuanganFilter"]').forEach(input => {
-        input.addEventListener('change', (event) => {
-            updateChart(event.target.value);
+        // Event listener untuk input radio
+        document.querySelectorAll('input[name="keuanganFilter"]').forEach(input => {
+            input.addEventListener('change', (event) => {
+                updateChart(event.target.value);
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 <script src="<? asset('js/file.js') ?>"></script>

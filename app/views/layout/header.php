@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="<?= asset('css/profile.css') ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <title><?php echo $title ?></title>
     <style>
         @media (max-width: 768px) {
@@ -68,25 +71,38 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASEURL; ?>#bookings">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= BASEURL; ?>#contact">Contact</a>
-                    </li>
+                    <?php if ($role === 'pencari kos'): ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#bookings">Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#contact">Contact</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#graph">Graph</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <div class="navbar-nav ml-auto mx-4 dropdown">
                     <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px">
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px" height="40px">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                         <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                        <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
                         <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
                             <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
                             <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Tambah Kamar</a>

@@ -20,33 +20,56 @@ class PembayaranController extends Controller
         $email = $_SESSION['user']['email'];
         $user = $this->userModel->findUserByEmail($email);
         $kos = $this->kosModel->getData($id);
-
+        ob_start();
         $this->view('pembayaran/konfirmasi', [
+            'kos' => $kos
+        ]);
+        $content = ob_get_clean();
+
+        $data = [
+            "content" => $content,
             'title' => "Konfirmasi Pemesanan",
-            'kos' => $kos,
+            "role" => $user['role'],
             'id_user' => $user['id_user'],
             'id_gambar' => $user['id_gambar']
-        ]);
+        ];
+        $this->view('layout/main', $data);
     }
 
     public function riwayatPencari()
     {
-
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $pembayaranModel = $this->model('PembayaranModel');
         $riwayat = $pembayaranModel->getRiwayatPencari();
+
+        ob_start();
         $this->view('history/historypencari', [
-            'riwayat' => $riwayat
+            'riwayat' => $riwayat,
+            'id_user' => $user['id_user']
         ]);
+        $content = ob_get_clean();
+
+        $data = [
+            "content" => $content,
+            'title' => "Konfirmasi Pemesanan",
+            "role" => $user['role'],
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
+        ];
+        $this->view('layout/main', $data);
     }
     public function riwayatPemilik()
     {
-        // var_dump('tes');
-        // die;
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $pembayaranModel = $this->model('PembayaranModel');
         $riwayat = $pembayaranModel->getRiwayatPemilik();
 
         $this->view('history/historypemilik', [
-            'riwayat' => $riwayat
+            'riwayat' => $riwayat,
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
         ]);
     }
     public function insertPembayaran()
@@ -94,7 +117,7 @@ class PembayaranController extends Controller
                 $this->header('/riwayat');
                 exit;
             } else {
-                echo "gagal";
+                echo "error";
             }
         } else {
             $data = [

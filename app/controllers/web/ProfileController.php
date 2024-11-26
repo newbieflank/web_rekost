@@ -98,6 +98,7 @@ class ProfileController extends Controller
         $layoutData = [
             "content" => $content,
             "title" => $pageTitle,
+            "role" => $user['role'],
             "id_user" => $user['id_user'],
             "id_gambar" => $user['id_gambar'],
             "footer" => false
