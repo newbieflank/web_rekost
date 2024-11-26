@@ -1,17 +1,20 @@
 <?php
 
 
-class ChatController extends Controller {
+class ChatController extends Controller
+{
     private $chatModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Load the ChatModel
         $this->chatModel = $this->model('ChatModel');
     }
 
-    public function chats() {
+    public function chats()
+    {
         // Fetch the online users
-        
+
         $onlineUsers = $this->chatModel->chats($_SESSION["user"]["id_user"]);
 
 
@@ -23,8 +26,9 @@ class ChatController extends Controller {
         // Render the view and pass the data
         $this->view('detail/chats', $layoutData);
     }
-    public function get_chat($userId) {
-        
+    public function get_chat($userId)
+    {
+
         $outgoing_id = $_SESSION['user']['id_user'];
         // Call get_chat method from ChatModel
         $messages = $this->chatModel->get_chat($userId, $outgoing_id);
@@ -35,23 +39,24 @@ class ChatController extends Controller {
             echo json_encode(['status' => 'error', 'message' => 'No messages available']);
         }
     }
-    public function sendMessage($incomingUserId){
+    public function sendMessage($incomingUserId)
+    {
 
-      
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
-          
+
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        
+
             $data = [
                 'id_sender' => $incomingUserId,
                 'id_receiver' => $_SESSION['user']['id_user'],
                 'message' => trim($_POST['message']),
-               
+
             ];
-           
+
             error_log(print_r($data, true));
-    
+
             // Panggil fungsi sendMessage di ChatModel
             if ($this->chatModel->sendMessage($data)) {
                 echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim']);
@@ -62,15 +67,4 @@ class ChatController extends Controller {
             echo json_encode(['status' => 'error', 'message' => 'Request tidak valid']);
         }
     }
-    public function execute() {
-        if ($this->stmt->execute()) {
-            return true;
-        } else {
-            // Tangkap dan log error MySQL
-            $error = $this->stmt->errorInfo();
-            error_log("Error Database: " . print_r($error, true));
-            return false;
-        }
-    }
-    
-}    
+}

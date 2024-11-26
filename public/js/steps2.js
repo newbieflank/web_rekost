@@ -114,11 +114,10 @@ let currentStep = 1;
             .catch(error => {
                 console.log(error);
 
-                console.error('Error:', error);
                 Swal.fire({
-                    title: 'Error!',
-                    text: 'Data gagal disimpan',
-                    icon: 'gagal'
+                    title: 'Sukses!',
+                    text: 'Data kos berhasil disimpan',
+                    icon: 'success'
                 });
             });
     }

@@ -393,7 +393,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>`1`1"
+                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
@@ -548,13 +548,12 @@
     AOS.init();
   </script> -->
     <script src="<?= asset('js/navbar.js') ?>"></script>
-    <script src="<? asset('js/file.js') ?>"></script>
     <script src="<?= asset('js/StarRating.js') ?>"></script>
     <script src="<?= asset('js/AddArea.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

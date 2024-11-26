@@ -2,16 +2,21 @@
 
 class Database
 {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pass = '';
-    private $db_name = 'rekost';
+    private $host;
+    private $user;
+    private $pass;
+    private $db_name;
 
     private $dbh;
     private $stm;
 
     public function __construct()
     {
+        $this->host = $_ENV['DB_HOST'];
+        $this->user = $_ENV['DB_USER'];
+        $this->pass = $_ENV['DB_PASS'];
+        $this->db_name = $_ENV['DB_NAME'];
+
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -21,7 +26,7 @@ class Database
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
-          
+
             $this->handleError($e);
         }
     }
@@ -29,7 +34,6 @@ class Database
     public function query($query)
     {
         try {
-           
             $this->stm = $this->dbh->prepare($query);
         } catch (PDOException $e) {
             $this->handleError($e);
@@ -67,7 +71,7 @@ class Database
         try {
             return $this->stm->execute();
         } catch (PDOException $e) {
-            
+
             $this->handleError($e);
         }
     }

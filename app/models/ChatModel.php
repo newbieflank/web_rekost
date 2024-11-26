@@ -17,7 +17,7 @@ class ChatModel
         // die;
         // Use session ID for user validation
         $user_id = $_SESSION['user']['id_user'];
-        $sql = "SELECT id_user, nama FROM user WHERE status_user = 'online' AND id_user <> :id_user";
+        $sql = "SELECT id_user, nama, id_gambar FROM user WHERE status_user = 'online' AND id_user <> :id_user";
 
         $this->db->query($sql);
         $this->db->bind('id_user', $user_id);
