@@ -43,14 +43,15 @@ class PembayaranModel
 
         return $this->db->resultSet();
     }
-    public function insertPembayaran($id_user, $id_kamar, $id_kos, $totalkamar, $harga, $tanggal, $waktuPenyewaan)
+    public function insertPembayaran($id_user, $id_kamar, $id_kos, $totalkamar, $durasi, $harga, $tanggal, $waktuPenyewaan)
     {
-        $query = "INSERT INTO `penyewaan` (`id_penyewaan`, `tanggal_penyewaan`, `status_penyewaan`, `waktu_penyewaan`, `harga`, `total_kamar`, `id_kos`, `id_kamar`, `id_user`) VALUES ('', :tanggal_penyewaan, :status_penyewaan, :waktu_penyewaan, :harga, :totalkamar, :id_kos, :id_kamar, :id_user)";
+        $query = "INSERT INTO `penyewaan` (`id_penyewaan`, `tanggal_penyewaan`, `status_penyewaan`, `durasi`,`waktu_penyewaan`, `harga`, `total_kamar`, `id_kos`, `id_kamar`, `id_user`) VALUES ('', :tanggal_penyewaan, :status_penyewaan, :durasi,:waktu_penyewaan, :harga, :totalkamar, :id_kos, :id_kamar, :id_user)";
         $this->db->query($query);
         $this->db->bind('id_user', $id_user);
         $this->db->bind('id_kamar', $id_kamar);
         $this->db->bind('id_kos', $id_kos);
         $this->db->bind('totalkamar', $totalkamar);
+        $this->db->bind('durasi', $durasi);
         $this->db->bind('status_penyewaan', "tersedia");
         $this->db->bind('harga', $harga);
         $this->db->bind('tanggal_penyewaan', $tanggal);

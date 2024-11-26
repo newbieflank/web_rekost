@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="<?= asset('css/konfirmasi.css') ?>">
 </head>
@@ -80,7 +80,11 @@
                                 <input type="text" name="lokasi" class="form-control" id="location" value="<?= $kos['alamat'] ?>" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="duration" class="form-label">Tanggal</label>
+                                <label for="customDate" class="form-label">Tanggal Awal</label>
+                                <input type="text" class="form-control" id="customDate" name="customDate" placeholder="Pilih tanggal">
+                            </div>
+                            <div class="mb-3">
+                                <label for="duration" class="form-label">Durasi</label>
                                 <select id="duration" name="waktu_penyewaan" class="form-select">
                                     <option value="1">Harian</option>
                                     <option value="2">Mingguan</option>
@@ -91,7 +95,7 @@
                             </div>
                             <div id="DayInput" class="mb-3 d-none">
                                 <label for="customDays" class="form-label">Masukkan Jumlah Hari</label>
-                                <input type="number" id="customDays" class="form-control" min="1" placeholder="Jumlah hari">
+                                <input type="number" id="customDays" name="customDays" class="form-control" min="1" placeholder="Jumlah hari">
                             </div>
 
                         </div>
@@ -106,8 +110,9 @@
                         <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
                         <p><strong>Total Kamar</strong>: <span id="detailTotalKamar">1</span></p>
                         <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
-                        <p><strong>Tanggal</strong>: <span id="detailTanggal"></span></p>
-                        <p><strong>Harga</strong>: <?= $kos['harga'] ?></p>
+                        <p><strong>Tanggal Awal</strong>: <span id="detailTanggal"></span></p>
+                        <p><strong>Tanggal Akhir</strong>: <span id="detailTanggalAkhir"></span></p>
+                        <p><strong>Harga</strong>: <?= $kos['harga_bulan'] ?></p>
                         <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="termsCheck">
@@ -179,50 +184,76 @@
 
         function setTotalHarga(harga) {
             document.querySelector('#idTotal').textContent = formatRupiah(harga);
-            console.log(harga);
-
             document.querySelector('#totalHarga').value = harga;
         }
-        setTotalHarga(<?= (int) $kos['harga'] ?>)
+        setTotalHarga(<?= (int) $kos['harga_bulan'] ?>)
     </script>
     <script>
         let totalKamar = 1;
-        document.getElementById('totalKamar').addEventListener('input', function() {
-            totalKamar = this.value.replace(/[^0-9]/g, '');
-            document.getElementById('detailTotalKamar').textContent = totalKamar;
-        });
-        document.getElementById('duration').addEventListener('change', function() {
-            const duration = parseInt(this.value);
-            const hargaKos = <?= $kos['harga'] ?>;
-            const totalKamar = parseInt(document.getElementById('totalKamar').value) || 1;
+        let duration = 1;
+        let customDays = 0;
 
+        const hargaHarian = <?= $kos['harga_hari'] ?>;
+        const hargaMingguan = <?= $kos['harga_minggu'] ?>;
+        const hargaBulanan = <?= $kos['harga_bulan'] ?>;
+
+        let hargaKos;
+
+        function calculateTotalHarga() {
             let totalHarga = 0;
+            const updatedTotalKamar = parseInt(document.getElementById('totalKamar').value) || 1;
 
             if (duration === 1) {
-                document.getElementById('DayInput').classList.remove('d-none');
-                document.getElementById('customDays').addEventListener('input', function() {
-                    const customDays = parseInt(this.value) || 0;
-                    totalHarga = hargaKos * customDays * totalKamar;
-                    updateTotalHarga(totalHarga);
-                });
+                hargaKos = hargaHarian;
+                totalHarga = hargaKos * customDays * updatedTotalKamar;
             } else {
-                document.getElementById('DayInput').classList.add('d-none');
                 let durationDays = 0;
 
                 if (duration === 2) {
+                    hargaKos = hargaMingguan;
                     durationDays = 7;
                 } else if (duration === 3) {
+                    hargaKos = hargaBulanan;
                     durationDays = 30;
                 } else if (duration === 4) {
+                    hargaKos = hargaBulanan;
                     durationDays = 90;
                 } else if (duration === 5) {
+                    hargaKos = hargaBulanan;
                     durationDays = 365;
                 }
 
-                totalHarga = hargaKos * durationDays * totalKamar;
-                updateTotalHarga(totalHarga);
+                totalHarga = hargaKos * durationDays * updatedTotalKamar;
+            }
+
+
+            updateTotalHarga(totalHarga);
+        }
+
+        document.getElementById('totalKamar').addEventListener('input', function() {
+            totalKamar = parseInt(this.value.replace(/[^0-9]/g, '')) || 1;
+            document.getElementById('detailTotalKamar').textContent = totalKamar;
+            calculateTotalHarga();
+        });
+
+
+        document.getElementById('duration').addEventListener('change', function() {
+            duration = parseInt(this.value);
+            document.getElementById('DayInput').classList.toggle('d-none', duration !== 1);
+
+            if (duration !== 1) {
+                calculateTotalHarga();
             }
         });
+
+
+        document.getElementById('customDays').addEventListener('input', function() {
+            if (duration === 1) {
+                customDays = parseInt(this.value) || 0;
+                calculateTotalHarga();
+            }
+        });
+
 
         function updateTotalHarga(totalHarga) {
             setTotalHarga(totalHarga);
@@ -238,9 +269,20 @@
             }).format(amount);
         }
     </script>
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzOg6tv6WJoREp+lG1er1kLtmYlP9+MVRt+8aK9I2GxD" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-pZfHC6QpZrK3Qe2m6Qm5Q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5z5Y5q5Y5q" crossorigin="anonymous"></script>
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
+<script src="<?= asset('js/konfirmasi.js') ?>"></script>
 
 </html>

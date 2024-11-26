@@ -91,7 +91,7 @@
                                     <td><?= $transaksi['waktu_penyewaan'] ?></td>
                                     <td><?= $transaksi['harga_kos'] ?></td>
                                     <td>
-                                        <a href="/uploads/id_kost<?= $transaksi['id_penyewaan'] ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= BASEURL; ?>/uploads/id_kost<?= $transaksi['id_penyewaan'] ?>" class="btn btn-sm btn-primary">
                                             Lihat Bukti
                                         </a>
                                     </td>
