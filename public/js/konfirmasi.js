@@ -58,7 +58,8 @@ $(function () {
             year: 'numeric'
         });
 
-        // Update the displayed end date
         document.getElementById('detailTanggalAkhir').textContent = formattedEndDate;
     }
+
+
 });

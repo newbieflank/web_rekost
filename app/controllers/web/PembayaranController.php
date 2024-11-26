@@ -3,6 +3,7 @@
 class PembayaranController extends Controller
 {
     private $kosModel;
+    private $userModel;
 
     public function __construct()
     {
@@ -12,14 +13,19 @@ class PembayaranController extends Controller
         }
 
         $this->kosModel = $this->model('KosModel');
+        $this->userModel = $this->model('UsersModel');
     }
     public function konfirmasi($id)
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $kos = $this->kosModel->getData($id);
-        // var_dump($kos, $id);
-        // die;
+
         $this->view('pembayaran/konfirmasi', [
-            'kos' => $kos
+            'title' => "Konfirmasi Pemesanan",
+            'kos' => $kos,
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
         ]);
     }
 

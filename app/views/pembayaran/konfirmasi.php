@@ -34,7 +34,6 @@
                             <p>Silakan unggah bukti pembayaran Anda agar pemesanan dapat diproses lebih lanjut.</p>
                             <div class="mb-3">
                                 <label for="paymentProof" class="form-label">Bukti Pembayaran</label>
-
                                 <input type="file" class="form-control" name="buktiPembayaran" id="paymentProof" accept="image/*,application/pdf">
                             </div>
                         </div>
@@ -47,15 +46,15 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label for="namaLengkap" class="form-label"><strong>Nama Lengkap</strong></label>
-                                        <input type="text" name="nama" class="form-control" id="namaLengkap" placeholder="Masukkan nama lengkap">
+                                        <input type="text" name="nama" class="form-control" id="namaLengkap" placeholder="Masukkan nama lengkap" required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="email" class="form-label"><strong>Email</strong></label>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan email">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Masukkan email" required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="nomorTelepon" class="form-label"><strong>Nomor Telepon</strong></label>
-                                        <input type="tel" name="telepon" class="form-control" id="nomorTelepon" placeholder="Masukkan nomor telepon">
+                                        <input type="tel" name="telepon" class="form-control" id="nomorTelepon" placeholder="Masukkan nomor telepon" required>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-primary" id="btnSimpan">Simpan Perubahan</button>
@@ -73,7 +72,7 @@
 
                             <div class="mb-3">
                                 <label for="totalKamar" class="form-label">Total Kamar</label>
-                                <input type="number" name="totalKamar" class="form-control" id="totalKamar" value="1 Kamar">
+                                <input type="number" name="totalKamar" class="form-control" id="totalKamar" value="1 Kamar" required>
                             </div>
                             <div class="mb-3">
                                 <label for="location" class="form-label">Lokasi</label>
@@ -81,11 +80,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="customDate" class="form-label">Tanggal Awal</label>
-                                <input type="text" class="form-control" id="customDate" name="customDate" placeholder="Pilih tanggal">
+                                <input type="text" class="form-control" id="customDate" name="customDate" placeholder="Pilih tanggal" required>
                             </div>
                             <div class="mb-3">
                                 <label for="duration" class="form-label">Durasi</label>
-                                <select id="duration" name="waktu_penyewaan" class="form-select">
+                                <select id="duration" name="waktu_penyewaan" class="form-select" required>
+                                    <option value="">Pilih Durasi Pemesanan</option>
                                     <option value="1">Harian</option>
                                     <option value="2">Mingguan</option>
                                     <option value="3">1 Bulan</option>
@@ -104,7 +104,7 @@
                 <div class="col-md-4">
                     <div class="detail-card p-3 border rounded">
                         <div class="mb-4">
-                            <img src="<?= asset('img/home1.png') ?>" class="w-100" alt="Kos Image">
+                            <img src="<?= asset('uploads/' . $kos['id_kos'] . '/foto_depan.jpg') ?>" class="w-100" alt="Kos Image">
                         </div>
                         <h5>Detail Pembayaran</h5>
                         <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
@@ -112,10 +112,10 @@
                         <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
                         <p><strong>Tanggal Awal</strong>: <span id="detailTanggal"></span></p>
                         <p><strong>Tanggal Akhir</strong>: <span id="detailTanggalAkhir"></span></p>
-                        <p><strong>Harga</strong>: <?= $kos['harga_bulan'] ?></p>
+                        <p><strong>Harga</strong>: Rp. <?= $kos['harga_bulan'] ?></p>
                         <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="termsCheck">
+                            <input class="form-check-input" type="checkbox" value="true" id="termsCheck">
                             <label class="form-check-label" for="termsCheck">
                                 Setuju dengan Ketentuan <a href="#" class="text-primary">Terms & Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
                             </label>
@@ -124,7 +124,7 @@
                         <input type="hidden" name="id_kamar" class="form-control" id="location" value="<?= $kos['id_kamar'] ?>" readonly>
                         <input type="hidden" name="totalHarga" class="form-control" id="totalHarga" readonly>
 
-                        <button class="btn btn-primary w-100" type="submit" id="btnSelesai">Seleseai</button>
+                        <button class="btn btn-primary w-100" type="submit" id="btnSelesai">Selesai</button>
                     </div>
                 </div>
             </div>
@@ -155,8 +155,16 @@
         document.getElementById("btnSelesai")?.addEventListener("click", function(event) {
 
             const paymentProof = document.getElementById('paymentProof').files.length;
+            const termsCheck = document.getElementById('termsCheck');
 
-            if (paymentProof > 0) {
+            if (termsCheck === true) {
+                Swal.fire({
+                    title: 'Warning',
+                    text: 'Pastikan Anda Menyetujui dengan persyaratan kami',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            } else if (paymentProof > 0) {
                 Swal.fire({
                     title: 'Berhasil',
                     text: 'Pembayaran Berhasil Dilakukan',
@@ -259,15 +267,55 @@
             setTotalHarga(totalHarga);
         }
 
-
-
-
         function formatRupiah(amount) {
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR'
             }).format(amount);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const requiredInputs = document.querySelectorAll('input[required], select[required]');
+            const paymentProofInput = document.getElementById('paymentProof');
+            const termsCheck = document.getElementById('termsCheck');
+            const btnSelesai = document.getElementById('btnSelesai');
+
+            function disableFinish() {
+                const isTermsChecked = termsCheck.checked;
+                const hasPaymentProof = paymentProofInput.files.length > 0;
+
+                if (!isTermsChecked || !hasPaymentProof) {
+                    btnSelesai.disabled = true;
+                } else {
+                    btnSelesai.disabled = false;
+                }
+            }
+
+            termsCheck.addEventListener('change', disableFinish);
+            paymentProofInput.addEventListener('change', disableFinish);
+
+            disableFinish();
+
+
+            function validateInputs() {
+                let isValid = true;
+
+                requiredInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                    }
+                });
+
+                paymentProofInput.disabled = !isValid; // Enable or disable paymentProofInput
+            }
+
+            requiredInputs.forEach(input => {
+                input.addEventListener('input', validateInputs);
+                input.addEventListener('change', validateInputs);
+            });
+
+            validateInputs();
+        });
     </script>
     <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
