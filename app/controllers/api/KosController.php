@@ -18,4 +18,22 @@ class KosController extends Controller
 
         echo json_encode(['status' => 'success', 'data' => $user]);
     }
+    public function getKosBest()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json');
+
+        $user = $this->kos->getDataBest();
+
+        echo json_encode(['status' => 'success', 'data' => $user]);
+    }
+    public function getKosTerdekat()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json');
+
+        $user = $this->kos->getDataTerdekat();
+
+        echo json_encode(['status' => 'success', 'data' => $user]);
+    }
 }

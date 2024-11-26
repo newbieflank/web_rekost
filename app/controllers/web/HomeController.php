@@ -42,6 +42,7 @@ class HomeController extends Controller
                 "chartpengeluaran" => $pengeluaranPerBulan
             ];
             if ($role === 'pemilik kos') {
+
                 $this->view('home/landingpemilik', $layoutData);
             } else {
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();

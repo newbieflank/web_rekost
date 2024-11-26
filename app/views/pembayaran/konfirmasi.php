@@ -123,28 +123,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="detail-card p-3 border rounded">
-                    <div class="mb-4">
-                        <img src="<?= asset('img/home1.png') ?>" class="w-100" alt="Kos Image">
-                    </div>
-                    <h5>Detail Pembayaran</h5>
-                    <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
-                    <p><strong>Total Kamar</strong>:  <span id="detailTotalKamar">1</span></p>
-                    <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
-                    <p><strong>Tanggal</strong>: <span id="detailTanggal"></span></p>
-                    <p><strong>Harga</strong>: <?= $kos['harga'] ?></p>
-                    <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="termsCheck">
-                        <label class="form-check-label" for="termsCheck">
-                            Setuju dengan Ketentuan <a href="#" class="text-primary">Terms & Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
-                        </label>
-                    </div>
-                    <button class="btn btn-primary w-100" id="btnSelesai">Seleseai</button>
-                </div>
+
             </div>
-        </div>
         </form>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
