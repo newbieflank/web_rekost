@@ -21,27 +21,6 @@ class KosModel
 
     public function getData($id)
     {
-        $query = "SELECT     kos.id_kos,
-    kos.nama_kos,
-    kos.deskripsi,
-    kos.tipe_kos,
-    kos.alamat,
-    kos.latitude,
-    kos.longitude,
-    kos.jenis_fasilitas,
-    kos.peraturan_kos,
-    kos.id_user,
-    kamar.id_kamar,
-    kamar.luas_kamar,
-    kamar.status_kamar,
-    kamar.fasilitas_kamar,
-    kamar.harga,
-    kamar.tipe_kamar,
-    kamar.kamar_tersedia,
-    kamar.waktu_penyewaan
- FROM kos JOIN 
-    kamar ON kos.id_kos = kamar.id_Kos; where id_kos = :id";
-
         $query = "SELECT * FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos where kos.id_kos = :id";
 
         $this->db->query($query);
@@ -50,8 +29,49 @@ class KosModel
     }
     public function getDataAll()
     {
-        $query = "SELECT * FROM kos left JOIN ulasan ON kos.id_kos = ulasan.id_kos JOIN kamar ON kos.id_kos = kamar.id_kos;
-                ";
+        $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) AS review_count, km.waktu_penyewaan, km.status_kamar FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
+
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+    public function getDataBest()
+    {
+        $query = "SELECT 
+    kos.id_kos, 
+    kos.nama_kos, 
+    kos.alamat, 
+    kos.tipe_kos, 
+    kamar.harga_bulan AS harga, 
+    (SELECT gambar.deskripsi 
+     FROM gambar 
+     WHERE gambar.id_kos = kos.id_kos 
+     LIMIT 1) AS gambar, 
+    AVG(ulasan.rating) AS avg_rating, 
+    kamar.waktu_penyewaan, 
+    kamar.status_kamar, 
+    COUNT(penyewaan.id_penyewaan) AS total_pemesanan
+FROM 
+    kos
+LEFT JOIN 
+    ulasan ON kos.id_kos = ulasan.id_kos
+LEFT JOIN 
+    kamar ON kos.id_kos = kamar.id_kos
+LEFT JOIN 
+    gambar ON kos.id_kos = gambar.id_kos
+     JOIN 
+    penyewaan ON kos.id_kos = penyewaan.id_kos
+GROUP BY 
+    kos.id_kos, kamar.status_kamar
+ORDER BY 
+    total_pemesanan DESC;
+";
+
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+    public function getDataTerdekat()
+    {
+        $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) AS review_count, km.waktu_penyewaan, km.status_kamar FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
 
         $this->db->query($query);
         return $this->db->resultSet();

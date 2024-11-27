@@ -47,6 +47,7 @@ class DataKosController extends Controller
         $data = [
             "content" => $content,
             "title" => "DataKos",
+            "role" => $user['role'],
             "id_user" => $user['id_user'],
             "id_gambar" => $user['id_gambar'],
             "id_kos" => $id_kos
@@ -171,6 +172,7 @@ class DataKosController extends Controller
         $data = [
             "content" => $content,
             "title" => "DataKos",
+            "role" => $user['role'],
             "id_gambar" => $user['id_gambar'],
             "id_user" => $id_user
         ];

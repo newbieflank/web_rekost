@@ -116,6 +116,62 @@ class UserController extends Controller
         }
     }
 
+    public function register()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json');
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        do {
+            $id = $this->generateRandomId();
+            $cekID = $this->user->findUserById($id);
+        } while ($cekID);
+
+        if ($data['role'] === ['pemilik kos']) {
+            do {
+                $idKos = $this->generateRandomId();
+                $cekID = $this->user->findKosById($idKos);
+            } while ($cekID);
+
+            $pemilik = $this->user->pemilik($data);
+
+            if ($pemilik > 0) {
+                if ($this->user->createKos($idKos, $id) > 0) {
+                    $response = [
+                        "status" => 'success',
+                        "message" => 'user berhasil di tambahkan'
+                    ];
+                } else {
+                    $response = [
+                        "status" => 'failed',
+                        "message" => 'data Kos gagal di tambahkan'
+                    ];
+                }
+            } else {
+                $response = [
+                    "status" => 'failed',
+                    "message" => 'user gagal di tambahkan'
+                ];
+            }
+        } else {
+            if ($this->user->create($data) > 0) {
+                $this->user->insert($id, 'aktif');
+                $response = [
+                    "status" => 'success',
+                    "message" => 'user berhasil di tambahkan'
+                ];
+            } else {
+                $response = [
+                    "status" => 'failed',
+                    "message" => 'user gagal di tambahkan'
+                ];
+            }
+        }
+
+        echo json_encode($response);
+    }
+
     public function user($id)
     {
         // header("Access-Control-Allow-Origin: *");
@@ -185,4 +241,17 @@ class UserController extends Controller
     }
 
 
+    public function getDataUser() {}
+
+    private function generateRandomId()
+    {
+
+        $dateTime = date('Ym');
+
+
+        $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
+
+        $generatedId = $dateTime . $randomNumber;
+        return $generatedId;
+    }
 }

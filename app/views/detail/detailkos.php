@@ -1,84 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link rel="stylesheet" href="<?= asset('css/detailkos.css') ?>">
+<link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
 
-<head>
-    <title>
-        Re-Kost
-    </title>
-    <link rel="stylesheet" href="<?= asset('css/detailkos.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+    body {
+        padding-top: 0;
+    }
 
-        #info,
-        #fasilitas,
-        #lokasi,
-        #kebijakan,
-        #tentang {
-            scroll-margin-top: 80px;
-        }
+    #info,
+    #fasilitas,
+    #lokasi,
+    #kebijakan,
+    #tentang {
+        scroll-margin-top: 80px;
+    }
 
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
-</head>
+    #map {
+        height: 500px;
+        width: 100%;
+    }
+</style>
 
 <body data-bs-spy="scroll" data-bs-target=".nav-tabs" data-bs-offset="80" tabindex="0">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-            <a class="navbar-brand" href="#">
-                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
-            </a>
-            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/web_rekost/#home">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/web_rekost/#bookings">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/web_rekost/#service">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/web_rekost/#contact">Contact</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <img src="<?= asset('img/user.png') ?>" alt="profile">
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <section class="foto mt-4">
+    <section class="foto">
         <div class="container-fluid px-4">
             <div class="row">
                 <div class="col-md-7 p-2">
-                    <img src="<?= asset('img/home1.png') ?>" alt="thumbnail" class="thumbnail w-100">
+                    <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_depan.jpg') ?>" alt="thumbnail" class="thumbnail w-100">
                 </div>
                 <div class="col-md-5 d-flex flex-wrap justify-content-around">
                     <div class="row">
-                        <img src="<?= asset('img/home2.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('img/home3.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('img/home4.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('img/home5.png') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_depan.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_belakang.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_jalan.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_dalam.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
                     </div>
                 </div>
             </div>
@@ -133,7 +94,7 @@
                         <span class="text-grey">Mulai dari</span> <br>
                         <span class="text-red">IDR <?= $data['harga_bulan'] ?></span> <br>
                         <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
-                        <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi'?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
+                        <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi' ?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
             </div>
@@ -238,66 +199,68 @@
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <a href="chats" class="btn btn-primary btn-lg w-50 mb-4 text-center">
+            <a href="<?= BASEURL; ?>chats"
+                class="btn btn-primary btn-lg w-50 mb-4 text-center"
+                data-id="<?= $data['id_pemilik'] ?>"
+                data-name="<?= htmlspecialchars($data['nama']) ?>"
+                data-img="<?= htmlspecialchars(isset($data['id_gambar']) ? asset('uploads/' . $data['id_pemilik'] . '/' . $data['id_gambar']) : asset('img/Vector.svg')) ?>"
+                id="chatButton">
                 Tanya Pemilik Sebelum Sewa
             </a>
         </div>
 
     </section>
-    <script crossorigin="anonymous" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1p6QF1bM4Jp+7F2m1i6U8zTnm5zT9UJ0Zr+2QIT3hK"
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        var scrollSpy = new bootstrap.ScrollSpy(document.body, {
-            target: '.nav-tabs',
-            offset: 80
-        });
-    </script>
-    <script>
-        function initMap() {
-            var map = L.map('map').setView([-7.922773, 113.808810], 13);
-
-            // Menambahkan tile layer dari OpenStreetMap
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-
-            // Menambahkan pin (marker) pada lokasi tertentu
-            var marker = L.marker([-8.15946626438085, 113.72347203723199]).addTo(map);
-
-            // Zoom in ke level yang lebih tinggi
-            map.setZoom(16);
-
-            // Tambahkan popup pada marker
-            marker.bindPopup("<b>Lokasi Saya</b><br>Ini adalah lokasi yang dipilih.").openPopup();
-        }
-        initMap()
-    </script>
-    <script>
-        function toggleFasilitas() {
-            const fasilitas = document.querySelectorAll('.fasilitas .icons div:nth-child(n + 6)');
-            const toggleBtn = document.querySelector('.toggle-btn');
-            const toggleIcon = toggleBtn.querySelector('i');
-
-            // Jika semua item terlihat, sembunyikan beberapa
-            if (toggleBtn.textContent.includes('Lihat lebih sedikit')) {
-                fasilitas.forEach((el, index) => {
-                    el.style.display = 'none';
-                });
-                toggleBtn.textContent = 'Lihat lebih banyak';
-                toggleIcon.classList.remove('fa-chevron-up');
-                toggleIcon.classList.add('fa-chevron-down');
-            } else {
-                fasilitas.forEach(el => {
-                    el.style.display = 'block';
-                });
-                toggleBtn.textContent = 'Lihat lebih sedikit';
-                toggleIcon.classList.remove('fa-chevron-down');
-                toggleIcon.classList.add('fa-chevron-up');
-            }
-        }
-    </script>
 </body>
 
-</html>
+
+<script>
+    var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '.nav-tabs',
+        offset: 80
+    });
+</script>
+<script>
+    function initMap() {
+        var map = L.map('map').setView([-7.922773, 113.808810], 13);
+
+        // Menambahkan tile layer dari OpenStreetMap
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Menambahkan pin (marker) pada lokasi tertentu
+        var marker = L.marker([-8.15946626438085, 113.72347203723199]).addTo(map);
+
+        // Zoom in ke level yang lebih tinggi
+        map.setZoom(16);
+
+        // Tambahkan popup pada marker
+        marker.bindPopup("<b>Lokasi Saya</b><br>Ini adalah lokasi yang dipilih.").openPopup();
+    }
+    initMap()
+</script>
+<script>
+    function toggleFasilitas() {
+        const fasilitas = document.querySelectorAll('.fasilitas .icons div:nth-child(n + 6)');
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const toggleIcon = toggleBtn.querySelector('i');
+
+        // Jika semua item terlihat, sembunyikan beberapa
+        if (toggleBtn.textContent.includes('Lihat lebih sedikit')) {
+            fasilitas.forEach((el, index) => {
+                el.style.display = 'none';
+            });
+            toggleBtn.textContent = 'Lihat lebih banyak';
+            toggleIcon.classList.remove('fa-chevron-up');
+            toggleIcon.classList.add('fa-chevron-down');
+        } else {
+            fasilitas.forEach(el => {
+                el.style.display = 'block';
+            });
+            toggleBtn.textContent = 'Lihat lebih sedikit';
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-up');
+        }
+    }
+</script>

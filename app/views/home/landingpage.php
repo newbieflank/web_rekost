@@ -160,8 +160,10 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                                 <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                                <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
                                 <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
-                                    <a class="dropdown-item" href="#services">Profile Kost</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Tambah Kamar</a>
                                 <?php endif; ?>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout">Logout</a>
@@ -349,7 +351,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>" class="card-img-top"
+                                <img src="<?= asset('uploads/' . $best["id_kos"] . '/foto_depan.jpg') ?>" class="card-img-top"
                                     alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
@@ -393,7 +395,7 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>`1`1"
+                                <img src="<?= asset('uploads/' . $campus["id_kos"] . '/foto_depan.jpg') ?>"
                                     class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
@@ -548,13 +550,12 @@
     AOS.init();
   </script> -->
     <script src="<?= asset('js/navbar.js') ?>"></script>
-    <script src="<? asset('js/file.js') ?>"></script>
     <script src="<?= asset('js/StarRating.js') ?>"></script>
     <script src="<?= asset('js/AddArea.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

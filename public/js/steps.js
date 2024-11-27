@@ -118,7 +118,7 @@ function submitForm() {
                     text: 'Data kos berhasil disimpan',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = 'datakos';
+                    window.location.href = 'datakamar';
                 });
             } else {
 
