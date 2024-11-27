@@ -37,8 +37,7 @@ class UserController extends Controller
         $password = $data['password'] ?? null;
 
         $user = $this->model('UsersModel')->getProfile($email, $password);
-        if (isset($user)) {
-
+        if ($user) {
             if ($user['role'] === 'pemilik kos') {
                 $data = $this->model('UsersModel')->findOwnerById($user['id_user']);
                 $response = [
