@@ -128,7 +128,14 @@ class UserController extends Controller
                 'message' => 'Data Berhasil Di Dapat',
                 'data' => [
                     'id_user' => $id,
-                    'email' => $user['email']
+                    'nama' => $user['nama'],
+                    'email' => $user['email'],
+                    'jenis_kelamin' => $user['jenis_kelamin'],
+                    'tanggal_lahir' => $user['tanggal_lahir'],
+                    'pekerjaan' => $user['pekerjaan'],
+                    'Instansi' => $user['Instansi'],
+                    'alamat' => $user['alamat'],
+                    'number_phone' => $user['number_phone']
                 ]
             ];
         } else {
@@ -141,5 +148,41 @@ class UserController extends Controller
         echo json_encode($response);
     }
 
-    public function getDataUser() {}
+    public function updateUser()
+    {
+
+        header("Access-Control-Allow-Origin: *");
+        header('Content-Type: application/json');
+
+        // Retrieve JSON data sent to the API
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (!$data) {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Invalid input data"
+            ]);
+            return;
+        }
+
+        // Panggil fungsi untuk update profile
+        $user = $this->user->updateProfile($data);
+
+        if ($user > 0) {
+            echo json_encode([
+                "status" => "success",
+                "message" => "User profile updated successfully"
+            ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Failed to update user profile. No changes made or invalid user."
+            ]);
+        }
+
+        // echo json_encode($data);
+
+    }
+
+
 }

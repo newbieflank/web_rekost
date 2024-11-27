@@ -129,17 +129,35 @@ class UsersModel
 
     public function updateProfile($data)
     {
-        $id = $_SESSION['user']['id_user'] ?? null;
-        if (!$id) {
-            echo "User ID not found in session.";
-            return;
+        // $id = $_SESSION['user']['id_user'] ?? null;
+        // $id = 0;
+        // echo $data['customDate'];
+        if (isset($_SESSION['user']['id_user'])) {
+            // echo "User ID not found in session.";
+            $id = $_SESSION['user']['id_user'] ?? null;
+         
+        }elseif(isset($data['id_user'])){
+            $id = $data['id_user'];
+        }else{
+            return 0;
         }
+
+          // Validasi tanggal customDate (jika ada)
+    $customDate = $data['customDate'] ?? null;
+    if ($customDate) {
+        // Validasi apakah string tanggal sesuai format 'YYYY-MM-DD'
+        $isValidDate = preg_match('/^\d{4}-\d{2}-\d{2}$/', $customDate);
+        if (!$isValidDate) {
+            throw new Exception("Tanggal tidak valid. Format harus 'YYYY-MM-DD'.");
+        }
+    }
 
         $query = 'UPDATE user SET nama = :nama, jenis_kelamin = :gender, tanggal_lahir = :tanggal, Instansi = :instansi, pekerjaan = :pekerjaan, kota_asal = :kota, number_phone = :telp, status = :status, alamat = :alamat WHERE id_user = :id';
         $this->db->query($query);
         $this->db->bind('nama', $data['name'] ?? null);
         $this->db->bind('gender', $data['inputGender'] ?? null);
-        $this->db->bind('tanggal', isset($data['customDate']) ? $this->formatDate($data['customDate']) : null);
+        // $this->db->bind('tanggal', isset( $data['customDate']) ? $this->formatDate($data['customDate']) : null);
+        $this->db->bind('tanggal', $customDate); 
         $this->db->bind('pekerjaan', $data['pekerjaan'] ?? null);
         $this->db->bind('instansi', $data['inputInstansi'] ?? null);
         $this->db->bind('kota', $data['kotaAsal'] ?? null);
@@ -189,7 +207,7 @@ class UsersModel
 
     private function formatDate($date)
     {
-        $tanggal = DateTime::createFromFormat('d-F-Y', $date);
+        $tanggal = DateTime::createFromFormat('Y-m-d', $date);
         return $tanggal ? $tanggal->format('Y-m-d') : null;
     }
 
