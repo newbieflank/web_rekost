@@ -53,11 +53,6 @@ body {
   color: #fd7e14;
 }
 
-.btn-primary {
-  background-color: #6f42c1;
-  border-color: #6f42c1;
-}
-
 .btn-primary:hover {
   background-color: #5a379e;
   border-color: #5a379e;
