@@ -1,5 +1,4 @@
-$(function () {
-
+$(document).ready(function () {
     let duration = 1;
     let customDays = 0;
 
@@ -8,16 +7,14 @@ $(function () {
         altInput: true,
         altFormat: "d-F-Y",
         onChange: function (selectedDates, dateStr, instance) {
+            document.getElementById("detailTanggalAwal").textContent = dateStr;
             calculateEndDate(dateStr);
-            document.getElementById("detailTanggal").textContent = dateStr;
         }
-
     });
 
     document.getElementById('duration').addEventListener('change', function () {
         duration = parseInt(this.value);
         const startDate = document.getElementById('customDate').value;
-
 
         if (startDate) {
             calculateEndDate(startDate);
@@ -60,6 +57,4 @@ $(function () {
 
         document.getElementById('detailTanggalAkhir').textContent = formattedEndDate;
     }
-
-
 });

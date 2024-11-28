@@ -21,7 +21,7 @@ class KosModel
 
     public function getData($id)
     {
-        $query = "SELECT * FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos where kos.id_kos = :id";
+        $query = "SELECT kos.*, kamar.harga_bulan, kamar.harga_hari, kamar.harga_minggu, kamar.id_kamar FROM kos JOIN kamar ON kos.id_kos = kamar.id_kos where kos.id_kos = :id";
 
         $this->db->query($query);
         $this->db->bind('id', $id);
@@ -86,6 +86,7 @@ ORDER BY
                           tipe_kos = :tipe_kos, 
                           peraturan_kos = :peraturan_kos, 
                           jenis_fasilitas = :jenis_fasilitas, 
+                          waktu_penyewaan = :waktu_penyewaan, 
                           alamat = :alamat, 
                           latitude = :latitude, 
                           longitude = :longitude 
@@ -97,6 +98,7 @@ ORDER BY
             $this->db->bind('tipe_kos', $data['tipe_kos']);
             $this->db->bind('peraturan_kos', $data['peraturan_kos']);
             $this->db->bind('jenis_fasilitas', $data['jenis_fasilitas']);
+            $this->db->bind('waktu_penyewaan', $data['waktu_penyewaan']);
             $this->db->bind('alamat', $data['alamat']);
             $this->db->bind('latitude', $data['latitude']);
             $this->db->bind('longitude', $data['longitude']);
@@ -182,7 +184,7 @@ ORDER BY
 
     public function CariKos($alamat, $harga)
     {
-        // Base query with common SELECT and JOIN clauses
+
         $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
             AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
@@ -192,7 +194,7 @@ ORDER BY
             LEFT JOIN kamar km ON k.id_kos = km.id_kos 
             LEFT JOIN gambar g ON k.id_kos = g.id_kos ";
 
-        // Add conditions based on the input values
+
         $conditions = [];
         if (!empty($alamat)) {
             $conditions[] = "k.alamat LIKE :alamat";
@@ -201,16 +203,15 @@ ORDER BY
             $conditions[] = "km.harga_bulan = :harga";
         }
 
-        // Append WHERE and GROUP BY clauses
+
         if (!empty($conditions)) {
             $query .= "WHERE " . implode(" AND ", $conditions) . " ";
         }
         $query .= "GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
 
-        // Prepare and bind the query
+
         $this->db->query($query);
 
-        // Bind parameters only if they have values
         if (!empty($alamat)) {
             $this->db->bind('alamat', '%' . $alamat . '%');
         }
@@ -219,5 +220,15 @@ ORDER BY
         }
 
         return $this->db->resultSet();
+    }
+
+    public function getDataKamar($id)
+    {
+        $query = "SELECT kos.waktu_penyewaan, kamar.* FROM kos JOIN kamar ON kos.id_kos=kamar.id_kos WHERE kos.id_kos=:id_kos";
+
+        $this->db->query($query);
+        $this->db->bind('id_kos', $id);
+
+        return $this->db->single();
     }
 }
