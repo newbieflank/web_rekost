@@ -110,36 +110,29 @@
                                 <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                                <?php if (empty($notifikasi)): ?>
-                                    <div class="dropdown-item text-center">Tidak ada notifikasi pembayaran terbaru</div>
+                                <?php if (empty($data['notifikasi'])): ?>
+                                    <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
                                 <?php else: ?>
-                                    <?php foreach ($notifikasi as $notif): ?>
+                                    <?php foreach ($data['notifikasi'] as $notif): ?>
                                         <a class="dropdown-item"
                                             href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
                                             <div class="d-flex align-items-center">
-                                                <i class="fas fa-info-circle mr-2"></i>
+                                                <i class="fas fa-check-circle text-success mr-2"></i>
                                                 <div>
                                                     <small class="text-muted">
                                                         <?php
                                                         $date1 = new DateTime($notif['tanggal_pembayaran']);
                                                         $date2 = new DateTime();
                                                         $interval = $date1->diff($date2);
-
-                                                        if ($interval->days == 0) {
-                                                            if ($interval->h == 0) {
-                                                                echo $interval->i . " menit yang lalu";
-                                                            } else {
-                                                                echo $interval->h . " jam yang lalu";
-                                                            }
-                                                        } else {
-                                                            echo $interval->days . " hari yang lalu";
-                                                        }
+                                                        echo $interval->days == 0 ?
+                                                            ($interval->h == 0 ? "{$interval->i} menit yang lalu" : "{$interval->h} jam yang lalu") :
+                                                            "{$interval->days} hari yang lalu";
                                                         ?>
                                                     </small>
                                                     <p class="mb-0">
                                                         Pembayaran kost sebesar Rp
-                                                        <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?>
-                                                        telah dikonfirmasi
+                                                        <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?> telah
+                                                        dikonfirmasi
                                                     </p>
                                                 </div>
                                             </div>
@@ -207,20 +200,20 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                <?php
+                    <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -351,8 +344,8 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $best["id_kos"] . '/foto_depan.jpg') ?>" class="card-img-top"
-                                    alt="Kost Image">
+                                <img src="<?= asset('uploads/' . $best["id_kos"] . '/foto_depan.jpg') ?>"
+                                    class="card-img-top" alt="Kost Image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $best['nama_kos'] ?>
@@ -473,8 +466,8 @@
             <div class="row">
                 <div class="col-md-12 text-left">
                     <div class="mt-2">
-                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" alt="Circle Image" class="rounded-circle"
-                            style="width: 50px; height: 50px;">
+                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>"
+                            alt="Circle Image" class="rounded-circle" style="width: 50px; height: 50px;">
                         <div class="star-rating mt-2" id="rating-container">
                             <i class="fas fa-star inactive" data-rating="1"></i>
                             <i class="fas fa-star inactive" data-rating="2"></i>

@@ -53,6 +53,10 @@ class HomeController extends Controller
 
                 $this->view('layout/main', $data);
             } else {
+                $notifModel = $this->model('Notifmodel');
+                $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']); 
+                $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
+
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
                 $best = $this->model('CardViewModel')->SelectCardViewKosBest();
                 $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
@@ -65,7 +69,8 @@ class HomeController extends Controller
                     "best" => $best,
                     "campus" => $campus,
                     "rating_aplikasi" => $rating,
-                    "penyewa" => $penyewa
+                    "penyewa" => $penyewa,
+                    "notifikasi" => $notifikasi
                 ];
                 $this->view('home/landingpage', $data);
             }
