@@ -117,24 +117,34 @@
                                         <a class="dropdown-item"
                                             href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
                                             <div class="d-flex align-items-center">
-                                                <i class="fas fa-check-circle text-success mr-2"></i>
-                                                <div>
-                                                    <small class="text-muted">
-                                                        <?php
-                                                        $date1 = new DateTime($notif['tanggal_pembayaran']);
-                                                        $date2 = new DateTime();
-                                                        $interval = $date1->diff($date2);
-                                                        echo $interval->days == 0 ?
-                                                            ($interval->h == 0 ? "{$interval->i} menit yang lalu" : "{$interval->h} jam yang lalu") :
-                                                            "{$interval->days} hari yang lalu";
-                                                        ?>
-                                                    </small>
-                                                    <p class="mb-0">
-                                                        Pembayaran kost sebesar Rp
-                                                        <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?> telah
-                                                        dikonfirmasi
-                                                    </p>
-                                                </div>
+                                                <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                                    <i class="fas fa-exclamation-circle text-warning mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">Masa sewa akan berakhir</small>
+                                                        <p class="mb-0">
+                                                            <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
+                                                        </p>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <i class="fas fa-check-circle text-success mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">
+                                                            <?php
+                                                            $date1 = new DateTime($notif['tanggal_pembayaran']);
+                                                            $date2 = new DateTime();
+                                                            $interval = $date1->diff($date2);
+                                                            echo $interval->days == 0 ?
+                                                                ($interval->h == 0 ? "{$interval->i} menit yang lalu" : "{$interval->h} jam yang lalu") :
+                                                                "{$interval->days} hari yang lalu";
+                                                            ?>
+                                                        </small>
+                                                        <p class="mb-0">
+                                                            Pembayaran kost sebesar Rp
+                                                            <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?> telah
+                                                            dikonfirmasi
+                                                        </p>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         </a>
                                     <?php endforeach; ?>
