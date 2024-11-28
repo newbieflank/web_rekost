@@ -43,22 +43,43 @@ class PembayaranController extends Controller
         $pembayaranModel = $this->model('PembayaranModel');
         $riwayat = $pembayaranModel->getRiwayatPencari();
 
+        if ($user['role'] === 'pencari kos') {
+            $this->renderProfile('history/historypencari', [
+                'riwayat' => $riwayat,
+                'id_user' => $user['id_user']
+            ]);
+        } else {
+            $this->renderProfile('history/historypemilik', [
+                'riwayat' => $riwayat,
+                'id_user' => $user['id_user'],
+            ]);
+        }
+    }
+
+    private function renderProfile($viewPath, $data = [])
+    {
+        $email = $_SESSION['user']['email'];
+        $user = $this->model('UsersModel')->findUserByEmail($email);
+
         ob_start();
-        $this->view('history/historypencari', [
-            'riwayat' => $riwayat,
-            'id_user' => $user['id_user']
-        ]);
+        $this->view($viewPath, $data);
         $content = ob_get_clean();
 
-        $data = [
+        $layoutData = [
             "content" => $content,
-            'title' => "Konfirmasi Pemesanan",
+            "title" => 'Riwayat',
             "role" => $user['role'],
-            'id_user' => $user['id_user'],
-            'id_gambar' => $user['id_gambar']
+            "id_user" => $user['id_user'],
+            "id_gambar" => $user['id_gambar'],
+            "footer" => false
         ];
-        $this->view('layout/main', $data);
+
+        // echo $role = $this->getRole();
+
+        $this->view('layout/main', $layoutData);
     }
+
+
     public function riwayatPemilik()
     {
         $email = $_SESSION['user']['email'];
@@ -69,7 +90,6 @@ class PembayaranController extends Controller
         $this->view('history/historypemilik', [
             'riwayat' => $riwayat,
             'id_user' => $user['id_user'],
-            'id_gambar' => $user['id_gambar']
         ]);
     }
     public function insertPembayaran()

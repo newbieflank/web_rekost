@@ -10,30 +10,78 @@ class DetailController extends Controller
     }
     public function popularkos()
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
         $data = [
             "popular" => $popular
         ];
+        ob_start();
         $this->view('detail/popularkos', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'content' => $content,
+            'title' => "Re-Kos",
+            "role" => $user['role'],
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
+        ];
+
+        $this->view('layout/main', $layout);
     }
     public function bestkos()
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $best = $this->model('CardViewModel')->SelectCardViewKosBest();
         $data = [
             "best" => $best
         ];
+
+        ob_start();
         $this->view('detail/bestkos', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'content' => $content,
+            'title' => "Re-Kos",
+            "role" => $user['role'],
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
+        ];
+
+        $this->view('layout/main', $layout);
     }
     public function strategically()
     {
+        $email = $_SESSION['user']['email'];
+        $user = $this->userModel->findUserByEmail($email);
         $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
         $data = [
             "campus" => $campus
         ];
+
+        ob_start();
         $this->view('detail/strategically', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'content' => $content,
+            'title' => "Re-Kos",
+            "role" => $user['role'],
+            'id_user' => $user['id_user'],
+            'id_gambar' => $user['id_gambar']
+        ];
+
+        $this->view('layout/main', $layout);
     }
     public function detailkos($id)
     {
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
         $email = $_SESSION['user']['email'];
         $user = $this->userModel->findUserByEmail($email);
 

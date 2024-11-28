@@ -97,7 +97,8 @@ class CardViewModel
     p.status_penyewaan,
     p.waktu_penyewaan AS penyewaan_waktu_penyewaan,
     us.id_user AS id_pemilik,
-    us.nama AS nama
+    us.nama AS nama,
+    us.id_gambar AS gambar
 
     FROM 
     kos k

@@ -15,6 +15,10 @@ class ChatController extends Controller
         $this->chatModel = $this->model('ChatModel');
     }
 
+    public function chatUser($id)
+    {
+        
+    }
     public function chats()
     {
         // Fetch the online users
