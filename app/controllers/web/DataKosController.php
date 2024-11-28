@@ -23,6 +23,8 @@ class DataKosController extends Controller
 
         $array = $kos['jenis_fasilitas'];
         $fasilitas = explode(',', $array);
+        $array_penyewaan = $kos['waktu_penyewaan'];
+        $penyewaan = explode(',', $array_penyewaan);
         $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
         $imagePath = $baseDir .  $id_kos;
 
@@ -33,6 +35,7 @@ class DataKosController extends Controller
             'alamat' => $kos['alamat'],
             'peraturan' => $kos['peraturan_kos'],
             'fasilitas' => $fasilitas,
+            'penyewaan' => $penyewaan,
             'latitude' => $kos['latitude'],
             'longitude' => $kos['longitude'],
             'imagePath' => $imagePath,
@@ -74,6 +77,7 @@ class DataKosController extends Controller
                 'tipe_kos' => $_POST['tipekos'],
                 'peraturan_kos' => $_POST['peraturan'],
                 'jenis_fasilitas' => $_POST['fasilitas'],
+                'waktu_penyewaan' => $_POST['penyewaan'],
                 'alamat' => $_POST['alamat'],
                 'latitude' => $_POST['latitude'],
                 'longitude' => $_POST['longitude'],
@@ -162,16 +166,24 @@ class DataKosController extends Controller
 
 
         $id_user = $_SESSION['user']['id_user'];
+        $id_kos = $_SESSION['user']['id_kos'];
         $user = $this->model('UsersModel')->findUserById($id_user);
+        $kamar = $this->KosModel->getDataKamar($id_kos);
+        $array = $kamar['jenis_fasilitas'];
+        $fasilitas = explode(',', $array);
 
+        $layout = [
+            'data' => $kamar,
+            'fasilitas' => $fasilitas
+        ];
 
         ob_start();
-        $this->view('data_kos/formkamar');
+        $this->view('data_kos/formkamar', $layout);
         $content = ob_get_clean();
 
         $data = [
             "content" => $content,
-            "title" => "DataKos",
+            "title" => "DataKamar",
             "role" => $user['role'],
             "id_gambar" => $user['id_gambar'],
             "id_user" => $id_user

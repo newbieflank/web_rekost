@@ -20,10 +20,17 @@ class PembayaranController extends Controller
         $email = $_SESSION['user']['email'];
         $user = $this->userModel->findUserByEmail($email);
         $kos = $this->kosModel->getData($id);
+        $array = $kos['waktu_penyewaan'];
+        $penyewaan = explode(',', $array);
+
         ob_start();
         $this->view('pembayaran/konfirmasi', [
-            'kos' => $kos
+            'kos' => $kos,
+            'penyewaan' => $penyewaan
         ]);
+
+
+
         $content = ob_get_clean();
 
         $data = [

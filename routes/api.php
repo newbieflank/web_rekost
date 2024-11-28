@@ -10,5 +10,5 @@ Router::get('/api/kos', 'KosController@getKos');
 Router::post('/api/upload', 'FileController@upload');
 Router::get('/api/best', 'KosController@getKosBest');
 Router::get('/api/terdekat', 'KosController@getKosTerdekat');
-
+Router::post('/api/allkos', 'KosController@getAllKos');
 Router::post('/api/register', 'UserController@register');

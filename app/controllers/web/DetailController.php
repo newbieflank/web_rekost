@@ -78,6 +78,10 @@ class DetailController extends Controller
     }
     public function detailkos($id)
     {
+        if (!isset($_SESSION['user'])) {
+            $this->header('/login');
+            exit;
+        }
         $email = $_SESSION['user']['email'];
         $user = $this->userModel->findUserByEmail($email);
 

@@ -36,4 +36,15 @@ class KosController extends Controller
 
         echo json_encode(['status' => 'success', 'data' => $user]);
     }
+    public function getAllKos()
+    {
+        // header("Access-Control-Allow-Origin: *");
+        // header('Content-Type: application/json');
+        $lokasi = $_POST['lokasi'];
+        $hargaawal = $_POST['hargaawal'];
+        $hargaakhir = $_POST['hargaakhir'];
+        // echo json_encode(['status' => 'success', 'data' => $hargaawal]);
+        $user = $this->kos->getAllKos($lokasi, $hargaawal, $hargaakhir);
+        echo json_encode(['data' => $user,'status' => 'success' ]);
+    }
 }

@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" href="<?= asset('css/konfirmasi.css') ?>">
 
 <section class="container my-4">
@@ -77,11 +78,11 @@
                             <label for="duration" class="form-label">Durasi</label>
                             <select id="duration" name="waktu_penyewaan" class="form-select" required>
                                 <option value="">Pilih Durasi Pemesanan</option>
-                                <option value="1">Harian</option>
-                                <option value="2">Mingguan</option>
-                                <option value="3">1 Bulan</option>
-                                <option value="4">3 Bulan</option>
-                                <option value="5">1 Tahun</option>
+                                <option value="1" <?= in_array('Harian', $penyewaan) ? '' : 'disabled' ?>>Harian</option>
+                                <option value="2" <?= in_array('Mingguan', $penyewaan) ? '' : 'disabled' ?>>Mingguan</option>
+                                <option value="3" <?= in_array('Bulanan', $penyewaan) ? '' : 'disabled' ?>>1 Bulan</option>
+                                <option value="4" <?= in_array('3 Bulan', $penyewaan) ? '' : 'disabled' ?>>3 Bulan</option>
+                                <option value="5" <?= in_array('Tahunan', $penyewaan) ? '' : 'disabled' ?>>1 Tahun</option>
                             </select>
                         </div>
                         <div id="DayInput" class="mb-3 d-none">
@@ -101,7 +102,7 @@
                     <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
                     <p><strong>Total Kamar</strong>: <span id="detailTotalKamar">1</span></p>
                     <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
-                    <p><strong>Tanggal Awal</strong>: <span id="detailTanggal"></span></p>
+                    <p><strong>Tanggal Awal</strong>: <span id="detailTanggalAwal"></span></p>
                     <p><strong>Tanggal Akhir</strong>: <span id="detailTanggalAkhir"></span></p>
                     <p><strong>Harga</strong>: Rp. <?= $kos['harga_bulan'] ?></p>
                     <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
@@ -309,7 +310,6 @@
     });
 </script>
 <!-- Flatpickr -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!-- Popper.js -->
