@@ -130,12 +130,12 @@ function sendMessage() {
 }
 
 function Image(id, gambar) {
-    const uri = 'http://localhost/web_rekost/';
+    const uri = 'http://localhost/web_rekost/public/';
 
     if (gambar) {
         img = uri + 'uploads/' + id + '/' + gambar
     } else {
-        img = uri + 'public/img/Vector.svg'
+        img = uri + 'img/Vector.svg'
     }
 
     return img

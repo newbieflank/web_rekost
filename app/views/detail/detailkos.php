@@ -146,6 +146,27 @@
                     <?php if (in_array('Lemari', $jenis_fasilitas)): ?>
                         <div><i class="fas fa-archive"></i>Lemari</div>
                     <?php endif; ?>
+                    <?php if (in_array('Kipas Angin', $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-fan"></i>Kipas Angin</div>
+                    <?php endif; ?>
+                    <?php if (in_array(needle: 'AC', haystack: $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-snowflake"></i>AC</div>
+                    <?php endif; ?>
+                    <?php if (in_array('Meja', $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-chair"></i>Meja</div>
+                    <?php endif; ?>
+                    <?php if (in_array('Kasur', $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-bed"></i>Kasur</div>
+                    <?php endif; ?>
+                    <?php if (in_array('Kamar Mandi Dalam', $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-shower"></i>Kamar Mandi Dalam</div>
+                    <?php endif; ?>
+                    <?php if (in_array(needle: 'Air Hangat', haystack: $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-temperature-full"></i>Air Hangat</div>
+                    <?php endif; ?>
+                    <?php if (in_array('Bantal', $jenis_fasilitas)): ?>
+                        <div><i class="fas fa-mattress-pillow"></i>Bantal</div>
+                    <?php endif; ?>
                 </div>
                 <!-- <span class="toggle-btn" onclick="toggleFasilitas()">Lihat lebih banyak <i
                         class="fas fa-chevron-down"></i></span> -->
