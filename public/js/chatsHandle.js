@@ -59,7 +59,7 @@ function loadChat(userId, userName, userImage) {
     }
     incomingUserId = userId;
     document.getElementById('chat-user-name').textContent = userName;
-    document.getElementById('chat-user-status').textContent = 'Online';
+    document.getElementById('chat-user-status').textContent = '';
     document.getElementById('chat-user-image').src = userImage;
     document.getElementById('chat-user-image').style.display = 'block';
     document.getElementById('chat-input-area').style.display = 'flex';
@@ -129,8 +129,31 @@ function sendMessage() {
     }
 }
 
+function Image(id, gambar) {
+    const uri = 'http://localhost/web_rekost/';
+
+    if (gambar) {
+        img = uri + 'uploads/' + id + '/' + gambar
+    } else {
+        img = uri + 'public/img/Vector.svg'
+    }
+
+    return img
+}
+
 
 // Initialize Socket.IO connection
 document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('id');
+    const userNama = urlParams.get('nama');
+    const userImage = urlParams.get('gambar');
+    let ImageUri = Image(userId, userImage);
+
+    if (userId) {
+        loadChat(userId, userNama, ImageUri);
+    } else {
+        console.warn('No ID found in URL.');
+    }
     connectSocketIO();
 });

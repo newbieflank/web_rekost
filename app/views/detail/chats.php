@@ -37,12 +37,12 @@
             </div>
             <ul class="list-unstyled" id="userList">
                 <?php if (empty($onlineUsers)): ?>
-                    <li class="text-center text-muted">Memuat pengguna...</li>
+                    <li class="text-center text-muted">Tidak ada Pengguna</li>
                 <?php else: ?>
                     <?php foreach ($onlineUsers as $us): ?>
                         <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;" onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>')">
                             <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
-                            <span><?= htmlspecialchars($us['nama']); ?> sedang online</span>
+                            <span><?= htmlspecialchars($us['nama']); ?></span>
                         </li>
                     <?php endforeach; ?>
                 <?php endif; ?>

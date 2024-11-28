@@ -199,11 +199,8 @@
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <a href="<?= BASEURL; ?>chats"
+            <a href="<?= BASEURL; ?>chats?id=<?= $data['id_pemilik'] ?>&gambar=<?= $data['gambar'] ?>&nama=<?= $data['nama'] ?>"
                 class="btn btn-primary btn-lg w-50 mb-4 text-center"
-                data-id="<?= $data['id_pemilik'] ?>"
-                data-name="<?= htmlspecialchars($data['nama']) ?>"
-                data-img="<?= htmlspecialchars(isset($data['id_gambar']) ? asset('uploads/' . $data['id_pemilik'] . '/' . $data['id_gambar']) : asset('img/Vector.svg')) ?>"
                 id="chatButton">
                 Tanya Pemilik Sebelum Sewa
             </a>
