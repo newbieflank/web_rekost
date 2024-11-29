@@ -8,6 +8,7 @@ class KosController extends Controller
     public function __construct()
     {
         $this->kos = $this->model('KosModel');
+        $this->detail = $this->model('CardViewModel');
     }
     public function getKos()
     {
@@ -46,5 +47,23 @@ class KosController extends Controller
         // echo json_encode(['status' => 'success', 'data' => $hargaawal]);
         $user = $this->kos->getAllKos($lokasi, $hargaawal, $hargaakhir);
         echo json_encode(['data' => $user,'status' => 'success' ]);
+    }
+
+    public function getDetailKos($id){
+        $detail = $this->detail->DetailKos($id);
+        if ($detail) {
+            $response = [
+                'status' => 'success',
+                'message' => 'Data Berhasil Di Dapat',
+                'data' => [$detail]
+            ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'detail missing',
+            ];
+        }
+
+        echo json_encode($response);
     }
 }
