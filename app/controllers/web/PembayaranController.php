@@ -114,24 +114,31 @@ class PembayaranController extends Controller
         switch ($waktuPenyewaan) {
             case 1:
                 $waktuSewa = "harian";
+                $durasi = $_POST['customDays'];
+
                 break;
             case 2:
                 $waktuSewa = "mingguan";
+                $durasi = 7;
                 break;
             case 3:
                 $waktuSewa = "1 bulan";
+                $durasi = 30;
                 break;
             case 4:
                 $waktuSewa = "3 bulan";
+                $durasi = 90;
                 break;
             case 5:
                 $waktuSewa = "tahunan";
+                $durasi = 365;
                 break;
         }
 
         $id_kamar = $_POST['id_kamar'];
         $id_kos = $_POST['id_kos'];
-        $durasi = $_POST['customDays'];
+
+
 
         $idPenyewaan = $this->model('PembayaranModel')->insertPembayaran($id_user, $id_kamar, $id_kos, $totalkamar, $durasi, $harga, $tanggal, $waktuSewa);
 
