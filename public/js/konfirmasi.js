@@ -6,6 +6,7 @@ $(document).ready(function () {
         dateFormat: "d-F-Y",
         altInput: true,
         altFormat: "d-F-Y",
+        minDate: 'today',
         onChange: function (selectedDates, dateStr, instance) {
             document.getElementById("detailTanggalAwal").textContent = dateStr;
             calculateEndDate(dateStr);
