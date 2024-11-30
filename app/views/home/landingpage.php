@@ -210,20 +210,20 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php
+                <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -306,9 +306,54 @@
                                     <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
                                         (<?php echo $popular['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                        IDR <?php echo $popular['harga'] ?>
+                                        IDR
+                                        <?php
+                                        $arr = $popular['waktu_penyewaan'];
+                                        $array = explode(',', $arr);
+                                        $array = array_reverse($array);
+
+                                        foreach ($array as $value) {
+                                            switch ($value) {
+                                                case 'Bulanan':
+                                                    echo $popular['harga'];
+                                                    break 2;
+                                                case 'Harian':
+                                                    echo $popular['harga_hari'];
+                                                    break 2;
+                                                case 'Mingguan':
+                                                    echo $popular['harga_minggu'];
+                                                    break 2;
+                                                default:
+                                                    echo $popular['harga'];
+                                                    break;
+                                            }
+                                        }
+                                        ?>
                                         <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $popular['waktu_penyewaan'] ?></span>
+                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                            <?php
+                                            $arr = $popular['waktu_penyewaan'];
+                                            $array = explode(',', $arr);
+                                            $array = array_reverse($array);
+
+                                            foreach ($array as $value) {
+                                                switch ($value) {
+                                                    case 'Bulanan':
+                                                        echo "Bulanan";
+                                                        break 2;
+                                                    case 'Harian':
+                                                        echo "Harian";
+                                                        break 2;
+                                                    case 'Mingguan':
+                                                        echo "Mingguan";
+                                                        break 2;
+                                                    default:
+                                                        echo "Bulanan";
+                                                        break;
+                                                }
+                                            }
+                                            ?>
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -367,9 +412,54 @@
                                     <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
                                         (<?php echo $best['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                        IDR <?php echo $best['harga'] ?>
+                                        IDR
+                                        <?php
+                                        $arr = $best['waktu_penyewaan'];
+                                        $array = explode(',', $arr);
+                                        $array = array_reverse($array);
+
+                                        foreach ($array as $value) {
+                                            switch ($value) {
+                                                case 'Bulanan':
+                                                    echo $best['harga'];
+                                                    break 2;
+                                                case 'Harian':
+                                                    echo $best['harga_hari'];
+                                                    break 2;
+                                                case 'Mingguan':
+                                                    echo $best['harga_minggu'];
+                                                    break 2;
+                                                default:
+                                                    echo $best['harga'];
+                                                    break;
+                                            }
+                                        }
+                                        ?>
                                         <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $best['waktu_penyewaan'] ?></span>
+                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                            <?php
+                                            $arr = $best['waktu_penyewaan'];
+                                            $arrayB = explode(',', $arr);
+                                            $arrayB = array_reverse($arrayB);
+
+                                            foreach ($arrayB as $value) {
+                                                switch ($value) {
+                                                    case 'Bulanan':
+                                                        echo "Bulanan";
+                                                        break 2;
+                                                    case 'Harian':
+                                                        echo "Harian";
+                                                        break 2;
+                                                    case 'Mingguan':
+                                                        echo "Mingguan";
+                                                        break 2;
+                                                    default:
+                                                        echo "Bulanan";
+                                                        break;
+                                                }
+                                            }
+                                            ?>
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -411,9 +501,54 @@
                                     <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
                                         (<?php echo $campus['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                        IDR <?php echo $campus['harga'] ?>
+                                        IDR
+                                        <?php
+                                        $arr = $campus['waktu_penyewaan'];
+                                        $array = explode(',', $arr);
+                                        $array = array_reverse($array);
+
+                                        foreach ($array as $value) {
+                                            switch ($value) {
+                                                case 'Bulanan':
+                                                    echo $campus['harga'];
+                                                    break 2;
+                                                case 'Harian':
+                                                    echo $campus['harga_hari'];
+                                                    break 2;
+                                                case 'Mingguan':
+                                                    echo $campus['harga_minggu'];
+                                                    break 2;
+                                                default:
+                                                    echo $campus['harga'];
+                                                    break;
+                                            }
+                                        }
+                                        ?>
                                         <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $campus['waktu_penyewaan'] ?></span>
+                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                            <?php
+                                            $arr = $campus['waktu_penyewaan'];
+                                            $array = explode(',', $arr);
+                                            $array = array_reverse($array);
+
+                                            foreach ($array as $value) {
+                                                switch ($value) {
+                                                    case 'Bulanan':
+                                                        echo "Bulanan";
+                                                        break 2;
+                                                    case 'Harian':
+                                                        echo "Harian";
+                                                        break 2;
+                                                    case 'Mingguan':
+                                                        echo "Mingguan";
+                                                        break 2;
+                                                    default:
+                                                        echo "Bulanan";
+                                                        break;
+                                                }
+                                            }
+                                            ?>
+                                        </span>
                                     </p>
                                 </div>
                             </div>

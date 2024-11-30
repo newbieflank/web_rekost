@@ -104,7 +104,30 @@
                     <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
                     <p><strong>Tanggal Awal</strong>: <span id="detailTanggalAwal"></span></p>
                     <p><strong>Tanggal Akhir</strong>: <span id="detailTanggalAkhir"></span></p>
-                    <p><strong>Harga</strong>: Rp. <?= $kos['harga_bulan'] ?></p>
+                    <p><strong>Harga</strong>: Rp.
+                        <?php
+                        $arr = $kos['waktu_penyewaan'];
+                        $array = explode(',', $arr);
+                        $array = array_reverse($array);
+
+                        foreach ($array as $value) {
+                            switch ($value) {
+                                case 'Bulanan':
+                                    echo $kos['harga_bulan'];
+                                    break 2;
+                                case 'Harian':
+                                    echo $kos['harga_hari'];
+                                    break 2;
+                                case 'Mingguan':
+                                    echo $kos['harga_minggu'];
+                                    break 2;
+                                default:
+                                    echo $kos['harga_bulan'];
+                                    break;
+                            }
+                        }
+                        ?>
+                    </p>
                     <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="true" id="termsCheck">
@@ -186,7 +209,30 @@
         document.querySelector('#idTotal').textContent = formatRupiah(harga);
         document.querySelector('#totalHarga').value = harga;
     }
-    setTotalHarga(<?= (int) $kos['harga_bulan'] ?>)
+    setTotalHarga(
+        <?php
+        $arr = $kos['waktu_penyewaan'];
+        $array = explode(',', $arr);
+        $array = array_reverse($array);
+
+        foreach ($array as $value) {
+            switch ($value) {
+                case 'Bulanan':
+                    echo $kos['harga_bulan'];
+                    break 2;
+                case 'Harian':
+                    echo $kos['harga_hari'];
+                    break 2;
+                case 'Mingguan':
+                    echo $kos['harga_minggu'];
+                    break 2;
+                default:
+                    echo $kos['harga_bulan'];
+                    break;
+            }
+        }
+        ?>
+    )
 </script>
 <script>
     let totalKamar = 1;
