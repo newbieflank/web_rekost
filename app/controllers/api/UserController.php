@@ -80,9 +80,9 @@ class UserController extends Controller
         $user = $this->model('UsersModel')->findUserById($userId);
         if (!isset($user['id_gambar'])) {
             $imageFile = BASEURL . 'public/img/logo.png';
-            $imageData = file_get_contents($imageFile); // Get image content as binary data
-            header("Content-Type: image/png"); // Set appropriate content type for SVG
-            echo $imageData; // Output image contentFile);
+            $imageData = file_get_contents($imageFile);
+            header("Content-Type: image/png");
+            readfile($imageFile);
             return;
         }
 
