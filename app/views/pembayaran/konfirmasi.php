@@ -104,29 +104,30 @@
                     <p><strong>Lokasi</strong>: <?= $kos['alamat'] ?></p>
                     <p><strong>Tanggal Awal</strong>: <span id="detailTanggalAwal"></span></p>
                     <p><strong>Tanggal Akhir</strong>: <span id="detailTanggalAkhir"></span></p>
-                    <p><strong>Harga</strong>: Rp.
-                        <?php
-                        $arr = $kos['waktu_penyewaan'];
-                        $array = explode(',', $arr);
-                        $array = array_reverse($array);
+                    <p><strong>Harga</strong>: Rp.<span id="harga_sewa">
+                            <?php
+                            $arr = $kos['waktu_penyewaan'];
+                            $array = explode(',', $arr);
+                            $array = array_reverse($array);
 
-                        foreach ($array as $value) {
-                            switch ($value) {
-                                case 'Bulanan':
-                                    echo $kos['harga_bulan'];
-                                    break 2;
-                                case 'Harian':
-                                    echo $kos['harga_hari'];
-                                    break 2;
-                                case 'Mingguan':
-                                    echo $kos['harga_minggu'];
-                                    break 2;
-                                default:
-                                    echo $kos['harga_bulan'];
-                                    break;
+                            foreach ($array as $value) {
+                                switch ($value) {
+                                    case 'Bulanan':
+                                        echo $kos['harga_bulan'];
+                                        break 2;
+                                    case 'Harian':
+                                        echo $kos['harga_hari'];
+                                        break 2;
+                                    case 'Mingguan':
+                                        echo $kos['harga_minggu'];
+                                        break 2;
+                                    default:
+                                        echo $kos['harga_bulan'];
+                                        break;
+                                }
                             }
-                        }
-                        ?>
+                            ?>
+                        </span>
                     </p>
                     <p class="total"><strong>Total:</strong><span id="idTotal"></span></p>
                     <div class="form-check mb-3">
@@ -248,24 +249,30 @@
     function calculateTotalHarga() {
         let totalHarga = 0;
         const updatedTotalKamar = parseInt(document.getElementById('totalKamar').value) || 1;
+        const sewa = document.getElementById('harga_sewa');
 
         if (duration === 1) {
             hargaKos = hargaHarian;
+            sewa.textContent = hargaHarian;
             totalHarga = hargaKos * customDays * updatedTotalKamar;
         } else {
             let durationDays = 0;
 
             if (duration === 2) {
                 hargaKos = hargaMingguan;
+                sewa.textContent = hargaMingguan;
                 durationDays = 7;
             } else if (duration === 3) {
                 hargaKos = hargaBulanan;
+                sewa.textContent = hargaBulanan;
                 durationDays = 30;
             } else if (duration === 4) {
                 hargaKos = hargaBulanan;
+                sewa.textContent = hargaBulanan;
                 durationDays = 90;
             } else if (duration === 5) {
                 hargaKos = hargaBulanan;
+                sewa.textContent = hargaBulanan;
                 durationDays = 365;
             }
 
