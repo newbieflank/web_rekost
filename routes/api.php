@@ -13,3 +13,5 @@ Router::get('/api/terdekat', 'KosController@getKosTerdekat');
 Router::post('/api/allkos', 'KosController@getAllKos');
 Router::post('/api/register', 'UserController@register');
 Router::get('/api/detail/{id}','KosController@getDetailKos');
+Router::get('/api/getImageKos/{id}','KosController@getImageKos');
+Router::post('/api/pembayaran','KosController@konfirmPembayaran');
