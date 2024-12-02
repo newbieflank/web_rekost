@@ -15,10 +15,12 @@ class CardViewModel
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
             AS harga, km.harga_hari, km.harga_minggu , (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, k.waktu_penyewaan, km.status_kamar 
+            AS review_count, k.waktu_penyewaan, km.status_kamar, status_user.status 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
-            LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g 
-            ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC LIMIT 0, 25;";
+            LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif' GROUP BY k.id_kos, km.status_kamar 
+            ORDER BY review_count DESC LIMIT 0, 25;";
 
             $this->db->query($query);
             $results = $this->db->resultSet();
@@ -34,9 +36,12 @@ class CardViewModel
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
             AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, k.waktu_penyewaan, km.status_kamar 
+            AS review_count, k.waktu_penyewaan, km.status_kamar, status_user.status 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
-            LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY avg_rating DESC LIMIT 0, 25;
+            LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif'
+            GROUP BY k.id_kos, km.status_kamar ORDER BY avg_rating DESC LIMIT 0, 25;
 ";
 
             $this->db->query($query);
@@ -56,6 +61,8 @@ class CardViewModel
             AS review_count, k.waktu_penyewaan, km.status_kamar 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
             LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif'
             GROUP BY k.id_kos, km.status_kamar LIMIT 0, 25;";
 
             $this->db->query($query);

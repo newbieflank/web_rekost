@@ -111,6 +111,9 @@ class ProfileController extends Controller
 
     public function update()
     {
+        // echo json_encode($_POST);
+        // die;
+
         if ($this->model('UsersModel')->updateProfile($_POST) > 0) {
             $this->header('/profile');
             exit;

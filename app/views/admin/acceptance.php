@@ -105,7 +105,7 @@
                 <img alt="Logo" height="50" src="<?= asset('img/logo.png') ?>" width="170" />
             </div>
             <nav class="nav flex-column">
-                <a class="nav-link" href="dashboard" id="dashboardLink">
+                <a class="nav-link" href="<?= BASEURL; ?>" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
                 <a class="nav-link active" href="acceptance" id="persetujuanLink">
@@ -186,7 +186,7 @@
                                                 <p><strong>Nomor Telepon:</strong> <?= $user['number_phone'] ?></p>
                                                 <p><strong>Status:</strong> <?= $user['status'] ?></p>
                                                 <p><strong>KTP:</strong> <img src="<?= asset('uploads/' . $user['id_user'] . '/Lampiran.jpg') ?>" alt="thumbnail" class="thumbnail w-100"></p>
-                                                <form action="acceptance " method="POST" id="statusForm<?= $user['id_user'] ?>">
+                                                <form action="<?= BASEURL; ?>acceptance" method="POST" id="statusForm<?= $user['id_user'] ?>">
                                                     <input type="hidden" name="id" value="<?= $user['id_user'] ?>">
                                                     <button type="submit" name="status" value="aktif" class="btn btn-success btn-sm">Setujui</button>
                                                     <button type="submit" name="status" value="blokir" class="btn btn-danger btn-sm">Tolak</button>

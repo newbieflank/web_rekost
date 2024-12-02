@@ -2,7 +2,12 @@
 
 class HomeController extends Controller
 {
+    private $userModel;
 
+    public function __construct()
+    {
+        $this->userModel =  $this->model('UsersModel');
+    }
 
     public function index()
     {
@@ -38,7 +43,36 @@ class HomeController extends Controller
                 "chartpendapatan" => $pendapatanPerBulan,
                 "chartpengeluaran" => $pengeluaranPerBulan
             ];
-            if ($role === 'pemilik kos') {
+            if ($role === 'admin') {
+                $totalPemilikKos = $this->userModel->countPemilikKos();
+                $totalPencariKos = $this->userModel->countPencariKos();
+                $totalKos = $this->userModel->countKos();
+                $rating = $this->model('RatingAplikasiModel')->totalRating();
+                $formatChartPemilik = [];
+                $formatChartPencari = [];
+                $totalRating = $rating['rating'] / $rating['user'];
+                $maxDays = date('t');
+                for ($i = 1; $i <= $maxDays; $i++) {
+                    $date = date("Y-m") . "-" . str_pad($i, 2, "0", STR_PAD_LEFT);
+                    $pemilikRegister = $this->userModel->getUserRegistrationByDate($date, 'pemilik kos');
+                    $pencariRegister = $this->userModel->getUserRegistrationByDate($date, 'pencari kos');
+
+                    $formatChartPemilik["date"][] = $i;
+                    $formatChartPemilik["count"][] = $pemilikRegister["total"] ?? 0;
+
+                    $formatChartPencari["date"][] = $i;
+                    $formatChartPencari["count"][] = $pencariRegister["total"] ?? 0;
+                }
+
+                $this->view('admin/dashboard', [
+                    'totalPemilikKos' => $totalPemilikKos,
+                    'totalPencariKos' => $totalPencariKos,
+                    'totalKos' => $totalKos,
+                    "chartPemilik" => $formatChartPemilik,
+                    "chartPencari" => $formatChartPencari,
+                    'totalRatingKos' => $totalRating
+                ]);
+            } else if ($role === 'pemilik kos') {
                 ob_start();
                 $this->view('home/landingpemilik', $layoutData);
                 $content = ob_get_clean();
@@ -98,6 +132,13 @@ class HomeController extends Controller
     }
     public function search()
     {
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->model('UsersModel')->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
 
         $alamat = isset($_POST['location']) ? $_POST['location'] : '';
         $harga = isset($_POST['cost']) ? $_POST['cost'] : null;
@@ -106,7 +147,26 @@ class HomeController extends Controller
         $data = [
             'search' => $search
         ];
+
+        ob_start();
         $this->view('home/search', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'title' => "cari kos",
+            'content' => $content,
+            'role' => $role,
+            'footer' => false
+        ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
+
+        $this->view('layout/main', $layout);
     }
 
     public function best()

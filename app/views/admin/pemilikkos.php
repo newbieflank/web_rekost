@@ -105,7 +105,7 @@
                 <img alt="Logo" height="50" src="<?= asset('img/logo.png') ?>" width="170" />
             </div>
             <nav class="nav flex-column">
-                <a class="nav-link" href="dashboard" id="dashboardLink">
+                <a class="nav-link" href="<?= BASEURL; ?>" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
                 <a class="nav-link" href="acceptance" id="persetujuanLink">

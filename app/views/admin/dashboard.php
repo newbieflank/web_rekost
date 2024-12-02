@@ -220,8 +220,8 @@
                             <div class="card-body">
                                 <div>
                                     <h5>Rating</h5>
-                                    <!-- <h3><?= $totalRatingKos ?><span class="text-muted">/5</span></h3> -->
-                                    <p>Total Rating Kos</p>
+                                    <h3><?= $totalRatingKos ?><span class="text-muted">/5</span></h3>
+                                    <p>Total Rating Aplikasi</p>
                                 </div>
                                 <div class="icon-box bg-warning">
                                     <i class="fas fa-star text-white"></i>

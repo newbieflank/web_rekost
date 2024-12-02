@@ -53,10 +53,7 @@ class AdminController extends Controller
             $formatChartPencari["date"][] = $i;
             $formatChartPencari["count"][] = $pencariRegister["total"] ?? 0;
         }
-        // echo "<pre>";
-        // var_dump($formatChartPemilik);
-        // echo "</pre>";
-        // die;
+
         $this->view('admin/dashboard', [
             'totalPemilikKos' => $totalPemilikKos,
             'totalPencariKos' => $totalPencariKos,
@@ -72,9 +69,6 @@ class AdminController extends Controller
             $userRegister = $this->userModel->getUserRegistrationByDate(date('Y-m-d', strtotime("-$i days")));
             $formatDate[] = $userRegister["total"];
         }
-
-        var_dump($formatDate);
-        die;
         $data = $this->userModel->getUserRegistration();
         $this->view('admin/dashboard', ['data' => $data]);
     }

@@ -135,29 +135,33 @@ class UsersModel
         if (isset($_SESSION['user']['id_user'])) {
             // echo "User ID not found in session.";
             $id = $_SESSION['user']['id_user'] ?? null;
-         
-        }elseif(isset($data['id_user'])){
+        } elseif (isset($data['id_user'])) {
             $id = $data['id_user'];
-        }else{
+        } else {
             return 0;
         }
 
-          // Validasi tanggal customDate (jika ada)
-    $customDate = $data['customDate'] ?? null;
-    if ($customDate) {
-        // Validasi apakah string tanggal sesuai format 'YYYY-MM-DD'
-        $isValidDate = preg_match('/^\d{4}-\d{2}-\d{2}$/', $customDate);
-        if (!$isValidDate) {
-            throw new Exception("Tanggal tidak valid. Format harus 'YYYY-MM-DD'.");
+        // Validasi tanggal customDate (jika ada)
+        $customDate = $data['customDate'] ?? null;
+        if ($customDate) {
+            // Validasi apakah string tanggal sesuai format 'YYYY-MM-DD'
+            $isValidDate = preg_match('/^\d{4}-\d{2}-\d{2}$/', $customDate);
+            if (!$isValidDate) {
+                try {
+                    $date = new DateTime($customDate);
+                    $customDate = $date->format('Y-m-d'); // Ensures correct format
+                } catch (Exception $e) {
+                    echo 'Invalid date format provided.';
+                }
+            }
         }
-    }
 
         $query = 'UPDATE user SET nama = :nama, jenis_kelamin = :gender, tanggal_lahir = :tanggal, Instansi = :instansi, pekerjaan = :pekerjaan, kota_asal = :kota, number_phone = :telp, status = :status, alamat = :alamat WHERE id_user = :id';
         $this->db->query($query);
         $this->db->bind('nama', $data['name'] ?? null);
         $this->db->bind('gender', $data['inputGender'] ?? null);
         // $this->db->bind('tanggal', isset( $data['customDate']) ? $this->formatDate($data['customDate']) : null);
-        $this->db->bind('tanggal', $customDate); 
+        $this->db->bind('tanggal', $customDate);
         $this->db->bind('pekerjaan', $data['pekerjaan'] ?? null);
         $this->db->bind('instansi', $data['inputInstansi'] ?? null);
         $this->db->bind('kota', $data['kotaAsal'] ?? null);
@@ -213,7 +217,7 @@ class UsersModel
 
     public function getPersetujuanKos()
     {
-        $query = "SELECT user.id_user, user.email, user.nama, kos.nama_kos, kos.alamat, user.kota_asal, user.number_phone, status_user.status FROM user JOIN kos ON user.id_user = kos.id_user JOIN status_user ON user.id_user = status_user.id_user WHERE role = 'pemilik kos';";
+        $query = "SELECT user.id_user, user.email, user.nama, kos.nama_kos, kos.alamat, user.kota_asal, user.number_phone, status_user.status FROM user JOIN kos ON user.id_user = kos.id_user JOIN status_user ON user.id_user = status_user.id_user WHERE status_user.status = 'pending'";
 
         $this->db->query($query);
 
@@ -279,8 +283,7 @@ class UsersModel
     }
     public function updateStatusPemilik($userId, $status)
     {
-        // var_dump($userId, $status);
-        // die; // Tambahkan pengecekan untuk melihat nilai yang dikirim
+
         $query = "UPDATE `status_user` SET `status` = :status WHERE `status_user`.`id_user` = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $userId);
