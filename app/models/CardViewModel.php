@@ -100,7 +100,7 @@ class CardViewModel
     km.kamar_tersedia,
     km.waktu_penyewaan AS kamar_waktu_penyewaan,
     AVG(u.rating) AS rating_kamar,
-    COUNT(u.id_ulasan) AS jumlah_rating,
+    COUNT(DISTINCT u.id_user) AS jumlah_rating,
     COALESCE(u.ulasan, 'No reviews') AS ulasan,
     COALESCE(u.rating, 0) AS rating,
     p.tanggal_penyewaan,
