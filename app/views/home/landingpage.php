@@ -110,14 +110,16 @@
                                 <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                            <!-- <?php
+                                var_dump($data['notifikasi']);
+                                ?> -->
                                 <?php if (empty($data['notifikasi'])): ?>
                                     <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
                                 <?php else: ?>
                                     <?php foreach ($data['notifikasi'] as $notif): ?>
-                                        <a class="dropdown-item"
-                                            href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
-                                            <div class="d-flex align-items-center">
-                                                <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                        <div class="dropdown-item">
+                                            <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                                <div class="d-flex align-items-center">
                                                     <i class="fas fa-exclamation-circle text-warning mr-2"></i>
                                                     <div>
                                                         <small class="text-muted">Masa sewa akan berakhir</small>
@@ -125,7 +127,13 @@
                                                             <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
                                                         </p>
                                                     </div>
-                                                <?php else: ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <div class="dropdown-item">
+                                            <?php if ($notif['status_pembayaran'] === 'Dibayar'): ?>
+                                                <div class="d-flex align-items-center">
                                                     <i class="fas fa-check-circle text-success mr-2"></i>
                                                     <div>
                                                         <small class="text-muted">
@@ -144,15 +152,16 @@
                                                             dikonfirmasi
                                                         </p>
                                                     </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        </a>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
                                     <?php endforeach; ?>
-                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-center" href="<?= BASEURL; ?>/pembayaran">Lihat semua
                                         pembayaran</a>
                                 <?php endif; ?>
                             </div>
+
                         </div>
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown"
@@ -210,20 +219,20 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                <?php
+                    <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -329,8 +338,7 @@
                                             }
                                         }
                                         ?>
-                                        <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                        <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
                                             <?php
                                             $arr = $popular['waktu_penyewaan'];
                                             $array = explode(',', $arr);
@@ -435,8 +443,7 @@
                                             }
                                         }
                                         ?>
-                                        <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                        <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
                                             <?php
                                             $arr = $best['waktu_penyewaan'];
                                             $arrayB = explode(',', $arr);
@@ -524,8 +531,7 @@
                                             }
                                         }
                                         ?>
-                                        <span
-                                            style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                        <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
                                             <?php
                                             $arr = $campus['waktu_penyewaan'];
                                             $array = explode(',', $arr);
