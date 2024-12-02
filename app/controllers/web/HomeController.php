@@ -31,9 +31,6 @@ class HomeController extends Controller
             }
 
             $layoutData = [
-                "id_user" => $user['id_user'],
-                "id_gambar" => $user['id_gambar'],
-                "title" => 'Home',
                 "pendapatan" => $pendapatan,
                 "pengeluaran" => $pengeluaran,
                 "rataRating" => $rataRating,
@@ -42,8 +39,24 @@ class HomeController extends Controller
                 "chartpengeluaran" => $pengeluaranPerBulan
             ];
             if ($role === 'pemilik kos') {
+                ob_start();
                 $this->view('home/landingpemilik', $layoutData);
+                $content = ob_get_clean();
+
+                $data = [
+                    'content' => $content,
+                    "id_user" => $user['id_user'],
+                    "id_gambar" => $user['id_gambar'],
+                    "role" => $user['role'],
+                    "title" => 'Home',
+                ];
+
+                $this->view('layout/main', $data);
             } else {
+                $notifModel = $this->model('Notifmodel');
+                $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']); 
+                $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
+
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
                 $best = $this->model('CardViewModel')->SelectCardViewKosBest();
                 $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
@@ -56,7 +69,8 @@ class HomeController extends Controller
                     "best" => $best,
                     "campus" => $campus,
                     "rating_aplikasi" => $rating,
-                    "penyewa" => $penyewa
+                    "penyewa" => $penyewa,
+                    "notifikasi" => $notifikasi
                 ];
                 $this->view('home/landingpage', $data);
             }

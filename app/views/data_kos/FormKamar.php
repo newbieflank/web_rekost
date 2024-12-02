@@ -203,11 +203,11 @@
                             <label for="TipeKamar" class="col-sm-2 col-form-label">Tipe Kamar</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
-                                    <option value="">Pilih tipe kamar</option>
-                                    <option value="TIPE A">Tipe A</option>
-                                    <option value="TIPE B">Tipe B</option>
-                                    <option value="TIPE C">Tipe C</option>
-                                    <option value="TIPE D">Tipe D</option>
+                                    <option value="" <?php echo empty($data['tipe_kamar']) ? 'selected' : ''; ?>>Pilih tipe kamar</option>
+                                    <option value="TIPE A" <?= $data['tipe_kamar'] == 'TIPE A' ? 'selected' : '' ?>>Tipe A</option>
+                                    <option value="TIPE B" <?= $data['tipe_kamar'] == 'TIPE B' ? 'selected' : '' ?>>Tipe B</option>
+                                    <option value="TIPE C" <?= $data['tipe_kamar'] == 'TIPE C' ? 'selected' : '' ?>>Tipe C</option>
+                                    <option value="TIPE D" <?= $data['tipe_kamar'] == 'TIPE D' ? 'selected' : '' ?>>Tipe D</option>
                                 </select>
                             </div>
                         </div>
@@ -215,14 +215,14 @@
                             <label for="Ukuran" class="col-sm-2 col-form-label">Ukuran Kamar</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="UkuranSelect" name="luas_kamar">
-                                    <option value="">Pilih ukuran</option>
-                                    <option value="2x2 m">2x2 m</option>
-                                    <option value="2x3 m">2x3 m</option>
-                                    <option value="3x3 m">3x3 m</option>
-                                    <option value="3x4 m">3x4 m</option>
-                                    <option value="4x4 m">4x4 m</option>
-                                    <option value="4x5 m">4x5 m</option>
-                                    <option value="5x5 m">5x5 m</option>
+                                    <option value="" <?= empty($data['luas_kamar']) ? 'selected' : '' ?>>Pilih ukuran</option>
+                                    <option value="2x2 m" <?= $data['luas_kamar'] == '2x2 m' ? 'selected' : '' ?>>2x2 m</option>
+                                    <option value="2x3 m" <?= $data['luas_kamar'] == '2x3 m' ? 'selected' : '' ?>>2x3 m</option>
+                                    <option value="3x3 m" <?= $data['luas_kamar'] == '3x3 m' ? 'selected' : '' ?>>3x3 m</option>
+                                    <option value="3x4 m" <?= $data['luas_kamar'] == '3x4 m' ? 'selected' : '' ?>>3x4 m</option>
+                                    <option value="4x4 m" <?= $data['luas_kamar'] == '4x4 m' ? 'selected' : '' ?>>4x4 m</option>
+                                    <option value="4x5 m" <?= $data['luas_kamar'] == '4x5 m' ? 'selected' : '' ?>>4x5 m</option>
+                                    <option value="5x5 m" <?= $data['luas_kamar'] == '5x5 m' ? 'selected' : '' ?>>5x5 m</option>
                                 </select>
                             </div>
                         </div>
@@ -230,14 +230,14 @@
                             <label for="totalkamar" class="col-sm-2 col-form-label">Total Kamar</label>
                             <div class="col-sm-10">
                                 <input type="number" name="total_kamar" class="form-control" id="totalkamar"
-                                    placeholder="Masukkan total kamar...">
+                                    placeholder="Masukkan total kamar..." value="<?= $data['total_kamar'] ?>">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="kamartersedia" class="col-sm-2 col-form-label">Jumlah Kamar Tersedia</label>
                             <div class="col-sm-10">
                                 <input type="number" name="kamar_tersedia" class="form-control" id="kamartersedia"
-                                    placeholder="Masukkan jumlah ">
+                                    placeholder="Masukkan jumlah.." value="<?= $data['kamar_tersedia'] ?>">
                             </div>
                         </div>
                     </div>
@@ -252,21 +252,21 @@
                             <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_hari" id="harga_minggu" class="form-control"
-                                    placeholder="Rp.0">
+                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Harian' ? 'disabled' : '' ?>>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_minggu" id="harga_minggu" class="form-control"
-                                    placeholder="Rp.0">
+                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Mingguan' ? 'disabled' : '' ?>>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_bulan" id="harga_bulan" class="form-control"
-                                    placeholder="Rp.0">
+                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Bulanan' ? 'disabled' : '' ?>>
                             </div>
                         </div>
                     </div>
@@ -284,7 +284,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Kasur"
-                                            id="Kasur">
+                                            id="Kasur"
+                                            <?= in_array('Kasur', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Kasur">
                                             Kasur
                                         </label>
@@ -293,7 +294,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kipas Angin" id="Kipas Angin">
+                                            value="Kipas Angin" id="Kipas Angin"
+                                            <?= in_array('Kipas Angin', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Kipas Angin">
                                             Kipas Angin
                                         </label>
@@ -302,7 +304,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]" value="AC"
-                                            id="AC">
+                                            id="AC"
+                                            <?= in_array('AC', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="AC">
                                             AC
                                         </label>
@@ -311,7 +314,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]" value="Meja"
-                                            id="Meja">
+                                            id="Meja"
+                                            <?= in_array('Meja', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Meja">
                                             Meja
                                         </label>
@@ -320,7 +324,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Lemari" id="Lemari">
+                                            value="Lemari" id="Lemari"
+                                            <?= in_array('Lemari', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Lemari">
                                             Lemari
                                         </label>
@@ -329,7 +334,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Kamar Mandi Dalam" id="Kamar Mandi Dalam">
+                                            value="Kamar Mandi Dalam" id="Kamar Mandi Dalam"
+                                            <?= in_array('Kamar Mandi Dalam', haystack: $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Kamar Mandi Dalam">
                                             Kamar Mandi Dalam
                                         </label>
@@ -338,7 +344,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Air Hangat" id="Air Hangat">
+                                            value="Air Hangat" id="Air Hangat"
+                                            <?= in_array('Air Hangat', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Air Hangat">
                                             Air Hangat
                                         </label>
@@ -347,7 +354,8 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="fasilitas[]"
-                                            value="Bantal" id="Bantal">
+                                            value="Bantal" id="Bantal"
+                                            <?= in_array('Bantal', $fasilitas) ? 'checked' : ''; ?>>
                                         <label class="form-check-label" for="Bantal">
                                             Bantal
                                         </label>

@@ -75,10 +75,12 @@ class CardViewModel
     k.deskripsi AS kos_deskripsi,
     k.tipe_kos,
     k.alamat,
+    k.waktu_penyewaan,
     k.latitude,
     k.longitude,
     k.jenis_fasilitas AS fasilitas_kos,
     k.peraturan_kos,
+    k.waktu_penyewaan,
     g.id_gambar,
     g.deskripsi AS gambar_deskripsi,
     km.id_kamar,
@@ -86,6 +88,8 @@ class CardViewModel
     km.status_kamar,
     km.jenis_fasilitas,
     km.harga_bulan,
+    km.harga_hari,
+    km.harga_minggu,
     km.tipe_kamar,
     km.kamar_tersedia,
     km.waktu_penyewaan AS kamar_waktu_penyewaan,
@@ -95,18 +99,23 @@ class CardViewModel
     COALESCE(u.rating, 0) AS rating,
     p.tanggal_penyewaan,
     p.status_penyewaan,
-    p.waktu_penyewaan AS penyewaan_waktu_penyewaan
+    p.waktu_penyewaan AS penyewaan_waktu_penyewaan,
+    us.id_user AS id_pemilik,
+    us.nama AS nama,
+    us.id_gambar AS gambar
 
-FROM 
+    FROM 
     kos k
-LEFT JOIN 
+    LEFT JOIN 
     kamar km ON k.id_kos = km.id_kos
-LEFT JOIN 
+    LEFT JOIN 
     gambar g ON k.id_kos = g.id_kos AND km.id_kamar = g.id_kamar
-LEFT JOIN 
+    LEFT JOIN 
     ulasan u ON k.id_kos = u.id_kos
-LEFT JOIN 
+    LEFT JOIN 
     penyewaan p ON k.id_kos = p.id_kos AND km.id_kamar = p.id_kamar
+    LEFT JOIN
+    user us ON k.id_user = us.id_user
 
     WHERE
     k.id_kos = :id
@@ -116,7 +125,7 @@ GROUP BY
     k.jenis_fasilitas, k.peraturan_kos, g.id_gambar, g.deskripsi, km.id_kamar, 
     km.luas_kamar, km.status_kamar, km.jenis_fasilitas, km.harga_bulan, km.tipe_kamar, 
     km.kamar_tersedia, km.waktu_penyewaan, p.tanggal_penyewaan, p.status_penyewaan, 
-    p.waktu_penyewaan;
+    p.waktu_penyewaan, us.id_user, us.nama;
 ";
             $this->db->query($query);
             $this->db->bind('id', $id);

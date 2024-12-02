@@ -100,8 +100,14 @@ function submitForm() {
         fasilitas.push(checkbox.value);
     });
 
+    const penyewaan = [];
+    document.querySelectorAll('input[name="penyewaan[]"]:checked').forEach(checkbox => {
+        penyewaan.push(checkbox.value)
+    });
+
     // Tambahkan fasilitas yang dicentang ke formData
     formData.append('fasilitas', (fasilitas));
+    formData.append('penyewaan', (penyewaan));
 
     // Kirim data menggunakan fetch
     fetch(form.action, {
@@ -118,7 +124,7 @@ function submitForm() {
                     text: 'Data kos berhasil disimpan',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = 'datakos';
+                    window.location.href = 'datakamar';
                 });
             } else {
 

@@ -214,6 +214,41 @@
                                     placeholder="Tentukan aturan kos disini..." value="<?= $peraturan ?>">
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                            <label for="tipekos" class="col-sm-2 col-form-label">Jenis Penyewaan</label>
+                            <div class="col-sm-4">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="penyewaan[]" type="checkbox"
+                                        id="Harian" value="Harian"
+                                        <?= in_array('Harian', $penyewaan) ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="penyewaan[]">Harian</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="penyewaan[]" id="Mingguan"
+                                        value="Mingguan"
+                                        <?= in_array('Mingguan', $penyewaan) ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="penyewaan[]">Mingguan</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="penyewaan[]" id="Bulanan"
+                                        value="Bulanan"
+                                        <?= in_array('Bulanan', $penyewaan) ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="penyewaan[]">Bulanan</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="penyewaan[]" id="Bulanan"
+                                        value="Bulanan"
+                                        <?= in_array('3 Bulan', $penyewaan) ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="penyewaan[]">3 Bulan</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="penyewaan[]" id="Bulanan"
+                                        value="Bulanan"
+                                        <?= in_array(needle: 'Tahunan', haystack: $penyewaan) ? 'checked' : ''; ?>>
+                                    <label class="form-check-label" for="penyewaan[]">Tahunan</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

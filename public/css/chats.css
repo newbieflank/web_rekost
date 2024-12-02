@@ -1,6 +1,7 @@
 body {
   font-family: "Arial", sans-serif;
   background-color: #f3f2ff !important;
+  min-height: 100vh;
 }
 
 .chat-container {
@@ -92,7 +93,7 @@ body {
 }
 
 .chat-window .chat-message .message-content {
-  max-width: 60%; /* Adjusted to avoid clipping */
+  max-width: 60%;
   padding: 0.5rem 1rem;
   border-radius: 10px;
   background-color: #eaf4ff;
@@ -164,7 +165,6 @@ body {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  max-height: 400px;
   overflow-y: auto;
 }
 
