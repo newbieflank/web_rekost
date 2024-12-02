@@ -26,6 +26,13 @@
         resize: none;
     }
 </style>
+<div class="row justify-content-center mt-3">
+    <div class="col-lg-8">
+        <?php if (isset($_SESSION['flashF'])): ?>
+            <?php Flasher::fadeFlash(); ?>
+        <?php endif; ?>
+    </div>
+</div>
 
 <!-- Form Profile -->
 <div class="container">
@@ -98,12 +105,6 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="namaKost" class="col-sm-2 col-form-label">Nama Kost</label>
-                    <div class="col-sm-10">
-                        <input name="namaKost" id="namaKost" placeholder="masukan nama kost" class="form-control" value="<?= $kost ?>">
-                    </div>
-                </div>
-                <div class="mb-3 row">
                     <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
                         <textarea name="alamat" id="alamat" placeholder="masukan alamat" class="form-control"><?= $alamat ?></textarea>
@@ -137,3 +138,18 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.remove('show');
+                flashMessage.addEventListener('transitionend', () => {
+                    flashMessage.remove();
+                });
+            }, 4000);
+        }
+    });
+</script>

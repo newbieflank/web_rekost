@@ -115,6 +115,7 @@ class ProfileController extends Controller
         // die;
 
         if ($this->model('UsersModel')->updateProfile($_POST) > 0) {
+            Flasher::setFF('Data Berhasil Di Ubah', 'success');
             $this->header('/profile');
             exit;
         } else {
