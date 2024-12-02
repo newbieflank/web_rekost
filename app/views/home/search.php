@@ -142,7 +142,7 @@
                     <?php endforeach; ?>
                 <?php else : ?>
                     <div class="no-results">
-                        <p>Kos Yang Anda Cari Tidak Ada</p>
+                        <p>No Result Found.</p>
                     </div>
                 <?php endif; ?>
             </div>
