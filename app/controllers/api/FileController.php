@@ -51,10 +51,7 @@ class FileController extends Controller
                     $imageTmpName = $image['tmp_name'];
                     $imagePath = $uploadDir . $imageName;
 
-                    // Move the uploaded file to the target directory
-                    if (move_uploaded_file($imageTmpName, $imagePath)) {
-                        $this->ImageModel->insert($userId, $imageName);
-
+                    if (move_uploaded_file($imageTmpName, $imagePath) &&  ($this->ImageModel->insert($userId, $imageName)) > 0) {
                         echo json_encode(['status' => 'success', 'message' => 'Image uploaded successfully!']);
                     } else {
                         echo json_encode(['status' => 'error', 'message' => 'Failed to upload image.']);

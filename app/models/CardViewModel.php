@@ -13,9 +13,9 @@ class CardViewModel
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
-            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS harga, km.harga_hari, km.harga_minggu , (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, km.waktu_penyewaan, km.status_kamar 
+            AS review_count, k.waktu_penyewaan, km.status_kamar 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
             LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g 
             ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC LIMIT 0, 25;";
@@ -32,9 +32,9 @@ class CardViewModel
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
-            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, km.waktu_penyewaan, km.status_kamar 
+            AS review_count, k.waktu_penyewaan, km.status_kamar 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
             LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos GROUP BY k.id_kos, km.status_kamar ORDER BY avg_rating DESC LIMIT 0, 25;
 ";
@@ -51,9 +51,9 @@ class CardViewModel
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
-            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, km.waktu_penyewaan, km.status_kamar 
+            AS review_count, k.waktu_penyewaan, km.status_kamar 
             FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
             LEFT JOIN gambar g ON k.id_kos = g.id_kos 
             GROUP BY k.id_kos, km.status_kamar LIMIT 0, 25;";
@@ -123,7 +123,7 @@ GROUP BY
     k.id_kos, k.nama_kos, k.deskripsi, k.tipe_kos, k.alamat, k.latitude, k.longitude, 
     k.jenis_fasilitas, k.peraturan_kos, g.id_gambar, g.deskripsi, km.id_kamar, 
     km.luas_kamar, km.status_kamar, km.jenis_fasilitas, km.harga_bulan, km.tipe_kamar, 
-    km.kamar_tersedia, km.waktu_penyewaan, p.tanggal_penyewaan, p.status_penyewaan, 
+    km.kamar_tersedia, k.waktu_penyewaan, p.tanggal_penyewaan, p.status_penyewaan, 
     p.waktu_penyewaan, us.id_user, us.nama;
 ";
             $this->db->query($query);

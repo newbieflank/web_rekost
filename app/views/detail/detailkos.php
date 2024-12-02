@@ -92,8 +92,54 @@
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>
-                        <span class="text-red">IDR <?= $data['harga_bulan'] ?></span> <br>
-                        <span class="text-grey">/kamar/<?= $data['kamar_waktu_penyewaan'] ?></span>
+                        <span class="text-red">IDR
+                            <?php
+                            $arr = $data['waktu_penyewaan'];
+                            $array = explode(',', $arr);
+                            $array = array_reverse($array);
+
+                            foreach ($array as $value) {
+                                switch ($value) {
+                                    case 'Bulanan':
+                                        echo $data['harga_bulan'];
+                                        break 2;
+                                    case 'Harian':
+                                        echo $data['harga_hari'];
+                                        break 2;
+                                    case 'Mingguan':
+                                        echo $data['harga_minggu'];
+                                        break 2;
+                                    default:
+                                        echo $data['harga_bulan'];
+                                        break;
+                                }
+                            }
+                            ?>
+                        </span> <br>
+                        <span class="text-grey">
+                            <?php
+                            $arr = $data['waktu_penyewaan'];
+                            $array = explode(',', $arr);
+                            $array = array_reverse($array);
+
+                            foreach ($array as $value) {
+                                switch ($value) {
+                                    case 'Bulanan':
+                                        echo "Per Bulan";
+                                        break 2;
+                                    case 'Mingguan':
+                                        echo "Per Minggu";
+                                        break 2;
+                                    case 'Harian':
+                                        echo "Per Hari";
+                                        break 2;
+                                    default:
+                                        echo "Per Bulan";
+                                        break 2;
+                                }
+                            }
+                            ?>
+                        </span>
                         <a href="<?= BASEURL . 'detailkos/' . $data["id_kos"] . '/konfirmasi' ?>" class="btn btn-primary w-100" style="margin-top: 10px;">Ajukan Sewa</a>
                     </div>
                 </div>
