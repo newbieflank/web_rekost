@@ -11,21 +11,14 @@ class chartModel
     public function getpendapatan()
     {
         try {
-            $query = "SELECT 
-                        jenis_transaksi,
-                        SUM(jumlah) AS total_jumlah
-                      FROM 
-                        manajemen_pemilik
-                      WHERE 
-                        jenis_transaksi = 'pendapatan'
-                      GROUP BY 
-                        jenis_transaksi;";
+            $query = "SELECT SUM(harga) AS pendapatan FROM penyewaan WHERE id_kos= :id";
 
             $this->db->query($query);
-            $results = $this->db->resultSet();
+            $this->db->bind('id', $_SESSION['user']['id_kos']);
+            $results = $this->db->single();
             return $results;
         } catch (\Throwable $e) {
-            echo "error" . $e->getMessage();
+            return 0;
         }
     }
 
@@ -43,10 +36,10 @@ class chartModel
                         jenis_transaksi;";
 
             $this->db->query($query);
-            $results = $this->db->resultSet();
+            $results = $this->db->single();
             return $results;
         } catch (\Throwable $e) {
-            echo "error" . $e->getMessage();
+            return 0;
         }
     }
 
@@ -82,7 +75,7 @@ ORDER BY
 
     public function getulasanatas()
     {
-        try{
+        try {
             $query = "SELECT 
             k.id_kos,
             k.nama_kos,
@@ -98,34 +91,33 @@ ORDER BY
         ORDER BY 
             rata_rata_rating DESC;";
 
-    $this->db->query($query);
-    $results = $this->db->resultSet();
-    return $results;
-         }catch (\Throwable $e) {
+            $this->db->query($query);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (\Throwable $e) {
             echo "error" . $e->getMessage();
         }
     }
 
 
-    public function gettransaksi(){
-        try{
-            $query = "SELECT MONTH(tgl_transaksi) AS bulan_index, 
-          SUM(jumlah) AS total_transaksi 
-          FROM manajemen_pemilik 
-          WHERE jenis_transaksi = 'pendapatan' 
-          GROUP BY MONTH(tgl_transaksi) 
+    public function gettransaksi()
+    {
+        try {
+            $query = "SELECT MONTH(tanggal_penyewaan) AS bulan_index, SUM(harga) AS total_transaksi FROM penyewaan WHERE id_kos= 2024115250
+          GROUP BY MONTH(tanggal_penyewaan) 
           ORDER BY bulan_index;";
 
-    $this->db->query($query);
-    $results = $this->db->resultSet();
-    return $results;
-         }catch (\Throwable $e) {
+            $this->db->query($query);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (\Throwable $e) {
             echo "error" . $e->getMessage();
         }
     }
 
-    public function gettransaksi2(){
-        try{
+    public function gettransaksi2()
+    {
+        try {
             $query = "SELECT MONTH(tgl_transaksi) AS bulan_index, 
           SUM(jumlah) AS total_transaksi 
           FROM manajemen_pemilik 
@@ -133,13 +125,11 @@ ORDER BY
           GROUP BY MONTH(tgl_transaksi) 
           ORDER BY bulan_index;";
 
-    $this->db->query($query);
-    $results = $this->db->resultSet();
-    return $results;
-         }catch (\Throwable $e) {
+            $this->db->query($query);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (\Throwable $e) {
             echo "error" . $e->getMessage();
         }
     }
-
-
 }

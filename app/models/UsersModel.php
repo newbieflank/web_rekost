@@ -271,7 +271,6 @@ class UsersModel
             $query .= " AND role = :role";
         }
 
-        $query .= " GROUP BY DATE(tgl_daftar) ORDER BY tgl_daftar DESC";
         $this->db->query($query);
         $this->db->bind('date', $date);
 

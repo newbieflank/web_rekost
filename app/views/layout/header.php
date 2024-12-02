@@ -70,7 +70,7 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
-                    <?php if ($role === 'pemilik_kos'): ?>
+                    <?php if ($role === 'pemilik kos'): ?>
                         <li class="nav-item active">
                             <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
                         </li>
