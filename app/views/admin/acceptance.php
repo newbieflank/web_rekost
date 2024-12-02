@@ -108,7 +108,7 @@
                 <a class="nav-link" href="<?= BASEURL; ?>" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
-                <a class="nav-link active" href="acceptance" id="persetujuanLink">
+                <a class="nav-link active" href="<?= BASEURL; ?>acceptance" id="persetujuanLink">
                     <i class="fas fa-check-circle"></i> Persetujuan Kost
                 </a>
                 <button class="btn w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#dataPenggunaCollapse" aria-expanded="false" aria-controls="dataPenggunaCollapse">
@@ -116,10 +116,13 @@
                 </button>
                 <div class="collapse" id="dataPenggunaCollapse">
                     <div class="mt-2 ps-3">
-                        <a href="pencarikos" class="nav-link">Pencari Kos</a>
-                        <a href="pemilikkos" class="nav-link">Pemilik Kos</a>
+                        <a href="<?= BASEURL; ?>pencarikos" class="nav-link">Pencari Kos</a>
+                        <a href="<?= BASEURL; ?>pemilikkos" class="nav-link">Pemilik Kos</a>
                     </div>
                 </div>
+                <a class="nav-link" href="<?= BASEURL; ?>logout" id="dashboardLink">
+                    <i class="fas fa-user-slash"></i> Logout
+                </a>
             </nav>
         </div>
         <div class="content flex-grow-1">
