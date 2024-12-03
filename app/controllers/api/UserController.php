@@ -95,7 +95,7 @@ class UserController extends Controller
             $imageFiles = $userDir . $user['id_gambar'];
             if (file_exists($imageFiles)) {
 
-                header("Content-Type: image/jpg");
+                header("Content-Type: image/*");
                 header("Content-Length: " . filesize($imageFiles));
 
                 readfile($imageFiles);
