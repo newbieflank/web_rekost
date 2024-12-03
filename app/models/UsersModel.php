@@ -129,11 +129,7 @@ class UsersModel
 
     public function updateProfile($data)
     {
-        // $id = $_SESSION['user']['id_user'] ?? null;
-        // $id = 0;
-        // echo $data['customDate'];
         if (isset($_SESSION['user']['id_user'])) {
-            // echo "User ID not found in session.";
             $id = $_SESSION['user']['id_user'] ?? null;
         } elseif (isset($data['id_user'])) {
             $id = $data['id_user'];

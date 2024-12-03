@@ -92,15 +92,13 @@ class UserController extends Controller
 
 
         if (is_dir($userDir)) {
+            $imageFiles = $userDir . $user['id_gambar'];
+            if (file_exists($imageFiles)) {
 
-            $imageFiles = glob($userDir . "*.png");
-            if (!empty($imageFiles)) {
-                $imageFilePath = $imageFiles[0];
+                header("Content-Type: image/jpg");
+                header("Content-Length: " . filesize($imageFiles));
 
-                header("Content-Type: image/png");
-                header("Content-Length: " . filesize($imageFilePath));
-
-                readfile($imageFilePath);
+                readfile($imageFiles);
                 return;
             } else {
                 header("HTTP/1.0 404 Not Found");
