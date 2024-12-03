@@ -26,11 +26,22 @@
     #alamat {
         resize: none;
     }
-</style>
 
+    .alert {
+        transition: opacity 0.5s ease-out;
+    }
+</style>
 <!-- Form Profile -->
+<div class="row justify-content-center mt-3">
+    <div class="col-lg-8">
+        <?php if (isset($_SESSION['flashF'])): ?>
+            <?php Flasher::fadeFlash(); ?>
+        <?php endif; ?>
+    </div>
+</div>
+
 <div class="container">
-    <div class="card m-4">
+    <div class="card m-4 mt-0">
         <h5 class="card-header">Informasi Pribadi</h5>
         <div class="card-body">
             <div class="container mt-3 mb-5">
@@ -132,3 +143,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.remove('show'); // Trigger Bootstrap fade-out
+                flashMessage.addEventListener('transitionend', () => {
+                    flashMessage.remove(); // Remove element after fade-out
+                });
+            }, 4000); // 4 seconds
+        }
+    });
+</script>

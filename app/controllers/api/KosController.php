@@ -4,6 +4,7 @@ class KosController extends Controller
 {
 
     private $kos;
+    private $detail;
 
     public function __construct()
     {
@@ -104,7 +105,8 @@ class KosController extends Controller
         }
     }
 
-    public function konfirmPembayaran(){
+    public function konfirmPembayaran()
+    {
         header("Access-Control-Allow-Origin: *");
         header('Content-Type: application/json');
 
@@ -121,11 +123,12 @@ class KosController extends Controller
         // Ambil data dari request JSON
         $id_user = $_SESSION['user']['id_user'];
         $buktiPembayaran = $_FILES['buktiPembayaran'];
-
         $totalkamar = $_POST['totalKamar'];
         $harga = $_POST['totalHarga'];
         $tanggal = date('Y-m-d');
         $waktuPenyewaan = $_POST['waktu_penyewaan'];
+
+        // Tentukan waktu sewa dan durasi berdasarkan pilihan
 
         switch ($waktuPenyewaan) {
             case 1:
@@ -182,7 +185,5 @@ class KosController extends Controller
 
             echo json_encode($data);
         }
-
     }
-
 }

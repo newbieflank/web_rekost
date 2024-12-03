@@ -2,7 +2,12 @@
 
 class HomeController extends Controller
 {
+    private $userModel;
 
+    public function __construct()
+    {
+        $this->userModel =  $this->model('UsersModel');
+    }
 
     public function index()
     {
@@ -11,34 +16,64 @@ class HomeController extends Controller
             $role = $_SESSION['user']['role'];
             $user = $this->model('UsersModel')->findUserByEmail($email);
 
-            $pendapatan = $this->model('chartModel')->getpendapatan();
-            $pengeluaran = $this->model('chartModel')->getpengeluaran();
-            $rataRating = $this->model('chartModel')->getUlasan();
-            $ratingatas = $this->model('chartModel')->getulasanatas();
-            $chartpendapatan = $this->model('chartModel')->gettransaksi();
-            $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+            if ($role === 'admin') {
+                $totalPemilikKos = $this->userModel->countPemilikKos();
+                $totalPencariKos = $this->userModel->countPencariKos();
+                $totalKos = $this->userModel->countKos();
+                $rating = $this->model('RatingAplikasiModel')->totalRating();
+                $formatChartPemilik = [];
+                $formatChartPencari = [];
+                $totalRating = $rating['rating'] / $rating['user'];
+                $maxDays = date('t');
+                for ($i = 1; $i <= $maxDays; $i++) {
+                    $date = date("Y-m") . "-" . str_pad($i, 2, "0", STR_PAD_LEFT);
+                    $pemilikRegister = $this->userModel->getUserRegistrationByDate($date, 'pemilik kos');
+                    $pencariRegister = $this->userModel->getUserRegistrationByDate($date, 'pencari kos');
 
-            $pendapatanPerBulan = array_fill(0, 12, 0);
-            foreach ($chartpendapatan as $item) {
-                $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-                $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
-            }
+                    $formatChartPemilik["date"][] = $i;
+                    $formatChartPemilik["count"][] = $pemilikRegister["total"] ?? 0;
 
-            $pengeluaranPerBulan = array_fill(0, 12, 0);
-            foreach ($chartpengeluaran as $item) {
-                $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-                $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
-            }
+                    $formatChartPencari["date"][] = $i;
+                    $formatChartPencari["count"][] = $pencariRegister["total"] ?? 0;
+                }
 
-            $layoutData = [
-                "pendapatan" => $pendapatan,
-                "pengeluaran" => $pengeluaran,
-                "rataRating" => $rataRating,
-                "ratingatas" => $ratingatas,
-                "chartpendapatan" => $pendapatanPerBulan,
-                "chartpengeluaran" => $pengeluaranPerBulan
-            ];
-            if ($role === 'pemilik kos') {
+                $this->view('admin/dashboard', [
+                    'totalPemilikKos' => $totalPemilikKos,
+                    'totalPencariKos' => $totalPencariKos,
+                    'totalKos' => $totalKos,
+                    "chartPemilik" => $formatChartPemilik,
+                    "chartPencari" => $formatChartPencari,
+                    'totalRatingKos' => $totalRating
+                ]);
+            } else if ($role === 'pemilik kos') {
+                $pendapatan = $this->model('chartModel')->getpendapatan();
+                $pengeluaran = $this->model('chartModel')->getpengeluaran();
+                $rataRating = $this->model('chartModel')->getUlasan();
+                $ratingatas = $this->model('chartModel')->getulasanatas();
+                $chartpendapatan = $this->model('chartModel')->gettransaksi();
+                $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+
+                $pendapatanPerBulan = array_fill(0, 12, 0);
+                foreach ($chartpendapatan as $item) {
+                    $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+                    $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+                }
+
+                $pengeluaranPerBulan = array_fill(0, 12, 0);
+                foreach ($chartpengeluaran as $item) {
+                    $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
+                    $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+                }
+
+                $layoutData = [
+                    "pendapatan" => $pendapatan,
+                    "pengeluaran" => $pengeluaran,
+                    "rataRating" => $rataRating,
+                    "ratingatas" => $ratingatas,
+                    "chartpendapatan" => $pendapatanPerBulan,
+                    "chartpengeluaran" => $pengeluaranPerBulan
+                ];
+
                 ob_start();
                 $this->view('home/landingpemilik', $layoutData);
                 $content = ob_get_clean();
@@ -98,6 +133,13 @@ class HomeController extends Controller
     }
     public function search()
     {
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->model('UsersModel')->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
 
         $alamat = isset($_POST['location']) ? $_POST['location'] : '';
         $harga = isset($_POST['cost']) ? $_POST['cost'] : null;
@@ -106,7 +148,26 @@ class HomeController extends Controller
         $data = [
             'search' => $search
         ];
+
+        ob_start();
         $this->view('home/search', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'title' => "cari kos",
+            'content' => $content,
+            'role' => $role,
+            'footer' => false
+        ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
+
+        $this->view('layout/main', $layout);
     }
 
     public function best()

@@ -220,6 +220,7 @@ ORDER BY
 
     public function CariKos($alamat, $harga)
     {
+        $array = explode('-', $harga);
 
         $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
             AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
@@ -236,7 +237,9 @@ ORDER BY
             $conditions[] = "k.alamat LIKE :alamat";
         }
         if (!empty($harga)) {
-            $conditions[] = "km.harga_bulan = :harga";
+            $conditions[] = "km.harga_bulan BETWEEN :hargaAwal AND :hargaAkhir 
+            OR km.harga_minggu BETWEEN :hargaAwal AND :hargaAkhir
+            OR km.harga_hari BETWEEN :hargaAwal AND :hargaAkhir";
         }
 
 
@@ -252,7 +255,8 @@ ORDER BY
             $this->db->bind('alamat', '%' . $alamat . '%');
         }
         if (!empty($harga)) {
-            $this->db->bind('harga', $harga);
+            $this->db->bind('hargaAwal', intval($array[0]));
+            $this->db->bind('hargaAkhir', intval($array[1]));
         }
 
         return $this->db->resultSet();

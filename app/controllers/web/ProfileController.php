@@ -111,7 +111,11 @@ class ProfileController extends Controller
 
     public function update()
     {
+        // echo json_encode($_POST);
+        // die;
+
         if ($this->model('UsersModel')->updateProfile($_POST) > 0) {
+            Flasher::setFF('Data Berhasil Di Ubah', 'success');
             $this->header('/profile');
             exit;
         } else {

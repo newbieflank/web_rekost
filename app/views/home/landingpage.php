@@ -110,9 +110,9 @@
                                 <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                            <!-- <?php
-                                var_dump($data['notifikasi']);
-                                ?> -->
+                                <!-- <?php
+                                        var_dump($data['notifikasi']);
+                                        ?> -->
                                 <?php if (empty($data['notifikasi'])): ?>
                                     <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
                                 <?php else: ?>
@@ -167,7 +167,7 @@
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/user.png') ?>"
-                                    class="rounded-circle" alt="Profile Image" width="40px">
+                                    class="rounded-circle" alt="Profile Image" width="40px" height="40px">
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
@@ -219,20 +219,20 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php
+                <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -274,7 +274,7 @@
                                         <option value="100000-500000">100,000 - 500,000</option>
                                         <option value="500000-1000000">500,000 - 1,000,000</option>
                                         <option value="1000000-2000000">1,000,000 - 2,000,000</option>
-                                        <option value="2000000">Diatas 2,000,000</option>
+                                        <option value="2000000-1000000000">Diatas 2,000,000</option>
                                     </select>
                                 </div>
                             </div>
