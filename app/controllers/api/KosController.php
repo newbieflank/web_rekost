@@ -112,7 +112,15 @@ class KosController extends Controller
 
         $data = json_decode(file_get_contents("php://input"), true);
 
-        if (!$data) {
+        // if ($_FILES['buktiPembayaran']) {
+        //     echo json_encode([
+        //         "status" => "error",
+        //         "message" => "Image"
+        //     ]);
+        //     return;
+        // }
+       
+        if (!isset($_POST)) {
             echo json_encode([
                 "status" => "error",
                 "message" => "Invalid input data"
@@ -121,41 +129,40 @@ class KosController extends Controller
         }
 
         // Ambil data dari request JSON
-        $id_user = $_SESSION['user']['id_user'];
+        $id_user = intval($_POST['id_user']);
+        $id_kamar = intval($_POST['id_kamar']);
+        $id_kos = intval($_POST['id_kos']);
         $buktiPembayaran = $_FILES['buktiPembayaran'];
-        $totalkamar = $_POST['totalKamar'];
-        $harga = $_POST['totalHarga'];
-        $tanggal = date('Y-m-d');
-        $waktuPenyewaan = $_POST['waktu_penyewaan'];
-
+        $totalkamar = intval($_POST['totalKamar']);
+        $harga = intval($_POST['totalHarga']);
+        $tanggal = $_POST['tanggal_penyewaan'];
+        // $waktuPenyewaan = $_POST['waktu_penyewaan'];
+        $durasiWaktu = $_POST['durasi'];
         // Tentukan waktu sewa dan durasi berdasarkan pilihan
 
-        switch ($waktuPenyewaan) {
-            case 1:
+        switch ($durasiWaktu) {
+            case "Harian":
                 $waktuSewa = "harian";
-                $durasi = $_POST['customDays'];
+                $durasi = 1;
 
                 break;
-            case 2:
+            case "Mingguan":
                 $waktuSewa = "mingguan";
                 $durasi = 7;
                 break;
-            case 3:
+            case "Bulanan":
                 $waktuSewa = "1 bulan";
                 $durasi = 30;
                 break;
-            case 4:
+            case "6 Bulan":
                 $waktuSewa = "3 bulan";
                 $durasi = 90;
                 break;
-            case 5:
+            case "Tahunan":
                 $waktuSewa = "tahunan";
                 $durasi = 365;
                 break;
         }
-
-        $id_kamar = $_POST['id_kamar'];
-        $id_kos = $_POST['id_kos'];
 
 
 
@@ -167,23 +174,24 @@ class KosController extends Controller
             $targetFilePath = "./public/uploads/$id_user/$idPenyewaan.jpg";
 
             if (move_uploaded_file($tmp_name, $targetFilePath)) {
-                $this->header('/riwayat');
-                exit;
+                $response = [
+                    "status" => "success",
+                    "message" => "Berhasil Mengunggah Pembayaran"
+                ];
+               echo json_encode($response);
             } else {
-                echo "error";
+                $response = [
+                    "status" => "failed",
+                    "message" => "Gagal Mengunggah Bukti Pembayaran"
+                ];
+               echo json_encode($response);
             }
         } else {
-            $data = [
-                'total_kamar' => $totalkamar,
-                'harga' => $harga,
-                'tanggal' => $tanggal,
-                'waktu' => $waktuPenyewaan,
-                'id_kamar' => $id_kamar,
-                'id_kos' => $id_kos,
-                'durasi' => $durasi
-            ];
-
-            echo json_encode($data);
+            $response = [
+                    "status" => "failed",
+                    "message" => "Gagal Mengunggah Pembayaran"
+                ];
+               echo json_encode($response);
         }
     }
 }
