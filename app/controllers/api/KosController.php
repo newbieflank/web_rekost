@@ -110,31 +110,23 @@ class KosController extends Controller
         header("Access-Control-Allow-Origin: *");
         header('Content-Type: application/json');
 
+        // Retrieve JSON data sent to the API
         $data = json_decode(file_get_contents("php://input"), true);
-
-        // if ($_FILES['buktiPembayaran']) {
-        //     echo json_encode([
-        //         "status" => "error",
-        //         "message" => "Image"
-        //     ]);
-        //     return;
-        // }
-       
-        if (!isset($_POST)) {
+        if (empty($_POST) || empty($_FILES)) {
             echo json_encode([
                 "status" => "error",
-                "message" => "Invalid input data"
+                "message" => "Pastikan Semua data terisi beserta dengan bukti"
             ]);
             return;
         }
 
         // Ambil data dari request JSON
-        $id_user = intval($_POST['id_user']);
+        $id_user = intval(value: $_POST['id_user']);
         $id_kamar = intval($_POST['id_kamar']);
         $id_kos = intval($_POST['id_kos']);
         $buktiPembayaran = $_FILES['buktiPembayaran'];
-        $totalkamar = intval($_POST['totalKamar']);
-        $harga = intval($_POST['totalHarga']);
+        $totalkamar = intval($_POST['totalkamar']);
+        $harga = intval($_POST['harga']);
         $tanggal = $_POST['tanggal_penyewaan'];
         // $waktuPenyewaan = $_POST['waktu_penyewaan'];
         $durasiWaktu = $_POST['durasi'];
@@ -178,20 +170,20 @@ class KosController extends Controller
                     "status" => "success",
                     "message" => "Berhasil Mengunggah Pembayaran"
                 ];
-               echo json_encode($response);
+                echo json_encode($response);
             } else {
                 $response = [
                     "status" => "failed",
                     "message" => "Gagal Mengunggah Bukti Pembayaran"
                 ];
-               echo json_encode($response);
+                echo json_encode($response);
             }
         } else {
             $response = [
-                    "status" => "failed",
-                    "message" => "Gagal Mengunggah Pembayaran"
-                ];
-               echo json_encode($response);
+                "status" => "failed",
+                "message" => "Gagal Mengunggah Pembayaran"
+            ];
+            echo json_encode($response);
         }
     }
 }
