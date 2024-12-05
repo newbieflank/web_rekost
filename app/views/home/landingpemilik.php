@@ -277,14 +277,8 @@
                 updateChart(event.target.value);
             });
         });
-<<<<<<< HEAD
-    });
-</script>
-~
-=======
     </script>
-
->>>>>>> 7b0a63e3f8d389d68f741a72a86e12f8f407e120
+    </script>
 </body>
 <!-- <script src="<? asset('js/file.js') ?>"></script> -->
 

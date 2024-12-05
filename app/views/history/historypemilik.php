@@ -57,7 +57,7 @@
         <div class="d-flex">
             <div class="content flex-grow-1">
                 <div class="container mt-4">
-                    <h2>Riwayat Transaksi</h2>
+                    <h2>Laporan Transaksi</h2>
                     <div class="table-responsive mt-4">
                         <table id="userTable" class="table table-bordered">
                             <thead class="table-dark">

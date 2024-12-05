@@ -29,18 +29,6 @@
             flex-direction: column;
         }
 
-        .card-body {
-            flex-grow: 1;
-            overflow: hidden;
-        }
-
-        .card-title,
-        .card-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
         .star-rating .fa-star {
             cursor: pointer;
             font-size: 24px;

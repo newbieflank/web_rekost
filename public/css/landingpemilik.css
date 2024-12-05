@@ -44,7 +44,7 @@
 }
 .customer-says {
   padding: 32px 0;
-  background-color: #e5e4ff;
+  background-color: #eaf4ff !important;
 }
 
 .customer-says h2 {

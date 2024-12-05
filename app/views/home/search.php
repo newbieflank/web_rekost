@@ -22,18 +22,34 @@
         }
 
         .card {
-            width: 300px;
+            width: 350px;
             height: 500px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             border: 1px solid #ddd;
+            border-radius: 15px;
         }
 
         .card-body {
             flex-grow: 1;
             padding: 15px;
             overflow: hidden;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card-text i.fas.fa-map-marker-alt,
+        .card-text {
+            color: #000;
+        }
+
+        .card-text strong {
+            color: #000;
         }
 
         .no-results {
@@ -52,6 +68,10 @@
             font-weight: bold;
             font-size: 1.5rem;
             color: #333;
+        }
+
+        .col-md-3 {
+            flex: 1 1 calc(33.33% - 20px);
         }
     </style>
 </head>

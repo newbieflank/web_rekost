@@ -25,6 +25,17 @@
         height: 500px;
         width: 100%;
     }
+
+    .tag {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #17a2b8;
+        color: #fff;
+        padding: 6px 8px;
+        font-size: 14px;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
 </style>
 
 <body data-bs-spy="scroll" data-bs-target=".nav-tabs" data-bs-offset="80" tabindex="0">
@@ -81,14 +92,13 @@
                         </div>
                         <h1><?= $data['nama_kos'] ?></h1>
                         <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <span class="btn-available" style="border-radius: 4px;">
+                            <span class="tag">
                                 <?php echo $data['tipe_kos'] ?>
                             </span>
                             <span>
                                 <?= $data['rating_kamar'] ?>/5 | <?= $data['jumlah_rating'] ?> Reviews
                             </span>
                         </div>
-
                     </div>
                     <div class="price">
                         <span class="text-grey">Mulai dari</span> <br>

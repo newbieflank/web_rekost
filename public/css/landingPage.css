@@ -395,6 +395,13 @@ header {
 
 .customer-says .card-body {
   padding: 20px;
+  word-wrap: break-word; /* Memastikan kata-kata panjang akan terputus */
+  word-break: break-word; /* Mendukung pemotongan untuk teks panjang */
+  white-space: normal; /* Teks dapat membungkus ke baris berikutnya */
+}
+.customer-says .card-text {
+  margin-bottom: 0;
+  overflow-wrap: break-word; /* Dukungan untuk memecah kata panjang */
 }
 
 .customer-says .d-flex {
