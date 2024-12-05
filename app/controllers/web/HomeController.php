@@ -54,14 +54,16 @@ class HomeController extends Controller
                 $this->view('layout/main', $data);
             } else {
                 $notifModel = $this->model('Notifmodel');
-                $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']); 
+                $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']);
                 $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
+
 
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
                 $best = $this->model('CardViewModel')->SelectCardViewKosBest();
                 $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
                 $rating = $this->model('RatingAplikasiModel')->GetUlasan();
                 $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
+
                 $data = [
                     "id_user" => $user['id_user'],
                     "id_gambar" => $user['id_gambar'],
@@ -70,7 +72,7 @@ class HomeController extends Controller
                     "campus" => $campus,
                     "rating_aplikasi" => $rating,
                     "penyewa" => $penyewa,
-                    "notifikasi" => $notifikasi
+                    "notifikasi" => $notifikasi,
                 ];
                 $this->view('home/landingpage', $data);
             }

@@ -92,7 +92,7 @@ class Notifmodel
         JOIN penyewaan py ON p.id_penyewaan = py.id_penyewaan 
         WHERE py.id_user = :id_user 
         AND (
-            (p.status_pembayaran = 'Dibayar' AND p.tanggal_pembayaran >= DATE_SUB(NOW(), INTERVAL 7 DAY))
+            (p.status_pembayaran = 'Dibayar' AND p.tanggal_pembayaran >= DATE_SUB(NOW(), INTERVAL 60 DAY))
             OR 
             DATEDIFF(
                 DATE_ADD(py.tanggal_penyewaan, 
@@ -105,10 +105,10 @@ class Notifmodel
                     WHEN 'tahunan' THEN py.durasi * 365
                 END DAY),
                 CURRENT_DATE
-            ) <= 4
+            ) <= 3
         )
         ORDER BY p.tanggal_pembayaran DESC, sisa_hari ASC
-        LIMIT 8";
+        LIMIT 10";
 
         $this->db->query($query);
         $this->db->bind('id_user', $id_user);

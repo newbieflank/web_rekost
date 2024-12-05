@@ -97,8 +97,53 @@
                                         <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5 (<?php echo $campus['review_count'] ?>)</p>
                                         <span class="btn-available" style="border-radius: 4px;"><?php echo $campus['status_kamar'] ?></span>
                                         <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                            IDR <?php echo $campus['harga'] ?>
-                                            <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/<?php echo $campus['waktu_penyewaan'] ?></span>
+                                            IDR 
+                                            <?php
+                                            $arr = $campus['waktu_penyewaan'];
+                                            $array = explode(',', $arr);
+                                            $array = array_reverse($array);
+
+                                            foreach ($array as $value) {
+                                                switch ($value) {
+                                                    case 'Bulanan':
+                                                        echo $campus['harga'];
+                                                        break 2;
+                                                    case 'Harian':
+                                                        echo $campus['harga_hari'];
+                                                        break 2;
+                                                    case 'Mingguan':
+                                                        echo $campus['harga_minggu'];
+                                                        break 2;
+                                                    default:
+                                                        echo $campus['harga'];
+                                                        break;
+                                                }
+                                            }
+                                            ?>
+                                            <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/
+                                                <?php
+                                                $arr = $campus['waktu_penyewaan'];
+                                                $array = explode(',', $arr);
+                                                $array = array_reverse($array);
+
+                                                foreach ($array as $value) {
+                                                    switch ($value) {
+                                                        case 'Bulanan':
+                                                            echo "Bulanan";
+                                                            break 2;
+                                                        case 'Harian':
+                                                            echo "Harian";
+                                                            break 2;
+                                                        case 'Mingguan':
+                                                            echo "Mingguan";
+                                                            break 2;
+                                                        default:
+                                                            echo "Bulanan";
+                                                            break;
+                                                    }
+                                                }
+                                                ?>
+                                            </span>
                                         </p>
                                         <a class="btn-order" href="#">Pesan sekarang</a>
                                     </div>
