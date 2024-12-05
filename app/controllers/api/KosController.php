@@ -4,11 +4,7 @@ class KosController extends Controller
 {
 
     private $kos;
-<<<<<<< HEAD
-    private $detailkos;
-=======
     private $detail;
->>>>>>> 65562c7fee072e9a0fb38cd02dc431283c890054
 
     public function __construct()
     {
