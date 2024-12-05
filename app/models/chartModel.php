@@ -100,14 +100,15 @@ ORDER BY
     }
 
 
-    public function gettransaksi()
+    public function gettransaksi($id)
     {
         try {
-            $query = "SELECT MONTH(tanggal_penyewaan) AS bulan_index, SUM(harga) AS total_transaksi FROM penyewaan WHERE id_kos= 2024115250
+            $query = "SELECT MONTH(tanggal_penyewaan) AS bulan_index, SUM(harga) AS total_transaksi FROM penyewaan WHERE id_kos= :id
           GROUP BY MONTH(tanggal_penyewaan) 
           ORDER BY bulan_index;";
 
             $this->db->query($query);
+            $this->db->bind('id', $id);
             $results = $this->db->resultSet();
             return $results;
         } catch (\Throwable $e) {

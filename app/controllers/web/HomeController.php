@@ -14,6 +14,7 @@ class HomeController extends Controller
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
             $role = $_SESSION['user']['role'];
+            $idKos = $_SESSION['user']['id_kos'] ?? null;
             $user = $this->model('UsersModel')->findUserByEmail($email);
 
             if ($role === 'admin') {
@@ -50,7 +51,7 @@ class HomeController extends Controller
                 $pengeluaran = $this->model('chartModel')->getpengeluaran();
                 $rataRating = $this->model('chartModel')->getUlasan();
                 $ratingatas = $this->model('chartModel')->getulasanatas();
-                $chartpendapatan = $this->model('chartModel')->gettransaksi();
+                $chartpendapatan = $this->model('chartModel')->gettransaksi($idKos);
                 $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
 
                 $pendapatanPerBulan = array_fill(0, 12, 0);
