@@ -105,10 +105,10 @@
                 <img alt="Logo" height="50" src="<?= asset('img/logo.png') ?>" width="170" />
             </div>
             <nav class="nav flex-column">
-                <a class="nav-link" href="dashboard" id="dashboardLink">
+                <a class="nav-link" href="<?= BASEURL; ?>" id="dashboardLink">
                     <i class="fas fa-home"></i> Dashboard
                 </a>
-                <a class="nav-link active" href="acceptance" id="persetujuanLink">
+                <a class="nav-link active" href="<?= BASEURL; ?>acceptance" id="persetujuanLink">
                     <i class="fas fa-check-circle"></i> Persetujuan Kost
                 </a>
                 <button class="btn w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#dataPenggunaCollapse" aria-expanded="false" aria-controls="dataPenggunaCollapse">
@@ -116,10 +116,13 @@
                 </button>
                 <div class="collapse" id="dataPenggunaCollapse">
                     <div class="mt-2 ps-3">
-                        <a href="pencarikos" class="nav-link">Pencari Kos</a>
-                        <a href="pemilikkos" class="nav-link">Pemilik Kos</a>
+                        <a href="<?= BASEURL; ?>pencarikos" class="nav-link">Pencari Kos</a>
+                        <a href="<?= BASEURL; ?>pemilikkos" class="nav-link">Pemilik Kos</a>
                     </div>
                 </div>
+                <a class="nav-link" href="<?= BASEURL; ?>logout" id="dashboardLink">
+                    <i class="fas fa-user-slash"></i> Logout
+                </a>
             </nav>
         </div>
         <div class="content flex-grow-1">
@@ -186,7 +189,7 @@
                                                 <p><strong>Nomor Telepon:</strong> <?= $user['number_phone'] ?></p>
                                                 <p><strong>Status:</strong> <?= $user['status'] ?></p>
                                                 <p><strong>KTP:</strong> <img src="<?= asset('uploads/' . $user['id_user'] . '/Lampiran.jpg') ?>" alt="thumbnail" class="thumbnail w-100"></p>
-                                                <form action="acceptance " method="POST" id="statusForm<?= $user['id_user'] ?>">
+                                                <form action="<?= BASEURL; ?>acceptance" method="POST" id="statusForm<?= $user['id_user'] ?>">
                                                     <input type="hidden" name="id" value="<?= $user['id_user'] ?>">
                                                     <button type="submit" name="status" value="aktif" class="btn btn-success btn-sm">Setujui</button>
                                                     <button type="submit" name="status" value="blokir" class="btn btn-danger btn-sm">Tolak</button>

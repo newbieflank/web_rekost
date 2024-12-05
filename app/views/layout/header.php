@@ -70,7 +70,17 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
-                    <?php if ($role === 'pencari kos'): ?>
+                    <?php if ($role === 'pemilik kos'): ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#graph">Graph</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
+                        </li>
+                    <?php else: ?>
                         <li class="nav-item active">
                             <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
                         </li>
@@ -83,33 +93,92 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?= BASEURL; ?>#contact">Contact</a>
                         </li>
-                    <?php else: ?>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?= BASEURL; ?>#home">Home <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= BASEURL; ?>#graph">Graph</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
-                        </li>
                     <?php endif; ?>
                 </ul>
-                <div class="navbar-nav ml-auto mx-4 dropdown">
-                    <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>" class="rounded-circle" alt="Profile Image" width="40px" height="40px">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
-                        <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
-                        <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
-                            <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
-                            <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Tambah Kamar</a>
-                        <?php endif; ?>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout">Logout</a>
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])): ?>
+                    <div class="navbar-nav ml-auto mx-4 d-flex align-items-center">
+                        <div class="dropdown">
+                            <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <?php if (isset($unreadCount) && $unreadCount > 0): ?>
+                                    <span class="badge badge-danger"><?= $unreadCount ?></span>
+                                <?php endif; ?>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
+                                <?php if (empty($data['notifikasi'])): ?>
+                                    <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
+                                <?php else: ?>
+                                    <?php foreach ($data['notifikasi'] as $notif): ?>
+                                        <a class="dropdown-item"
+                                            href="<?= BASEURL; ?>/pembayaran/detail/<?= $notif['id_pembayaran'] ?>">
+                                            <div class="d-flex align-items-center">
+                                                <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                                    <i class="fas fa-exclamation-circle text-warning mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">Masa sewa akan berakhir</small>
+                                                        <p class="mb-0">
+                                                            <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
+                                                        </p>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <i class="fas fa-check-circle text-success mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">
+                                                            <?php
+                                                            $date1 = new DateTime($notif['tanggal_pembayaran']);
+                                                            $date2 = new DateTime();
+                                                            $interval = $date1->diff($date2);
+                                                            echo $interval->days == 0 ?
+                                                                ($interval->h == 0 ? "{$interval->i} menit yang lalu" : "{$interval->h} jam yang lalu") :
+                                                                "{$interval->days} hari yang lalu";
+                                                            ?>
+                                                        </small>
+                                                        <p class="mb-0">
+                                                            Pembayaran kost sebesar Rp
+                                                            <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?> telah
+                                                            dikonfirmasi
+                                                        </p>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </a>
+                                    <?php endforeach; ?>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>/pembayaran">Lihat semua
+                                        pembayaran</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/user.png') ?>"
+                                    class="rounded-circle" alt="Profile Image" width="40px" height="40px">
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                                <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
+                                <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
+                                <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Tambah Kamar</a>
+                                <?php endif; ?>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout">Logout</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                <?php else: ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="<?= BASEURL; ?>login" class="btn btn-outline-primary mr-2">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= BASEURL; ?>register" class="btn btn-primary">Sign Up</a>
+                        </li>
+                    </ul>
+                <?php endif; ?>
             </div>
         </nav>
     </header>

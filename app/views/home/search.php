@@ -17,6 +17,10 @@
             scroll-behavior: smooth;
         }
 
+        body {
+            padding-top: 0;
+        }
+
         .card {
             width: 300px;
             height: 500px;
@@ -31,41 +35,28 @@
             padding: 15px;
             overflow: hidden;
         }
+
+        .no-results {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .no-results p {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #333;
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-            <a class="navbar-brand" href="#">
-                <img src="<?= asset('img/logo.png') ?>" alt="Re-Kost Logo" height="50">
-            </a>
-            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#bookings">Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#service">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <img src="img/user.png" alt="profile">
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <section class="populer">
         <div class="container-fluid px-4">
             <div class="row">
@@ -150,25 +141,10 @@
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>
-                    <p>No results found.</p>
-                <?php endif; ?>
-                <div class="col-md-3 p-3 mb-5">
-                    <div class="card">
-                        <img src="<?= asset('img/home2.png') ?>" class="card-img-top" height="200" width="300" />
-                        <div class="card-body">
-                            <h5 class="card-title">Kos Putri Syariah</h5>
-                            <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
-                                Blindungan, Bondowoso</p>
-                            <p class="card-text" style="font-weight: 600;">4.5/5 (100 Reviews)</p>
-                            <span class="btn-available" style="border-radius: 4px;">Tersedia</span>
-                            <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                IDR 500,000
-                                <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">/month</span>
-                            </p>
-                            <a class="btn-order" href="detailkos">Pesan sekarang</a>
-                        </div>
+                    <div class="no-results">
+                        <p>No Result Found.</p>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
 
