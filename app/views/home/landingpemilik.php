@@ -149,16 +149,6 @@
                     <h2>Statistik Keuangan</h2>
                     <p>Menampilkan ringkasan statistik keuangan untuk memberikan gambaran lengkap tentang pendapatan dan pengeluaran bulanan.</p>
                 </div>
-                <div class="filter mx-">
-                    <label>
-                        <input type="radio" name="keuanganFilter" value="pendapatan" checked>
-                        Pendapatan
-                    </label>
-                    <label>
-                        <input type="radio" name="keuanganFilter" value="pengeluaran">
-                        Pengeluaran
-                    </label>
-                </div>
             </div>
             <div class="chart-wrapper">
                 <canvas id="keuanganChart"></canvas>
