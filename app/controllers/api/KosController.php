@@ -4,7 +4,11 @@ class KosController extends Controller
 {
 
     private $kos;
+<<<<<<< HEAD
+    private $detailkos;
+=======
     private $detail;
+>>>>>>> 65562c7fee072e9a0fb38cd02dc431283c890054
 
     public function __construct()
     {
@@ -12,6 +16,8 @@ class KosController extends Controller
         $this->detail = $this->model('CardViewModel');
     }
     public function getKos()
+
+
     {
         header("Access-Control-Allow-Origin: *");
         header('Content-Type: application/json');
