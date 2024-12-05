@@ -49,7 +49,8 @@ class PembayaranController extends Controller
         $user = $this->userModel->findUserByEmail($email);
         $pembayaranModel = $this->model('PembayaranModel');
         $riwayat = $pembayaranModel->getRiwayatPencari();
-
+        // var_dump($riwayat);
+        // die;
         if ($user['role'] === 'pencari kos') {
             $this->renderProfile('history/historypencari', [
                 'riwayat' => $riwayat,
@@ -178,5 +179,10 @@ class PembayaranController extends Controller
         } while ($check);
 
         return $generatedId;
+    }
+    public function addrating()
+    {
+        $this->model('PembayaranModel')->insertRating();
+        $this->header('/riwayat');
     }
 }

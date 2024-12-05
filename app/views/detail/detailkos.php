@@ -91,7 +91,7 @@
                             ?>
                         </div>
                         <h1><?= $data['nama_kos'] ?></h1>
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: inline-block;  gap: 10px;">
                             <span class="tag">
                                 <?php echo $data['tipe_kos'] ?>
                             </span>

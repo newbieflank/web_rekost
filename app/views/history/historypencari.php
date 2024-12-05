@@ -40,13 +40,15 @@
                             </a>
                         </td>
                         <td class="text-center">
-                            <a href="#"
+                            <button href="#"
+                                data-id_kos="<?= $transaksi['id_kos'] ?>"
+                                <?= $transaksi['status_ulasan'] == 'Sudah' ? 'disabled' : '' ?>
                                 class="btn btn-sm btn-warning give-rating"
                                 data-bs-toggle="modal"
                                 data-bs-target="#ratingModal"
                                 data-id="<?= $transaksi['id_penyewaan'] ?>">
                                 Rating
-                            </a>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -77,7 +79,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="ratingForm">
+                <form action="<?= BASEURL; ?>rating" method="post" name="rating" id="ratingForm">
+                    <input type="hidden" name="id_kos">
                     <div class="mb-3 text-center">
                         <label for="rating" class="form-label">Rating:</label>
                         <div class="rating">
@@ -121,25 +124,31 @@
                 $('#ratingForm').data('id', idTransaksi);
             }
         });
-        $('#ratingForm').on('submit', function(event) {
-            event.preventDefault();
-            const idTransaksi = $(this).data('id');
-            const rating = $('#ratingValue').val();
-            const review = $('#review').val();
+        // $('#ratingForm').on('submit', function(event) {
+        //     event.preventDefault();
+        //     const idTransaksi = $(this).data('id');
+        //     const rating = $('#ratingValue').val();
+        //     const review = $('#review').val();
 
-            console.log({
-                idTransaksi,
-                rating,
-                review
-            });
-            $('#ratingModal').modal('hide');
-        });
+        //     console.log({
+        //         idTransaksi,
+        //         rating,
+        //         review
+        //     });
+        //     $('#ratingModal').modal('hide');
+        // });
 
         $('.rating i').on('click', function() {
             const rating = $(this).data('rating');
             $('#ratingValue').val(rating);
             $('.rating i').removeClass('bi-star-fill').addClass('bi-star');
             $(this).prevAll().addBack().removeClass('bi-star').addClass('bi-star-fill');
+        });
+        $('.give-rating').on('click', function() {
+            const id_kos = $(this).data('id_kos');
+            $('[name="id_kos"]').val(id_kos);
+            $('[name="id_user"]').val(id_user);
+
         });
     });
 </script>

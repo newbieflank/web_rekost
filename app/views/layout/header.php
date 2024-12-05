@@ -78,7 +78,7 @@
                             <a class="nav-link" href="<?= BASEURL; ?>#graph">Graph</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASEURL; ?>#service">Service</a>
+                            <a class="nav-link" href="<?= BASEURL; ?>#service">Rating</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item active">

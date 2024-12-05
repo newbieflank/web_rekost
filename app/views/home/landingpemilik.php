@@ -119,18 +119,12 @@
                         </p>
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
             <div class="col-md-4">
                 <div class="card overlap-card" style="--url: url('https://img.icons8.com/ios-filled/100/000000/line-chart.png')">
                     <div class="card-body">
-                        <h5>Pengeluaran</h5>
-                        <p>Pengeluaran yang dikeluarkan Bulan Januari</p>
+                        <h5>Jumlah Penyewa</h5>
+                        <p>Menampilkan pengguna yang ada di kos ini</p>
                         <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?= is_array($data['pengeluaran']) && isset($data['pengeluaran']['pengeluaran']) ? $data['pengeluaran']['total_jumlah'] : 0; ?>
                         </p>
                     </div>

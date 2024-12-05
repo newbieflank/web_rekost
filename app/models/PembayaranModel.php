@@ -16,7 +16,26 @@ class PembayaranModel
     public function getRiwayatPencari()
     {
 
-        $query = "SELECT penyewaan.id_penyewaan AS id_penyewaan, DATE(penyewaan.tanggal_penyewaan) AS tanggal_penyewaan, penyewaan.waktu_penyewaan AS waktu_penyewaan, penyewaan.harga AS harga_kos, penyewaan.id_kos as id_kos FROM penyewaan JOIN user ON user.id_user = penyewaan.id_user WHERE user.id_user = :id_user ORDER BY penyewaan.tanggal_penyewaan DESC";
+        $query = "
+SELECT 
+    penyewaan.id_penyewaan AS id_penyewaan, 
+    DATE(penyewaan.tanggal_penyewaan) AS tanggal_penyewaan, 
+    penyewaan.waktu_penyewaan AS waktu_penyewaan, 
+    penyewaan.harga AS harga_kos, 
+    penyewaan.id_kos AS id_kos,
+    CASE 
+        WHEN EXISTS (
+            SELECT id_kos 
+            FROM ulasan 
+            WHERE ulasan.id_kos = penyewaan.id_kos
+        ) THEN 'Sudah'
+        ELSE 'Belum'
+    END AS status_ulasan
+FROM penyewaan
+JOIN user ON user.id_user = penyewaan.id_user
+WHERE user.id_user = :id_user
+ORDER BY penyewaan.tanggal_penyewaan DESC";
+
 
         $this->db->query($query);
         $this->db->bind('id_user', $_SESSION['user']['id_user']);
@@ -63,5 +82,16 @@ class PembayaranModel
     public function getDataPembayaran($id_penyewaan)
     {
         $query = "SELECT * FROM penyewaan WHERE id_penyewaan = :id_penyewaan";
+    }
+    public function insertRating()
+    {
+        $query = "INSERT INTO `ulasan` (`id_ulasan`, `ulasan`, `rating`, `id_user`, `id_kos`) VALUES ('', :ulasan, :rating, :id_user, :id_kos)";
+        $this->db->query($query);
+        $this->db->bind('id_user', $_SESSION['user']['id_user']);
+        $this->db->bind('id_kos', $_POST['id_kos']);
+        $this->db->bind('ulasan', $_POST['review']);
+        $this->db->bind('rating', $_POST['rating']);
+        $this->db->execute();
+        return  $this->db->lastInsertId();
     }
 }

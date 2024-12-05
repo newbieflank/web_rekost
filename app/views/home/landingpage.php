@@ -23,7 +23,7 @@
 
         .card {
             width: 100%;
-            height: 420px;
+            height: 400px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
