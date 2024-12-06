@@ -274,7 +274,7 @@ ORDER BY
 
     public function jumlahPenyewa()
     {
-        $query = "SELECT COUNT(*) AS jumlah FROM penyewaan WHERE id_kos=:id";
+        $query = "SELECT COUNT(DISTINCT id_user) AS jumlah FROM penyewaan WHERE id_kos=:id";
 
         $this->db->query($query);
         $this->db->bind('id', $_SESSION['user']['id_kos']);
