@@ -49,10 +49,14 @@ class HomeController extends Controller
             } else if ($role === 'pemilik kos') {
                 $pendapatan = $this->model('chartModel')->getpendapatan();
                 $pengeluaran = $this->model('chartModel')->getpengeluaran();
-                $rataRating = $this->model('chartModel')->getUlasan();
+                $rataRating = $this->model(model: 'chartModel')->getUlasan();
                 $ratingatas = $this->model('chartModel')->getulasanatas();
                 $chartpendapatan = $this->model('chartModel')->gettransaksi($idKos);
                 $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+                $penyewa = $this->model('KosModel')->jumlahPenyewa();
+                $ulasan = $this->model('KosModel')->totalRating();
+
+                $ulasan['user'] > 0 ?  $jumlah = $ulasan['rating'] / $ulasan['user'] : $jumlah = 0;
 
                 $pendapatanPerBulan = array_fill(0, 12, 0);
                 foreach ($chartpendapatan as $item) {
@@ -72,7 +76,9 @@ class HomeController extends Controller
                     "rataRating" => $rataRating,
                     "ratingatas" => $ratingatas,
                     "chartpendapatan" => $pendapatanPerBulan,
-                    "chartpengeluaran" => $pengeluaranPerBulan
+                    "chartpengeluaran" => $pengeluaranPerBulan,
+                    "penyewa" => $penyewa,
+                    "ulasan" => $jumlah
                 ];
 
                 ob_start();

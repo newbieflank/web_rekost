@@ -271,4 +271,24 @@ ORDER BY
 
         return $this->db->single();
     }
+
+    public function jumlahPenyewa()
+    {
+        $query = "SELECT COUNT(*) AS jumlah FROM penyewaan WHERE id_kos=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $_SESSION['user']['id_kos']);
+
+        return $this->db->single();
+    }
+
+    public function totalRating()
+    {
+        $query = "SELECT COUNT(*) AS user, SUM(rating) AS rating FROM ulasan WHERE id_kos=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $_SESSION['user']['id_kos']);
+
+        return $this->db->single();
+    }
 }
