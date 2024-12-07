@@ -65,6 +65,7 @@ class AuthController extends Controller
 
         switch ($_SESSION['form']) {
             case 'login':
+                $_SESSION['new'] = false;
                 $user = $this->userModel->findUserByEmail($googleUser->email);
                 if (!$user) {
                     Flasher::setFlash('Akun Tidak Di Temukan', 'danger');

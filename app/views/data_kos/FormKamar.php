@@ -380,4 +380,7 @@
     </button>
 </div>
 
+<script>
+    const sessionValue = <?= json_encode($_SESSION['new'] ?? null) ?>;
+</script>
 <script src="<?= asset('js/steps2.js') ?>"></script>

@@ -100,7 +100,11 @@ function submitForm() {
                     text: 'Data kos berhasil disimpan',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = '';
+                    if (sessionValue == true) {
+                        window.location.href = '';
+                    } else {
+                        window.location.href = 'datakamar';
+                    }
                 });
             } else {
 

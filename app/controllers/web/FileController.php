@@ -138,6 +138,7 @@
 
                     // Move the file to the target directory
                     if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+                        $_SESSION['new'] = true;
                         $this->header('/datakos');
                         exit;
                     } else {

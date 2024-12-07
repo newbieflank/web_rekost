@@ -466,6 +466,9 @@
 
     </form>
 </div>
+<script>
+    const sessionValue = <?= json_encode($_SESSION['new'] ?? null) ?>;
+</script>
 <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
 <script src="<?= asset('js/map.js') ?>"></script>
 <script src="<?= asset('js/steps.js') ?>"></script>
