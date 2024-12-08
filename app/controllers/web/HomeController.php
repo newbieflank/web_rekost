@@ -153,7 +153,9 @@ class HomeController extends Controller
 
         $search = $this->model('KosModel')->CariKos($alamat, $harga);
         $data = [
-            'search' => $search
+            'search' => $search,
+            'alamat' => $alamat,
+            'harga' => $harga
         ];
 
         ob_start();
@@ -161,8 +163,8 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         $layout = [
-            'title' => "cari kos",
             'content' => $content,
+            'title' => "cari kos",
             'role' => $role,
             'footer' => false
         ];
@@ -176,6 +178,18 @@ class HomeController extends Controller
 
         $this->view('layout/main', $layout);
     }
+
+    public function filterKos()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $alamat = $data['alamat'] ?? '';
+        $harga = $data['harga'] ?? '';
+
+        $results = $this->model('KosModel')->CariKos($alamat, $harga);
+
+        echo json_encode($results);
+    }
+
 
     public function best()
     {

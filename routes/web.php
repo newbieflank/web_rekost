@@ -53,5 +53,6 @@ Router::post('/datakamar/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
+Router::post('/filterKos', 'HomeController@filterKos');
 
 Router::get('/out', 'LoginController@out');
