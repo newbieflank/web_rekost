@@ -9,7 +9,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -122,6 +122,34 @@
         position: absolute;
         bottom: 10px;
     }
+
+    .image-preview {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .image-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-preview i {
+        font-size: 2rem;
+        color: #ccc;
+    }
+
+    .image-preview p {
+        color: #ccc;
+        text-align: center;
+    }
 </style>
 
 <div class="container mt-5">
@@ -135,7 +163,7 @@
     </div>
 
     <!-- Form Utama -->
-    <form id="multiStepForm" action="<?= BASEURL; ?>datakamar/tambah" method="post" onsubmit="handleSubmit(event)">
+    <form id="multiStepForm" action="<?= BASEURL; ?>datakamar/tambah" enctype="multipart/form-data" method="post" onsubmit="handleSubmit(event)">
         <div class="card mb-4">
             <div class="step-container" data-step="1">
                 <h5 class="card-header">
@@ -155,9 +183,15 @@
                             <p class="text-sm text-gray-500 mb-4">Foto depan kamar dari pintu dengan cahaya yang terang.
                             </p>
                             <label for="foto-depan-kamar" class="photo-box">
-                                <input type="file" accept="image/*" id="foto-depan-kamar" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                                <p class="text-gray-400">Tambah foto kamar dari depan</p>
+                                <input type="file" accept="image/*" id="foto-depan-kamar" name="kamar-depan" style="display: none;" onchange="previewImage(this, 'preview-depan')">
+                                <div id="preview-depan" class="image-preview">
+                                    <?php if (file_exists($imagePath . '/kamar-depan.jpg')) : ?>
+                                        <img src="<?= asset('uploads/' . $id_kos . '/kamar-depan.jpg') ?>" alt="Preview">
+                                    <?php else : ?>
+                                        <i class="fas fa-camera"></i>
+                                        <p class="text-gray-400">Tambah foto bangunan depan</p>
+                                    <?php endif; ?>
+                                </div>
                             </label>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -165,9 +199,15 @@
                             <p class="text-sm text-gray-500 mb-4">Tunjukkan foto kamar mandi yang akan digunakan oleh
                                 penyewa.</p>
                             <label for="foto-kamar-mandi" class="photo-box">
-                                <input type="file" accept="image/*" id="foto-kamar-mandi" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                                <p class="text-gray-400">Tambah foto kamar mandi</p>
+                                <input type="file" accept="image/*" id="foto-kamar-mandi" name="kamar-kamar_mandi" style="display: none;" onchange="previewImage(this, 'preview-kamar-mandi')">
+                                <div id="preview-kamar-mandi" class="image-preview">
+                                    <?php if (file_exists($imagePath . '/kamar-kamar_mandi.jpg')) : ?>
+                                        <img src="<?= asset('uploads/' . $id_kos . '/kamar-kamar_mandi.jpg') ?>" alt="Preview">
+                                    <?php else : ?>
+                                        <i class="fas fa-camera"></i>
+                                        <p class="text-gray-400">Tambah foto bangunan depan</p>
+                                    <?php endif; ?>
+                                </div>
                             </label>
                         </div>
                         <div class="col-md-6 mb-4">
@@ -176,18 +216,30 @@
                                 penyewa.
                             </p>
                             <label for="foto-dalam-kamar" class="photo-box">
-                                <input type="file" accept="image/*" id="foto-dalam-kamar" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                                <p class="text-gray-400">Tambah foto dalam kamar</p>
+                                <input type="file" accept="image/*" id="foto-dalam-kamar" name="kamar-dalam" style="display: none;" onchange="previewImage(this, 'preview-dalam')">
+                                <div id="preview-dalam" class="image-preview">
+                                    <?php if (file_exists(filename: $imagePath . '/kamar-dalam.jpg')) : ?>
+                                        <img src="<?= asset('uploads/' . $id_kos . '/kamar-dalam.jpg') ?>" alt="Preview">
+                                    <?php else : ?>
+                                        <i class="fas fa-camera"></i>
+                                        <p class="text-gray-400">Tambah foto bangunan depan</p>
+                                    <?php endif; ?>
+                                </div>
                             </label>
                         </div>
                         <div class="col-md-6 mb-4">
                             <h2 class="font-semibold mb-2">Tambah foto lain?</h2>
                             <p class="text-sm text-gray-500 mb-4">Tambah foto fasilitas umum kos disini.(opsional).</p>
                             <label for="foto-lain" class="photo-box">
-                                <input type="file" accept="image/*" id="foto-lain" style="display: none;">
-                                <i class="fas fa-camera"></i>
-                                <p class="text-gray-400">Tambah foto lain berupa opsional</p>
+                                <input type="file" accept="image/*" id="foto-lain" name="kamar-lain" style="display: none;" onchange="previewImage(this, 'preview-lain')">
+                                <div id="preview-lain" class="image-preview">
+                                    <?php if (file_exists($imagePath . '/kamar-lain.jpg')) : ?>
+                                        <img src="<?= asset('uploads/' . $id_kos . '/kamar-lain.jpg') ?>" alt="Preview">
+                                    <?php else : ?>
+                                        <i class="fas fa-camera"></i>
+                                        <p class="text-gray-400">Tambah foto bangunan depan</p>
+                                    <?php endif; ?>
+                                </div>
                             </label>
                         </div>
                     </div>
@@ -203,7 +255,7 @@
                             <label for="TipeKamar" class="col-sm-2 col-form-label">Tipe Kamar</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="Tipe_Kamar" name="tipe_kamar">
-                                    <option value="" <?php echo empty($data['tipe_kamar']) ? 'selected' : ''; ?>>Pilih tipe kamar</option>
+                                    <option value="" <?= empty($data['tipe_kamar']) ? 'selected' : ''; ?>>Pilih tipe kamar</option>
                                     <option value="TIPE A" <?= $data['tipe_kamar'] == 'TIPE A' ? 'selected' : '' ?>>Tipe A</option>
                                     <option value="TIPE B" <?= $data['tipe_kamar'] == 'TIPE B' ? 'selected' : '' ?>>Tipe B</option>
                                     <option value="TIPE C" <?= $data['tipe_kamar'] == 'TIPE C' ? 'selected' : '' ?>>Tipe C</option>
@@ -252,21 +304,24 @@
                             <label for="perhari" class="col-sm-2 col-form-label">Harga Per Hari</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_hari" id="harga_minggu" class="form-control"
-                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Harian' ? 'disabled' : '' ?>>
+                                    placeholder="Rp.0" value="<?= $data['harga_hari'] ? $data['harga_hari'] : 0 ?>"
+                                    <?= in_array(needle: 'Harian', haystack: $penyewaan) ? '' : 'disabled' ?>>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="perminggu" class="col-sm-2 col-form-label">Harga Per Minggu</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_minggu" id="harga_minggu" class="form-control"
-                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Mingguan' ? 'disabled' : '' ?>>
+                                    placeholder="Rp.0" value="<?= $data['harga_minggu'] ? $data['harga_minggu'] : 0 ?>"
+                                    <?= in_array(needle: 'Mingguan', haystack: $penyewaan) ? '' : 'disabled' ?>>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="perbulan" class="col-sm-2 col-form-label">Harga Per Bulan</label>
                             <div class="col-sm-10">
                                 <input type="number" name="harga_bulan" id="harga_bulan" class="form-control"
-                                    placeholder="Rp.0" <?= $data['waktu_penyewaan'] == 'Bulanan' ? 'disabled' : '' ?>>
+                                    placeholder="Rp.0" value="<?= $data['harga_bulan'] ? $data['harga_bulan'] : 0 ?>"
+                                    <?= in_array(needle: 'Bulanan', haystack: $penyewaan) ? '' : 'disabled' ?>>
                             </div>
                         </div>
                     </div>

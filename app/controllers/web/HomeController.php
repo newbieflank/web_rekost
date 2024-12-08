@@ -239,6 +239,7 @@ class HomeController extends Controller
     public function echo()
     {
         echo json_encode($_SESSION['user']);
+        echo json_encode($_SESSION['new']);
     }
 
     public function AddUlasan()
