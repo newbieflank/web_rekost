@@ -43,14 +43,53 @@
         <div class="container-fluid px-4">
             <div class="row">
                 <div class="col-md-7 p-2">
-                    <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_depan.jpg') ?>" alt="thumbnail" class="thumbnail w-100">
+                    <?php
+                    $path = 'uploads/' . $data["id_kos"] . '/foto_depan.jpg';
+                    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                    if (file_exists($absolutePath)) {
+                    ?>
+                        <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                    <?php
+                    } else {
+
+                    ?>
+                        <img src="<?= asset(path: 'default/default.jpg') ?>" width="400px" height="600px" class="card-img-top" alt="No Image Available">
+                    <?php
+                    }
+                    ?>
                 </div>
                 <div class="col-md-5 d-flex flex-wrap justify-content-around">
                     <div class="row">
-                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_depan.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_belakang.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_jalan.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
-                        <img src="<?= asset('uploads/' . $data['id_kos'] . '/foto_dalam.jpg') ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                        <?php
+                        $images = [
+                            'kamar-dalam.jpg',
+                            'kamar-depan.jpg',
+                            'kamar-kamar_mandi.jpg',
+                            'kamar-lain.jpg'
+                        ];
+
+                        $hasImage = false;
+                        foreach ($images as $image) {
+                            $path = 'uploads/' . $data['id_kos'] . '/' . $image;
+                            $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+
+                            if (file_exists($absolutePath)) {
+                                $hasImage = true;
+                        ?>
+                                <img src="<?= asset($path) ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                            <?php
+                            }
+                        }
+                        if (!$hasImage) {
+                            ?>
+                            <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                                <div class="text-center">
+                                    <p>Tidak ada Lampiran Gambar Lainnya.</p>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

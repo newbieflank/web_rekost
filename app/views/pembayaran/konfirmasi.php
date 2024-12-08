@@ -96,7 +96,20 @@
             <div class="col-md-4">
                 <div class="detail-card p-3 border rounded">
                     <div class="mb-4">
-                        <img src="<?= asset('uploads/' . $kos['id_kos'] . '/foto_depan.jpg') ?>" class="w-100" alt="Kos Image">
+                        <?php
+                        $path = 'uploads/' . $kos["id_kos"] . '/foto_depan.jpg';
+                        $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                        if (file_exists($absolutePath)) {
+                        ?>
+                            <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                        <?php
+                        } else {
+
+                        ?>
+                            <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                        <?php
+                        }
+                        ?>
                     </div>
                     <h5>Detail Pembayaran</h5>
                     <p><strong>Nama Kos</strong>: <?= $kos['nama_kos'] ?></p>
