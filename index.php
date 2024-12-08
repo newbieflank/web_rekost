@@ -54,22 +54,22 @@ $output = shell_exec('ps aux | grep "[n]ode ./server/server.js"');
 if (empty($output)) {
     shell_exec('node ./server/server.js > /dev/null 2>&1 &');
 }
+// // index.php
+// if (isset($_GET['url'])) {
+//     $url = $_GET['url'];  // Ambil URL yang dikirim
 
-if (isset($_GET['url'])) {
-    $url = $_GET['url'];  // Ambil URL yang dikirim
-
-    // Panggil controller sesuai dengan URL
-    if ($url == 'app/controllers/api/UpdateFcmToken.php') {
-        require_once 'app/controllers/api/UpdateFcmToken.php';
-        $controller = new UpdateFcmToken();
-        $controller->update();  // Panggil method 'update' untuk memperbarui token
-    } else {
-        // Tambahkan logika untuk menangani URL lainnya
-        echo 'Page not found';
-    }
-} else {
-    echo 'URL parameter missing';
-}
+//     // Panggil controller sesuai dengan URL
+//     if ($url == 'app/controllers/api/UpdateFcmToken.php') {
+//         require_once 'app/controllers/api/UpdateFcmToken.php';
+//         $controller = new UpdateFcmToken();
+//         $controller->update();  // Panggil method 'update' untuk memperbarui token
+//     } else {
+//         // Tambahkan logika untuk menangani URL lainnya
+//         echo 'Page not found';
+//     }
+// } else {
+//     echo 'URL parameter missing';
+// }
 
 
 $app = new App();
