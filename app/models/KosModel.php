@@ -203,13 +203,13 @@ ORDER BY
         $array = explode('-', $harga);
 
         $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
-            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, km.waktu_penyewaan, km.status_kamar 
-            FROM kos k 
-            LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
-            LEFT JOIN kamar km ON k.id_kos = km.id_kos 
-            LEFT JOIN gambar g ON k.id_kos = g.id_kos ";
+            AS review_count, k.waktu_penyewaan 
+            FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif' ";
 
 
         $conditions = [];
@@ -224,9 +224,9 @@ ORDER BY
 
 
         if (!empty($conditions)) {
-            $query .= "WHERE " . implode(" AND ", $conditions) . " ";
+            $query .= "AND " . implode(" AND ", $conditions) . " ";
         }
-        $query .= "GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
+        $query .= "GROUP BY k.id_kos ORDER BY review_count DESC";
 
 
         $this->db->query($query);

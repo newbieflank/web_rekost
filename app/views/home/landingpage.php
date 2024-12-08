@@ -312,7 +312,7 @@
                                         <?php echo $popular['alamat'] ?>
                                     </p>
 
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ? $popular['avg_rating'] : 0  ?>/5
                                         (<?php echo $popular['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
@@ -429,7 +429,7 @@
                                         <?php echo $best['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ? $best['avg_rating'] : 0 ?>/5
                                         (<?php echo $best['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
@@ -529,7 +529,7 @@
                                         <?php echo $campus['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ? $campus['avg_rating'] : 0 ?>/5
                                         (<?php echo $campus['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
