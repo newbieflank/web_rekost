@@ -160,50 +160,30 @@ ORDER BY
     public function tambahDataKamar($data)
     {
         try {
-            do {
-                $idKamar = $this->generateKamarId();
-                $query = "SELECT COUNT(*) as count FROM kamar WHERE id_kamar = :id_kamar";
-                $this->db->query($query);
-                $this->db->bind(':id_kamar', $idKamar);
-                $result = $this->db->single();
-            } while ($result['count'] > 0);
 
-            $query2 = "INSERT INTO kamar (
-                id_kamar,
-                luas_kamar, 
-                jenis_fasilitas, 
-                harga_bulan,      
-                tipe_kamar,
-                kamar_tersedia, 
-                id_kos,
-                total_kamar,
-                harga_minggu,     
-                harga_hari        
-            ) VALUES (
-                :id_kamar,
-                :luas_kamar,
-                :jenis_fasilitas,
-                :harga_bulan,     
-                :tipe_kamar,
-                :kamar_tersedia,
-                :id_kos,
-                :total_kamar,
-                :harga_minggu,    
-                :harga_hari       
-            )";
+            $query2 = "UPDATE kamar SET
+                luas_kamar = :luas_kamar,
+                jenis_fasilitas = :jenis_fasilitas,
+                harga_bulan = :harga_bulan,     
+                tipe_kamar = :tipe_kamar,
+                kamar_tersedia = :kamar_tersedia,
+                total_kamar = :total_kamar,
+                harga_minggu = :harga_minggu,    
+                harga_hari = :harga_hari
+                WHERE id_kos = :id_kos       
+            ";
 
             $this->db->query($query2);
 
-            $this->db->bind(':id_kamar', $idKamar);
-            $this->db->bind(':luas_kamar', $data['luas_kamar']);
+            $this->db->bind('luas_kamar', $data['luas_kamar']);
             $this->db->bind('jenis_fasilitas', $data['jenis_fasilitas']);
-            $this->db->bind(':harga_bulan', $data['harga_bulan']);
-            $this->db->bind(':tipe_kamar', $data['tipe_kamar']);
-            $this->db->bind(':kamar_tersedia', $data['kamar_tersedia']);
-            $this->db->bind(':total_kamar', $data['total_kamar']);
-            $this->db->bind(':harga_minggu', $data['harga_minggu']);
-            $this->db->bind(':harga_hari', $data['harga_hari']);
-            $this->db->bind(':id_kos', $data['id_kos']);
+            $this->db->bind('harga_bulan', $data['harga_bulan']);
+            $this->db->bind('tipe_kamar', $data['tipe_kamar']);
+            $this->db->bind('kamar_tersedia', $data['kamar_tersedia']);
+            $this->db->bind('total_kamar', $data['total_kamar']);
+            $this->db->bind('harga_minggu', $data['harga_minggu']);
+            $this->db->bind('harga_hari', $data['harga_hari']);
+            $this->db->bind('id_kos', $data['id_kos']);
 
             $this->db->execute();
             return $this->db->rowCount();
@@ -223,13 +203,13 @@ ORDER BY
         $array = explode('-', $harga);
 
         $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
-            AS harga, (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
             AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
-            AS review_count, km.waktu_penyewaan, km.status_kamar 
-            FROM kos k 
-            LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
-            LEFT JOIN kamar km ON k.id_kos = km.id_kos 
-            LEFT JOIN gambar g ON k.id_kos = g.id_kos ";
+            AS review_count, k.waktu_penyewaan 
+            FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif' ";
 
 
         $conditions = [];
@@ -244,9 +224,9 @@ ORDER BY
 
 
         if (!empty($conditions)) {
-            $query .= "WHERE " . implode(" AND ", $conditions) . " ";
+            $query .= "AND " . implode(" AND ", $conditions) . " ";
         }
-        $query .= "GROUP BY k.id_kos, km.status_kamar ORDER BY review_count DESC";
+        $query .= "GROUP BY k.id_kos ORDER BY review_count DESC";
 
 
         $this->db->query($query);
@@ -264,10 +244,30 @@ ORDER BY
 
     public function getDataKamar($id)
     {
-        $query = "SELECT kos.waktu_penyewaan, kamar.* FROM kos JOIN kamar ON kos.id_kos=kamar.id_kos WHERE kos.id_kos=:id_kos";
+        $query = "SELECT kos.waktu_penyewaan AS waktu_sewa, kamar.* FROM kos JOIN kamar ON kos.id_kos=kamar.id_kos WHERE kos.id_kos=:id_kos";
 
         $this->db->query($query);
         $this->db->bind('id_kos', $id);
+
+        return $this->db->single();
+    }
+
+    public function jumlahPenyewa()
+    {
+        $query = "SELECT COUNT(DISTINCT id_user) AS jumlah FROM penyewaan WHERE id_kos=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $_SESSION['user']['id_kos']);
+
+        return $this->db->single();
+    }
+
+    public function totalRating()
+    {
+        $query = "SELECT COUNT(*) AS user, SUM(rating) AS rating FROM ulasan WHERE id_kos=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $_SESSION['user']['id_kos']);
 
         return $this->db->single();
     }

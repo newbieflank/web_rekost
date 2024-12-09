@@ -38,6 +38,15 @@ class UsersModel
         return $this->db->single();
     }
 
+    public function findKamarById($id)
+    {
+        $query = "SELECT * FROM kamar WHERE id_kamar = :id_kos";
+        $this->db->query($query);
+        $this->db->bind('id_kos', $id);
+
+        return $this->db->single();
+    }
+
     public function findOwnerById($id)
     {
         $query = "SELECT * FROM pemilik WHERE id_user = :id_user";
@@ -286,5 +295,35 @@ class UsersModel
 
         $this->db->execute();
         return $this->db->rowCount();
+    }
+
+    public function createKamar($id)
+    {
+        do {
+            $idKamar = $this->generateRandomId();
+            $cekID = $this->findKamarById($idKamar);
+        } while ($cekID);
+
+        $query = "INSERT INTO kamar (id_kamar, id_kos) VALUES (:id_kamar, :id_kos)";
+
+        $this->db->query($query);
+        $this->db->bind('id_kamar', $idKamar);
+        $this->db->bind('id_kos', $id);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+
+    private function generateRandomId()
+    {
+
+        $dateTime = date('Ym');
+
+
+        $randomNumber = str_pad(rand(0, 9999), 2, '0', STR_PAD_LEFT);
+
+        $generatedId = $dateTime . $randomNumber;
+        return $generatedId;
     }
 }

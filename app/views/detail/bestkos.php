@@ -108,7 +108,20 @@
                         <div class="col-md-3 p-3 mb-5">
                             <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                                 <div class="card">
-                                    <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
+                                    <?php
+                                    $path = 'uploads/' . $best["id_kos"] . '/foto_depan.jpg';
+                                    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                    if (file_exists($absolutePath)) {
+                                    ?>
+                                        <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                    <?php
+                                    } else {
+
+                                    ?>
+                                        <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $best['nama_kos'] ?></h5>
                                         <span class="btn-available"
@@ -118,7 +131,7 @@
                                         <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
                                             (<?php echo $best['review_count'] ?>)</p>
                                         <span class="btn-available"
-                                            style="border-radius: 4px;"><?php echo $best['status_kamar'] ?></span>
+                                            style="border-radius: 4px;"><?php echo $best['tipe_kos'] ?></span>
                                         <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                             IDR
                                             <?php

@@ -153,7 +153,7 @@
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/user.png') ?>"
+                                <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>"
                                     class="rounded-circle" alt="Profile Image" width="40px" height="40px">
                             </a>
 
@@ -161,8 +161,8 @@
                                 <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
                                 <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
                                 <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
-                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Profile Kost</a>
-                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Tambah Kamar</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakos">Data Kost</a>
+                                    <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Data Kamar</a>
                                 <?php endif; ?>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout">Logout</a>

@@ -194,7 +194,7 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="tipekos" id="campur"
                                         value="Bebas"
-                                        <?php echo ($tipe === 'Campur') ? 'checked' : ''; ?>>
+                                        <?php echo ($tipe === 'Bebas') ? 'checked' : ''; ?>>
                                     <label class="form-check-label" for="campur">Campur</label>
                                 </div>
                             </div>
@@ -400,54 +400,6 @@
                             </div>
                         </label>
                     </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h2 class="font-semibold mb-2">Foto bangunan dari belakang</h2>
-                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan kos dari belakang ke calon penyewa.</p>
-                        <label for="foto-belakang" class="photo-box">
-                            <input type="file" accept="image/*" id="foto-belakang" name="foto_belakang" style="display: none;" onchange="previewImage(this, 'preview-belakang')">
-                            <div id="preview-belakang" class="image-preview">
-                                <?php if (file_exists($imagePath . '/foto_belakang.jpg')) : ?>
-                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_belakang.jpg') ?>" alt="Preview">
-                                <?php else : ?>
-                                    <i class="fas fa-camera"></i>
-                                    <p class="text-gray-400">Tambah foto bangunan dari belakang</p>
-                                <?php endif; ?>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h2 class="font-semibold mb-2">Foto bangunan dalam</h2>
-                        <p class="text-sm text-gray-500 mb-4">Perlihatkan suasana di dalam dengan cahaya terang agar terlihat lebih jelas.</p>
-                        <label for="foto-dalam" class="photo-box">
-                            <input type="file" accept="image/*" id="foto-dalam" name="foto_dalam" style="display: none;" onchange="previewImage(this, 'preview-dalam')">
-                            <div id="preview-dalam" class="image-preview">
-                                <?php if (file_exists($imagePath . '/foto_dalam.jpg')) : ?>
-                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_dalam.jpg') ?>" alt="Preview">
-                                <?php else : ?>
-                                    <i class="fas fa-camera"></i>
-                                    <p class="text-gray-400">Tambah foto dari dalam bangunan</p>
-                                <?php endif; ?>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="col-md-6 mb-4">
-                        <h2 class="font-semibold mb-2">Foto bangunan dari jalan</h2>
-                        <p class="text-sm text-gray-500 mb-4">Tunjukkan lingkungan sekitar depan kos ke calon penyewa.</p>
-                        <label for="foto-jalan" class="photo-box">
-                            <input type="file" accept="image/*" id="foto-jalan" name="foto_jalan" style="display: none;" onchange="previewImage(this, 'preview-jalan')">
-                            <div id="preview-jalan" class="image-preview">
-                                <?php if (file_exists($imagePath . '/foto_jalan.jpg')) : ?>
-                                    <img src="<?= asset('uploads/'  . $id_kos . '/foto_jalan.jpg') ?>" alt="Preview">
-                                <?php else : ?>
-                                    <i class="fas fa-camera"></i>
-                                    <p class="text-gray-400">Tambah foto bangunan dari jalan</p>
-                                <?php endif; ?>
-                            </div>
-                        </label>
-                    </div>
                 </div>
 
             </div>
@@ -466,6 +418,9 @@
 
     </form>
 </div>
+<script>
+    const sessionValue = <?= json_encode($_SESSION['new'] ?? null) ?>;
+</script>
 <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
 <script src="<?= asset('js/map.js') ?>"></script>
 <script src="<?= asset('js/steps.js') ?>"></script>

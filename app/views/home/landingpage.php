@@ -288,8 +288,20 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $popular["id_kos"] . '/foto_depan.jpg') ?>"
-                                    class="card-img-top" alt="Kost Image">
+                                <?php
+                                $path = 'uploads/' . $popular["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                if (file_exists($absolutePath)) {
+                                ?>
+                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                <?php
+                                } else {
+
+                                ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                                <?php
+                                }
+                                ?>
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $popular['nama_kos'] ?>
@@ -300,7 +312,7 @@
                                         <?php echo $popular['alamat'] ?>
                                     </p>
 
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ? $popular['avg_rating'] : 0  ?>/5
                                         (<?php echo $popular['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
@@ -395,8 +407,20 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $best["id_kos"] . '/foto_depan.jpg') ?>"
-                                    class="card-img-top" alt="Kost Image">
+                                <?php
+                                $path = 'uploads/' . $best["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                if (file_exists($absolutePath)) {
+                                ?>
+                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                <?php
+                                } else {
+
+                                ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                                <?php
+                                }
+                                ?>
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $best['nama_kos'] ?>
@@ -405,7 +429,7 @@
                                         <?php echo $best['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ? $best['avg_rating'] : 0 ?>/5
                                         (<?php echo $best['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
@@ -483,8 +507,20 @@
                     <div class="col-md-3 mb-4">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
-                                <img src="<?= asset('uploads/' . $campus["id_kos"] . '/foto_depan.jpg') ?>"
-                                    class="card-img-top" alt="Kost Image">
+                                <?php
+                                $path = 'uploads/' . $campus["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                if (file_exists($absolutePath)) {
+                                ?>
+                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                <?php
+                                } else {
+
+                                ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                                <?php
+                                }
+                                ?>
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size: 20px; font-weight: bold;">
                                         <?php echo $campus['nama_kos'] ?>
@@ -493,7 +529,7 @@
                                         <?php echo $campus['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5
+                                    <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ? $campus['avg_rating'] : 0 ?>/5
                                         (<?php echo $campus['review_count'] ?>)</p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR

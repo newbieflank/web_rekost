@@ -125,7 +125,7 @@
                     <div class="card-body">
                         <h5>Jumlah Penyewa</h5>
                         <p>Menampilkan pengguna yang ada di kos ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?= is_array($data['pengeluaran']) && isset($data['pengeluaran']['pengeluaran']) ? $data['pengeluaran']['total_jumlah'] : 0; ?>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center"><?= $data['penyewa']['jumlah'] ?>
                         </p>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     <div class="card-body">
                         <h5>Rating</h5>
                         <p>Ulasan yang diberikan untuk kost ini</p>
-                        <p style="font-size: 40px; font-weight: 600; text-align:center">Rp <?= is_array($data['ratingatas']) && isset($data['ratingatas']['rata_rata_rating']) ? $data['ratingatas']['rata_rata_rating'] : 0; ?>
+                        <p style="font-size: 40px; font-weight: 600; text-align:center"><?= $data['ulasan'] ?>
                         </p>
                     </div>
                 </div>

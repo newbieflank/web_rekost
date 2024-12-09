@@ -100,7 +100,11 @@ function submitForm() {
                     text: 'Data kos berhasil disimpan',
                     icon: 'success'
                 }).then(() => {
-                    window.location.href = '';
+                    if (sessionValue == true) {
+                        window.location.href = '';
+                    } else {
+                        window.location.href = 'datakamar';
+                    }
                 });
             } else {
 
@@ -118,11 +122,37 @@ function submitForm() {
                 title: 'Sukses!',
                 text: 'Data kos berhasil disimpan',
                 icon: 'success'
-            });
+            })
+                .then(() => {
+                    if (sessionValue == true) {
+                        window.location.href = '';
+                    } else {
+                        window.location.href = 'datakamar';
+                    }
+                })
         });
 }
 
+function previewImage(input, previewId,) {
+    const previewDiv = document.getElementById(previewId);
 
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            // Replace the content with the uploaded image
+            previewDiv.innerHTML = `<img src="${e.target.result}" alt="Preview Image">`;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        // Reset to default if no file is selected
+        previewDiv.innerHTML = `
+            <i class="fas fa-camera"></i>
+            <p class="text-gray-400">Tambah foto</p>
+        `;
+    }
+}
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
     showStep(currentStep);

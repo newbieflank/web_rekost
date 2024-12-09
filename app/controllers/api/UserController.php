@@ -125,45 +125,17 @@ class UserController extends Controller
             $cekID = $this->user->findUserById($id);
         } while ($cekID);
 
-        if ($data['role'] === ['pemilik kos']) {
-            do {
-                $idKos = $this->generateRandomId();
-                $cekID = $this->user->findKosById($idKos);
-            } while ($cekID);
-
-            $pemilik = $this->user->pemilik($data);
-
-            if ($pemilik > 0) {
-                if ($this->user->createKos($idKos, $id) > 0) {
-                    $response = [
-                        "status" => 'success',
-                        "message" => 'user berhasil di tambahkan'
-                    ];
-                } else {
-                    $response = [
-                        "status" => 'failed',
-                        "message" => 'data Kos gagal di tambahkan'
-                    ];
-                }
-            } else {
-                $response = [
-                    "status" => 'failed',
-                    "message" => 'user gagal di tambahkan'
-                ];
-            }
+        if ($this->user->create($data) > 0) {
+            $this->user->insert($id, 'aktif');
+            $response = [
+                "status" => 'success',
+                "message" => 'user berhasil di tambahkan'
+            ];
         } else {
-            if ($this->user->create($data) > 0) {
-                $this->user->insert($id, 'aktif');
-                $response = [
-                    "status" => 'success',
-                    "message" => 'user berhasil di tambahkan'
-                ];
-            } else {
-                $response = [
-                    "status" => 'failed',
-                    "message" => 'user gagal di tambahkan'
-                ];
-            }
+            $response = [
+                "status" => 'failed',
+                "message" => 'user gagal di tambahkan'
+            ];
         }
 
         echo json_encode($response);
@@ -171,8 +143,6 @@ class UserController extends Controller
 
     public function user($id)
     {
-        // header("Access-Control-Allow-Origin: *");
-        // header('Content-Type: application/json');
         $user = $this->user->findUserById($id);
 
         if ($user) {

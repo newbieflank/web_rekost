@@ -49,10 +49,14 @@ class HomeController extends Controller
             } else if ($role === 'pemilik kos') {
                 $pendapatan = $this->model('chartModel')->getpendapatan();
                 $pengeluaran = $this->model('chartModel')->getpengeluaran();
-                $rataRating = $this->model('chartModel')->getUlasan();
+                $rataRating = $this->model(model: 'chartModel')->getUlasan();
                 $ratingatas = $this->model('chartModel')->getulasanatas();
                 $chartpendapatan = $this->model('chartModel')->gettransaksi($idKos);
                 $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
+                $penyewa = $this->model('KosModel')->jumlahPenyewa();
+                $ulasan = $this->model('KosModel')->totalRating();
+
+                $ulasan['user'] > 0 ?  $jumlah = $ulasan['rating'] / $ulasan['user'] : $jumlah = 0;
 
                 $pendapatanPerBulan = array_fill(0, 12, 0);
                 foreach ($chartpendapatan as $item) {
@@ -72,7 +76,9 @@ class HomeController extends Controller
                     "rataRating" => $rataRating,
                     "ratingatas" => $ratingatas,
                     "chartpendapatan" => $pendapatanPerBulan,
-                    "chartpengeluaran" => $pengeluaranPerBulan
+                    "chartpengeluaran" => $pengeluaranPerBulan,
+                    "penyewa" => $penyewa,
+                    "ulasan" => $jumlah
                 ];
 
                 ob_start();
@@ -147,7 +153,9 @@ class HomeController extends Controller
 
         $search = $this->model('KosModel')->CariKos($alamat, $harga);
         $data = [
-            'search' => $search
+            'search' => $search,
+            'alamat' => $alamat,
+            'harga' => $harga
         ];
 
         ob_start();
@@ -155,8 +163,8 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         $layout = [
-            'title' => "cari kos",
             'content' => $content,
+            'title' => "cari kos",
             'role' => $role,
             'footer' => false
         ];
@@ -170,6 +178,18 @@ class HomeController extends Controller
 
         $this->view('layout/main', $layout);
     }
+
+    public function filterKos()
+    {
+        $data = json_decode(file_get_contents("php://input"), true);
+        $alamat = $data['alamat'] ?? '';
+        $harga = $data['harga'] ?? '';
+
+        $results = $this->model('KosModel')->CariKos($alamat, $harga);
+
+        echo json_encode($results);
+    }
+
 
     public function best()
     {
@@ -233,6 +253,7 @@ class HomeController extends Controller
     public function echo()
     {
         echo json_encode($_SESSION['user']);
+        echo json_encode($_SESSION['new']);
     }
 
     public function AddUlasan()

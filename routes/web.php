@@ -6,7 +6,6 @@ Router::get('/login', 'LoginController@login');
 Router::get('/register', 'LoginController@register');
 Router::get('/id/{id}', 'LoginController@show');
 Router::get('/profile', 'ProfileController@profile');
-Router::get('/Kost', 'ProfileController@profileKost');
 Router::get('/popular', 'HomeController@popular');
 Router::get('/best', 'HomeController@best');
 Router::get('/popular', 'DetailController@popularkos');
@@ -21,15 +20,12 @@ Router::get('/chat/user/{user_id}', 'ChatController@getChatByUserId');
 Router::get('/detailkos/{id}/konfirmasi', 'PembayaranController@konfirmasi');
 Router::get('/verif', 'HomeController@verif');
 Router::get('/getchat/{userId}', 'ChatController@get_chat');
-Router::get('/pemilik', 'HomeController@home');
 Router::get('/riwayat', 'PembayaranController@riwayatpencari');
-Router::get('/riwayatpemilik', 'PembayaranController@riwayatpemilik');
 Router::post('/pembayaran', 'PembayaranController@insertPembayaran');
 Router::get('/chats/{id}', 'ChatController@chatUser');
 Router::post('/rating', 'PembayaranController@addrating');
 
 //admin
-Router::get('/dashboard', 'AdminController@dashboard');
 Router::get('/acceptance', 'AdminController@getPersetujuanKos');
 Router::get('/pencarikos', 'AdminController@getPencarikos');
 Router::get('/pemilikkos', 'AdminController@getPemilikkos');
@@ -57,5 +53,6 @@ Router::post('/datakamar/tambah', 'DataKosController@tambahFasilitas');
 Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
+Router::post('/filterKos', 'HomeController@filterKos');
 
 Router::get('/out', 'LoginController@out');
