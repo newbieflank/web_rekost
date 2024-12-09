@@ -232,7 +232,7 @@
             <hr>
         </div>
         <div class="location container-fluid px-4" id="lokasi">
-            <h3 style="margin-bottom: 24px;">Lokasi</h3>
+            <h3 class="px-4" style="margin-bottom: 24px;">Lokasi</h3>
             <div class="location-content">
                 <div class="map-container">
                     <div id="map"></div>
@@ -247,9 +247,9 @@
         </div>
         <div class="kebijakan container-fluid px-4" id="kebijakan">
             <div class="row">
-                <h3>Kebijakan</h3>
+                <h3 class="px-4">Kebijakan</h3>
                 <div class="col-md-4">
-                    <h6>Yang Harus Diketahui</h6>
+                    <h6 class="px-4">Yang Harus Diketahui</h6>
                 </div>
                 <div class="col-md-8">
                     <div class="row">

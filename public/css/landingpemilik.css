@@ -114,3 +114,27 @@
 .star-rating {
   color: #ffc107;
 }
+.float-button {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #54aaff;
+  color: white;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 1000;
+}
+
+.float-button i {
+  margin-top: 16px;
+}
+
+.float-button:hover {
+  background-color: #2793ff;
+  transition: 0.3s;
+  color: white;
+}

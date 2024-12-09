@@ -12,22 +12,32 @@
 
         body {
             padding-top: 0;
+            background-color: #f3f2ff;
         }
 
         .card {
-            width: 300px;
-            height: 550px;
+            width: 350px;
+            height: 500px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border: 1px solid #ddd;
-            border-radius: 20px;
         }
 
         .card-body {
             flex-grow: 1;
             padding: 15px;
             overflow: hidden;
+        }
+
+        .card-text i {
+            color: #000;
+        }
+
+        .card-text {
+            color: #000;
         }
     </style>
 

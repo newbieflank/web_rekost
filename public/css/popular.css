@@ -91,12 +91,6 @@ header {
 .populer button {
   white-space: nowrap;
 }
-.card {
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
 
 .card img {
   width: 100%;

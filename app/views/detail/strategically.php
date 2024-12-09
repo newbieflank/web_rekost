@@ -11,21 +11,32 @@
 
         body {
             padding-top: 0;
+            background-color: #f3f2ff;
         }
 
         .card {
-            width: 300px;
+            width: 350px;
             height: 500px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border: 1px solid #ddd;
         }
 
         .card-body {
             flex-grow: 1;
             padding: 15px;
             overflow: hidden;
+        }
+
+        .card-text i {
+            color: #000;
+        }
+
+        .card-text {
+            color: #000;
         }
     </style>
 
@@ -97,7 +108,7 @@
                                         <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ?>/5 (<?php echo $campus['review_count'] ?>)</p>
                                         <span class="btn-available" style="border-radius: 4px;"><?php echo $campus['status_kamar'] ?></span>
                                         <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                            IDR 
+                                            IDR
                                             <?php
                                             $arr = $campus['waktu_penyewaan'];
                                             $array = explode(',', $arr);

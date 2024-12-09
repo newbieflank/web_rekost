@@ -202,6 +202,9 @@
             </div>
         </div>
     </section>
+    <a href="chats" class="float-button" onclick="toggleChat()">
+        <i class="fas fa-comment-dots"></i>
+    </a>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data for the chart

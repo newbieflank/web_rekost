@@ -23,6 +23,23 @@
             height: 100vh;
             padding: 0;
         }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0554a8;
+        }
+
+        .chat-header .btn-secondary {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
     </style>
 </head>
 
@@ -52,10 +69,15 @@
         <!-- Chat Window -->
         <section class="chat-window flex-grow-1 p-3">
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
-                <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" style="display: none;" id="chat-user-image">
-                <div>
-                    <div id="chat-user-name"></div>
-                    <div class="text-muted" id="chat-user-status"></div>
+                <a href="<?= BASEURL . '/' ?>" class="btn btn-secondary btn-sm me-3">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+                <div class="d-flex align-items-center">
+                    <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" style="display: none;" id="chat-user-image">
+                    <div>
+                        <div id="chat-user-name"></div>
+                        <div class="text-muted" id="chat-user-status"></div>
+                    </div>
                 </div>
             </header>
 
