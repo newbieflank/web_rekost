@@ -1,6 +1,4 @@
 <?php
-
-// Pastikan namespace dan class sesuai dengan struktur framework Anda
 class UpdateFcmToken
 {
     public function update()
