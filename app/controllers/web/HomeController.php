@@ -124,6 +124,8 @@ class HomeController extends Controller
             $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
             $rating = $this->model('RatingAplikasiModel')->GetUlasan();
             $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
+            var_dump($best);
+            die;
             $data = [
                 "popular" => $popular,
                 "best" => $best,
