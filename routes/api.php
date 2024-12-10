@@ -17,6 +17,3 @@ Router::get('/api/getImageKos/{id}','KosController@getImageKos');
 Router::post('/api/pembayaran','KosController@konfirmPembayaran');
 Router::post('/api/updateFcmToken','UpdateFcmToken@update');
 Router::get('/api/Notifikasi/{id_user}', 'Notifikasi@getNotifikasi');
-
-
-
