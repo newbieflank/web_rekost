@@ -1,43 +1,54 @@
 <?php
-require 'vendor/autoload.php';
+
+require __DIR__ . '/../../../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
 
-// Path ke file kredensial
-$firebaseCredentialsPath = __DIR__ . '/../../../rekos.json';  // Sesuaikan path dengan lokasi file Anda
+class SendNotification
+{
+    private $firebase;
 
-// Inisialisasi Firebase dengan kredensial service account
-$serviceAccount = ServiceAccount::fromJsonFile($firebaseCredentialsPath);
-$firebase = (new Factory)
-    ->withServiceAccount($serviceAccount)
-    ->createMessaging();
+    public function __construct()
+    {
+        $this->firebase = (new Factory)
+            ->withServiceAccount(__DIR__ . '/../../../rekos.json')
+            ->createMessaging();
+    }
 
-// Ambil data dari request (misalnya token dan pesan)
-$requestData = json_decode(file_get_contents('php://input'), true);
-$token = $requestData['token'] ?? null;
-$title = $requestData['title'] ?? 'Default Title';
-$body = $requestData['body'] ?? 'Default Body';
+    public function send($data)
+    {
+        $messaging = $this->firebase;
 
-if (!$token) {
-    die(json_encode(['error' => 'Token is required']));
+        $message = [
+            'token' => $data['token'],
+            'notification' => [
+                'title' => $data['title'],
+                'body' => $data['body'],
+            ],
+        ];
+
+        try {
+            $response = $messaging->send($message);
+            return [
+                'status' => 'success',
+                'response' => $response,
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }
 
-// Menyiapkan pesan notifikasi
-$message = [
-    'token' => $token,
-    'notification' => [
-        'title' => $title,
-        'body' => $body,
-    ]
-];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+    $input = json_decode(file_get_contents('php://input'), true);
 
-// Kirim pesan menggunakan Firebase Admin SDK
-try {
-    $firebase->send($message);
-    echo json_encode(['status' => 'Notification sent successfully']);
-} catch (Exception $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+    $notification = new SendNotification();
+    $response = $notification->send($input);
+
+    echo json_encode($response);
 }
 ?>
-
