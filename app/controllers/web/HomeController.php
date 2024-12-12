@@ -97,7 +97,7 @@ class HomeController extends Controller
             } else {
                 $notifModel = $this->model('Notifmodel');
                 $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']);
-                $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
+                // $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
 
 
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
@@ -124,8 +124,7 @@ class HomeController extends Controller
             $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
             $rating = $this->model('RatingAplikasiModel')->GetUlasan();
             $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
-            var_dump($best);
-            die;
+
             $data = [
                 "popular" => $popular,
                 "best" => $best,

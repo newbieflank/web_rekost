@@ -12,7 +12,7 @@
     <title>Chat</title>
     <style>
         .chat-input {
-            /* display: none; */
+            display: none;
         }
 
         .chat-placeholder {
@@ -57,12 +57,9 @@
                     <li class="text-center text-muted">Tidak ada Pengguna</li>
                 <?php else: ?>
                     <?php foreach ($onlineUsers as $us): ?>
-                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;">
-                            <a href="?user=<?= $us["id_user"] ?>" class="text-decoration-none">
-
-                                <img src="<?= isset($us['id_gambar']) && $us['id_gambar'] != "" ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
-                                <span><?= htmlspecialchars($us['nama']); ?></span>
-                            </a>
+                        <li class="d-flex align-items-center p-2 mb-2 user-item" style="cursor: pointer;" onclick="loadChat(<?= htmlspecialchars($us['id_user']); ?>, '<?= htmlspecialchars($us['nama']); ?>', '<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>')">
+                            <img src="<?= isset($us['id_gambar']) ? asset('uploads/' . $us['id_user'] . '/' . $us['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2">
+                            <span><?= htmlspecialchars($us['nama']); ?></span>
                         </li>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -76,13 +73,11 @@
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
                 <div class="d-flex align-items-center">
-                    <?php if ($user): ?>
-                        <img src="<?= isset($user['id_gambar']) && $user['id_gambar'] != "" ? asset('uploads/' . $user['id_user'] . '/' . $user['id_gambar']) : asset('img/Vector.svg') ?>" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" id="chat-user-image">
-                        <div>
-                            <div id="chat-user-name"><?= $user['nama'] ?></div>
-                            <div class="text-muted" id="chat-user-status"></div>
-                        </div>
-                    <?php endif; ?>
+                    <img src="" alt="Foto profil pengguna" width="30" height="30" class="rounded-circle me-2" style="display: none;" id="chat-user-image">
+                    <div>
+                        <div id="chat-user-name"></div>
+                        <div class="text-muted" id="chat-user-status"></div>
+                    </div>
                 </div>
             </header>
 
@@ -93,22 +88,17 @@
 
             <!-- Chat Input -->
             <footer class="chat-input align-items-center mt-auto" id="chat-input-area">
-                <form action="/web_rekost/sendchat/2024115948" id="input-form" method="post" class="d-flex">
-                    <input type="text" name="message" class="form-control rounded me-2" placeholder="Tulis Pesan..." id="messageInput">
-                    <button type="submit" class="btn btn-primary" id="sendButton">
-                        <i class="fa-regular fa-paper-plane"></i>
-                    </button>
-                </form>
+                <input type="text" class="form-control rounded me-2" placeholder="Tulis Pesan..." id="messageInput">
+                <button class="btn btn-primary" id="sendButton">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
             </footer>
         </section>
     </section>
 
     <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?= asset('js/chatsHandle.js') ?>"></script>
-
-
 </body>
 
 </html>
