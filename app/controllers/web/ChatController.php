@@ -15,20 +15,20 @@ class ChatController extends Controller
         $this->chatModel = $this->model('ChatModel');
     }
 
-    public function chatUser($id)
-    {
-        
-    }
+    public function chatUser($id) {}
     public function chats()
     {
         // Fetch the online users
 
         $onlineUsers = $this->chatModel->chats($_SESSION["user"]["id_user"]);
-
+        $userId = $_GET["user"] ?? null;
+        $user = array_filter($onlineUsers, function ($e) use ($userId) {
+            return  $e['id_user'] == $userId;
+        });
 
         $layoutData = [
             'onlineUsers' => $onlineUsers,  // Corrected the array structure
-            'user' => $_SESSION['user']     // Example: passing user data if needed
+            'user' => reset($user),
         ];
 
         // Render the view and pass the data
@@ -53,12 +53,15 @@ class ChatController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            header("Access-Control-Allow-Origin: *");
+            header('Content-Type: application/json');
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'id_sender' => $incomingUserId,
-                'id_receiver' => $_SESSION['user']['id_user'],
+                'id_sender' => $_SESSION['user']['id_user'],
+                'id_receiver' => $incomingUserId,
                 'message' => trim($_POST['message']),
 
             ];
@@ -74,5 +77,18 @@ class ChatController extends Controller
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Request tidak valid']);
         }
+    }
+
+    public function chats2()
+    {
+        $onlineUsers = $this->chatModel->chats($_SESSION["user"]["id_user"]);
+
+
+        $layoutData = [
+            'onlineUsers' => $onlineUsers,  // Corrected the array structure
+            'user' => $_SESSION['user']     // Example: passing user data if needed
+        ];
+
+        $this->view('detail/chats', $layoutData);
     }
 }

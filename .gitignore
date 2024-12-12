@@ -1,3 +1,5 @@
 /vendor/
 /.env
 /node_modules/
+rekos.json
+/rekos.json
