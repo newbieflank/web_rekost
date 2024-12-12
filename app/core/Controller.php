@@ -8,13 +8,13 @@ class Controller
     {
 
         extract($data);
-        require_once './app/views/' . $view . '.php';
+        require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
     // Fungsi untuk memuat model
     protected function model($model)
     {
-        require_once './app/models/' . $model . '.php';
+        require_once __DIR__ . '/../models/' . $model . '.php';
         return new $model;
     }
 
@@ -41,7 +41,7 @@ class Controller
     protected function loadModel($model)
     {
         // Memastikan file model ada
-        $modelPath = './app/models/' . $model . '.php';
+        $modelPath = __DIR__ . '/../models/' . $model . '.php';
         if (file_exists($modelPath)) {
             require_once $modelPath;
             return new $model();
