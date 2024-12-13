@@ -13,7 +13,7 @@ class ChatModel
 
     public function chats($idUser)
     {
-        $sql = "SELECT user.id_user,user.nama,user.id_gambar, (SELECT message FROM chat_message where user.id_user = chat_message.id_receiver OR user.id_user = chat_message.id_sender order by id_message desc limit 1) as message
+        $sql = "SELECT user.id_user,user.nama,user.id_gambar, (SELECT message FROM chat_message where user.id_user = chat_message.id_receiver OR user.id_user = chat_message.id_sender order by id_message desc limit 1) as message,(SELECT waktu_kirim_pesan FROM chat_message where user.id_user = chat_message.id_receiver OR user.id_user = chat_message.id_sender order by id_message desc limit 1) as time
             FROM user JOIN chat_message ch ON user.id_user = ch.id_receiver OR user.id_user = ch.id_sender
             WHERE (ch.id_receiver = :id_user OR ch.id_sender = :id_user) AND user.id_user != :id_user GROUP BY user.id_user, user.nama, user.id_gambar;";
         $this->db->query($sql);
