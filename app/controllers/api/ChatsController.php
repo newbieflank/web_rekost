@@ -14,7 +14,7 @@ class ChatsController extends Controller
     public function listChats($id_sender)
     {
         $onlineUsers = $this->chat->chats($id_sender);
-        echo json_encode(['status' => 'success', 'users' => $onlineUsers]);
+        echo json_encode(['status' => 'success', 'data' => $onlineUsers]);
     }
 
     public function chatDetail($id_sender, $id_receiver)
