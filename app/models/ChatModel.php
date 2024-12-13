@@ -62,14 +62,13 @@ class ChatModel
             $this->db->bind('id_sender', $data['id_sender']);
             $this->db->bind('message', $data['message']);
 
-
             if ($this->db->execute()) {
                 return true;
             } else {
-                // error_log("Failed to execute query: " . $this->db->errorInfo());
                 return false;
             }
         }
+
         return false;
     }
 }
