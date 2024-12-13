@@ -57,6 +57,7 @@ class Router
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
         }
+        $uri = $uri == "" ? "/" : $uri;
 
         return ENV_MODE === "production" ? "/$uri" : "$uri";
     }
