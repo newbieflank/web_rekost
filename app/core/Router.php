@@ -43,7 +43,7 @@ class Router
         // Menangani response 404 dengan pesan JSON dan redirect ke halaman utama
         header('Content-Type: application/json', true, 404);
         echo json_encode(['status' => 'error', 'message' => 'Route not found']);
-        header('Location: /web_rekost/');
+        header('Location: ' . BASEURL);
         exit();
     }
 
@@ -53,12 +53,12 @@ class Router
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
         // Jika aplikasi berada dalam subdirektori, kita harus menyesuaikan URI
-        $baseDir = 'web_rekost';
+        $baseDir = ENV_MODE === "production" ? "/" : 'web_rekost';
         if (strpos($uri, $baseDir) === 0) {
             $uri = substr($uri, strlen($baseDir));
         }
 
-        return $uri ?: '/';
+        return ENV_MODE === "production" ? "/$uri" : "$uri";
     }
 
     // Memanggil controller dan method berdasarkan route yang cocok
