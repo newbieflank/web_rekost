@@ -47,11 +47,10 @@ class ChatsController extends Controller
 
             ];
 
-            // error_log(print_r($data, true));
 
             // Panggil fungsi sendMessage di ChatModel
             if ($this->chat->sendMessage($data)) {
-                echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim', "data" => ["message" => "Dsa"]]);
+                echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim']);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim pesan']);
             }
