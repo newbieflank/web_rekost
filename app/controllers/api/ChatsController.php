@@ -22,7 +22,7 @@ class ChatsController extends Controller
         $messages = $this->chat->get_chat($id_sender, $id_receiver);
 
         if ($messages) {
-            echo json_encode(['status' => 'success', 'messages' => $messages]);
+            echo json_encode(['status' => 'success', 'data' => $messages]);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'No messages available']);
         }
