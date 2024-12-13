@@ -28,7 +28,7 @@ class ChatsController extends Controller
         }
     }
 
-    public function sendMessage($id_receiver)
+    public function sendMessage($id_sender, $id_receiver)
     {
 
 
@@ -41,17 +41,17 @@ class ChatsController extends Controller
             // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'id_sender' => $_SESSION['user']['id_user'],
+                'id_sender' => $id_sender,
                 'id_receiver' => $id_receiver,
                 'message' => trim($_POST['message']),
 
             ];
 
-            error_log(print_r($data, true));
+            // error_log(print_r($data, true));
 
             // Panggil fungsi sendMessage di ChatModel
             if ($this->chat->sendMessage($data)) {
-                echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim']);
+                echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim', "data" => ["message" => "Dsa"]]);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim pesan']);
             }
