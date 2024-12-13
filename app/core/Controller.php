@@ -21,6 +21,7 @@ class Controller
     // Fungsi untuk mengarahkan halaman
     protected function header($route, $data = [])
     {
+        $route = ltrim($route, '/');
         header('Location: ' . BASEURL . $route);
     }
 
