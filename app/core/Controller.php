@@ -21,7 +21,7 @@ class Controller
     // Fungsi untuk mengarahkan halaman
     protected function header($route, $data = [])
     {
-        header('Location: http://localhost/web_rekost' . $route);
+        header('Location: ' . BASEURL . $route);
     }
 
     // Fungsi untuk memuat helper
