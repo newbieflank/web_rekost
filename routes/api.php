@@ -21,4 +21,5 @@ Router::get('/api/Notifikasi/{id_user}', 'Notifikasi@getNotifikasi');
 
 // chat route
 Router::get('/api/chats/{id_sender}', 'ChatsController@listChats');
-Router::get('/api/chats/{id_sender}/{id_receiver}', 'ChatsController@getNotifikasi');
+Router::get('/api/chats/{id_sender}/{id_receiver}', 'ChatsController@chatDetail');
+Router::post('/api/chats/send/{id_receiver}', 'ChatsController@sendMessage');

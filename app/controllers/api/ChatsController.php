@@ -27,4 +27,36 @@ class ChatsController extends Controller
             echo json_encode(['status' => 'error', 'message' => 'No messages available']);
         }
     }
+
+    public function sendMessage($id_receiver)
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            header("Access-Control-Allow-Origin: *");
+            header('Content-Type: application/json');
+
+
+            // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id_sender' => $_SESSION['user']['id_user'],
+                'id_receiver' => $id_receiver,
+                'message' => trim($_POST['message']),
+
+            ];
+
+            error_log(print_r($data, true));
+
+            // Panggil fungsi sendMessage di ChatModel
+            if ($this->chat->sendMessage($data)) {
+                echo json_encode(['status' => 'success', 'message' => 'Pesan berhasil dikirim']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim pesan']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Request tidak valid']);
+        }
+    }
 }
