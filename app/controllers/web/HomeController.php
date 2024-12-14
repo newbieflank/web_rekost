@@ -24,7 +24,7 @@ class HomeController extends Controller
                 $rating = $this->model('RatingAplikasiModel')->totalRating();
                 $formatChartPemilik = [];
                 $formatChartPencari = [];
-                $totalRating = $rating['rating'] / $rating['user'];
+                $totalRating = $rating['user'] > 0 ?  $rating['rating'] / $rating['user'] : 0;
                 $maxDays = date('t');
                 for ($i = 1; $i <= $maxDays; $i++) {
                     $date = date("Y-m") . "-" . str_pad($i, 2, "0", STR_PAD_LEFT);
@@ -124,8 +124,6 @@ class HomeController extends Controller
             $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
             $rating = $this->model('RatingAplikasiModel')->GetUlasan();
             $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
-            var_dump($best);
-            die;
             $data = [
                 "popular" => $popular,
                 "best" => $best,
