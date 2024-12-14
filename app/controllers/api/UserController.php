@@ -144,13 +144,13 @@ class UserController extends Controller
     public function user($id)
     {
         $user = $this->user->findUserById($id);
-
         if ($user) {
             $response = [
                 'status' => 'success',
                 'message' => 'Data Berhasil Di Dapat',
                 'data' => [
                     'id_user' => $id,
+                    'id_gambar' => $user["id_gambar"],
                     'nama' => $user['nama'],
                     'email' => $user['email'],
                     'jenis_kelamin' => $user['jenis_kelamin'],

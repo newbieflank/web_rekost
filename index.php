@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 if (!session_start()) {
     session_set_cookie_params(0);
@@ -49,11 +50,11 @@ require_once './app/core/App.php';
 //     shell_exec('pm2 start ./server/server.js --name server');
 // }
 
-$output = shell_exec('ps aux | grep "[n]ode ./server/server.js"');
+// $output = shell_exec('ps aux | grep "[n]ode ./server/server.js"');
 
-if (empty($output)) {
-    shell_exec('node ./server/server.js > /dev/null 2>&1 &');
-}
+// if (empty($output)) {
+//     shell_exec('node ./server/server.js > /dev/null 2>&1 &');
+// }
 
 
 
