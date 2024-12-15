@@ -16,8 +16,7 @@
         {
             $id = $_SESSION['user']['id_user'];
 
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-            $uploadDir = $baseDir . $id . '/';
+            $uploadDir = uploads($id . '/');
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
@@ -74,32 +73,12 @@
             }
         }
 
-
-        public function user($id)
-        {
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/2024105278/';
-            $imagePath = $baseDir . $id . '.png';
-
-            if (file_exists($imagePath)) {
-                header("Content-Type: image/jpeg");
-                header("Content-Length: " . filesize($imagePath));
-
-
-                readfile($imagePath);
-            } else {
-                // If the image doesn't exist, return a 404 response
-                header("HTTP/1.0 404 Not Found");
-                echo json_encode(["error" => "Image not found"]);
-            }
-        }
-
         public function lampiran()
         {
             $id = $_SESSION['user']['id_user'];
 
             if ($this->userModel->insert($id, 'pending') > 0) {
-                $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-                $uploadDir = $baseDir . $id . '/';
+                $uploadDir = uploads($id . '/');
 
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);

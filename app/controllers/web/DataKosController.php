@@ -84,8 +84,7 @@ class DataKosController extends Controller
                 'id_kos' => $idKos
             ];
 
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-            $uploadDir = $baseDir . $idKos . '/';
+            $uploadDir = uploads($idKos . '/');
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
@@ -216,8 +215,7 @@ class DataKosController extends Controller
                 'kamar-lain' => 'kamar-lain',
             ];
 
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-            $uploadDir = $baseDir . $id_kos . '/';
+            $uploadDir = uploads($id_kos . '/');
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
