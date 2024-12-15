@@ -4,6 +4,7 @@
 class ChatController extends Controller
 {
     private $chatModel;
+    private $userModel;
 
     public function __construct()
     {
@@ -13,6 +14,7 @@ class ChatController extends Controller
         }
         // Load the ChatModel
         $this->chatModel = $this->model('ChatModel');
+        $this->userModel = $this->model('UsersModel');
     }
 
     public function chatUser($id) {}
@@ -25,10 +27,18 @@ class ChatController extends Controller
         $user = array_filter($onlineUsers, function ($e) use ($userId) {
             return  $e['id_user'] == $userId;
         });
+        // var_dump($user);
+        // die;
+
+        if (empty($user)) {
+            $user = $this->userModel->findUserById($userId);
+        } else {
+            $user = reset($user);
+        }
 
         $layoutData = [
             'onlineUsers' => $onlineUsers,  // Corrected the array structure
-            'user' => reset($user),
+            'user' => $user,
         ];
 
         // Render the view and pass the data
