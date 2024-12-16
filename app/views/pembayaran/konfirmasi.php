@@ -97,11 +97,11 @@
                 <div class="detail-card p-3 border rounded">
                     <div class="mb-4">
                         <?php
-                        $path = 'uploads/' . $kos["id_kos"] . '/foto_depan.jpg';
-                        $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                        $path = $kos["id_kos"] . '/foto_depan.jpg';
+                        $absolutePath = uploads($path);
                         if (file_exists($absolutePath)) {
                         ?>
-                            <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                            <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                         <?php
                         } else {
 

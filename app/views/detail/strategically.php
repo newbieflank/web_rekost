@@ -100,11 +100,11 @@
                             <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                                 <div class="card">
                                     <?php
-                                    $path = 'uploads/' . $campus["id_kos"] . '/foto_depan.jpg';
-                                    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                    $path = $campus["id_kos"] . '/foto_depan.jpg';
+                                    $absolutePath = uploads($path);
                                     if (file_exists($absolutePath)) {
                                     ?>
-                                        <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                        <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                                     <?php
                                     } else {
 

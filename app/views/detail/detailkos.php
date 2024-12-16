@@ -44,11 +44,11 @@
             <div class="row">
                 <div class="col-md-7 p-2">
                     <?php
-                    $path = 'uploads/' . $data["id_kos"] . '/foto_depan.jpg';
-                    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                    $path = $data["id_kos"] . '/foto_depan.jpg';
+                    $absolutePath = uploads($path);
                     if (file_exists($absolutePath)) {
                     ?>
-                        <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                        <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                     <?php
                     } else {
 
@@ -70,13 +70,13 @@
 
                         $hasImage = false;
                         foreach ($images as $image) {
-                            $path = 'uploads/' . $data['id_kos'] . '/' . $image;
-                            $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                            $path = $data['id_kos'] . '/' . $image;
+                            $absolutePath = uploads($path);
 
                             if (file_exists($absolutePath)) {
                                 $hasImage = true;
                         ?>
-                                <img src="<?= asset($path) ?>" alt="thumbnail" class="img-fluid w-50 p-2">
+                                <img src="<?= asset('uploads/' . $path) ?>" alt="thumbnail" class="img-fluid w-50 p-2">
                             <?php
                             }
                         }

@@ -39,19 +39,11 @@ class UserController extends Controller
         $user = $this->model('UsersModel')->getProfile($email, $password);
         if ($user) {
             if ($user['role'] === 'pemilik kos') {
-                $data = $this->model('UsersModel')->findOwnerById($user['id_user']);
                 $response = [
-                    'status' => 'success',
-                    'message' => 'Login successful',
-                    'data' => [
-                        "id" => $user['id_user'],
-                        "email" => $user['email'],
-                        "role" => $user['role'],
-                        "id_kos" => $data['id_kos']
-                    ],
+                    'status' => 'error',
+                    'message' => 'Pastikan status anda sebagai Pencari kos',
                 ];
             } else {
-                // For demonstration, let's assume a successful login scenario
                 $response = [
                     'status' => 'success',
                     'message' => 'Login successful',
@@ -66,7 +58,7 @@ class UserController extends Controller
         } else {
             $response = [
                 'status' => 'error',
-                'message' => 'Email or password missing',
+                'message' => 'Email atau password salah',
             ];
         }
 
@@ -87,8 +79,7 @@ class UserController extends Controller
         }
 
         // Define the path where user images are stored
-        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $userDir = $baseDir . $userId . '/';
+        $userDir = uploads($userId . '/');
 
 
         if (is_dir($userDir)) {

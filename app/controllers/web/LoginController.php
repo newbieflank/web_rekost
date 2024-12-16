@@ -288,8 +288,8 @@ class LoginController extends Controller
                     "email" => $data['email'],
                     "role" => $data['role']
                 ];
-
-                $this->header('/');
+                $_SESSION['new'] = true;
+                $this->header('/profile');
                 exit();
             } else {
                 $data = [

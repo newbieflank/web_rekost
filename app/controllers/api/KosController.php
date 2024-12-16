@@ -78,9 +78,7 @@ class KosController extends Controller
         $idKos = $id;
         $kos = $this->model('KosModel')->Data($idKos);
 
-        // Define the path where user images are stored
-        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $kosDir = $baseDir . $idKos . '/';
+        $kosDir = uploads($idKos . '/');
 
 
         if (is_dir($kosDir)) {

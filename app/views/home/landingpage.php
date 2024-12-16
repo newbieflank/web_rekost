@@ -87,7 +87,11 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])): ?>
+                <?php
+
+                use Google\Service\Analytics\Uploads;
+
+                if (isset($_SESSION['user']) && !empty($_SESSION['user'])): ?>
                     <div class="navbar-nav ml-auto mx-4 d-flex align-items-center">
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
@@ -289,11 +293,11 @@
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php
-                                $path = 'uploads/' . $popular["id_kos"] . '/foto_depan.jpg';
-                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                $path = $popular["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = Uploads($path);
                                 if (file_exists($absolutePath)) {
                                 ?>
-                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                    <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                                 <?php
                                 } else {
 
@@ -408,11 +412,11 @@
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php
-                                $path = 'uploads/' . $best["id_kos"] . '/foto_depan.jpg';
-                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                $path = $best["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
                                 ?>
-                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                    <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                                 <?php
                                 } else {
 
@@ -508,11 +512,11 @@
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php
-                                $path = 'uploads/' . $campus["id_kos"] . '/foto_depan.jpg';
-                                $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/' . $path;
+                                $path = $campus["id_kos"] . '/foto_depan.jpg';
+                                $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
                                 ?>
-                                    <img src="<?= asset($path) ?>" class="card-img-top" alt="Kost Image">
+                                    <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
                                 <?php
                                 } else {
 
