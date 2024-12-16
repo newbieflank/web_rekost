@@ -12,7 +12,7 @@ class AuthController extends Controller
         $this->googleClient = new Google_Client();
         $this->googleClient->setClientId($_ENV['CLIENT_ID_GOOGLE']);
         $this->googleClient->setClientSecret($_ENV['CLIENT_SECRET']);
-        $this->googleClient->setRedirectUri('http://localhost/web_rekost/auth/callback');
+        $this->googleClient->setRedirectUri($_ENV['REDIRECT']);
         $this->googleClient->addScope("email");
         $this->googleClient->addScope("profile");
 

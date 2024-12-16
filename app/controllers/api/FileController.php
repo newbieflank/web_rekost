@@ -20,9 +20,7 @@ class FileController extends Controller
             $userId = intval($_POST['user_id']);
             $image = $_FILES['file'];
 
-
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-            $uploadDir = $baseDir . $userId . '/';
+            $uploadDir = uploads($userId . '/');
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);

@@ -102,8 +102,6 @@ class PembayaranController extends Controller
     }
     public function insertPembayaran()
     {
-        // var_dump($_POST);
-        // die;
         $id_user = $_SESSION['user']['id_user'];
         $buktiPembayaran = $_FILES['buktiPembayaran'];
 
@@ -145,9 +143,15 @@ class PembayaranController extends Controller
 
         if ($idPenyewaan > 0) {
 
-            $tmp_name = $buktiPembayaran['tmp_name'];
-            $targetFilePath = "./public/uploads/$id_user/$idPenyewaan.jpg";
 
+            $uploadDir = uploads($id_user . '/');
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $tmp_name = $buktiPembayaran['tmp_name'];
+            $targetFilePath = $uploadDir . "$idPenyewaan.jpg";
             if (move_uploaded_file($tmp_name, $targetFilePath)) {
                 $this->header('/riwayat');
                 exit;

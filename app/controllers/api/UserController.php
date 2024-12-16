@@ -87,8 +87,7 @@ class UserController extends Controller
         }
 
         // Define the path where user images are stored
-        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $userDir = $baseDir . $userId . '/';
+        $userDir = uploads($userId . '/');
 
 
         if (is_dir($userDir)) {

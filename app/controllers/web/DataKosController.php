@@ -25,8 +25,7 @@ class DataKosController extends Controller
         $fasilitas = explode(',', $array);
         $array_penyewaan = $kos['waktu_penyewaan'];
         $penyewaan = explode(',', $array_penyewaan);
-        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $imagePath = $baseDir .  $id_kos;
+        $imagePath = uploads($id_kos);
 
         $dataKos = [
             'namaKos' => $kos['nama_kos'],
@@ -159,8 +158,7 @@ class DataKosController extends Controller
         $fasilitas = explode(',', $array);
         $array_penyewaan = $kamar['waktu_sewa'] ?? null;
         $penyewaan = explode(',', $array_penyewaan);
-        $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/web_rekost/public/uploads/';
-        $imagePath = $baseDir .  $id_kos;
+        $imagePath = uploads($id_kos);
 
         $layout = [
             'data' => $kamar,
