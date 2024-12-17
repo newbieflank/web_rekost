@@ -85,7 +85,7 @@ class AuthController extends Controller
                         "role" => $user['role'],
                         "id_kos" => $data['id_kos']
                     ];
-
+                    $_SESSION['already_log'] = true;
                     $this->header('/');
                 } else {
                     $_SESSION['user'] = [
@@ -93,7 +93,7 @@ class AuthController extends Controller
                         "email" => $user['email'],
                         "role" => $user['role']
                     ];
-
+                    $_SESSION['already_log'] = true;
                     $this->header('/');
                 }
 

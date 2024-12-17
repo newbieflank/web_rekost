@@ -16,7 +16,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        if ($_SESSION['user']) {
+        if (isset($_SESSION['already_log']) == true) {
             $this->header('/');
             exit;
         }
@@ -27,7 +27,7 @@ class LoginController extends Controller
 
     public function register()
     {
-        if ($_SESSION['user']) {
+        if (isset($_SESSION['already_log']) == true) {
             $this->header('/');
             exit;
         }
@@ -61,6 +61,7 @@ class LoginController extends Controller
                 }
 
                 $_SESSION['user'] = $data;
+                $_SESSION['already_log'] = true;
                 $this->header('/');
                 exit();
             } else {
@@ -77,6 +78,7 @@ class LoginController extends Controller
                 }
 
                 $_SESSION['user'] = $user;
+                $_SESSION['already_log'] = true;
                 $this->header('/');
                 exit();
             }
@@ -131,10 +133,6 @@ class LoginController extends Controller
             $cekID = $this->userModel->findUserById($id);
         } while ($cekID);
 
-
-
-
-
         $username = $_POST['fullname'];
         $email = $_POST['email'];
         $number = $_POST['number'];
@@ -174,6 +172,7 @@ class LoginController extends Controller
                         "id_kos" => $data['id_kos']
                     ];
 
+                    $_SESSION['already_log'] = true;
                     $this->view('login/verifpemilik', $data);
                     exit();
                 } else {
@@ -204,6 +203,7 @@ class LoginController extends Controller
                     "role" => $data['role']
                 ];
                 $_SESSION['new'] = true;
+                $_SESSION['already_log'] = true;
                 $this->header('/profile');
                 exit();
             } else {
