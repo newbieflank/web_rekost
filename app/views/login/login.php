@@ -72,4 +72,10 @@
         const type = passwordField.type === 'password' ? 'text' : 'password';
         passwordField.type = type;
     }
+
+    // Mencegah tombol back di browser
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        history.go(1);
+    };
 </script>

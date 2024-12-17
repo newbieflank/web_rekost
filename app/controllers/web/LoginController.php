@@ -7,17 +7,31 @@ class LoginController extends Controller
 
     public function __construct()
     {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
         $this->userModel = $this->model('UsersModel');
     }
 
     public function login()
     {
+        if ($_SESSION['user']) {
+            $this->header('/');
+            exit;
+        }
+
         $this->view('login/login');
     }
 
 
     public function register()
     {
+        if ($_SESSION['user']) {
+            $this->header('/');
+            exit;
+        }
+
         $this->view('login/register');
     }
 
@@ -101,6 +115,9 @@ class LoginController extends Controller
             );
         }
 
+        // Nonaktifkan cache browser
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Pragma: no-cache");
 
         $this->header('/');
         exit();
