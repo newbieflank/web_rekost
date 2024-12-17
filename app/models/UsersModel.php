@@ -11,6 +11,18 @@ class UsersModel
         $this->db = new Database();
     }
 
+    public function getFcmToken($id_user)
+    {
+        $query = "SELECT fcm_token FROM user WHERE id_user = :id_user";
+        
+        $this->db->query($query); 
+        $this->db->bind(':id_user', $id_user, PDO::PARAM_INT); 
+        $this->db->execute(); 
+        $fcm_token = $this->db->single();
+    
+        return $fcm_token;
+    }
+
     public function findKost($id)
     {
         $query = "SELECT nama_kos FROM detail_kos WHERE id_user = :id_user";
@@ -314,17 +326,6 @@ class UsersModel
         return $this->db->rowCount();
     }
 
-    public function getFcmToken($id_user)
-    {
-        $query = "SELECT fcm_token FROM user WHERE id_user = :id_user";
-        
-        $this->db->query($query); 
-        $this->db->bind(':id_user', $id_user, PDO::PARAM_INT); 
-        $this->db->execute(); 
-        $fcm_token = $this->db->single();
-    
-        return $fcm_token;
-    }
     
 
 
