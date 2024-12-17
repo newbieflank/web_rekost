@@ -16,7 +16,7 @@ Router::get('/api/detail/{id}', 'KosController@getDetailKos');
 Router::get('/api/getImageKos/{id}', 'KosController@getImageKos');
 Router::post('/api/pembayaran', 'KosController@konfirmPembayaran');
 Router::post('/api/updateFcmToken', 'UpdateFcmToken@update');
-Router::post('/api/sendNotification', 'NotificationController@send');
+Router::post('/api/sendNotification', 'sendNotification@send');
 Router::get('/api/Notifikasi/{id_user}', 'Notifikasi@getNotifikasi');
 
 // chat route

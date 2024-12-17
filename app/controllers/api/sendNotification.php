@@ -4,7 +4,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 
-class SendNotification
+class SendNotification extends Controller
 {
     private $firebase;
 
@@ -19,8 +19,22 @@ class SendNotification
     {
         $messaging = $this->firebase;
 
+        if (empty($data['token']) || empty($data['harga'])) {
+            return [
+                'status' => 'error',
+                'message' => 'Token atau harga tidak boleh kosong.'
+            ];
+        }
+
+        if (!is_numeric($data['harga']) || $data['harga'] <= 0) {
+            return [
+                'status' => 'error',
+                'message' => 'Harga tidak valid.'
+            ];
+        }
+
         $message = [
-            'token' => $data['token'], 
+            'token' => $data['token'],
             'notification' => [
                 'title' => 'Pembayaran Berhasil',
                 'body' => 'Pembayaran Sebesar Rp ' . number_format($data['harga'], 0, ',', '.') . ' Berhasil',
@@ -28,20 +42,20 @@ class SendNotification
         ];
 
         try {
-
             $response = $messaging->send($message);
             return [
                 'status' => 'success',
                 'response' => $response,
             ];
         } catch (Exception $e) {
+            error_log('Error sending FCM: ' . $e->getMessage()); 
             return [
                 'status' => 'error',
-                'message' => $e->getMessage(),
+                'message' => 'Failed to send notification. ' . $e->getMessage(),
             ];
         }
     }
-}
+}    
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
@@ -50,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($input['token']) || !isset($input['harga'])) {
         echo json_encode([
             'status' => 'error',
-            'message' => 'Invalid input.',
+            'message' => 'Invalid input. Token atau harga tidak ditemukan.',
         ]);
         exit;
     }
