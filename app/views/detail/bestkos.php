@@ -16,7 +16,7 @@
         }
 
         .card {
-            width: 350px;
+            width: 80%;
             height: auto;
             border: none;
             border-radius: 12px;
@@ -38,6 +38,53 @@
 
         .card-text {
             color: #000;
+        }
+
+        select.form-control {
+            display: inline-block;
+            width: 200px;
+            max-width: 100%;
+            padding: 0 20px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        select.form-control:focus {
+            outline: none;
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        select.form-control::after {
+            content: "▼";
+            position: absolute;
+            right: 10px;
+            pointer-events: none;
+        }
+
+        select.form-control option {
+            color: #333;
+            background-color: #fff;
+            padding: 5px 10px;
+        }
+
+        select+select {
+            margin-left: 10px;
+        }
+
+        select.form-control option[hidden] {
+            display: none;
         }
     </style>
 
@@ -66,46 +113,29 @@
                         <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tapen</button>
                     </div>
                     <div class="d-flex align-items-center">
-                        <div class="dropdown d-inline-block mr-3">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-map-marker-alt"></i> Lokasi
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownLokasi">
-                                <a class="dropdown-item" href="#">Blindungan</a>
-                                <a class="dropdown-item" href="#">Tamanan</a>
-                                <a class="dropdown-item" href="#">Tamansari</a>
-                                <a class="dropdown-item" href="#">Tapen</a>
-                                <a class="dropdown-item" href="#">Sempol</a>
-                            </div>
+
+                        <div class="d-inline-block mr-3 position-relative">
+                            <select class="form-control btn btn-primary" id="dropdownHarga">
+                                <option value="" disabled selected hidden>Harga</option>
+                                <option value="high-to-low">Tertinggi ke Terendah</option>
+                                <option value="low-to-high">Terendah ke Tertinggi</option>
+                            </select>
                         </div>
-                        <div class="dropdown d-inline-block mr-3">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-dollar-sign"></i> Harga
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownHarga">
-                                <a class="dropdown-item" href="#">Tertinggi ke Terendah</a>
-                                <a class="dropdown-item" href="#">Terendah ke Tertinggi</a>
-                            </div>
-                        </div>
-                        <div class="dropdown d-inline-block">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-filter"></i> Urutkan
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownUrutkan">
-                                <a class="dropdown-item" href="#">Popularitas</a>
-                                <a class="dropdown-item" href="#">Terbaru</a>
-                            </div>
+                        <div class="d-inline-block position-relative">
+                            <select class="form-control btn btn-primary" id="dropdownUrutkan">
+                                <option value="" disabled selected hidden>Urutkan</option>
+                                <option value="popularity">Popularitas</option>
+                                <option value="newest">Terbaru</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
             <div class="container-fluid">
                 <div class="row" style="margin-top: 32px;">
                     <?php foreach ($data['best'] as $best): ?>
-                        <div class="col-md-3 p-3 mb-5">
+                        <div class="col-md-3 p-3 mb-4">
                             <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                                 <div class="card">
                                     <?php
