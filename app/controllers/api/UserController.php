@@ -109,12 +109,21 @@ class UserController extends Controller
         header("Access-Control-Allow-Origin: *");
         header('Content-Type: application/json');
 
-        $data = json_decode(file_get_contents("php://input"), true);
+        $json = json_decode(file_get_contents("php://input"), true);
 
         do {
             $id = $this->generateRandomId();
             $cekID = $this->user->findUserById($id);
         } while ($cekID);
+
+        $data = [
+            "id" => $id,
+            "username" => $json['username'],
+            "email" => $json['email'],
+            "password" => $json['password'],
+            "number" => intval($json['number']),
+            "role" => 'pencari kos'
+        ];
 
         if ($this->user->create($data) > 0) {
             $this->user->insert($id, 'aktif');
