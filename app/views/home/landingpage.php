@@ -23,7 +23,7 @@
 
         .card {
             width: 100%;
-            height: 400px;
+            height: auto;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -289,7 +289,7 @@
             </div>
             <div class="row scroll-container">
                 <?php foreach ($data['popular'] as $popular): ?>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-4 mb-5">
                         <a href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php
@@ -408,7 +408,7 @@
             </div>
             <div class="row scroll-container">
                 <?php foreach ($data['best'] as $best): ?>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-4 mb-5">
                         <a href="<?= BASEURL . 'detailkos/' . $best["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php
@@ -508,7 +508,7 @@
             </div>
             <div class="row scroll-container">
                 <?php foreach ($data['campus'] as $campus): ?>
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-4 mb-5">
                         <a href="<?= BASEURL . 'detailkos/' . $campus["id_kos"] ?>" class="card-link">
                             <div class="card">
                                 <?php

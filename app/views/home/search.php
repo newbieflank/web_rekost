@@ -24,8 +24,8 @@
         }
 
         .card {
-            width: 350px;
-            height: 500px;
+            width: 80%;
+            height: auto;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -75,6 +75,82 @@
         .col-md-3 {
             flex: 1 1 calc(33.33% - 20px);
         }
+
+        select.form-control {
+            display: inline-block;
+            width: 200px;
+            max-width: 100%;
+            padding: 0 20px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        select.form-control:focus {
+            outline: none;
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        select.form-control::after {
+            content: "▼";
+            position: absolute;
+            right: 10px;
+            pointer-events: none;
+        }
+
+        select.form-control option {
+            color: #333;
+            background-color: #fff;
+            padding: 5px 10px;
+        }
+
+        select+select {
+            margin-left: 10px;
+        }
+
+        select.form-control option[hidden] {
+            display: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 50px 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 18px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-icon:hover {
+            color: #007bff;
+        }
     </style>
 </head>
 
@@ -93,42 +169,29 @@
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <form id="filterForm" method="POST" action="<?= BASEURL; ?>search">
                     <div class="d-flex mb-3">
-                        <div class="dropdown d-inline-block mr-3">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownLokasi" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-map-marker-alt"></i> <span id="lokasiSelected">Lokasi</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownLokasi">
-                                <button type="button" class="dropdown-item" data-value="Blindungan">Blindungan</button>
-                                <button type="button" class="dropdown-item" data-value="Tamanan">Tamanan</button>
-                                <button type="button" class="dropdown-item" data-value="Tamansari">Tamansari</button>
-                                <button type="button" class="dropdown-item" data-value="Sumbersari">Sumbersari</button>
-                                <button type="button" class="dropdown-item" data-value="Tapen">Tapen</button>
-                                <button type="button" class="dropdown-item" data-value="Sempol">Sempol</button>
-                            </div>
-                            <input type="hidden" name="location" id="locationInput">
+                        <div class="d-inline-block mr-3 position-relative">
+                            <select class="form-control btn btn-primary" id="dropdownLokasi">
+                                <option value="" disabled selected hidden>Lokasi</option>
+                                <option value="Blindungan">Blindungan</option>
+                                <option value="Tamanan">Tamanan</option>
+                                <option value="Tamansari">Tamansari</option>
+                                <option value="Tapen">Tapen</option>
+                                <option value="Sempol">Sempol</option>
+                            </select>
                         </div>
-
-                        <!-- Harga Dropdown -->
-                        <div class="dropdown d-inline-block mr-3">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownHarga" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-dollar-sign"></i> <span id="hargaSelected">Harga</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownHarga">
-                                <button type="button" class="dropdown-item" data-value="0-1000000">Tertinggi ke Terendah</button>
-                                <button type="button" class="dropdown-item" data-value="1000000-2000000">Terendah ke Tertinggi</button>
-                            </div>
-                            <input type="hidden" name="cost" id="costInput">
+                        <div class="d-inline-block mr-3 position-relative">
+                            <select class="form-control btn btn-primary" id="dropdownHarga">
+                                <option value="" disabled selected hidden>Harga</option>
+                                <option value="high-to-low">Tertinggi ke Terendah</option>
+                                <option value="low-to-high">Terendah ke Tertinggi</option>
+                            </select>
                         </div>
-
-                        <!-- Urutkan Dropdown (No form element) -->
-                        <div class="dropdown d-inline-block">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownUrutkan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-filter"></i> Urutkan
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownUrutkan">
-                                <a class="dropdown-item" href="#">Popularitas</a>
-                                <a class="dropdown-item" href="#">Terbaru</a>
-                            </div>
+                        <div class="d-inline-block position-relative">
+                            <select class="form-control btn btn-primary" id="dropdownUrutkan">
+                                <option value="" disabled selected hidden>Urutkan</option>
+                                <option value="popularity">Popularitas</option>
+                                <option value="newest">Terbaru</option>
+                            </select>
                         </div>
                     </div>
                     <button type="submit" style="display: none;">Submit</button>
@@ -141,22 +204,24 @@
         </div>
 
         <div class="container-fluid px-4">
-            <div class="row" style="margin-top: 32px;">
+            <div class="row mt-4">
                 <?php if (!empty($data['search'])) : ?>
-                    <div class="row">
+                    <div class="row row-cols-1 row-cols-md-4 g-3">
                         <?php foreach ($data['search'] as $kos) : ?>
-                            <div class="col-md-3 p-3 mb-5">
-                                <a href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>" class="card-link">
-                                    <div class="card">
-                                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top" height="200" width="300" />
+                            <div class="col">
+                                <a href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>" class="card-link text-decoration-none">
+                                    <div class="card h-100">
+                                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top img-fluid" alt="Kos Image" />
                                         <div class="card-body">
                                             <h5 class="card-title"><?= htmlspecialchars($kos['nama_kos'], ENT_QUOTES, 'UTF-8') ?></h5>
                                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                                 <?= htmlspecialchars($kos['alamat'], ENT_QUOTES, 'UTF-8') ?></p>
-                                            <p class="card-text" style="font-weight: 600;"><?= $kos['avg_rating'] ?>/5
-                                                (<?= $kos['review_count'] ?>)</p>
-                                            <span class="btn-available"
-                                                style="border-radius: 4px;"><?= htmlspecialchars($kos['tipe_kos'], ENT_QUOTES, 'UTF-8') ?></span>
+                                            <p class="card-text" style="font-weight: 600;">
+                                                <?= $kos['avg_rating'] ?>/5 (<?= $kos['review_count'] ?>)
+                                            </p>
+                                            <span class="btn-available" style="border-radius: 4px;">
+                                                <?= htmlspecialchars($kos['tipe_kos'], ENT_QUOTES, 'UTF-8') ?>
+                                            </span>
                                             <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                                 IDR <?= number_format($kos['harga'], 0, ',', '.') ?>
                                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">
@@ -175,9 +240,9 @@
                         <p>No results found. Try adjusting your filters or search criteria.</p>
                     </div>
                 <?php endif; ?>
-
             </div>
         </div>
+
 
     </section>
 
