@@ -10,8 +10,14 @@ class DetailController extends Controller
     }
     public function popularkos()
     {
-        $email = $_SESSION['user']['email'];
-        $user = $this->userModel->findUserByEmail($email);
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->userModel->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
+
         $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
         $data = [
             "popular" => $popular
@@ -22,18 +28,30 @@ class DetailController extends Controller
 
         $layout = [
             'content' => $content,
-            'title' => "Re-Kos",
-            "role" => $user['role'],
-            'id_user' => $user['id_user'],
-            'id_gambar' => $user['id_gambar']
+            'title' => "cari kos",
+            'role' => $role,
+            'footer' => false
         ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
 
         $this->view('layout/main', $layout);
     }
     public function bestkos()
     {
-        $email = $_SESSION['user']['email'];
-        $user = $this->userModel->findUserByEmail($email);
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->userModel->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
+
         $best = $this->model('CardViewModel')->SelectCardViewKosBest();
         $data = [
             "best" => $best
@@ -45,18 +63,30 @@ class DetailController extends Controller
 
         $layout = [
             'content' => $content,
-            'title' => "Re-Kos",
-            "role" => $user['role'],
-            'id_user' => $user['id_user'],
-            'id_gambar' => $user['id_gambar']
+            'title' => "cari kos",
+            'role' => $role,
+            'footer' => false
         ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
 
         $this->view('layout/main', $layout);
     }
     public function strategically()
     {
-        $email = $_SESSION['user']['email'];
-        $user = $this->userModel->findUserByEmail($email);
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->userModel->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
+
         $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
         $data = [
             "campus" => $campus
@@ -68,11 +98,17 @@ class DetailController extends Controller
 
         $layout = [
             'content' => $content,
-            'title' => "Re-Kos",
-            "role" => $user['role'],
-            'id_user' => $user['id_user'],
-            'id_gambar' => $user['id_gambar']
+            'title' => "cari kos",
+            'role' => $role,
+            'footer' => false
         ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
 
         $this->view('layout/main', $layout);
     }
