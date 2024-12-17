@@ -247,11 +247,8 @@
                                 <div class="input-group position-relative">
                                     <select class="form-control pl-5 pr-5" id="location" name="location" required>
                                         <option value="">Pilih Lokasi</option>
-                                        <option value="blindungan">Blindungan</option>
-                                        <option value="tapen">Tapen</option>
-                                        <option value="Sumbersari">Sumbersari</option>
-                                        <option value="tamansari">Tamansari</option>
-                                        <option value="sempol">Sempol</option>
+                                        <option value="blindungan">Jember</option>
+                                        <option value="bws">Bondowoso</option>
                                     </select>
                                     <i class="fas fa-map-marker-alt position-absolute"
                                         style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
