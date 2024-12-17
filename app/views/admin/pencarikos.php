@@ -150,7 +150,7 @@
                                 <th>Kota Asal</th>
                                 <th>Instansi</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Status User</th>
+                                <th>Terakhir Online</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -170,7 +170,7 @@
                                     <td><?= $user['kota_asal'] ?></td>
                                     <td><?= $user['instansi'] ?></td>
                                     <td><?= $user['jenis_kelamin'] ?></td>
-                                    <td><?= $user['status_user'] ?></td>
+                                    <td><?= $user['online'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

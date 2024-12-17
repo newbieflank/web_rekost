@@ -14,12 +14,12 @@ class UsersModel
     public function getFcmToken($id_user)
     {
         $query = "SELECT fcm_token FROM user WHERE id_user = :id_user";
-        
-        $this->db->query($query); 
-        $this->db->bind(':id_user', $id_user, PDO::PARAM_INT); 
-        $this->db->execute(); 
+
+        $this->db->query($query);
+        $this->db->bind(':id_user', $id_user, PDO::PARAM_INT);
+        $this->db->execute();
         $fcm_token = $this->db->single();
-    
+
         return $fcm_token;
     }
 
@@ -242,14 +242,14 @@ class UsersModel
     }
     public function getPemilikKos()
     {
-        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, status_user FROM user WHERE role='pemilik kos'";
+        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, last_online FROM user WHERE role='pemilik kos'";
         $this->db->query($query);
 
         return $this->db->resultSet();
     }
     public function getPencariKos()
     {
-        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, status_user FROM user WHERE role='pencari kos'";
+        $query = "SELECT id_user, nama, email, status, alamat, number_phone, tanggal_lahir, pekerjaan, kota_asal, instansi, jenis_kelamin, last_online FROM user WHERE role='pencari kos'";
         $this->db->query($query);
 
         return $this->db->resultSet();
@@ -326,7 +326,17 @@ class UsersModel
         return $this->db->rowCount();
     }
 
-    
+
+    public function login($id)
+    {
+        $query = "UPDATE user SET last_online = NOW() WHERE id_user=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        $this->db->execute();
+    }
+
 
 
     private function generateRandomId()

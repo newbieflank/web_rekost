@@ -76,6 +76,7 @@ class AuthController extends Controller
                     exit();
                 }
 
+                $this->userModel->login($user['id_user']);
                 if ($user['role'] === 'pemilik kos') {
                     $data = $this->userModel->findOwnerById($user['id_user']);
 

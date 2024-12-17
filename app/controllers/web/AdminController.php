@@ -24,11 +24,31 @@ class AdminController extends Controller
     public function getPemilikKos()
     {
         $data = $this->userModel->getPemilikKos();
+
+        foreach ($data as &$item) {
+            if (isset($item['last_online'])) {
+                $data = array_merge($data, []);
+                $item['online'] = $this->formatDateHumanReadable($item['last_online']);
+            } else {
+                $item['online'] = 'Never';
+            }
+        }
+
         $this->view('admin/pemilikkos', ['data' => $data]);
     }
     public function getPencariKos()
     {
         $data = $this->userModel->getPencariKos();
+
+        foreach ($data as &$item) {
+            if (isset($item['last_online'])) {
+                $data = array_merge($data, []);
+                $item['online'] = $this->formatDateHumanReadable($item['last_online']);
+            } else {
+                $item['online'] = 'Never';
+            }
+        }
+
         $this->view('admin/pencarikos', ['data' => $data]);
     }
 
@@ -71,5 +91,28 @@ class AdminController extends Controller
         }
         $data = $this->userModel->getUserRegistration();
         $this->view('admin/dashboard', ['data' => $data]);
+    }
+
+    private function formatDateHumanReadable($dateTime)
+    {
+        $date = new DateTime($dateTime);
+        $now = new DateTime();
+        $today = new DateTime('today');
+
+        $diff = $now->diff($date);
+
+        if ($date >= $today) {
+            return 'Hari ini';
+        } elseif ($diff->days == 1) {
+            return 'Kemarin';
+        } elseif ($diff->days < 7) {
+            return $diff->days . ' Hari yang lalu';
+        } elseif ($diff->days < 30) {
+            return ceil($diff->days / 7) . ' Minggu' . (ceil($diff->days / 7) > 1 ? 's' : '') . ' yang lalu';
+        } elseif ($diff->days < 365) {
+            return $date->format('F') . ' ' . $date->format('j');
+        } else {
+            return $date->format('Y-m-d');
+        }
     }
 }
