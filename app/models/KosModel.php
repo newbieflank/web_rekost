@@ -217,11 +217,10 @@ ORDER BY
             $conditions[] = "k.alamat LIKE :alamat";
         }
         if (!empty($harga)) {
-            $conditions[] = "km.harga_bulan BETWEEN :hargaAwal AND :hargaAkhir 
-            OR km.harga_minggu BETWEEN :hargaAwal AND :hargaAkhir
-            OR km.harga_hari BETWEEN :hargaAwal AND :hargaAkhir";
+            $conditions[] = "(km.harga_bulan BETWEEN :hargaAwal AND :hargaAkhir 
+        OR km.harga_minggu BETWEEN :hargaAwal AND :hargaAkhir
+        OR km.harga_hari BETWEEN :hargaAwal AND :hargaAkhir)";
         }
-
 
         if (!empty($conditions)) {
             $query .= "AND " . implode(" AND ", $conditions) . " ";
