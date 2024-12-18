@@ -211,7 +211,7 @@
                                                 ?>
                                             </span>
                                         </p>
-                                        <a class="btn-order" href="#">Pesan sekarang</a>
+                                        <a class="btn-order" href="<?= BASEURL . 'detailkos/' . $best["id_kos"] . '/konfirmasi' ?>">Pesan sekarang</a>
                                     </div>
                                 </div>
                             </a>

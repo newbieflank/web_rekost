@@ -207,6 +207,7 @@
                                             ?>
                                        </span>
                                    </p>
+                                   <a class="btn-order" href="<?= BASEURL . 'detailkos/' . $popular["id_kos"] . '/konfirmasi' ?>">Pesan sekarang</a>
                                </div>
                            </div>
                        </a>

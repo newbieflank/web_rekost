@@ -54,7 +54,7 @@ class DetailController extends Controller
     {
         $lokasi = $_GET['lokasi'] ?? null;
         $harga = $_GET['harga'] ?? null;
-        $urutan = $_GET['urutan'] ?? null;
+        $urutan = $_GET['urutkan'] ?? null;
 
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
@@ -96,6 +96,10 @@ class DetailController extends Controller
     }
     public function strategically()
     {
+        $lokasi = $_GET['lokasi'] ?? null;
+        $harga = $_GET['harga'] ?? null;
+        $urutan = $_GET['urutkan'] ?? null;
+
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
             $user = $this->userModel->findUserByEmail($email);
@@ -105,8 +109,24 @@ class DetailController extends Controller
         }
 
         $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
+        if (!empty($user['Instansi'])) {
+            $institutionName = $user['Instansi'];
+            $coordinates = $this->getCoordinates($institutionName);
+            if (!empty($lokasi) || !empty($harga) || !empty($urutan)) {
+                $Kosterdekat = $this->model('CardViewModel')->SelectNearestKosByFilter($coordinates['lat'], $coordinates['lng'], 5, $lokasi, $harga, $urutan);
+            } else {
+                $Kosterdekat = $this->model('CardViewModel')->SelectNearestKos($coordinates['lat'], $coordinates['lng'], 5);
+            }
+        } else {
+            if (!empty($lokasi) || !empty($harga) || !empty($urutan)) {
+                $Kosterdekat = $this->model('CardViewModel')->SelectCardViewKosCampusByFilter($lokasi, $harga, $urutan);
+            } else {
+                $Kosterdekat = $campus;
+            }
+        }
+
         $data = [
-            "campus" => $campus
+            "campus" => $Kosterdekat
         ];
 
         ob_start();
@@ -160,5 +180,22 @@ class DetailController extends Controller
     public function chats()
     {
         $this->view('detail/chats');
+    }
+
+
+    public function getCoordinates($locationName)
+    {
+        $url = "https://photon.komoot.io/api/?q=" . urlencode($locationName);
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        if (isset($data['features'][0])) {
+            return [
+                'lat' => $data['features'][0]['geometry']['coordinates'][1], // Latitude
+                'lng' => $data['features'][0]['geometry']['coordinates'][0], // Longitude
+            ];
+        } else {
+            return null;
+        }
     }
 }
