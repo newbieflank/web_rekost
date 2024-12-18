@@ -37,7 +37,7 @@ class SendNotification extends Controller
             'token' => $data['token'],
             'notification' => [
                 'title' => 'Pembayaran Berhasil',
-                'body' => 'Pembayaran Sebesar Rp ' . number_format($data['harga'], 0, ',', '.') . ' Berhasil',
+                'body' => 'Pembayaran Kos Sebesar Rp ' . number_format($data['harga'], 0, ',', '.') . ' Berhasil',
             ],
         ];
 

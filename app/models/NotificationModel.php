@@ -8,25 +8,22 @@ class NotificationModel
 
     public function __construct()
     {
-        $this->db = new Database(); // Pastikan Anda menggunakan instance database yang benar
+        $this->db = new Database();
     }
 
-    // Mendapatkan token FCM dari user berdasarkan ID
     public function getFcmTokenById($id_user)
     {
         $query = "SELECT fcm_token FROM user WHERE id_user = :id_user";
         $this->db->query($query);
         $this->db->bind('id_user', $id_user);
 
-        return $this->db->single()['fcm_token']; // Mengambil fcm_token user
+        return $this->db->single()['fcm_token'];
     }
-
-    // Fungsi untuk mengirim push notification
     public function sendPushNotification($id_user, $title, $body)
     {
         $fcmToken = $this->getFcmTokenById($id_user);
         if (!$fcmToken) {
-            return false; // Token tidak ditemukan
+            return false;
         }
 
         $factory = (new Factory)->withServiceAccount('./path/to/your/firebase-service-account.json');
