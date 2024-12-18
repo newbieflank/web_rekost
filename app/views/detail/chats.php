@@ -72,7 +72,7 @@
         <!-- Chat Window -->
         <section class="chat-window flex-grow-1 p-3">
             <header class="chat-header d-flex align-items-center pb-3 border-bottom mb-3">
-                <a href="<?= BASEURL . '/' ?>" class="btn btn-secondary btn-sm me-3">
+                <a href="<?= BASEURL ?>" class="btn btn-secondary btn-sm me-3">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
                 <div class="d-flex align-items-center">
