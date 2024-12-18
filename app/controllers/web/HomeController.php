@@ -106,12 +106,24 @@ class HomeController extends Controller
                 $rating = $this->model('RatingAplikasiModel')->GetUlasan();
                 $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
 
+                if (!empty($user['Instansi'])) {
+                    $institutionName = $user['Instansi'];
+                    $coordinates = $this->getCoordinates($institutionName);
+                    $Kosterdekat = $this->model('CardViewModel')->SelectNearestKos(true, $coordinates['lat'], $coordinates['lng'], 5);
+                } else {
+                    $Kosterdekat = $campus;
+                }
+
+                if (empty($Kosterdekat)) {
+                    $Kosterdekat = $campus;
+                }
+
                 $data = [
                     "id_user" => $user['id_user'],
                     "id_gambar" => $user['id_gambar'],
                     "popular" => $popular,
                     "best" => $best,
-                    "campus" => $campus,
+                    "campus" => $Kosterdekat,
                     "rating_aplikasi" => $rating,
                     "penyewa" => $penyewa,
                     "notifikasi" => $notifikasi,
@@ -305,6 +317,22 @@ class HomeController extends Controller
             exit;
         } else {
             echo json_encode($data);
+        }
+    }
+
+    public function getCoordinates($locationName)
+    {
+        $url = "https://photon.komoot.io/api/?q=" . urlencode($locationName);
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        if (isset($data['features'][0])) {
+            return [
+                'lat' => $data['features'][0]['geometry']['coordinates'][1], // Latitude
+                'lng' => $data['features'][0]['geometry']['coordinates'][0], // Longitude
+            ];
+        } else {
+            return null;
         }
     }
 }

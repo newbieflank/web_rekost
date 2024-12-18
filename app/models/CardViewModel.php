@@ -178,7 +178,170 @@ class CardViewModel
             echo "Error: " . $e->getMessage();
         }
     }
+    public function SelectCardViewKosCampusByFilter($lokasi, $harga, $urutan)
+    {
+        try {
+            $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
+            AS review_count, k.waktu_penyewaan 
+            FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif'";
 
+            if (!empty($lokasi)) {
+                $query .= " AND LOWER(k.alamat) LIKE LOWER(:alamat)";
+            }
+
+            // Add sorting logic
+            $query .= " GROUP BY k.id_kos ORDER BY ";
+            if ($urutan === "popularity") {
+                $query .= "review_count DESC, ";
+            }
+            if ($harga === "high-to-low") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) DESC, ";
+            } elseif ($harga === "low-to-high") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) ASC, ";
+            }
+
+            $query .= "review_count ASC";
+
+            $this->db->query($query);
+
+            if (!empty($lokasi)) {
+                $this->db->bind('alamat', '%' . $lokasi . '%');
+            }
+
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function SelectNearestKos($limit = false, $lat, $lng, $radius)
+    {
+        try {
+            $query = "SELECT 
+                    k.id_kos,
+                    k.nama_kos,
+                    k.alamat,
+                    k.tipe_kos,
+                    km.harga_bulan AS harga,
+                    km.harga_hari,
+                    km.harga_minggu,
+                    (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar,
+                    AVG(u.rating) AS avg_rating,
+                    COUNT(u.id_ulasan) AS review_count,
+                    k.waktu_penyewaan,
+                    (
+                        6371 * ACOS(
+                            COS(RADIANS(:lat)) * COS(RADIANS(k.latitude)) * COS(RADIANS(k.longitude) - RADIANS(:lng)) + 
+                            SIN(RADIANS(:lat)) * SIN(RADIANS(k.latitude))
+                        )
+                    ) AS distance
+                FROM 
+                    kos k
+                LEFT JOIN 
+                    ulasan u ON k.id_kos = u.id_kos
+                LEFT JOIN 
+                    kamar km ON k.id_kos = km.id_kos
+                LEFT JOIN 
+                    gambar g ON k.id_kos = g.id_kos
+                LEFT JOIN 
+                    status_user ON k.id_user = status_user.id_user
+                WHERE 
+                    status_user.status = 'aktif'
+                GROUP BY 
+                    k.id_kos
+                HAVING 
+                    distance <= :radius
+                ORDER BY 
+                    distance ASC;
+                ";
+
+            if ($limit === true) {
+                $query .= "LIMIT 0, 25;";
+            }
+
+            $this->db->query($query);
+            $this->db->bind('lat', $lat);
+            $this->db->bind('lng', $lng);
+            $this->db->bind('radius', $radius);
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function SelectNearestKosByFilter($lat, $lng, $radius, $lokasi, $harga, $urutan)
+    {
+        try {
+            $query = "SELECT 
+                    k.id_kos,
+                    k.nama_kos,
+                    k.alamat,
+                    k.tipe_kos,
+                    km.harga_bulan AS harga,
+                    km.harga_hari,
+                    km.harga_minggu,
+                    (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar,
+                    AVG(u.rating) AS avg_rating,
+                    COUNT(u.id_ulasan) AS review_count,
+                    k.waktu_penyewaan,
+                    (
+                        6371 * ACOS(
+                            COS(RADIANS(:lat)) * COS(RADIANS(k.latitude)) * COS(RADIANS(k.longitude) - RADIANS(:lng)) + 
+                            SIN(RADIANS(:lat)) * SIN(RADIANS(k.latitude))
+                        )
+                    ) AS distance
+                FROM 
+                    kos k
+                LEFT JOIN 
+                    ulasan u ON k.id_kos = u.id_kos
+                LEFT JOIN 
+                    kamar km ON k.id_kos = km.id_kos
+                LEFT JOIN 
+                    gambar g ON k.id_kos = g.id_kos
+                LEFT JOIN 
+                    status_user ON k.id_user = status_user.id_user
+                WHERE 
+                    status_user.status = 'aktif'
+                ";
+
+            if (!empty($lokasi)) {
+                $query .= " AND k.alamat LIKE :alamat";
+            }
+
+            // Add sorting logic
+            $query .= " GROUP BY k.id_kos HAVING distance <= :radius ORDER BY ";
+            if ($urutan === "popularity") {
+                $query .= "review_count DESC, ";
+            }
+            if ($harga === "high-to-low") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) DESC, ";
+            } elseif ($harga === "low-to-high") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) ASC, ";
+            }
+            $query .= "distance ASC";
+
+            $this->db->query($query);
+            $this->db->bind('lat', $lat);
+            $this->db->bind('lng', $lng);
+            $this->db->bind('radius', $radius);
+            if (!empty($lokasi)) {
+                $this->db->bind('alamat', '%' . $lokasi . '%');
+            }
+
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    //DETAIL KOS
     public function DetailKos($id)
     {
         try {

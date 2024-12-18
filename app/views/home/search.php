@@ -263,7 +263,7 @@
                                                     <?= htmlspecialchars($kos['waktu_penyewaan'], ENT_QUOTES, 'UTF-8') ?>
                                                 </span>
                                             </p>
-                                            <a class="btn-order" href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>">Pesan sekarang</a>
+                                            <a class="btn-order" href="<?= BASEURL . 'detailkos/' . $kos["id_kos"] . '/konfirmasi' ?>">Pesan sekarang</a>
                                         </div>
                                     </div>
                                 </a>

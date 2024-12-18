@@ -165,7 +165,7 @@
                                     <a class="dropdown-item" href="<?= BASEURL; ?>datakamar">Data Kamar</a>
                                 <?php endif; ?>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout">Logout</a>
+                                <a class="dropdown-item" href="<?= BASEURL; ?>logout">Logout</a>
                             </div>
                         </div>
                     </div>

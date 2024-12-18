@@ -27,21 +27,24 @@
 
 
                 if ($file['error'] !== UPLOAD_ERR_OK) {
-                    echo "An error occurred during file upload.";
-                    return;
+                    Flasher::setFF('Gagal Mengubah Gambar', 'danger');
+                    $this->header("/profile");
+                    exit;
                 }
 
 
                 if ($file['size'] > 2 * 1024 * 1024) {
-                    echo "File size exceeds the limit.";
-                    return;
+                    Flasher::setFF('Ukuran Melebihi Batas Maksimum', 'danger');
+                    $this->header("/profile");
+                    exit;
                 }
 
 
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                $allowedTypes = ['image/jpeg', 'image/png'];
                 if (!in_array($file['type'], $allowedTypes)) {
-                    echo "Only JPG, PNG, and GIF files are allowed.";
-                    return;
+                    Flasher::setFF('Hanya Suport jpeg dan png', 'danger');
+                    $this->header("/profile");
+                    exit;
                 }
 
                 $existingImage = $this->ImageModel->getImageByUserId($id);
@@ -66,10 +69,14 @@
                         exit;
                     }
                 } else {
-                    echo "Failed to move uploaded file.";
+                    Flasher::setFF('Gagal Mengubah Gambar', 'danger');
+                    $this->header("/profile");
+                    exit;
                 }
             } else {
-                echo "No file uploaded.";
+                Flasher::setFF('Tidak ada Gambar', 'danger');
+                $this->header("/profile");
+                exit;
             }
         }
 
