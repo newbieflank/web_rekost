@@ -267,9 +267,6 @@ class HomeController extends Controller
         $this->view('login/verifpemilik');
     }
 
-
-
-
     public function bestkos()
     {
         $this->view('detail/bestkos');

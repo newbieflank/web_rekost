@@ -336,4 +336,12 @@ class LoginController extends Controller
     }
 
     public function verifPemilik() {}
+    public function forgotPassword()
+    {
+        $this->view('login/forgotPassword');
+    }
+    public function resetPassword()
+    {
+        $this->view('login/resetPassword');
+    }
 }

@@ -18,6 +18,8 @@ Router::post('/api/pembayaran', 'KosController@konfirmPembayaran');
 Router::post('/api/updateFcmToken', 'UpdateFcmToken@update');
 Router::post('/api/sendNotification', 'sendNotification@send');
 Router::get('/api/Notifikasi/{id_user}', 'Notifikasi@getNotifikasi');
+Router::get('/forgotPassword', 'LoginController@forgotPassword');
+Router::get('/resetPassword', 'LoginController@resetPassword');
 
 // chat route
 Router::get('/api/chats/{id_sender}', 'ChatsController@listChats');
