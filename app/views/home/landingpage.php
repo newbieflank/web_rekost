@@ -103,8 +103,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
                                 <!-- <?php
-                                var_dump($data['notifikasi']);
-                                ?> -->
+                                        var_dump($data['notifikasi']);
+                                        ?> -->
                                 <?php if (empty($data['notifikasi'])): ?>
                                     <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
                                 <?php else: ?>
@@ -143,10 +143,10 @@
                                                         ?>
                                                     </small>
                                                     <p class="mb-0">
-                                                            Pembayaran kost sebesar Rp
-                                                            <?= number_format($notif['harga'], 0, ',', '.') ?> telah
-                                                            dikonfirmasi
-                                                        </p>
+                                                        Pembayaran kost sebesar Rp
+                                                        <?= number_format($notif['harga'], 0, ',', '.') ?> telah
+                                                        dikonfirmasi
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -214,23 +214,23 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
-                            <?php echo htmlspecialchars($rating['total_rating']); ?>
+                            <?php echo htmlspecialchars($rating['total_rating']) ? $rating['total_rating'] : 0; ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                    <?php
+                <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                    ?>
+                ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
-                            <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
+                            <?php echo htmlspecialchars($penyewa['jumlah_penyewa']) ? $penyewa['jumlah_penyewa'] : 0; ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Pesanan</p>
                     </div>
@@ -296,15 +296,15 @@
                                 $path = $popular["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = Uploads($path);
                                 if (file_exists($absolutePath)) {
-                                    ?>
+                                ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                    <?php
+                                <?php
                                 } else {
 
-                                    ?>
+                                ?>
                                     <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
                                         alt="No Image Available">
-                                    <?php
+                                <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -418,15 +418,15 @@
                                 $path = $best["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
-                                    ?>
+                                ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                    <?php
+                                <?php
                                 } else {
 
-                                    ?>
+                                ?>
                                     <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
                                         alt="No Image Available">
-                                    <?php
+                                <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -521,15 +521,15 @@
                                 $path = $campus["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
-                                    ?>
+                                ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                    <?php
+                                <?php
                                 } else {
 
-                                    ?>
+                                ?>
                                     <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
                                         alt="No Image Available">
-                                    <?php
+                                <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -616,15 +616,12 @@
                             <div class="card mx-3 mb-4" style="width: 300px;">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="<?= asset('img/user.png') ?>" class="rounded-circle mr-3"
+                                        <img src="<?= asset('uploads/' . $rating['id_user'] . '/' . $rating['img']) ?>" class="rounded-circle mr-3"
                                             alt="User Profile">
                                         <div>
                                             <h5 class="card-title" style="margin-bottom: 5px;">
                                                 <?php echo $rating['nama_user'] ?>
                                             </h5>
-                                            <p class="card-text" style="margin-top: 0;"><i
-                                                    class="fas fa-map-marker-alt"></i> <?php echo $rating['alamat_user'] ?>
-                                            </p>
                                         </div>
                                     </div>
                                     <div class="mb-3" style="color: #FFC107;">

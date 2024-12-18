@@ -12,12 +12,14 @@ class RatingAplikasiModel
     {
         try {
             $query = "SELECT 
+    user.id_user AS id_user,
     user.nama AS nama_user,
     user.alamat AS alamat_user,
     ulasan_aplikasi.ulasan AS review,
     ulasan_aplikasi.rating AS rating,
     ulasan_aplikasi.tanggal_ulas AS tanggal_review,
-    COUNT(*) OVER() AS total_rating
+    COUNT(*) OVER() AS total_rating,
+    user.id_gambar AS img
     FROM 
     ulasan_aplikasi
     JOIN 
