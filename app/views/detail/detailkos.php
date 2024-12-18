@@ -315,7 +315,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <a href="<?= BASEURL; ?>chats?id=<?= $data['id_pemilik'] ?>&gambar=<?= $data['gambar'] ?>&nama=<?= $data['nama'] ?>"
+            <a href="<?= BASEURL; ?>chats?user=<?= $data['id_pemilik'] ?>"
                 class="btn btn-primary btn-lg w-50 mb-4 text-center"
                 id="chatButton">
                 Tanya Pemilik Sebelum Sewa
