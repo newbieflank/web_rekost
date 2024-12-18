@@ -103,8 +103,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
                                 <!-- <?php
-                                        var_dump($data['notifikasi']);
-                                        ?> -->
+                                var_dump($data['notifikasi']);
+                                ?> -->
                                 <?php if (empty($data['notifikasi'])): ?>
                                     <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
                                 <?php else: ?>
@@ -124,28 +124,31 @@
                                         </div>
 
                                         <div class="dropdown-item">
-                                            <?php if ($notif['status_pembayaran'] === 'Dibayar'): ?>
-                                                <div class="d-flex align-items-center">
-                                                    <i class="fas fa-check-circle text-success mr-2"></i>
-                                                    <div>
-                                                        <small class="text-muted">
-                                                            <?php
-                                                            $date1 = new DateTime($notif['tanggal_pembayaran']);
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-check-circle text-success mr-2"></i>
+                                                <div>
+                                                    <small class="text-muted">
+                                                        <?php
+                                                        if (isset($notif['tanggal_penyewaan'])) {
+                                                            $date1 = new DateTime($notif['tanggal_penyewaan']);
                                                             $date2 = new DateTime();
                                                             $interval = $date1->diff($date2);
-                                                            echo $interval->days == 0 ?
-                                                                ($interval->h == 0 ? "{$interval->i} menit yang lalu" : "{$interval->h} jam yang lalu") :
-                                                                "{$interval->days} hari yang lalu";
-                                                            ?>
-                                                        </small>
-                                                        <p class="mb-0">
+
+                                                            if ($interval->days == 0) {
+                                                                echo "Pembayaran hari ini";
+                                                            } else {
+                                                                echo "Pembayaran {$interval->days} hari yang lalu";
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </small>
+                                                    <p class="mb-0">
                                                             Pembayaran kost sebesar Rp
-                                                            <?= number_format($notif['jumlah_pembayaran'], 0, ',', '.') ?> telah
+                                                            <?= number_format($notif['harga'], 0, ',', '.') ?> telah
                                                             dikonfirmasi
                                                         </p>
-                                                    </div>
                                                 </div>
-                                            <?php endif; ?>
+                                            </div>
                                         </div>
                                         <div class="dropdown-divider"></div>
                                     <?php endforeach; ?>
@@ -211,20 +214,20 @@
                 // Menampilkan total rating
                 if (!empty($data['rating_aplikasi'])):
                     $rating = current($data['rating_aplikasi']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #6A0DAD;">
                             <?php echo htmlspecialchars($rating['total_rating']); ?>
                         </h2>
                         <p style="font-size: 18px; color: #4A4A4A;">Ulasan</p>
                     </div>
-                <?php
+                    <?php
                 endif;
 
                 // Menampilkan jumlah penyewa
                 if (!empty($data['penyewa'])):
                     $penyewa = current($data['penyewa']); // Ambil elemen pertama
-                ?>
+                    ?>
                     <div class="col-auto">
                         <h2 style="margin-bottom: 10px; padding-left: 10px; color: #000080;">
                             <?php echo htmlspecialchars($penyewa['jumlah_penyewa']); ?>
@@ -293,14 +296,15 @@
                                 $path = $popular["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = Uploads($path);
                                 if (file_exists($absolutePath)) {
-                                ?>
+                                    ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                <?php
+                                    <?php
                                 } else {
 
-                                ?>
-                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
-                                <?php
+                                    ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
+                                        alt="No Image Available">
+                                    <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -313,8 +317,10 @@
                                         <?php echo $popular['alamat'] ?>
                                     </p>
 
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $popular['avg_rating'] ? $popular['avg_rating'] : 0  ?>/5
-                                        (<?php echo $popular['review_count'] ?>)</p>
+                                    <p class="card-text" style="font-weight: 600;">
+                                        <?php echo $popular['avg_rating'] ? $popular['avg_rating'] : 0 ?>/5
+                                        (<?php echo $popular['review_count'] ?>)
+                                    </p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
                                         <?php
@@ -412,14 +418,15 @@
                                 $path = $best["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
-                                ?>
+                                    ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                <?php
+                                    <?php
                                 } else {
 
-                                ?>
-                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
-                                <?php
+                                    ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
+                                        alt="No Image Available">
+                                    <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -430,8 +437,10 @@
                                         <?php echo $best['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $best['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $best['avg_rating'] ? $best['avg_rating'] : 0 ?>/5
-                                        (<?php echo $best['review_count'] ?>)</p>
+                                    <p class="card-text" style="font-weight: 600;">
+                                        <?php echo $best['avg_rating'] ? $best['avg_rating'] : 0 ?>/5
+                                        (<?php echo $best['review_count'] ?>)
+                                    </p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
                                         <?php
@@ -512,14 +521,15 @@
                                 $path = $campus["id_kos"] . '/foto_depan.jpg';
                                 $absolutePath = uploads($path);
                                 if (file_exists($absolutePath)) {
-                                ?>
+                                    ?>
                                     <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
-                                <?php
+                                    <?php
                                 } else {
 
-                                ?>
-                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
-                                <?php
+                                    ?>
+                                    <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top"
+                                        alt="No Image Available">
+                                    <?php
                                 }
                                 ?>
                                 <div class="card-body">
@@ -530,8 +540,10 @@
                                         <?php echo $campus['tipe_kos'] ?></span>
                                     <p class="card-text mt-3" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
                                         <?php echo $campus['alamat'] ?></p>
-                                    <p class="card-text" style="font-weight: 600;"><?php echo $campus['avg_rating'] ? $campus['avg_rating'] : 0 ?>/5
-                                        (<?php echo $campus['review_count'] ?>)</p>
+                                    <p class="card-text" style="font-weight: 600;">
+                                        <?php echo $campus['avg_rating'] ? $campus['avg_rating'] : 0 ?>/5
+                                        (<?php echo $campus['review_count'] ?>)
+                                    </p>
                                     <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
                                         IDR
                                         <?php
