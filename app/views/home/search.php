@@ -211,7 +211,20 @@
                             <div class="col">
                                 <a href="<?= BASEURL . 'detailkos/' . $kos['id_kos'] ?>" class="card-link text-decoration-none">
                                     <div class="card h-100">
-                                        <img src="<?= asset('img/home1.png') ?>" class="card-img-top img-fluid" alt="Kos Image" />
+                                        <?php
+                                        $path = $kos["id_kos"] . '/foto_depan.jpg';
+                                        $absolutePath = uploads($path);
+                                        if (file_exists($absolutePath)) {
+                                        ?>
+                                            <img src="<?= asset('uploads/' . $path) ?>" class="card-img-top" alt="Kost Image">
+                                        <?php
+                                        } else {
+
+                                        ?>
+                                            <img src="<?= asset(path: 'default/default.jpg') ?>" class="card-img-top" alt="No Image Available">
+                                        <?php
+                                        }
+                                        ?>
                                         <div class="card-body">
                                             <h5 class="card-title"><?= htmlspecialchars($kos['nama_kos'], ENT_QUOTES, 'UTF-8') ?></h5>
                                             <p class="card-text" style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i>
@@ -223,7 +236,29 @@
                                                 <?= htmlspecialchars($kos['tipe_kos'], ENT_QUOTES, 'UTF-8') ?>
                                             </span>
                                             <p class="card-text" style="font-size: 20px; font-weight: bold; color: #E52424;">
-                                                IDR <?= number_format($kos['harga'], 0, ',', '.') ?>
+                                                IDR
+                                                <?php
+                                                $arr = $kos['waktu_penyewaan'];
+                                                $array = explode(',', $arr);
+                                                $array = array_reverse($array);
+
+                                                foreach ($array as $value) {
+                                                    switch (trim($value)) {
+                                                        case 'Bulanan':
+                                                            echo number_format($kos['harga'], 0, ',', '.');
+                                                            break 2;
+                                                        case 'Harian':
+                                                            echo number_format($kos['harga_hari'], 0, ',', '.');
+                                                            break 2;
+                                                        case 'Mingguan':
+                                                            echo number_format($kos['harga_minggu'], 0, ',', '.');
+                                                            break 2;
+                                                        default:
+                                                            echo number_format($kos['harga'], 0, ',', '.');
+                                                            break;
+                                                    }
+                                                }
+                                                ?>
                                                 <span style="font-size: 16px; font-weight: normal; color:#4A4A4A">
                                                     <?= htmlspecialchars($kos['waktu_penyewaan'], ENT_QUOTES, 'UTF-8') ?>
                                                 </span>
@@ -250,46 +285,47 @@
 
 </body>
 <script>
-    document.querySelectorAll('.dropdown-menu button').forEach(button => {
-        button.addEventListener('click', function() {
-            const dropdown = this.closest('.dropdown');
-            const inputId = dropdown.querySelector('input[type="hidden"]').id;
-            const value = this.getAttribute('data-value');
-            const selectedSpan = dropdown.querySelector('button span');
-
-            document.getElementById(inputId).value = value;
-
-            const buttonText = this.innerText;
-            selectedSpan.innerText = buttonText;
-
-            document.getElementById('filterForm').submit();
-        });
+    document.getElementById('dropdownHarga').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('harga', selectedValue);
+        window.location.href = currentUrl;
     });
 
-    let selectedHarga = [];
-    document.querySelectorAll('#dropdownHarga .dropdown-item').forEach(button => {
-        button.addEventListener('click', function() {
-            const value = this.getAttribute('data-value');
-            const selectedSpan = document.getElementById('hargaSelected');
-
-            if (!selectedHarga.includes(value)) {
-                selectedHarga.push(value);
-                selectedSpan.innerText = selectedHarga.join(', ');
-            } else {
-                selectedHarga = selectedHarga.filter(item => item !== value);
-                selectedSpan.innerText = selectedHarga.join(', ') || 'Harga';
-            }
-
-            document.getElementById('costInput').value = selectedHarga.join(', ');
-
-            document.getElementById('filterForm').submit();
-        });
+    document.getElementById('dropdownUrutkan').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('urutkan', selectedValue);
+        window.location.href = currentUrl;
     });
 
-    window.history.replaceState(null, document.title, window.location.href);
+    document.getElementById('dropdownLokasi').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('lokasi', selectedValue);
+        window.location.href = currentUrl;
+    });
 
-    window.addEventListener('popstate', function() {
-        window.location.href = '';
+    window.addEventListener('DOMContentLoaded', function() {
+        const currentUrl = new URL(window.location.href);
+
+        const hargaParam = currentUrl.searchParams.get('harga');
+        if (hargaParam) {
+            const hargaDropdown = document.getElementById('dropdownHarga');
+            hargaDropdown.value = hargaParam;
+        }
+
+        const urutkanParam = currentUrl.searchParams.get('urutkan');
+        if (urutkanParam) {
+            const urutkanDropdown = document.getElementById('dropdownUrutkan');
+            urutkanDropdown.value = urutkanParam;
+        }
+
+        const lokasiParam = currentUrl.searchParams.get('lokasi');
+        if (urutkanParam) {
+            const urutkanDropdown = document.getElementById('dropdownLokasi');
+            urutkanDropdown.value = lokasiParam;
+        }
     });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

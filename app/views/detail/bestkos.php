@@ -1,7 +1,5 @@
     <link rel="stylesheet" href="<?= asset('css/bestkos.css') ?>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -104,14 +102,15 @@
                 </div>
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
                     <div class="d-flex overflow-auto mb-2 mb-md-0">
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Blindungan</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamanan</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Wonosari</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tamansari</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Kampung Arab</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Sempol</button>
-                        <button type="button" class="btn btn-outline-primary mr-2 d-inline-block">Tapen</button>
+                        <a href="?location=Blindungan" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Blindungan">Blindungan</a>
+                        <a href="?location=Tamanan" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Tamanan">Tamanan</a>
+                        <a href="?location=Wonosari" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Wonosari">Wonosari</a>
+                        <a href="?location=Tamansari" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Tamansari">Tamansari</a>
+                        <a href="?location=Kampung Arab" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Kampung Arab">Kampung Arab</a>
+                        <a href="?location=Sempol" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Sempol">Sempol</a>
+                        <a href="?location=Tapen" class="btn btn-outline-primary mr-2 d-inline-block" data-param="Tapen">Tapen</a>
                     </div>
+
                     <div class="d-flex align-items-center">
 
                         <div class="d-inline-block mr-3 position-relative">
@@ -172,16 +171,16 @@
                                             foreach ($array as $value) {
                                                 switch ($value) {
                                                     case 'Bulanan':
-                                                        echo $best['harga'];
+                                                        echo number_format($best['harga'], 0, ',', '.');
                                                         break 2;
                                                     case 'Harian':
-                                                        echo $best['harga_hari'];
+                                                        echo number_format($best['harga_hari'], 0, ',', '.');
                                                         break 2;
                                                     case 'Mingguan':
-                                                        echo $best['harga_minggu'];
+                                                        echo number_format($best['harga_minggu'], 0, ',', '.');
                                                         break 2;
                                                     default:
-                                                        echo $best['harga'];
+                                                        echo number_format($best['harga'], 0, ',', '.');
                                                         break;
                                                 }
                                             }
@@ -224,5 +223,5 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+        <script src="<?= asset('js/bestKos.js') ?>"></script>
     </body>

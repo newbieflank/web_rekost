@@ -10,6 +10,9 @@ class DetailController extends Controller
     }
     public function popularkos()
     {
+        $lokasi = $_GET['lokasi'] ?? null;
+        $harga = $_GET['harga'] ?? null;
+
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
             $user = $this->userModel->findUserByEmail($email);
@@ -18,7 +21,12 @@ class DetailController extends Controller
             $role = "pencari_kos";
         }
 
-        $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
+        if (!empty($lokasi) || !empty($harga)) {
+            $popular = $this->model('CardViewModel')->SelectCardViewKosPopularByFilter($lokasi, $harga);
+        } else {
+            $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
+        }
+
         $data = [
             "popular" => $popular
         ];
@@ -44,6 +52,10 @@ class DetailController extends Controller
     }
     public function bestkos()
     {
+        $lokasi = $_GET['lokasi'] ?? null;
+        $harga = $_GET['harga'] ?? null;
+        $urutan = $_GET['urutan'] ?? null;
+
         if (isset($_SESSION['user'])) {
             $email = $_SESSION['user']['email'];
             $user = $this->userModel->findUserByEmail($email);
@@ -52,7 +64,12 @@ class DetailController extends Controller
             $role = "pencari_kos";
         }
 
-        $best = $this->model('CardViewModel')->SelectCardViewKosBest();
+        if (!empty($lokasi) || !empty($harga) || !empty($urutan)) {
+            $best = $this->model('CardViewModel')->SelectCardViewKosBestByFilter($lokasi, $harga, $urutan);
+        } else {
+            $best = $this->model('CardViewModel')->SelectCardViewKosBest();
+        }
+
         $data = [
             "best" => $best
         ];

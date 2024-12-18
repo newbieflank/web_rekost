@@ -242,6 +242,49 @@ ORDER BY
         return $this->db->resultSet();
     }
 
+    public function CariKosByFilter($lokasi, $harga, $urutan)
+    {
+        try {
+            $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+            AS harga, km.harga_hari, km.harga_minggu ,(SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
+            AS review_count, k.waktu_penyewaan 
+            FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+            LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif'";
+
+            if (!empty($lokasi)) {
+                $query .= " AND k.alamat LIKE :alamat";
+            }
+
+            // Add sorting logic
+            $query .= " GROUP BY k.id_kos ORDER BY ";
+            if ($urutan === "popularity") {
+                $query .= "review_count DESC, ";
+            }
+            if ($harga === "high-to-low") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) DESC, ";
+            } elseif ($harga === "low-to-high") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) ASC, ";
+            }
+            $query .= "avg_rating DESC";
+
+            $this->db->query($query);
+
+            // Bind location parameter if applicable
+            if (!empty($lokasi)) {
+                $this->db->bind('alamat', '%' . $lokasi . '%');
+            }
+
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
     public function getDataKamar($id)
     {
         $query = "SELECT kos.waktu_penyewaan AS waktu_sewa, kamar.* FROM kos JOIN kamar ON kos.id_kos=kamar.id_kos WHERE kos.id_kos=:id_kos";

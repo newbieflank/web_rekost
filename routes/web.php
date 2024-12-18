@@ -6,8 +6,6 @@ Router::get('/login', 'LoginController@login');
 Router::get('/register', 'LoginController@register');
 Router::get('/id/{id}', 'LoginController@show');
 Router::get('/profile', 'ProfileController@profile');
-Router::get('/popular', 'HomeController@popular');
-Router::get('/best', 'HomeController@best');
 Router::get('/popular', 'DetailController@popularkos');
 Router::get('/best', 'DetailController@bestkos');
 Router::get('/campus', 'DetailController@strategically');
@@ -24,6 +22,7 @@ Router::get('/riwayat', 'PembayaranController@riwayatpencari');
 Router::post('/pembayaran', 'PembayaranController@insertPembayaran');
 Router::get('/chats/{id}', 'ChatController@chatUser');
 Router::post('/rating', 'PembayaranController@addrating');
+Router::get('/search', 'HomeController@cari');
 
 //admin
 Router::get('/acceptance', 'AdminController@getPersetujuanKos');

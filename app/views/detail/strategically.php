@@ -195,16 +195,16 @@
                                                 foreach ($array as $value) {
                                                     switch ($value) {
                                                         case 'Bulanan':
-                                                            echo "Bulanan";
+                                                            echo number_format($campus['harga'], 0, ',', '.');
                                                             break 2;
                                                         case 'Harian':
-                                                            echo "Harian";
+                                                            echo number_format($campus['harga_hari'], 0, ',', '.');
                                                             break 2;
                                                         case 'Mingguan':
-                                                            echo "Mingguan";
+                                                            echo number_format($campus['harga_minggu'], 0, ',', '.');
                                                             break 2;
                                                         default:
-                                                            echo "Bulanan";
+                                                            echo number_format($campus['harga'], 0, ',', '.');
                                                             break;
                                                     }
                                                 }

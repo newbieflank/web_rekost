@@ -9,7 +9,9 @@ class CardViewModel
         $this->db = new Database;  // Assuming the Database class is properly defined
     }
 
-    public function SelectCardViewKosPoPular()
+
+    //VIEW POPULAR KOS
+    public function SelectCardViewKosPoPular($limit = false)
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
@@ -20,7 +22,11 @@ class CardViewModel
             LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos
             LEFT JOIN status_user ON k.id_user = status_user.id_user
             WHERE status_user.status = 'aktif' GROUP BY k.id_kos
-            ORDER BY review_count DESC LIMIT 0, 25;";
+            ORDER BY review_count DESC ";
+
+            if ($limit === true) {
+                $query .= "LIMIT 0, 25;";
+            }
 
             $this->db->query($query);
             $results = $this->db->resultSet();
@@ -30,7 +36,50 @@ class CardViewModel
         }
     }
 
-    public function SelectCardViewKosBest()
+    public function SelectCardViewKosPopularByFilter($lokasi, $harga)
+    {
+        try {
+            $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+            AS harga, km.harga_hari, km.harga_minggu , (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) 
+            AS gambar, AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) 
+            AS review_count, k.waktu_penyewaan, status_user.status 
+            FROM kos k LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
+            LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos
+            LEFT JOIN status_user ON k.id_user = status_user.id_user
+            WHERE status_user.status = 'aktif'";
+
+            if (!empty($lokasi)) {
+                $query .= " AND k.alamat LIKE :alamat";
+            }
+
+            // Add sorting logic
+            $query .= " GROUP BY k.id_kos ORDER BY ";
+
+            if ($harga === "high-to-low") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) DESC, ";
+            } elseif ($harga === "low-to-high") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) ASC, ";
+            }
+            $query .= "review_count DESC";
+
+            $this->db->query($query);
+
+            // Bind location parameter if applicable
+            if (!empty($lokasi)) {
+                $this->db->bind('alamat', '%' . $lokasi . '%');
+            }
+
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+
+    //VIEW BEST KOS
+    public function SelectCardViewKosBest($limit = false)
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
@@ -41,8 +90,12 @@ class CardViewModel
             LEFT JOIN kamar km ON k.id_kos = km.id_kos LEFT JOIN gambar g ON k.id_kos = g.id_kos 
             LEFT JOIN status_user ON k.id_user = status_user.id_user
             WHERE status_user.status = 'aktif'
-            GROUP BY k.id_kos ORDER BY avg_rating DESC LIMIT 0, 25;
-";
+            GROUP BY k.id_kos ORDER BY avg_rating DESC 
+            ";
+
+            if ($limit === true) {
+                $query .= "LIMIT 0, 25;";
+            }
 
             $this->db->query($query);
             $results = $this->db->resultSet();
@@ -52,7 +105,56 @@ class CardViewModel
         }
     }
 
-    public function SelectCardViewKosCampus()
+    public function SelectCardViewKosBestByFilter($lokasi, $harga, $urutan)
+    {
+        try {
+            $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
+        AS harga, km.harga_hari, km.harga_minggu, 
+        (SELECT g.deskripsi FROM gambar g WHERE g.id_kos = k.id_kos LIMIT 1) AS gambar, 
+        AVG(u.rating) AS avg_rating, COUNT(u.id_ulasan) AS review_count, 
+        k.waktu_penyewaan, status_user.status 
+        FROM kos k 
+        LEFT JOIN ulasan u ON k.id_kos = u.id_kos 
+        LEFT JOIN kamar km ON k.id_kos = km.id_kos 
+        LEFT JOIN gambar g ON k.id_kos = g.id_kos 
+        LEFT JOIN status_user ON k.id_user = status_user.id_user
+        WHERE status_user.status = 'aktif'";
+
+            if (!empty($lokasi)) {
+                $query .= " AND k.alamat LIKE :alamat";
+            }
+
+            // Add sorting logic
+            $query .= " GROUP BY k.id_kos ORDER BY ";
+            if ($urutan === "popularity") {
+                $query .= "review_count DESC, ";
+            }
+            if ($harga === "high-to-low") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) DESC, ";
+            } elseif ($harga === "low-to-high") {
+                $query .= "COALESCE(km.harga_bulan, km.harga_minggu, km.harga_hari) ASC, ";
+            }
+            $query .= "avg_rating DESC";
+
+            $this->db->query($query);
+
+            // Bind location parameter if applicable
+            if (!empty($lokasi)) {
+                $this->db->bind('alamat', '%' . $lokasi . '%');
+            }
+
+            $results = $this->db->resultSet();
+            return $results;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+
+
+    //VIEW CAMPUS KOS
+    public function SelectCardViewKosCampus($limit = false)
     {
         try {
             $query = "SELECT k.id_kos, k.nama_kos, k.alamat, k.tipe_kos, km.harga_bulan 
@@ -63,7 +165,11 @@ class CardViewModel
             LEFT JOIN gambar g ON k.id_kos = g.id_kos 
             LEFT JOIN status_user ON k.id_user = status_user.id_user
             WHERE status_user.status = 'aktif'
-            GROUP BY k.id_kos LIMIT 0, 25;";
+            GROUP BY k.id_kos ";
+
+            if ($limit === true) {
+                $query .= "LIMIT 0, 25;";
+            }
 
             $this->db->query($query);
             $results = $this->db->resultSet();

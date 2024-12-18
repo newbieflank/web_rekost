@@ -1,7 +1,5 @@
    <link rel="stylesheet" href="<?= asset('css/popular.css') ?>">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-       integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR0O4v8rZ7tH6XGm7q4cdw8dF/6g2IsG2M5eR" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -118,13 +116,6 @@
                            <option value="low-to-high">Terendah ke Tertinggi</option>
                        </select>
                    </div>
-                   <div class="d-inline-block position-relative">
-                       <select class="form-control btn btn-primary" id="dropdownUrutkan">
-                           <option value="" disabled selected hidden>Urutkan</option>
-                           <option value="popularity">Popularitas</option>
-                           <option value="newest">Terbaru</option>
-                       </select>
-                   </div>
                </div>
                <div class="position-relative" style="width: 100%; max-width: 400px;">
                    <input type="text" class="form-control search-input" placeholder="Search Boarding House"
@@ -176,16 +167,16 @@
                                         foreach ($array as $value) {
                                             switch ($value) {
                                                 case 'Bulanan':
-                                                    echo $popular['harga'];
+                                                    echo number_format($popular['harga'], 0, ',', '.');
                                                     break 2;
                                                 case 'Harian':
-                                                    echo $popular['harga_hari'];
+                                                    echo number_format($popular['harga_hari'], 0, ',', '.');
                                                     break 2;
                                                 case 'Mingguan':
-                                                    echo $popular['harga_minggu'];
+                                                    echo number_format($popular['harga_minggu'], 0, ',', '.');
                                                     break 2;
                                                 default:
-                                                    echo $popular['harga'];
+                                                    echo number_format($popular['harga'], 0, ',', '.');
                                                     break;
                                             }
                                         }
@@ -231,5 +222,5 @@
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+   <script src="<?= asset('js/popular.js') ?>"></script>
    </body>

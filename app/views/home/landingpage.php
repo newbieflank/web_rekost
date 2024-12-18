@@ -247,8 +247,8 @@
                                 <div class="input-group position-relative">
                                     <select class="form-control pl-5 pr-5" id="location" name="location" required>
                                         <option value="">Pilih Lokasi</option>
-                                        <option value="blindungan">Jember</option>
-                                        <option value="bws">Bondowoso</option>
+                                        <option value="Jember">Jember</option>
+                                        <option value="Bondowoso">Bondowoso</option>
                                     </select>
                                     <i class="fas fa-map-marker-alt position-absolute"
                                         style="left: 10px; top: 50%; transform: translateY(-50%); z-index: 4;"></i>
@@ -325,16 +325,16 @@
                                         foreach ($array as $value) {
                                             switch ($value) {
                                                 case 'Bulanan':
-                                                    echo $popular['harga'];
+                                                    echo number_format($popular['harga'], 0, ',', '.');
                                                     break 2;
                                                 case 'Harian':
-                                                    echo $popular['harga_hari'];
+                                                    echo number_format($popular['harga_hari'], 0, ',', '.');
                                                     break 2;
                                                 case 'Mingguan':
-                                                    echo $popular['harga_minggu'];
+                                                    echo number_format($popular['harga_minggu'], 0, ',', '.');
                                                     break 2;
                                                 default:
-                                                    echo $popular['harga'];
+                                                    echo number_format($popular['harga'], 0, ',', '.');
                                                     break;
                                             }
                                         }
@@ -442,16 +442,16 @@
                                         foreach ($array as $value) {
                                             switch ($value) {
                                                 case 'Bulanan':
-                                                    echo $best['harga'];
+                                                    echo number_format($best['harga'], 0, ',', '.');
                                                     break 2;
                                                 case 'Harian':
-                                                    echo $best['harga_hari'];
+                                                    echo number_format($best['harga_hari'], 0, ',', '.');
                                                     break 2;
                                                 case 'Mingguan':
-                                                    echo $best['harga_minggu'];
+                                                    echo number_format($best['harga_minggu'], 0, ',', '.');
                                                     break 2;
                                                 default:
-                                                    echo $best['harga'];
+                                                    echo number_format($best['harga'], 0, ',', '.');
                                                     break;
                                             }
                                         }
@@ -542,16 +542,16 @@
                                         foreach ($array as $value) {
                                             switch ($value) {
                                                 case 'Bulanan':
-                                                    echo $campus['harga'];
+                                                    echo number_format($campus['harga'], 0, ',', '.');
                                                     break 2;
                                                 case 'Harian':
-                                                    echo $campus['harga_hari'];
+                                                    echo number_format($campus['harga_hari'], 0, ',', '.');
                                                     break 2;
                                                 case 'Mingguan':
-                                                    echo $campus['harga_minggu'];
+                                                    echo number_format($campus['harga_minggu'], 0, ',', '.');
                                                     break 2;
                                                 default:
-                                                    echo $campus['harga'];
+                                                    echo number_format($campus['harga'], 0, ',', '.');
                                                     break;
                                             }
                                         }

@@ -100,9 +100,9 @@ class HomeController extends Controller
                 // $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
 
 
-                $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
-                $best = $this->model('CardViewModel')->SelectCardViewKosBest();
-                $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
+                $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular(true);
+                $best = $this->model('CardViewModel')->SelectCardViewKosBest(true);
+                $campus = $this->model('CardViewModel')->SelectCardViewKosCampus(true);
                 $rating = $this->model('RatingAplikasiModel')->GetUlasan();
                 $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
 
@@ -119,9 +119,9 @@ class HomeController extends Controller
                 $this->view('home/landingpage', $data);
             }
         } else {
-            $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular();
-            $best = $this->model('CardViewModel')->SelectCardViewKosBest();
-            $campus = $this->model('CardViewModel')->SelectCardViewKosCampus();
+            $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular(true);
+            $best = $this->model('CardViewModel')->SelectCardViewKosBest(true);
+            $campus = $this->model('CardViewModel')->SelectCardViewKosCampus(true);
             $rating = $this->model('RatingAplikasiModel')->GetUlasan();
             $penyewa = $this->model('RatingAplikasiModel')->GetTotalPenyewa();
             $data = [
@@ -133,10 +133,6 @@ class HomeController extends Controller
             ];
             $this->view('home/landingpage', $data);
         }
-    }
-    public function popularkos()
-    {
-        $this->view('detail/popularkos');
     }
     public function search()
     {
@@ -179,15 +175,44 @@ class HomeController extends Controller
         $this->view('layout/main', $layout);
     }
 
-    public function filterKos()
+    public function cari()
     {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $alamat = $data['alamat'] ?? '';
-        $harga = $data['harga'] ?? '';
+        $alamat = $_GET['lokasi'] ?? null;
+        $harga = $_GET['harga'] ?? null;
+        $urutan = $_GET['urutan'] ?? null;
 
-        $results = $this->model('KosModel')->CariKos($alamat, $harga);
+        if (isset($_SESSION['user'])) {
+            $email = $_SESSION['user']['email'];
+            $user = $this->model('UsersModel')->findUserByEmail($email);
+            $role = $user['role'];
+        } else {
+            $role = "pencari_kos";
+        }
 
-        echo json_encode($results);
+        $search = $this->model('KosModel')->CariKosByFilter($alamat, $harga, $urutan);
+        $data = [
+            'search' => $search
+        ];
+
+        ob_start();
+        $this->view('home/search', $data);
+        $content = ob_get_clean();
+
+        $layout = [
+            'content' => $content,
+            'title' => "cari kos",
+            'role' => $role,
+            'footer' => false
+        ];
+
+        if (isset($user)) {
+            $layout = array_merge($layout, [
+                'id_user' => $user['id_user'],
+                'id_gambar' => $user['id_gambar']
+            ]);
+        }
+
+        $this->view('layout/main', $layout);
     }
 
 
@@ -238,7 +263,7 @@ class HomeController extends Controller
         header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
-        
+
         $this->view('login/verifpemilik');
     }
 
