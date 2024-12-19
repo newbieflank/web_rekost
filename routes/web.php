@@ -23,6 +23,9 @@ Router::post('/pembayaran', 'PembayaranController@insertPembayaran');
 Router::get('/chats/{id}', 'ChatController@chatUser');
 Router::post('/rating', 'PembayaranController@addrating');
 Router::get('/search', 'HomeController@cari');
+Router::get('/forgetPassword', 'LoginController@forget');
+Router::post('/forgetPassword/reset', 'LoginController@reset');
+Router::get('/forgetPassword/reset', 'LoginController@reset');
 
 //admin
 Router::get('/acceptance', 'AdminController@getPersetujuanKos');
@@ -53,6 +56,6 @@ Router::post('/addulasan', 'HomeController@AddUlasan');
 Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
 Router::post('/filterKos', 'HomeController@filterKos');
-
+Router::post('/forgetPassword', 'LoginController@requestReset');
 
 Router::get('/out', 'LoginController@out');

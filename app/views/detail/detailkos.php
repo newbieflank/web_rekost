@@ -333,24 +333,25 @@
     });
 </script>
 <script>
-    function initMap() {
-        var map = L.map('map').setView([-7.922773, 113.808810], 13);
+    var latitude = <?= $data['latitude']; ?>;
+    var longitude = <?= $data['longitude']; ?>;
 
+    function initMap() {
         // Menambahkan tile layer dari OpenStreetMap
+        var map = L.map('map').setView([latitude, longitude], 13);
+
+        // Add tile layer from OpenStreetMap
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // Menambahkan pin (marker) pada lokasi tertentu
-        var marker = L.marker([-8.15946626438085, 113.72347203723199]).addTo(map);
+        // Add a marker using the PHP-provided coordinates
+        var marker = L.marker([latitude, longitude]).addTo(map);
 
-        // Zoom in ke level yang lebih tinggi
-        map.setZoom(16);
-
-        // Tambahkan popup pada marker
         marker.bindPopup("<b>Lokasi Saya</b><br>Ini adalah lokasi yang dipilih.").openPopup();
     }
+
     initMap()
 </script>
 <script>

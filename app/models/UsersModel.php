@@ -337,7 +337,40 @@ class UsersModel
         $this->db->execute();
     }
 
+    public function storeResetToken($userId, $token)
+    {
+        $this->db->query("INSERT INTO password_resets (id_user, token, created_at) VALUES (:userId, :token, NOW())");
+        $this->db->bind('userId', $userId);
+        $this->db->bind('token', $token);
+        $this->db->execute();
+    }
 
+    public function findUserByToken($token)
+    {
+        $this->db->query("SELECT id_user FROM password_resets WHERE token = :token AND created_at >= (NOW() - INTERVAL 1 HOUR)");
+        $this->db->bind('token', $token);
+        return $this->db->single();
+    }
+
+    public function updatePassword($userId, $newPassword)
+    {
+        $this->db->query("UPDATE user SET password = :password WHERE id_user = :userId");
+        // $this->db->bind('password', password_hash($newPassword, PASSWORD_BCRYPT));
+        $this->db->bind('password',  $newPassword);
+        $this->db->bind('userId', $userId);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function deleteToken($id)
+    {
+        $query = "DELETE FROM password_resets WHERE id_user= :id_user";
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+        $this->db->execute();
+    }
 
     private function generateRandomId()
     {

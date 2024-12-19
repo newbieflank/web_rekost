@@ -321,7 +321,98 @@ class LoginController extends Controller
         }
     }
 
-    public function out() {}
+    public function forget()
+    {
+        $this->view('login/forgotPassword');
+    }
+
+    public function requestReset()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = trim($_POST['email']);
+
+            $user = $this->userModel->findUserByEmail($email);
+            if (!$user) {
+                Flasher::setFlash('*Akun Tidak di Temukan', 'danger');
+                $this->view('login/setpassword', ['email' => $email]);
+                exit();
+            }
+
+            $token = bin2hex(random_bytes(32));
+            $this->userModel->storeResetToken($user['id_user'], $token);
+
+            $resetLink = BASEURL . "forgetPassword/reset?token=" . $token;
+            sendResetEmail($email,  $resetLink);
+
+            $this->view('login/forgotPassword', ['email' => $email]);
+            exit();
+        } else {
+            $this->header('/forgetPassword');
+        }
+    }
+
+    public function reset()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $user = $this->userModel->findUserByToken($token);
+            if (!$user) {
+                Flasher::setFlash('*Token tidak valid atau telah kedaluwarsa.', 'danger');
+                $this->header('/forgetPassword');
+                exit;
+            }
+            $this->view('login/resetPassword');
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $token = $_POST['token'];
+            $newPassword = $_POST['password'];
+            $konfirmasiPassword = $_POST['konfirmasi'];
+
+            $data = [
+                'token' => $token
+            ];
+
+            if (empty($newPassword) || empty($konfirmasiPassword) || empty($token)) {
+                Flasher::setFlash('*Semua field harus diisi.', 'danger');
+                $this->view('login/resetPassword');
+                exit;
+            }
+
+            $user = $this->userModel->findUserByToken($token);
+            if (!$user) {
+                Flasher::setFlash('*Token tidak valid atau telah kedaluwarsa.', 'danger');
+                $this->header('/forgetPassword');
+                exit;
+            }
+
+            if ($newPassword !== $konfirmasiPassword) {
+                Flasher::setFlash('*Pastikan kedua password sama.', 'danger');
+                $this->view('login/resetPassword', $data);
+                exit;
+            }
+
+            if (strlen($newPassword) < 8) {
+                Flasher::setFlash('*Password harus memiliki minimal 8 karakter.', 'danger');
+                $this->view('login/resetPassword', $data);
+                exit;
+            }
+
+            // $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+            if ($this->userModel->updatePassword($user['id_user'], $newPassword) > 0) {
+                $this->userModel->deleteToken($user['id_user']);
+                Flasher::setFlash('*Password berhasil diubah. Silakan login.', 'success');
+                $this->header('/login');
+                exit;
+            } else {
+                Flasher::setFlash('*Gagal mengubah password.', 'danger');
+                $this->view('login/resetPassword', $data);
+                exit;
+            }
+        }
+    }
+
 
     private function generateRandomId()
     {
