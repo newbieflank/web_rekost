@@ -322,9 +322,9 @@
         }
 
         const lokasiParam = currentUrl.searchParams.get('lokasi');
-        if (urutkanParam) {
-            const urutkanDropdown = document.getElementById('dropdownLokasi');
-            urutkanDropdown.value = lokasiParam;
+        if (lokasiParam) {
+            const lokasiDropdown = document.getElementById('dropdownLokasi');
+            lokasiDropdown.value = lokasiParam;
         }
     });
 </script>
