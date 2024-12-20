@@ -347,6 +347,7 @@ class CardViewModel
         try {
             $query = "SELECT 
     k.id_kos,
+    k.id_user AS id_pemilik,
     k.nama_kos,
     k.deskripsi AS kos_deskripsi,
     k.tipe_kos,
