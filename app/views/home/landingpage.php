@@ -126,7 +126,7 @@
                                                 <i class="fas fa-check-circle text-success mr-2"></i>
                                                 <div>
                                                     <small class="text-muted">
-                                                        <?php
+                                                    <?php
                                                         if (isset($notif['tanggal_penyewaan'])) {
                                                             $date1 = new DateTime($notif['tanggal_penyewaan']);
                                                             $date2 = new DateTime();
@@ -135,7 +135,8 @@
                                                             if ($interval->days == 0) {
                                                                 echo "Pembayaran hari ini";
                                                             } else {
-                                                                echo "Pembayaran {$interval->days} hari yang lalu";
+                                                                $formattedDate = $date1->format('d/m/Y');
+                                                                echo "Pembayaran pada tanggal: {$formattedDate}";
                                                             }
                                                         }
                                                         ?>

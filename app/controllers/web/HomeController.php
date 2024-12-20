@@ -6,7 +6,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->userModel =  $this->model('UsersModel');
+        $this->userModel = $this->model('UsersModel');
     }
 
     public function index()
@@ -24,7 +24,7 @@ class HomeController extends Controller
                 $rating = $this->model('RatingAplikasiModel')->totalRating();
                 $formatChartPemilik = [];
                 $formatChartPencari = [];
-                $totalRating = $rating['user'] > 0 ?  $rating['rating'] / $rating['user'] : 0;
+                $totalRating = $rating['user'] > 0 ? $rating['rating'] / $rating['user'] : 0;
                 $maxDays = date('t');
                 for ($i = 1; $i <= $maxDays; $i++) {
                     $date = date("Y-m") . "-" . str_pad($i, 2, "0", STR_PAD_LEFT);
@@ -47,27 +47,30 @@ class HomeController extends Controller
                     'totalRatingKos' => $totalRating
                 ]);
             } else if ($role === 'pemilik kos') {
+                $notifModel = $this->model('Notifmodel');
+                $notifikasiPemilik = $notifModel->getNotifikasiPemilik($_SESSION['user']['id_user']);
+
                 $pendapatan = $this->model('chartModel')->getpendapatan();
                 $pengeluaran = $this->model('chartModel')->getpengeluaran();
-                $rataRating = $this->model(model: 'chartModel')->getUlasan();
+                $rataRating = $this->model('chartModel')->getUlasan();
                 $ratingatas = $this->model('chartModel')->getulasanatas();
                 $chartpendapatan = $this->model('chartModel')->gettransaksi($idKos);
                 $chartpengeluaran = $this->model('chartModel')->gettransaksi2();
                 $penyewa = $this->model('KosModel')->jumlahPenyewa();
                 $ulasan = $this->model('KosModel')->totalRating();
 
-                $ulasan['user'] > 0 ?  $jumlah = $ulasan['rating'] / $ulasan['user'] : $jumlah = 0;
+                $ulasan['user'] > 0 ? $jumlah = $ulasan['rating'] / $ulasan['user'] : $jumlah = 0;
 
                 $pendapatanPerBulan = array_fill(0, 12, 0);
                 foreach ($chartpendapatan as $item) {
                     $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-                    $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+                    $pendapatanPerBulan[$bulanIndex] = (int) $item['total_transaksi'];
                 }
 
                 $pengeluaranPerBulan = array_fill(0, 12, 0);
                 foreach ($chartpengeluaran as $item) {
                     $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-                    $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+                    $pengeluaranPerBulan[$bulanIndex] = (int) $item['total_transaksi'];
                 }
 
                 $layoutData = [
@@ -78,7 +81,7 @@ class HomeController extends Controller
                     "chartpendapatan" => $pendapatanPerBulan,
                     "chartpengeluaran" => $pengeluaranPerBulan,
                     "penyewa" => $penyewa,
-                    "ulasan" => $jumlah
+                    "ulasan" => $jumlah,
                 ];
 
                 ob_start();
@@ -91,14 +94,16 @@ class HomeController extends Controller
                     "id_gambar" => $user['id_gambar'],
                     "role" => $user['role'],
                     "title" => 'Home',
+                    "notifikasiPemilik" => $notifikasiPemilik
+
+                
                 ];
 
                 $this->view('layout/main', $data);
+
             } else {
                 $notifModel = $this->model('Notifmodel');
                 $notifikasi = $notifModel->getNotifikasi($_SESSION['user']['id_user']);
-                // $unreadCount = $notifModel->getUnreadCount($_SESSION['user']['id_user']);
-
 
                 $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular(true);
                 $best = $this->model('CardViewModel')->SelectCardViewKosBest(true);
@@ -130,6 +135,7 @@ class HomeController extends Controller
                 ];
                 $this->view('home/landingpage', $data);
             }
+
         } else {
             $popular = $this->model('CardViewModel')->SelectCardViewKosPoPular(true);
             $best = $this->model('CardViewModel')->SelectCardViewKosBest(true);
@@ -244,13 +250,13 @@ class HomeController extends Controller
         $pendapatanPerBulan = array_fill(0, 12, 0);
         foreach ($chartpendapatan as $item) {
             $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-            $pendapatanPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+            $pendapatanPerBulan[$bulanIndex] = (int) $item['total_transaksi'];
         }
 
         $pengeluaranPerBulan = array_fill(0, 12, 0);
         foreach ($chartpengeluaran as $item) {
             $bulanIndex = $item['bulan_index'] - 1; // Bulan_index (1 = January) menjadi array index (0 = January)
-            $pengeluaranPerBulan[$bulanIndex] = (int)$item['total_transaksi'];
+            $pengeluaranPerBulan[$bulanIndex] = (int) $item['total_transaksi'];
         }
 
 
