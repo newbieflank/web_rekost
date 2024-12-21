@@ -65,6 +65,34 @@ class Notifmodel
         $this->db->bind('id_user', $id_user);
         return $this->db->resultSet();
     }
+
+    public function getNotifikasiDanFcmToken()
+    {
+        $query = "
+            SELECT 
+                p.id_penyewaan,
+                p.tanggal_penyewaan,
+                p.waktu_penyewaan,
+                p.durasi,
+                p.harga,
+                p.status_penyewaan,
+                p.id_user,
+                DATEDIFF(DATE_ADD(p.tanggal_penyewaan, INTERVAL p.durasi DAY), CURDATE()) AS sisa_hari,
+                u.fcm_token
+            FROM 
+                penyewaan p
+            INNER JOIN 
+                user u ON p.id_user = u.id_user
+            WHERE 
+                p.status_penyewaan = 'Tersedia'
+                AND DATEDIFF(DATE_ADD(p.tanggal_penyewaan, INTERVAL p.durasi DAY), CURDATE()) <= 3
+                AND DATEDIFF(DATE_ADD(p.tanggal_penyewaan, INTERVAL p.durasi DAY), CURDATE()) >= 0
+                AND u.fcm_token IS NOT NULL;
+        ";
+
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
     
     
     

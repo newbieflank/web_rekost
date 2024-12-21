@@ -20,6 +20,10 @@ Router::post('/api/sendNotification', 'sendNotification@send');
 Router::get('/api/Notifikasi/{id_user}', 'Notifikasi@getNotifikasi');
 Router::get('/forgotPassword', 'LoginController@forgotPassword');
 Router::get('/resetPassword', 'LoginController@resetPassword');
+Router::post('/api/sendNotification1', 'Pengingat@CekdanPush');
+
+
+
 
 // chat route
 Router::get('/api/chats/{id_sender}', 'ChatsController@listChats');

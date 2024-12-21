@@ -35,6 +35,22 @@ foreach ($lines as $line) {
     }
 }
 
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     header('Content-Type: application/json');
+
+//     // Inisialisasi controller notifikasi
+//     require_once './app/controllers/api/SendNotificationController.php'; // Pastikan controller ini terinclude
+//     $notificationController = new SendNotificationController();
+//     $notificationController->checkAndSendNotification(); // Panggil pengecekan dan pengiriman notifikasi
+
+//     // Respons sukses setelah pengecekan
+//     echo json_encode([
+//         'status' => 'success',
+//         'message' => 'Pengecekan selesai, notifikasi dikirim jika kondisi terpenuhi.',
+//     ]);
+// }
+
+
 require './vendor/autoload.php';
 require_once './config/config.php';
 require_once './app/helpers/FileUploadHelper.php';

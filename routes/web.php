@@ -26,6 +26,8 @@ Router::get('/search', 'HomeController@cari');
 Router::get('/forgetPassword', 'LoginController@forget');
 Router::post('/forgetPassword/reset', 'LoginController@reset');
 Router::get('/forgetPassword/reset', 'LoginController@reset');
+Router::get('/testpush', 'TestPush@CekdanPush');
+
 
 //admin
 Router::get('/acceptance', 'AdminController@getPersetujuanKos');
@@ -57,5 +59,7 @@ Router::post('/verif', 'FileController@lampiran');
 Router::post('/sendchat/{incomingUserId}', 'ChatController@sendMessage');
 Router::post('/filterKos', 'HomeController@filterKos');
 Router::post('/forgetPassword', 'LoginController@requestReset');
+
+
 
 Router::get('/out', 'LoginController@out');
