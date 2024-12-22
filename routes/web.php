@@ -26,7 +26,7 @@ Router::get('/search', 'HomeController@cari');
 Router::get('/forgetPassword', 'LoginController@forget');
 Router::post('/forgetPassword/reset', 'LoginController@reset');
 Router::get('/forgetPassword/reset', 'LoginController@reset');
-Router::get('/testpush', 'TestPush@CekdanPush');
+Router::get('/Rutin', 'TestPush@CekdanPush');
 
 
 //admin
