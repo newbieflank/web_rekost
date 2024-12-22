@@ -95,9 +95,6 @@
                             <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
-                                <?php if (isset($unreadCount) && $unreadCount > 0): ?>
-                                    <span class="badge badge-danger"><?= $unreadCount ?></span>
-                                <?php endif; ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
                                 <!-- <?php
@@ -151,7 +148,7 @@
                                         </div>
                                         <div class="dropdown-divider"></div>
                                     <?php endforeach; ?>
-                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>/pembayaran">Lihat semua
+                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>riwayat">Lihat semua riwayat
                                         pembayaran</a>
                                 <?php endif; ?>
                             </div>

@@ -95,7 +95,7 @@
                         </li>
                     <?php endif; ?>
                 </ul>
-                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user']['role'] === 'pemilik kos'): ?>
+                <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])): ?>
                     <div class="navbar-nav ml-auto mx-4 d-flex align-items-center">
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="notifDropdown" role="button" data-toggle="dropdown"
@@ -103,84 +103,137 @@
                                 <i class="fas fa-bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown">
-                                <?php if (empty($data['notifikasiPemilik'])): ?>
-                                    <div class="dropdown-item text-center">Tidak ada</div>
-                                <?php else: ?>
-                                    <?php foreach ($data['notifikasiPemilik'] as $notif): ?>
-                                        <div class="dropdown-item">
-                                            <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                <?php if ($_SESSION['user']['role'] === 'pemilik kos'): ?>
+                                    <?php if (empty($data['notifikasiPemilik'])): ?>
+                                        <div class="dropdown-item text-center">Tidak ada Notifikasi</div>
+                                    <?php else: ?>
+                                        <?php foreach ($data['notifikasiPemilik'] as $notif): ?>
+                                            <div class="dropdown-item">
+                                                <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-exclamation-circle text-warning mr-2"></i>
+                                                        <div>
+                                                            <small class="text-muted">Masa sewa penyewa </small>
+                                                            <p class="mb-0">
+                                                                <?= $notif['nama_penyewa'] ?> akan berakhir dalam
+                                                                <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+
                                                 <div class="d-flex align-items-center">
-                                                    <i class="fas fa-exclamation-circle text-warning mr-2"></i>
+                                                    <i class="fas fa-check-circle text-success mr-2"></i>
                                                     <div>
-                                                        <small class="text-muted">Masa sewa penyewa </small>
+                                                        <small class="text-muted">
+                                                            <?php
+                                                            if (isset($notif['tanggal_penyewaan'])) {
+                                                                $date = new DateTime($notif['tanggal_penyewaan']);
+                                                                echo "Penyewa baru pada " . $date->format('d F Y');
+                                                            } else {
+                                                                echo "Penyewa baru";
+                                                            }
+                                                            ?>
+                                                        </small>
                                                         <p class="mb-0">
-                                                            <?= $notif['nama_penyewa'] ?> akan berakhir dalam
-                                                            <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
+                                                            <?= $notif['nama_penyewa'] ?> telah menyewa <?= $notif['nama_kos'] ?> selama
+                                                            <?= $notif['durasi'] ?> hari
                                                         </p>
                                                     </div>
                                                 </div>
-                                            <?php endif; ?>
 
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-check-circle text-success mr-2"></i>
-                                                <div>
-                                                    <small class="text-muted">
-                                                        <?php
-                                                        if (isset($notif['tanggal_penyewaan'])) {
-                                                            $date = new DateTime($notif['tanggal_penyewaan']);
-                                                            echo "Penyewa baru pada " . $date->format('d F Y');
-                                                        } else {
-                                                            echo "Penyewa baru";
-                                                        }
-                                                        ?>
-                                                    </small>
-                                                    <p class="mb-0">
-                                                    <?= $notif['nama_penyewa'] ?> telah menyewa <?= $notif['nama_kos'] ?> selama <?= $notif['durasi'] ?> hari
-                                                    </p>
-                                                </div>
-                                            </div>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-money-check-alt text-info mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">
+                                                            <?php
+                                                            if (isset($notif['tanggal_penyewaan'])) {
+                                                                $date1 = new DateTime($notif['tanggal_penyewaan']);
+                                                                $date2 = new DateTime();
+                                                                $interval = $date1->diff($date2);
 
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-money-check-alt text-info mr-2"></i>
-                                                <div>
-                                                    <small class="text-muted">
-                                                        <?php
-                                                        if (isset($notif['tanggal_penyewaan'])) {
-                                                            $date1 = new DateTime($notif['tanggal_penyewaan']);
-                                                            $date2 = new DateTime();
-                                                            $interval = $date1->diff($date2);
-
-                                                            if ($interval->days == 0) {
-                                                                echo "Pembayaran hari ini";
-                                                            } else {
-                                                                $formattedDate = $date1->format('d F Y');
-                                                                echo "Pembayaran pada tanggal: {$formattedDate}";
+                                                                if ($interval->days == 0) {
+                                                                    echo "Pembayaran hari ini";
+                                                                } else {
+                                                                    $formattedDate = $date1->format('d F Y');
+                                                                    echo "Pembayaran pada tanggal: {$formattedDate}";
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                    </small>
-                                                    <p class="mb-0">
-                                                        Pembayaran <?= $notif['nama_penyewa'] ?> Rp
-                                                        <?= number_format($notif['harga'], 0, ',', '.') ?> telah diterima
-                                                    </p>
+                                                            ?>
+                                                        </small>
+                                                        <p class="mb-0">
+                                                            Pembayaran <?= $notif['nama_penyewa'] ?> Rp
+                                                            <?= number_format($notif['harga'], 0, ',', '.') ?> telah diterima
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                                        <?php endforeach; ?>
+                                        <a class="dropdown-item text-center" href="<?= BASEURL; ?>/riwayat"></a>
+                                    <?php endif; ?>
+
+
+                                <?php else: ?>
+                                    <?php if (empty($data['notifikasi'])): ?>
+                                        <div class="dropdown-item text-center">Tidak ada notifikasi terbaru</div>
+                                    <?php else: ?>
+                                        <?php foreach ($data['notifikasi'] as $notif): ?>
+                                            <div class="dropdown-item">
+                                                <?php if (isset($notif['sisa_hari']) && $notif['sisa_hari'] <= 3 && $notif['sisa_hari'] >= 0): ?>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-exclamation-circle text-warning mr-2"></i>
+                                                        <div>
+                                                            <small class="text-muted">Masa sewa akan berakhir</small>
+                                                            <p class="mb-0">
+                                                                <?= $notif['sisa_hari'] == 0 ? 'Hari ini' : "dalam {$notif['sisa_hari']} hari" ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-check-circle text-success mr-2"></i>
+                                                    <div>
+                                                        <small class="text-muted">
+                                                            <?php
+                                                            if (isset($notif['tanggal_penyewaan'])) {
+                                                                $date1 = new DateTime($notif['tanggal_penyewaan']);
+                                                                $date2 = new DateTime();
+                                                                $interval = $date1->diff($date2);
+
+                                                                if ($interval->days == 0) {
+                                                                    echo "Pembayaran hari ini";
+                                                                } else {
+                                                                    $formattedDate = $date1->format('d/m/Y');
+                                                                    echo "Pembayaran pada tanggal: {$formattedDate}";
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </small>
+                                                        <p class="mb-0">
+                                                            Pembayaran kost sebesar Rp
+                                                            <?= number_format($notif['harga'], 0, ',', '.') ?> telah dikonfirmasi
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                    <?php endforeach; ?>
-                                    <a class="dropdown-item text-center" href="<?= BASEURL; ?>/riwayat">
-                                    </a>
+                                            <div class="dropdown-divider"></div>
+                                        <?php endforeach; ?>
+                                        <a class="dropdown-item text-center" href="<?= BASEURL; ?>riwayat">Lihat semua Riwayat
+                                            pembayaran</a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
+
                         <div class="dropdown">
                             <a href="#" class="nav-link" id="profileDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <img src="<?php echo isset($id_gambar) ? asset('uploads/' . $id_user . '/' . $id_gambar) : asset('img/Vector.svg') ?>"
                                     class="rounded-circle" alt="Profile Image" width="40px" height="40px">
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
                                 <a class="dropdown-item" href="<?= BASEURL; ?>profile">Profile</a>
                                 <a class="dropdown-item" href="<?= BASEURL; ?>riwayat">Riwayat</a>
@@ -203,6 +256,7 @@
                         </li>
                     </ul>
                 <?php endif; ?>
+
             </div>
         </nav>
     </header>
